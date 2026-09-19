@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Set</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f1014;
+      color: white;
+    }
+
+    header {
+      height: 65px;
+      background: #17181d;
+      border-bottom: 1px solid #292b33;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .create-post {
+      background: #17181d;
+      border: 1px solid #292b33;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+      resize: none;
+      background: #0f1014;
+      color: white;
+      border: 1px solid #30323a;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      margin-top: 10px;
+      background: #5865f2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .post {
+      background: #17181d;
+      border: 1px solid #292b33;
+      border-radius: 15px;
+      padding: 17px;
+      margin-bottom: 15px;
+    }
+
+    .user {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .post-text {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .like {
+      background: transparent;
+      border: 1px solid #30323a;
+      color: #aaa;
+    }
+
+    .like.active {
+      color: #ff4f70;
+      border-color: #ff4f70;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        margin-top: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Social Set</div>
+  </header>
+
+  <main class="container">
+
+    <div class="create-post">
+      <textarea id="postInput" placeholder="Что у тебя нового?"></textarea>
+      <button onclick="createPost()">Опубликовать</button>
+    </div>
+
+    <div id="feed">
+
+      <div class="post">
+        <div class="user">@admin</div>
+        <div class="post-text">
+          Добро пожаловать в Social Set 👋
+        </div>
+
+        <div class="actions">
+          <button class="like" onclick="likePost(this)">
+            ♡ 0
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function createPost() {
+      const input = document.getElementById("postInput");
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const post = document.createElement("div");
+      post.className = "post";
+
+      post.innerHTML = `
+        <div class="user">@you</div>
+        <div class="post-text">${escapeHtml(text)}</div>
+
+        <div class="actions">
+          <button class="like" onclick="likePost(this)">
+            ♡ 0
+          </button>
+        </div>
+      `;
+
+      document.getElementById("feed").prepend(post);
+
+      input.value = "";
+    }
+
+    function likePost(button) {
+      let count = parseInt(button.innerText.match(/\d+/)[0]);
+
+      if (button.classList.contains("active")) {
+        count--;
+        button.classList.remove("active");
+        button.innerText = "♡ " + count;
+      } else {
+        count++;
+        button.classList.add("active");
+        button.innerText = "♥ " + count;
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+
+</body>
+</html>
