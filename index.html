@@ -374,9 +374,9 @@ async function reactToPost(postId, type, button) {
     {
       method: "PATCH",
       headers: {
-  ...headers,
-  "Authorization": "Bearer " + localStorage.getItem("access_token"),
-  "Prefer": "return=representation"
+        ...headers,
+        "Prefer": "return=representation"
+      
 },
      
       
@@ -540,8 +540,10 @@ async function editProfile() {
     {
       method: "PATCH",
       headers: {
-        ...headers,
-        "Prefer": "return=representation"
+  ...headers,
+  "Authorization": "Bearer " + localStorage.getItem("access_token"),
+  "Prefer": "return=representation"
+},
       },
       body: JSON.stringify({
         username: username,
