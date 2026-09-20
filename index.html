@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 :root{
   --navy:#0b1f3a;
   --sky:#e9f6ff;
@@ -16,338 +17,1111 @@
   --muted:#718397;
   --red:#ef4056;
 }
-html,body{margin:0;padding:0;min-height:100%}
-body{font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-button{border:0;cursor:pointer;font:inherit}
-button:disabled{opacity:.6;cursor:default}
-input,textarea{font-family:inherit}
+
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  font:inherit;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:default;
+}
+
+input,textarea{
+  font-family:inherit;
+}
 
 /* AUTH */
+
 #authScreen{
- position:relative;overflow:hidden;min-height:100vh;min-height:100dvh;
- display:flex;align-items:center;justify-content:center;padding:24px;background:#000
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#000;
 }
-.auth-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
-.auth-overlay{position:absolute;inset:0;background:rgba(0,0,0,.18);z-index:1}
+
+.auth-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+
+.auth-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.2);
+  z-index:1;
+}
+
 .auth-card{
- position:relative;z-index:10;width:100%;max-width:420px;padding:34px;
- background:rgba(255,255,255,.94);border-radius:24px;
- box-shadow:0 22px 65px rgba(0,0,0,.35);backdrop-filter:blur(12px)
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:420px;
+  padding:32px;
+  background:rgba(255,255,255,.95);
+  border-radius:24px;
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
 }
-.brand{font-size:44px;font-weight:900;letter-spacing:-2.5px;color:var(--navy);text-align:center}
-.tagline{text-align:center;color:var(--muted);margin:8px 0 28px}
-.auth-choice button,.auth-form button{width:100%;padding:13px 16px;border-radius:12px;margin-top:10px;font-weight:700}
-.primary{background:var(--navy);color:white}
-.secondary{background:var(--sky);color:var(--navy)}
+
+.brand{
+  text-align:center;
+  font-size:44px;
+  font-weight:900;
+  color:var(--navy);
+  letter-spacing:-2px;
+}
+
+.tagline{
+  text-align:center;
+  color:var(--muted);
+  margin:8px 0 25px;
+}
+
 .auth-form{display:none}
-.auth-form h2{margin-top:0;color:var(--navy)}
-.auth-form input{
- width:100%;padding:13px;margin-top:10px;border:1px solid var(--line);
- border-radius:11px;outline:none;font-size:15px
+
+.auth-form h2{
+  color:var(--navy);
+  margin-top:0;
 }
-.auth-form input:focus{border-color:#7db9df;box-shadow:0 0 0 3px rgba(98,183,245,.12)}
-.back-btn{background:transparent;color:var(--muted);margin-top:12px;padding:8px 0}
-#authMessage{min-height:20px;margin-top:12px;color:var(--muted);font-size:14px}
+
+.auth-form input{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  outline:none;
+  font-size:15px;
+}
+
+.auth-form button,
+.auth-choice button{
+  width:100%;
+  padding:13px;
+  border-radius:11px;
+  margin-top:10px;
+  font-weight:700;
+}
+
+.primary{
+  background:var(--navy);
+  color:#fff;
+}
+
+.secondary{
+  background:var(--sky);
+  color:var(--navy);
+}
+
+.back-btn{
+  background:transparent;
+  color:var(--muted);
+  margin-top:12px;
+  padding:7px 0;
+}
+
+#authMessage{
+  min-height:20px;
+  margin-top:12px;
+  color:var(--muted);
+  font-size:14px;
+}
 
 /* APP */
+
 #app{display:none;min-height:100vh}
+
 header{
- height:64px;background:white;border-bottom:1px solid var(--line);
- display:flex;align-items:center;justify-content:space-between;padding:0 20px;
- position:sticky;top:0;z-index:20
+  height:64px;
+  background:white;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:50;
 }
-.header-logo{font-size:23px;font-weight:900;color:var(--navy)}
-.logout{background:var(--navy);color:white;border-radius:10px;padding:9px 13px;font-size:13px;font-weight:700}
-.container{max-width:650px;margin:25px auto 90px;padding:0 15px}
-.page{display:none}.page.active{display:block}
+
+.header-logo{
+  font-size:23px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.logout{
+  background:var(--navy);
+  color:#fff;
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.container{
+  max-width:650px;
+  margin:20px auto 90px;
+  padding:0 15px;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+/* COMMON */
+
+.create-post,
+.post,
+.profile-card,
+.profile-wall,
+.public-profile-card,
+.search-box,
+.search-user,
+.conversations,
+.follow-list,
+.group-card{
+  background:#fff;
+  border:1px solid var(--line);
+}
+
+.create-post{
+  padding:16px;
+  border-radius:17px;
+  margin-bottom:18px;
+}
+
+textarea{
+  width:100%;
+  min-height:90px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  outline:none;
+  background:#fafdff;
+  font-size:16px;
+}
+
+.publish{
+  margin-top:10px;
+  padding:11px 18px;
+  border-radius:10px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:700;
+}
+
+.wall-empty,
+.search-empty{
+  color:var(--muted);
+  text-align:center;
+  padding:25px 10px;
+}
 
 /* POSTS */
-.create-post,.post,.profile-card,.profile-wall,.public-profile-card,.search-box,.search-user,.conversations{
- background:white;border:1px solid var(--line)
+
+.post{
+  padding:16px;
+  border-radius:17px;
+  margin-bottom:15px;
 }
-.create-post{padding:17px;margin-bottom:20px;border-radius:17px}
-textarea{
- width:100%;min-height:90px;resize:vertical;background:#fafdff;color:var(--text);
- border:1px solid var(--line);border-radius:12px;padding:12px;font-size:16px;outline:none
-}
-textarea:focus{border-color:#7db9df}
-.publish{margin-top:10px;background:var(--navy);color:white;border-radius:10px;padding:11px 18px;font-weight:700}
-.post-photo-tools{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
-.photo-button{background:var(--sky);color:var(--navy);border-radius:10px;padding:9px 13px;font-weight:700}
-.photo-name{color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px}
-.post-image-preview{display:none;margin-top:12px;position:relative}
-.post-image-preview.has-image{display:block}
-.post-image-preview img{display:block;width:100%;max-height:420px;object-fit:cover;border-radius:14px;background:#f1f3f5}
-.remove-photo{
- position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;
- background:rgba(0,0,0,.7);color:white;font-size:18px
-}
-.post{margin-bottom:15px;padding:16px;border-radius:17px}
+
 .post-user{
- display:flex;align-items:center;gap:10px;margin-bottom:12px;cursor:pointer
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+  cursor:pointer;
 }
-.post-user:active{opacity:.7}
-.mini-avatar,.search-avatar,.conversation-avatar,.message-result-avatar,.chat-avatar{object-fit:cover}
-.mini-avatar{width:42px;height:42px;border-radius:50%;background:var(--sky);border:1px solid var(--line);flex-shrink:0}
+
+.mini-avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:var(--sky);
+  border:1px solid var(--line);
+  flex-shrink:0;
+}
+
 .mini-avatar-placeholder{
- width:42px;height:42px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  flex-shrink:0;
 }
-.user-name{color:var(--navy);font-weight:800}
-.post-date{color:var(--muted);font-size:12px;margin-top:3px}
-.post-text{font-size:16px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-.post-image{display:block;width:100%;max-height:650px;object-fit:contain;border-radius:14px;margin-top:12px;background:#f1f3f5}
-.actions{margin-top:15px;display:flex;gap:8px}
-.reaction-btn{background:white;border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:8px 12px;font-weight:700}
-.reaction-btn.active{color:var(--red);border-color:#f1a0aa;background:#fff5f6}
+
+.user-name{
+  color:var(--navy);
+  font-weight:800;
+}
+
+.user-handle{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.post-text{
+  font-size:16px;
+  line-height:1.5;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.post-image{
+  display:block;
+  width:100%;
+  max-height:650px;
+  object-fit:contain;
+  border-radius:14px;
+  margin-top:12px;
+  background:#f1f3f5;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.reaction-btn{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--muted);
+  border-radius:10px;
+  padding:8px 12px;
+  font-weight:700;
+}
+
+.reaction-btn.active{
+  color:var(--red);
+  border-color:#f1a0aa;
+  background:#fff5f6;
+}
+
+.post-photo-tools{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.photo-button{
+  background:var(--sky);
+  color:var(--navy);
+  padding:9px 13px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.photo-name{
+  color:var(--muted);
+  font-size:13px;
+  max-width:230px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.post-image-preview{
+  display:none;
+  margin-top:12px;
+  position:relative;
+}
+
+.post-image-preview.has-image{display:block}
+
+.post-image-preview img{
+  width:100%;
+  max-height:400px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+.remove-photo{
+  position:absolute;
+  right:8px;
+  top:8px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(0,0,0,.7);
+  color:#fff;
+}
 
 /* PROFILE */
-.profile-card{overflow:hidden;margin-bottom:20px;border-radius:17px}
-.cover,.public-cover{height:145px;background:linear-gradient(135deg,#0b1f3a,#23608f,#62b7f5)}
-.profile-info,.public-info{padding:0 20px 20px;position:relative}
-.big-avatar,.public-avatar{
- width:110px;height:110px;border-radius:50%;object-fit:cover;background:var(--sky);
- border:5px solid white;margin-top:-55px;display:block
-}
-.avatar-placeholder,.public-avatar-placeholder{
- width:110px;height:110px;border-radius:50%;background:var(--navy);color:white;
- border:5px solid white;margin-top:-55px;display:flex;align-items:center;
- justify-content:center;font-size:36px;font-weight:900
-}
-.profile-name,.public-name{font-size:25px;font-weight:900;color:var(--navy);margin-top:12px;overflow-wrap:anywhere}
-.profile-username,.public-username{color:var(--muted);margin-top:3px}
-.profile-bio,.public-bio{margin-top:13px;line-height:1.5;white-space:pre-wrap}
-.profile-buttons,.public-actions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}
-.profile-button,.public-action{
- background:var(--sky);color:var(--navy);border-radius:10px;padding:10px 14px;font-weight:700
-}
-.profile-button.dark{background:var(--navy);color:white}
-.public-action{flex:1}.public-action.following{background:var(--navy);color:white}
-.public-action.friend{background:#dff5e8;color:#17653a}
-.profile-stats,.public-stats{display:flex;gap:24px;margin-top:18px}
-.stat{
- cursor:pointer;padding:5px 8px;border-radius:10px
-}
-.stat:active{background:#f1f6fa}
-.stat-number{font-weight:900;font-size:19px;color:var(--navy)}
-.stat-label{font-size:12px;color:var(--muted);margin-top:2px}
-.profile-wall{padding:17px;border-radius:17px}
-.public-wall{margin-top:20px}
-.wall-title{color:var(--navy);font-size:21px;font-weight:900;margin-bottom:15px}
-.wall-empty{color:var(--muted);text-align:center;padding:25px 10px}
 
-/* FRIENDS */
-.friends-box{
- margin-top:20px;background:white;border:1px solid var(--line);border-radius:17px;padding:17px
+.profile-card,
+.public-profile-card{
+  border-radius:17px;
+  overflow:hidden;
+  margin-bottom:20px;
 }
-.friends-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-.friends-title{font-size:21px;font-weight:900;color:var(--navy)}
-.friend-item{
- display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #edf2f5;cursor:pointer
+
+.cover,
+.public-cover{
+  height:140px;
+  background:linear-gradient(135deg,#0b1f3a,#23608f,#62b7f5);
 }
-.friend-item:last-child{border-bottom:0}
-.friend-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--sky)}
-.friend-avatar-placeholder{
- width:48px;height:48px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900
+
+.profile-info,
+.public-info{
+  padding:0 18px 20px;
 }
-.friend-name{font-weight:800;color:var(--navy)}
-.friend-username{font-size:13px;color:var(--muted);margin-top:3px}
+
+.big-avatar,
+.public-avatar{
+  width:110px;
+  height:110px;
+  margin-top:-55px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid white;
+  background:var(--sky);
+  display:block;
+}
+
+.avatar-placeholder,
+.public-avatar-placeholder{
+  width:110px;
+  height:110px;
+  margin-top:-55px;
+  border-radius:50%;
+  border:5px solid white;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  font-weight:900;
+}
+
+.profile-name,
+.public-name{
+  margin-top:12px;
+  font-size:25px;
+  font-weight:900;
+  color:var(--navy);
+  overflow-wrap:anywhere;
+}
+
+.profile-username,
+.public-username{
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.profile-bio,
+.public-bio{
+  margin-top:13px;
+  line-height:1.5;
+  white-space:pre-wrap;
+}
+
+.profile-stats,
+.public-stats{
+  display:flex;
+  gap:28px;
+  margin-top:18px;
+}
+
+.stat{
+  cursor:pointer;
+}
+
+.stat-number{
+  color:var(--navy);
+  font-size:19px;
+  font-weight:900;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.profile-buttons,
+.public-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+
+.profile-button,
+.public-action{
+  background:var(--sky);
+  color:var(--navy);
+  border-radius:10px;
+  padding:10px 13px;
+  font-weight:700;
+}
+
+.profile-button.dark,
+.public-action.dark{
+  background:var(--navy);
+  color:#fff;
+}
+
+.public-action{
+  flex:1;
+}
+
+.public-action.following{
+  background:var(--navy);
+  color:#fff;
+}
+
+.friend-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:12px;
+  padding:7px 10px;
+  border-radius:10px;
+  background:#edf8ef;
+  color:#23753a;
+  font-size:13px;
+  font-weight:800;
+}
+
+.profile-wall{
+  border-radius:17px;
+  padding:17px;
+}
+
+.wall-title{
+  font-size:21px;
+  font-weight:900;
+  color:var(--navy);
+  margin-bottom:14px;
+}
+
+.public-wall{margin-top:20px}
+
+.public-back{
+  background:transparent;
+  color:var(--muted);
+  padding:4px 0 12px;
+  font-weight:700;
+}
 
 /* SEARCH */
-.search-box{border-radius:17px;padding:15px;margin-bottom:15px}
-.search-input{
- width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;
- outline:none;background:#fafdff;color:var(--text);font-size:16px
-}
-.search-results{display:flex;flex-direction:column;gap:10px}
-.search-user{
- border-radius:15px;padding:12px;display:flex;align-items:center;gap:12px;cursor:pointer
-}
-.search-user:active{background:#f4f9fd}
-.search-avatar{width:48px;height:48px;border-radius:50%;background:var(--sky);border:1px solid var(--line);flex-shrink:0}
-.search-avatar-placeholder{
- width:48px;height:48px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0
-}
-.search-user-name{font-weight:800;color:var(--navy);overflow-wrap:anywhere}
-.search-user-username{color:var(--muted);font-size:13px;margin-top:3px}
-.search-empty{text-align:center;color:var(--muted);padding:30px 10px}
 
-/* PUBLIC */
-.public-back{background:transparent;color:var(--muted);font-weight:700;padding:5px 0 12px}
-.public-profile-card{border-radius:17px;overflow:hidden}
+.search-box{
+  padding:15px;
+  border-radius:17px;
+  margin-bottom:15px;
+}
+
+.search-input{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  outline:none;
+  font-size:16px;
+  background:#fafdff;
+}
+
+.search-results{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.search-user{
+  padding:12px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+}
+
+.search-avatar,
+.message-result-avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  object-fit:cover;
+  background:var(--sky);
+  flex-shrink:0;
+}
+
+.search-avatar-placeholder,
+.message-result-placeholder{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.search-user-name{
+  color:var(--navy);
+  font-weight:800;
+}
+
+.search-user-username{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+/* FOLLOWERS */
+
+.follow-list{
+  border-radius:17px;
+  overflow:hidden;
+}
+
+.follow-list-header{
+  padding:17px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid var(--line);
+}
+
+.follow-list-title{
+  font-size:22px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.follow-back{
+  background:var(--sky);
+  color:var(--navy);
+  padding:8px 11px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.follow-user{
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid #edf1f4;
+  cursor:pointer;
+}
+
+.follow-user:last-child{border-bottom:0}
+
+.follow-user-info{
+  flex:1;
+  min-width:0;
+}
+
+.follow-user-name{
+  font-weight:800;
+  color:var(--navy);
+}
+
+.follow-user-username{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.follow-status{
+  font-size:12px;
+  color:#23753a;
+  font-weight:800;
+}
 
 /* MESSAGES */
-.messages-header{margin-bottom:15px}
-.messages-title{font-size:32px;font-weight:900;letter-spacing:-1px;color:#111;margin-bottom:18px}
-.messages-top-buttons{display:flex;gap:8px;margin-bottom:12px}
-.new-group-button{
- flex:1;background:var(--navy);color:white;border-radius:12px;padding:12px;font-weight:800
+
+.messages-title{
+  font-size:30px;
+  font-weight:900;
+  color:#111;
+  margin-bottom:17px;
 }
-.messages-search{position:relative}
+
+.messages-search{
+  position:relative;
+  margin-bottom:12px;
+}
+
 .messages-search-input{
- width:100%;height:56px;padding:0 20px 0 52px;border:0;border-radius:30px;
- background:#e9e9ed;outline:none;font-size:17px;color:#111
+  width:100%;
+  height:54px;
+  padding:0 20px 0 50px;
+  border:0;
+  border-radius:28px;
+  background:#e9e9ed;
+  outline:none;
+  font-size:17px;
 }
-.messages-search-icon{position:absolute;left:19px;top:50%;transform:translateY(-50%);font-size:23px;color:#555;pointer-events:none}
-.conversations{border-radius:18px;overflow:hidden}
+
+.messages-search-icon{
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:22px;
+  color:#555;
+}
+
+.conversations{
+  border-radius:18px;
+  overflow:hidden;
+}
+
 .conversation{
- min-height:88px;padding:12px 10px 12px 5px;display:flex;align-items:center;
- border-bottom:1px solid #e5e5e5;cursor:pointer
+  min-height:85px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid #e5e5e5;
+  cursor:pointer;
 }
+
 .conversation:last-child{border-bottom:0}
-.conversation:active{background:#f4f4f5}
-.conversation-avatar-wrap{width:72px;display:flex;justify-content:center;position:relative;flex-shrink:0}
-.conversation-avatar{width:58px;height:58px;border-radius:50%;background:var(--sky)}
-.conversation-avatar-placeholder{
- width:58px;height:58px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:900
-}
-.online-dot{
- position:absolute;right:3px;bottom:1px;width:16px;height:16px;border-radius:50%;
- background:#68737d;border:3px solid white
-}
-.conversation-main{min-width:0;flex:1;padding-right:8px}
-.conversation-top{display:flex;justify-content:space-between;gap:10px}
-.conversation-name{font-size:18px;font-weight:800;color:#111;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.conversation-time{color:#666;font-size:13px;white-space:nowrap}
-.conversation-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:4px}
-.conversation-preview{color:#707070;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* GROUP LIST */
-.group-badge{
- width:58px;height:58px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-size:23px
+.conversation-avatar{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  object-fit:cover;
+  background:var(--sky);
 }
-.group-members-preview{font-size:12px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* MESSAGE SEARCH */
+.conversation-placeholder{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  font-weight:900;
+}
+
+.conversation-main{
+  flex:1;
+  min-width:0;
+}
+
+.conversation-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.conversation-name{
+  font-size:17px;
+  font-weight:800;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.conversation-time{
+  color:#777;
+  font-size:12px;
+}
+
+.conversation-preview{
+  color:#777;
+  margin-top:5px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
 .message-user-result{
- background:white;border-bottom:1px solid #e5e5e5;padding:13px 10px;
- display:flex;align-items:center;gap:12px;cursor:pointer
+  background:#fff;
+  border-bottom:1px solid #e5e5e5;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
 }
-.message-user-result:first-child{border-radius:16px 16px 0 0}
-.message-user-result:last-child{border-radius:0 0 16px 16px}
-.message-result-avatar{width:50px;height:50px;border-radius:50%;background:var(--sky);flex-shrink:0}
-.message-result-placeholder{
- width:50px;height:50px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0
+
+/* GROUP CHAT */
+
+.group-create-button{
+  width:100%;
+  margin-bottom:12px;
+  padding:12px;
+  border-radius:12px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+}
+
+.group-card{
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.group-card-main{
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+}
+
+.group-icon{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:var(--sky);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  flex-shrink:0;
+}
+
+.group-info{
+  min-width:0;
+  flex:1;
+}
+
+.group-name{
+  font-weight:900;
+  color:var(--navy);
+}
+
+.group-members{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:4px;
+}
+
+.group-create-list{
+  max-height:400px;
+  overflow:auto;
+  margin-top:10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+
+.friend-select{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-bottom:1px solid #edf1f4;
+}
+
+.friend-select:last-child{border-bottom:0}
+
+.friend-select input{
+  width:18px;
+  height:18px;
+}
+
+.friend-select-info{
+  flex:1;
 }
 
 /* CHAT */
-.chat-page{height:calc(100vh - 154px);height:calc(100dvh - 154px);display:none;flex-direction:column}
+
+.chat-page{
+  height:calc(100vh - 154px);
+  height:calc(100dvh - 154px);
+  flex-direction:column;
+}
+
 .chat-page.active{display:flex}
+
 .chat-header{
- background:white;border:1px solid var(--line);border-radius:17px;padding:10px 12px;
- display:flex;align-items:center;gap:10px;flex-shrink:0
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-.chat-back{background:transparent;color:var(--navy);font-size:25px;padding:4px 7px}
-.chat-avatar{width:43px;height:43px;border-radius:50%;background:var(--sky)}
+
+.chat-back{
+  background:transparent;
+  color:var(--navy);
+  font-size:28px;
+  padding:3px 7px;
+}
+
+.chat-avatar{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
 .chat-avatar-placeholder{
- width:43px;height:43px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
 }
-.chat-user-info{min-width:0}
-.chat-user-name{font-weight:900;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.chat-user-username{font-size:12px;color:var(--muted);margin-top:2px}
-.chat-group-members{font-size:11px;color:var(--muted);margin-top:2px}
-.chat-messages{flex:1;overflow-y:auto;padding:18px 5px;display:flex;flex-direction:column;gap:7px}
-.chat-empty{margin:auto;color:var(--muted);text-align:center}
-.message-row{display:flex;width:100%}
+
+.chat-user-info{
+  min-width:0;
+}
+
+.chat-user-name{
+  color:var(--navy);
+  font-weight:900;
+}
+
+.chat-user-username{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.chat-messages{
+  flex:1;
+  overflow-y:auto;
+  padding:15px 4px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.message-row{
+  display:flex;
+}
+
 .message-row.mine{justify-content:flex-end}
 .message-row.theirs{justify-content:flex-start}
+
 .message-bubble{
- max-width:78%;padding:10px 13px;border-radius:18px;font-size:16px;line-height:1.35;
- white-space:pre-wrap;overflow-wrap:anywhere
+  max-width:78%;
+  padding:10px 13px;
+  border-radius:18px;
+  line-height:1.35;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
-.message-row.mine .message-bubble{background:var(--navy);color:white;border-bottom-right-radius:5px}
-.message-row.theirs .message-bubble{background:white;color:var(--text);border:1px solid var(--line);border-bottom-left-radius:5px}
-.group-sender{font-size:11px;font-weight:800;color:#406482;margin-bottom:3px}
-.message-time{margin-top:4px;font-size:10px;opacity:.65;text-align:right}
+
+.mine .message-bubble{
+  background:var(--navy);
+  color:#fff;
+  border-bottom-right-radius:5px;
+}
+
+.theirs .message-bubble{
+  background:#fff;
+  border:1px solid var(--line);
+  border-bottom-left-radius:5px;
+}
+
+.message-time{
+  margin-top:4px;
+  font-size:10px;
+  opacity:.65;
+  text-align:right;
+}
+
 .chat-input-area{
- background:white;border:1px solid var(--line);border-radius:17px;padding:9px;
- display:flex;gap:8px;align-items:flex-end;flex-shrink:0
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:8px;
+  display:flex;
+  gap:8px;
 }
-.chat-input{flex:1;min-height:44px;max-height:110px;resize:none;border:0;background:#f1f3f5;border-radius:22px;padding:11px 15px;outline:none;font-size:16px}
-.chat-send{width:44px;height:44px;border-radius:50%;background:var(--navy);color:white;font-size:18px;flex-shrink:0}
+
+.chat-input{
+  flex:1;
+  min-height:44px;
+  max-height:110px;
+  resize:none;
+  border:0;
+  background:#f1f3f5;
+  border-radius:22px;
+  padding:11px 15px;
+  outline:none;
+}
+
+.chat-send{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+}
 
 /* NAV */
+
 .bottom-nav{
- position:fixed;bottom:0;left:0;right:0;height:68px;background:rgba(255,255,255,.96);
- border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;backdrop-filter:blur(12px)
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:68px;
+  background:rgba(255,255,255,.96);
+  border-top:1px solid var(--line);
+  z-index:40;
+  backdrop-filter:blur(12px);
 }
-.nav-inner{width:100%;max-width:650px;display:flex;justify-content:space-around;align-items:center}
+
+.nav-inner{
+  max-width:650px;
+  height:100%;
+  margin:auto;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
 .nav-button{
- background:transparent;color:var(--muted);min-width:70px;padding:8px 4px;
- display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:700;position:relative
+  background:transparent;
+  color:var(--muted);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  min-width:65px;
+  padding:7px 4px;
+  font-size:11px;
+  font-weight:700;
 }
-.nav-icon{font-size:22px}.nav-button.active{color:var(--navy)}
+
+.nav-icon{font-size:21px}
+.nav-button.active{color:var(--navy)}
 
 /* MODALS */
+
 .modal{
- display:none;position:fixed;inset:0;background:rgba(11,31,58,.45);z-index:100;
- align-items:center;justify-content:center;padding:20px
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(11,31,58,.45);
+  align-items:center;
+  justify-content:center;
+  padding:18px;
 }
+
 .modal.active{display:flex}
+
 .modal-card{
- width:100%;max-width:430px;max-height:85vh;overflow:auto;background:white;
- border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.2)
-}
-.modal-card h2{margin-top:0;color:var(--navy)}
-.modal-card input,.modal-card textarea{margin-top:10px}
-.modal-card input{width:100%;padding:13px;border:1px solid var(--line);border-radius:11px;outline:none;font-size:15px}
-.modal-actions{display:flex;gap:8px;margin-top:12px}
-.modal-actions button{flex:1;padding:11px;border-radius:10px;font-weight:700}
-.cancel{background:var(--sky);color:var(--navy)}
-
-.user-select-list{margin-top:15px}
-.user-select-item{
- display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid #edf2f5
-}
-.user-select-item input{width:20px;height:20px;accent-color:var(--navy)}
-.user-select-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:var(--sky)}
-.user-select-placeholder{
- width:42px;height:42px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900
-}
-.user-select-info{min-width:0}.user-select-name{font-weight:800;color:var(--navy)}
-.user-select-username{font-size:12px;color:var(--muted);margin-top:2px}
-
-.list-modal-item{
- display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #edf2f5;cursor:pointer
-}
-.list-modal-item:last-child{border-bottom:0}
-.list-modal-avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--sky)}
-.list-modal-placeholder{
- width:48px;height:48px;border-radius:50%;background:var(--navy);color:white;
- display:flex;align-items:center;justify-content:center;font-weight:900
+  width:100%;
+  max-width:430px;
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
-/* MOBILE */
+.modal-card h2{
+  color:var(--navy);
+  margin-top:0;
+}
+
+.modal-card input,
+.modal-card textarea{
+  width:100%;
+  margin-top:10px;
+}
+
+.modal-card input{
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  outline:none;
+}
+
+.modal-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.modal-actions button{
+  flex:1;
+  padding:11px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.cancel{
+  background:var(--sky);
+  color:var(--navy);
+}
+
 @media(max-width:700px){
- .container{margin-top:15px}
- .cover,.public-cover{height:125px}
- .profile-info,.public-info{padding-left:16px;padding-right:16px}
- .auth-card{padding:26px}
- .brand{font-size:38px}
- .nav-button{min-width:65px}
- .messages-title{font-size:30px}
- .conversation-name{font-size:17px}
- .post-image{max-height:500px}
+  .container{margin-top:14px}
+  .auth-card{padding:25px}
+  .brand{font-size:38px}
+  .cover,.public-cover{height:125px}
 }
 </style>
 </head>
 
 <body>
 
+<!-- AUTH -->
+
 <section id="authScreen">
+
 <video class="auth-video" autoplay muted loop playsinline preload="auto">
 <source src="https://jrzoexmvgyyitojbcxvr.supabase.co/storage/v1/object/public/Stenka/auth-bg.mp4/3992627239181363251.mp4" type="video/mp4">
 </video>
+
 <div class="auth-overlay"></div>
 
 <div class="auth-card">
+
 <div class="brand">No Cap</div>
 <div class="tagline">Своя соцсеть. Без лишнего.</div>
 
@@ -358,25 +1132,32 @@ textarea:focus{border-color:#7db9df}
 
 <div id="loginForm" class="auth-form">
 <h2>Войти</h2>
-<input id="loginEmail" type="email" placeholder="Email" autocomplete="email">
-<input id="loginPassword" type="password" placeholder="Пароль" autocomplete="current-password">
-<button class="primary" id="loginButton" onclick="signIn()">Войти</button>
+
+<input id="loginEmail" type="email" placeholder="Email">
+<input id="loginPassword" type="password" placeholder="Пароль">
+
+<button class="primary" onclick="signIn()" id="loginButton">Войти</button>
 <button class="back-btn" onclick="showAuthChoice()">← Назад</button>
 </div>
 
 <div id="signupForm" class="auth-form">
 <h2>Создать аккаунт</h2>
-<input id="signupUsername" type="text" placeholder="Username" autocomplete="username" maxlength="30">
-<input id="signupEmail" type="email" placeholder="Email" autocomplete="email">
-<input id="signupPassword" type="password" placeholder="Пароль" autocomplete="new-password">
-<button class="primary" id="signupButton" onclick="signUp()">Создать аккаунт</button>
+
+<input id="signupUsername" placeholder="Username" maxlength="30">
+<input id="signupEmail" type="email" placeholder="Email">
+<input id="signupPassword" type="password" placeholder="Пароль">
+
+<button class="primary" onclick="signUp()" id="signupButton">Создать аккаунт</button>
 <button class="back-btn" onclick="showAuthChoice()">← Назад</button>
 </div>
 
 <div id="authMessage"></div>
+
 </div>
 </section>
 
+
+<!-- APP -->
 
 <div id="app">
 
@@ -387,153 +1168,221 @@ textarea:focus{border-color:#7db9df}
 
 <main class="container">
 
+<!-- FEED -->
+
 <section id="feedPage" class="page">
+
 <div class="create-post">
-<textarea id="postInput" placeholder="Что у тебя нового?" maxlength="5000"></textarea>
+
+<textarea id="postInput" maxlength="5000" placeholder="Что у тебя нового?"></textarea>
+
 <div class="post-photo-tools">
-<button type="button" class="photo-button" onclick="choosePostImage('feed')">📷 Фото</button>
+<button class="photo-button" onclick="choosePostImage('feed')">📷 Фото</button>
 <span id="postImageName" class="photo-name"></span>
 </div>
+
 <div id="postImagePreview" class="post-image-preview"></div>
+
 <input id="postImageInput" type="file" accept="image/*" hidden onchange="previewPostImage(event,'feed')">
+
 <button class="publish" id="publishPostButton" onclick="createPost()">Опубликовать</button>
+
 </div>
+
 <div id="feed"></div>
+
 </section>
 
 
+<!-- SEARCH -->
+
 <section id="searchPage" class="page">
+
 <div class="search-box">
-<input id="userSearchInput" class="search-input" type="text" placeholder="🔎 Найти пользователя..." autocomplete="off" oninput="searchUsers()">
+<input id="userSearchInput" class="search-input" placeholder="🔎 Найти пользователя..." oninput="searchUsers()">
 </div>
+
 <div id="searchResults" class="search-results">
 <div class="search-empty">Начни вводить username или имя</div>
 </div>
+
 </section>
 
+
+<!-- MESSAGES -->
 
 <section id="messagesPage" class="page">
 
-<div class="messages-header">
 <div class="messages-title">СООБЩЕНИЯ</div>
 
-<div class="messages-top-buttons">
-<button class="new-group-button" onclick="openGroupCreateModal()">👥 Создать общий чат</button>
-</div>
+<button class="group-create-button" onclick="openCreateGroupModal()">
+＋ Создать общий чат
+</button>
 
 <div class="messages-search">
 <span class="messages-search-icon">⌕</span>
-<input id="messageSearchInput" class="messages-search-input" type="text" placeholder="Поиск" autocomplete="off" oninput="searchMessageUsers()">
-</div>
+<input id="messageSearchInput" class="messages-search-input" placeholder="Поиск" oninput="searchMessageUsers()">
 </div>
 
 <div id="messageSearchResults" style="display:none"></div>
+
+<div id="groupChats"></div>
+
 <div id="conversations" class="conversations"></div>
+
 </section>
 
+
+<!-- CHAT -->
 
 <section id="chatPage" class="page chat-page">
+
 <div id="chatHeader" class="chat-header"></div>
+
 <div id="chatMessages" class="chat-messages"></div>
+
 <div class="chat-input-area">
+
 <textarea id="chatInput" class="chat-input" rows="1" placeholder="Сообщение..." onkeydown="handleChatKey(event)"></textarea>
-<button class="chat-send" onclick="sendCurrentMessage()">↑</button>
+
+<button class="chat-send" onclick="sendMessage()">↑</button>
+
 </div>
+
 </section>
 
+
+<!-- PROFILE -->
 
 <section id="profilePage" class="page">
 
 <div class="profile-card">
+
 <div class="cover"></div>
 
 <div class="profile-info">
+
 <div id="profileAvatarContainer"></div>
+
 <div id="profileName" class="profile-name"></div>
 <div id="profileUsername" class="profile-username"></div>
 <div id="profileBio" class="profile-bio"></div>
 
 <div class="profile-stats">
-<div class="stat" onclick="openPeopleList(localStorage.getItem('user_id'),'followers')">
+
+<div class="stat" onclick="openFollowList('followers',localStorage.getItem('user_id'))">
 <div id="myFollowersCount" class="stat-number">0</div>
 <div class="stat-label">подписчиков</div>
 </div>
 
-<div class="stat" onclick="openPeopleList(localStorage.getItem('user_id'),'following')">
+<div class="stat" onclick="openFollowList('following',localStorage.getItem('user_id'))">
 <div id="myFollowingCount" class="stat-number">0</div>
 <div class="stat-label">подписок</div>
 </div>
+
 </div>
 
 <div class="profile-buttons">
+
 <button class="profile-button dark" onclick="openProfileEditor()">Редактировать профиль</button>
-<button class="profile-button" onclick="chooseAvatar()">📷 Изменить аватар</button>
+<button class="profile-button" onclick="chooseAvatar()">📷 Аватар</button>
+
 </div>
+
 </div>
 </div>
 
-<div class="friends-box">
-<div class="friends-header">
-<div class="friends-title">🤝 Друзья</div>
-<button class="profile-button" onclick="loadMyFriends()">Обновить</button>
-</div>
-<div id="friendsList"></div>
-</div>
 
 <div class="profile-wall">
+
 <div class="wall-title">Моя стена</div>
 
 <div class="create-post">
-<textarea id="wallInput" placeholder="Что написать на стене?" maxlength="5000"></textarea>
+
+<textarea id="wallInput" maxlength="5000" placeholder="Что написать на стене?"></textarea>
 
 <div class="post-photo-tools">
-<button type="button" class="photo-button" onclick="choosePostImage('wall')">📷 Фото</button>
+<button class="photo-button" onclick="choosePostImage('wall')">📷 Фото</button>
 <span id="wallImageName" class="photo-name"></span>
 </div>
 
 <div id="wallImagePreview" class="post-image-preview"></div>
+
 <input id="wallImageInput" type="file" accept="image/*" hidden onchange="previewPostImage(event,'wall')">
+
 <button class="publish" id="publishWallButton" onclick="createWallPost()">Опубликовать</button>
+
 </div>
 
 <div id="wall"></div>
+
 </div>
 
 </section>
 
+
+<!-- PUBLIC PROFILE -->
 
 <section id="publicProfilePage" class="page">
 
 <button class="public-back" onclick="backFromPublicProfile()">← Назад</button>
 
 <div class="public-profile-card">
+
 <div class="public-cover"></div>
 
 <div class="public-info">
+
 <div id="publicAvatarContainer"></div>
+
 <div id="publicName" class="public-name"></div>
 <div id="publicUsername" class="public-username"></div>
 <div id="publicBio" class="public-bio"></div>
 
+<div id="publicFriendBadge"></div>
+
 <div class="public-stats">
-<div class="stat" onclick="openPublicPeopleList('followers')">
+
+<div class="stat" onclick="openFollowList('followers',publicProfile?.id)">
 <div id="publicFollowersCount" class="stat-number">0</div>
 <div class="stat-label">подписчиков</div>
 </div>
 
-<div class="stat" onclick="openPublicPeopleList('following')">
+<div class="stat" onclick="openFollowList('following',publicProfile?.id)">
 <div id="publicFollowingCount" class="stat-number">0</div>
 <div class="stat-label">подписок</div>
 </div>
+
 </div>
 
 <div id="publicActions" class="public-actions"></div>
+
 </div>
 </div>
 
 <div class="public-wall">
+
 <div class="wall-title">Стена</div>
 <div id="publicWall"></div>
+
+</div>
+
+</section>
+
+
+<!-- FOLLOW LIST -->
+
+<section id="followListPage" class="page">
+
+<div class="follow-list">
+
+<div class="follow-list-header">
+<button class="follow-back" onclick="closeFollowList()">← Назад</button>
+<div id="followListTitle" class="follow-list-title">Подписчики</div>
+</div>
+
+<div id="followListContent"></div>
+
 </div>
 
 </section>
@@ -541,88 +1390,88 @@ textarea:focus{border-color:#7db9df}
 </main>
 
 
+<!-- NAV -->
+
 <nav class="bottom-nav">
+
 <div class="nav-inner">
 
 <button id="feedNav" class="nav-button" onclick="showPage('feed')">
-<span class="nav-icon">🏠</span><span>Лента</span>
+<span class="nav-icon">🏠</span>
+<span>Лента</span>
 </button>
 
 <button id="searchNav" class="nav-button" onclick="showPage('search')">
-<span class="nav-icon">🔎</span><span>Поиск</span>
+<span class="nav-icon">🔎</span>
+<span>Поиск</span>
 </button>
 
 <button id="messagesNav" class="nav-button" onclick="showPage('messages')">
-<span class="nav-icon">💬</span><span>Сообщения</span>
+<span class="nav-icon">💬</span>
+<span>Сообщения</span>
 </button>
 
 <button id="profileNav" class="nav-button" onclick="showPage('profile')">
-<span class="nav-icon">👤</span><span>Профиль</span>
+<span class="nav-icon">👤</span>
+<span>Профиль</span>
 </button>
 
 </div>
 </nav>
+
 </div>
 
 
-<!-- PROFILE EDITOR -->
+<!-- PROFILE MODAL -->
 
 <div id="profileModal" class="modal">
+
 <div class="modal-card">
+
 <h2>Редактировать профиль</h2>
 
-<input id="editDisplayName" type="text" placeholder="Имя" maxlength="50">
-<input id="editUsername" type="text" placeholder="Username" maxlength="30">
-<textarea id="editBio" placeholder="Расскажи о себе" maxlength="300"></textarea>
+<input id="editDisplayName" placeholder="Имя" maxlength="50">
+<input id="editUsername" placeholder="Username" maxlength="30">
+
+<textarea id="editBio" maxlength="300" placeholder="Расскажи о себе"></textarea>
 
 <div class="modal-actions">
 <button class="cancel" onclick="closeProfileEditor()">Отмена</button>
 <button class="primary" onclick="saveProfile()">Сохранить</button>
 </div>
+
 </div>
 </div>
 
 
-<!-- PEOPLE LIST -->
-
-<div id="peopleModal" class="modal">
-<div class="modal-card">
-<h2 id="peopleModalTitle">Пользователи</h2>
-<div id="peopleModalList"></div>
-
-<div class="modal-actions">
-<button class="cancel" onclick="closePeopleModal()">Закрыть</button>
-</div>
-</div>
-</div>
-
-
-<!-- GROUP CREATE -->
+<!-- GROUP MODAL -->
 
 <div id="groupModal" class="modal">
+
 <div class="modal-card">
+
 <h2>Новый общий чат</h2>
 
-<input id="groupNameInput" type="text" maxlength="50" placeholder="Название чата">
+<input id="groupName" maxlength="50" placeholder="Название чата">
 
-<div id="groupFriendsList" class="user-select-list">
-<div class="search-empty">Загружаем друзей...</div>
-</div>
+<div id="groupFriendsList" class="group-create-list"></div>
 
 <div class="modal-actions">
-<button class="cancel" onclick="closeGroupCreateModal()">Отмена</button>
+<button class="cancel" onclick="closeGroupModal()">Отмена</button>
 <button class="primary" onclick="createGroupChat()">Создать</button>
 </div>
+
 </div>
 </div>
 
 
-<input id="avatarInput" type="file" accept="image/*" style="display:none" onchange="uploadAvatar()">
+<input id="avatarInput" type="file" accept="image/*" hidden onchange="uploadAvatar()">
 
 
 <script>
+
 /* =========================================================
- SUPABASE
+   SUPABASE
 ========================================================= */
 
 const SUPABASE_URL="https://jrzoexmvgyyitojbcxvr.supabase.co";
@@ -630,3166 +1479,2776 @@ const SUPABASE_URL="https://jrzoexmvgyyitojbcxvr.supabase.co";
 const SUPABASE_KEY="sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
 
 const baseHeaders={
-  "apikey":SUPABASE_KEY,
+  apikey:SUPABASE_KEY,
   "Content-Type":"application/json"
 };
 
 function authHeaders(){
- const token=localStorage.getItem("access_token");
- return {...baseHeaders,"Authorization":"Bearer "+(token||SUPABASE_KEY)};
+  return{
+    ...baseHeaders,
+    Authorization:"Bearer "+(
+      localStorage.getItem("access_token")||SUPABASE_KEY
+    )
+  };
 }
 
 
 /* =========================================================
- STATE
+   STATE
 ========================================================= */
 
 let currentChatUser=null;
 let currentGroupChat=null;
-let chatPolling=null;
-let searchTimeout=null;
-let messageSearchTimeout=null;
 let publicProfile=null;
+let followListReturn=null;
+
+let chatPolling=null;
+let searchTimer=null;
+let messageSearchTimer=null;
+
 let profilesCache=null;
 let profilesCacheTime=0;
-let postsLoading=false;
-let conversationsLoading=false;
-let chatLoading=false;
 
-const PROFILES_CACHE_MS=30000;
+const PROFILE_CACHE_TIME=30000;
 
 
 /* =========================================================
- AUTH
+   AUTH
 ========================================================= */
 
 function showAuthChoice(){
- document.getElementById("authChoice").style.display="block";
- document.getElementById("loginForm").style.display="none";
- document.getElementById("signupForm").style.display="none";
- document.getElementById("authMessage").textContent="";
+  document.getElementById("authChoice").style.display="block";
+  document.getElementById("loginForm").style.display="none";
+  document.getElementById("signupForm").style.display="none";
+  document.getElementById("authMessage").textContent="";
 }
 
 function showAuthForm(type){
- document.getElementById("authChoice").style.display="none";
- document.getElementById("loginForm").style.display=type==="login"?"block":"none";
- document.getElementById("signupForm").style.display=type==="signup"?"block":"none";
- document.getElementById("authMessage").textContent="";
+  document.getElementById("authChoice").style.display="none";
+  document.getElementById("loginForm").style.display=type==="login"?"block":"none";
+  document.getElementById("signupForm").style.display=type==="signup"?"block":"none";
+  document.getElementById("authMessage").textContent="";
 }
 
+function clearSession(){
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("user_id");
+}
 
 async function signUp(){
 
- const username=document.getElementById("signupUsername").value.trim();
- const email=document.getElementById("signupEmail").value.trim();
- const password=document.getElementById("signupPassword").value;
- const message=document.getElementById("authMessage");
- const button=document.getElementById("signupButton");
+  const username=document.getElementById("signupUsername").value.trim();
+  const email=document.getElementById("signupEmail").value.trim();
+  const password=document.getElementById("signupPassword").value;
+  const message=document.getElementById("authMessage");
+  const button=document.getElementById("signupButton");
 
- if(!username||!email||!password){
-  message.textContent="Заполни все поля.";
-  return;
- }
-
- if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
-  message.textContent="Username: только латиница, цифры, _ . -";
-  return;
- }
-
- if(username.length<3){
-  message.textContent="Username должен быть минимум 3 символа.";
-  return;
- }
-
- if(password.length<6){
-  message.textContent="Пароль должен быть минимум 6 символов.";
-  return;
- }
-
- button.disabled=true;
- message.textContent="Создаём аккаунт...";
-
- try{
-  const response=await fetch(SUPABASE_URL+"/auth/v1/signup",{
-   method:"POST",
-   headers:baseHeaders,
-   body:JSON.stringify({email,password})
-  });
-
-  const data=await response.json();
-
-  if(!response.ok){
-   message.textContent=data.msg||data.message||data.error_description||"Не удалось создать аккаунт.";
-   return;
+  if(!username||!email||!password){
+    message.textContent="Заполни все поля.";
+    return;
   }
 
-  if(!data.user){
-   message.textContent="Не удалось получить данные аккаунта.";
-   return;
+  if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
+    message.textContent="Username: только латиница, цифры, _ . -";
+    return;
   }
 
-  if(!data.access_token){
-   message.textContent="Аккаунт создан. Теперь войди.";
-   showAuthForm("login");
-   document.getElementById("loginEmail").value=email;
-   return;
+  if(username.length<3){
+    message.textContent="Username должен быть минимум 3 символа.";
+    return;
   }
 
-  localStorage.setItem("access_token",data.access_token);
-  localStorage.setItem("user_id",data.user.id);
-
-  const created=await createProfile(data.user.id,username);
-
-  if(!created){
-   clearSession();
-   message.textContent="Аккаунт создан, но профиль не создался.";
-   return;
+  if(password.length<6){
+    message.textContent="Пароль должен быть минимум 6 символов.";
+    return;
   }
 
-  await showApp();
+  button.disabled=true;
+  message.textContent="Создаём аккаунт...";
 
- }catch(error){
-  console.error("signUp:",error);
-  message.textContent="Ошибка соединения с сервером.";
- }finally{
-  button.disabled=false;
- }
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+"/auth/v1/signup",
+      {
+        method:"POST",
+        headers:baseHeaders,
+        body:JSON.stringify({email,password})
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      message.textContent=data.msg||data.message||data.error_description||"Ошибка регистрации.";
+      return;
+    }
+
+    if(!data.user){
+      message.textContent="Не удалось создать пользователя.";
+      return;
+    }
+
+    if(!data.access_token){
+      message.textContent="Аккаунт создан. Теперь войди.";
+      showAuthForm("login");
+      document.getElementById("loginEmail").value=email;
+      return;
+    }
+
+    localStorage.setItem("access_token",data.access_token);
+    localStorage.setItem("user_id",data.user.id);
+
+    const ok=await createProfile(data.user.id,username);
+
+    if(!ok){
+      clearSession();
+      message.textContent="Аккаунт создан, но профиль не создался.";
+      return;
+    }
+
+    await showApp();
+
+  }catch(e){
+    console.error(e);
+    message.textContent="Ошибка соединения.";
+  }finally{
+    button.disabled=false;
+  }
 }
-
 
 async function signIn(){
 
- const email=document.getElementById("loginEmail").value.trim();
- const password=document.getElementById("loginPassword").value;
- const message=document.getElementById("authMessage");
- const button=document.getElementById("loginButton");
+  const email=document.getElementById("loginEmail").value.trim();
+  const password=document.getElementById("loginPassword").value;
+  const message=document.getElementById("authMessage");
+  const button=document.getElementById("loginButton");
 
- if(!email||!password){
-  message.textContent="Введите email и пароль.";
-  return;
- }
-
- button.disabled=true;
- message.textContent="Входим...";
-
- try{
-  const response=await fetch(SUPABASE_URL+"/auth/v1/token?grant_type=password",{
-   method:"POST",
-   headers:baseHeaders,
-   body:JSON.stringify({email,password})
-  });
-
-  const data=await response.json();
-
-  if(!response.ok){
-   message.textContent=data.msg||data.message||data.error_description||"Неверный email или пароль.";
-   return;
+  if(!email||!password){
+    message.textContent="Введите email и пароль.";
+    return;
   }
 
-  if(!data.access_token||!data.user){
-   message.textContent="Сервер не вернул данные входа.";
-   return;
+  button.disabled=true;
+  message.textContent="Входим...";
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+"/auth/v1/token?grant_type=password",
+      {
+        method:"POST",
+        headers:baseHeaders,
+        body:JSON.stringify({email,password})
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok){
+      message.textContent=data.msg||data.message||data.error_description||"Неверный email или пароль.";
+      return;
+    }
+
+    localStorage.setItem("access_token",data.access_token);
+    localStorage.setItem("user_id",data.user.id);
+
+    await showApp();
+
+  }catch(e){
+    console.error(e);
+    message.textContent="Ошибка соединения.";
+  }finally{
+    button.disabled=false;
   }
-
-  localStorage.setItem("access_token",data.access_token);
-  localStorage.setItem("user_id",data.user.id);
-
-  await showApp();
-
- }catch(error){
-  console.error("signIn:",error);
-  message.textContent="Ошибка соединения с сервером.";
- }finally{
-  button.disabled=false;
- }
 }
-
 
 async function validateSession(){
 
- const token=localStorage.getItem("access_token");
- const userId=localStorage.getItem("user_id");
+  const token=localStorage.getItem("access_token");
+  const userId=localStorage.getItem("user_id");
 
- if(!token||!userId)return false;
+  if(!token||!userId)return false;
 
- try{
-  const response=await fetch(SUPABASE_URL+"/auth/v1/user",{
-   headers:{
-    "apikey":SUPABASE_KEY,
-    "Authorization":"Bearer "+token
-   }
-  });
+  try{
 
-  if(!response.ok){
-   clearSession();
-   return false;
+    const response=await fetch(
+      SUPABASE_URL+"/auth/v1/user",
+      {
+        headers:{
+          apikey:SUPABASE_KEY,
+          Authorization:"Bearer "+token
+        }
+      }
+    );
+
+    if(!response.ok){
+      clearSession();
+      return false;
+    }
+
+    const user=await response.json();
+
+    if(user.id!==userId){
+      clearSession();
+      return false;
+    }
+
+    return true;
+
+  }catch{
+    return false;
   }
-
-  const user=await response.json();
-
-  if(!user||user.id!==userId){
-   clearSession();
-   return false;
-  }
-
-  return true;
-
- }catch(error){
-  console.error("validateSession:",error);
-  return false;
- }
 }
-
-
-function clearSession(){
- localStorage.removeItem("access_token");
- localStorage.removeItem("user_id");
-}
-
 
 function signOut(){
- stopChatPolling();
- currentChatUser=null;
- currentGroupChat=null;
- publicProfile=null;
- clearSession();
- window.currentProfile=null;
- profilesCache=null;
- showAuth();
+  stopChatPolling();
+  currentChatUser=null;
+  currentGroupChat=null;
+  publicProfile=null;
+  clearSession();
+  profilesCache=null;
+  showAuth();
 }
 
 
 /* =========================================================
- PROFILE
+   PROFILE
 ========================================================= */
 
-async function createProfile(userId,username){
+async function createProfile(id,username){
 
- try{
-  const response=await fetch(SUPABASE_URL+"/rest/v1/profiles",{
-   method:"POST",
-   headers:{...authHeaders(),"Prefer":"return=minimal"},
-   body:JSON.stringify({
-    id:userId,
-    username,
-    display_name:username,
-    bio:"",
-    avatar_url:"",
-    cover_url:""
-   })
-  });
+  try{
 
-  if(response.ok){
-   profilesCache=null;
-   return true;
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/profiles",
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          id,
+          username,
+          display_name:username,
+          bio:"",
+          avatar_url:"",
+          cover_url:""
+        })
+      }
+    );
+
+    if(response.ok){
+      profilesCache=null;
+      return true;
+    }
+
+    console.error(await response.text());
+    return false;
+
+  }catch(e){
+    console.error(e);
+    return false;
   }
-
-  console.error("Profile creation:",await response.text());
-  return false;
-
- }catch(error){
-  console.error("createProfile:",error);
-  return false;
- }
 }
-
 
 async function loadProfile(){
 
- const userId=localStorage.getItem("user_id");
- if(!userId)return null;
+  const id=localStorage.getItem("user_id");
+  if(!id)return null;
 
- try{
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(userId)+"&select=*",
-   {headers:authHeaders()}
-  );
+  try{
 
-  if(!response.ok){
-   console.error("loadProfile:",await response.text());
-   return null;
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(id)+"&select=*",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)return null;
+
+    const rows=await response.json();
+    if(!rows.length)return null;
+
+    const profile=rows[0];
+    window.currentProfile=profile;
+
+    document.getElementById("profileName").textContent=
+      profile.display_name||profile.username;
+
+    document.getElementById("profileUsername").textContent=
+      "@"+profile.username;
+
+    document.getElementById("profileBio").textContent=
+      profile.bio||"Описание профиля пока не добавлено.";
+
+    renderAvatar("profileAvatarContainer",profile,"big");
+
+    await loadFollowStats(id,"myFollowersCount","myFollowingCount");
+
+    return profile;
+
+  }catch(e){
+    console.error(e);
+    return null;
+  }
+}
+
+function renderAvatar(containerId,profile,type){
+
+  const container=document.getElementById(containerId);
+  if(!container)return;
+
+  container.innerHTML="";
+
+  if(profile.avatar_url){
+
+    const img=document.createElement("img");
+    img.src=profile.avatar_url;
+    img.alt="";
+    img.loading="lazy";
+
+    img.className=
+      type==="big"?"big-avatar":
+      type==="public"?"public-avatar":
+      type==="chat"?"chat-avatar":
+      "mini-avatar";
+
+    container.appendChild(img);
+    return;
   }
 
-  const profiles=await response.json();
+  const div=document.createElement("div");
 
-  if(!profiles.length)return null;
+  div.className=
+    type==="big"?"avatar-placeholder":
+    type==="public"?"public-avatar-placeholder":
+    type==="chat"?"chat-avatar-placeholder":
+    "mini-avatar-placeholder";
 
-  const profile=profiles[0];
-  window.currentProfile=profile;
-  profilesCache=null;
+  div.textContent=(
+    profile.display_name||
+    profile.username||
+    "N"
+  ).charAt(0).toUpperCase();
 
-  document.getElementById("profileName").textContent=profile.display_name||profile.username;
-  document.getElementById("profileUsername").textContent="@"+profile.username;
-  document.getElementById("profileBio").textContent=profile.bio||"Описание профиля пока не добавлено.";
-
-  renderProfileAvatar(profile);
-
-  await loadFollowStats(userId,"myFollowersCount","myFollowingCount");
-  await loadMyFriends();
-
-  return profile;
-
- }catch(error){
-  console.error("loadProfile:",error);
-  return null;
+  container.appendChild(div);
 }
-
-
-function renderProfileAvatar(profile){
-
- const container=document.getElementById("profileAvatarContainer");
- if(!container)return;
-
- container.replaceChildren();
-
- if(profile.avatar_url){
-  const img=document.createElement("img");
-  img.className="big-avatar";
-  img.src=profile.avatar_url;
-  img.alt="Аватар";
-  img.loading="lazy";
-  img.onerror=()=>renderProfileAvatar({...profile,avatar_url:""});
-  container.appendChild(img);
-  return;
- }
-
- const div=document.createElement("div");
- div.className="avatar-placeholder";
- div.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
- container.appendChild(div);
-}
-
 
 function chooseAvatar(){
- document.getElementById("avatarInput").click();
+  document.getElementById("avatarInput").click();
 }
-
 
 async function uploadAvatar(){
 
- const input=document.getElementById("avatarInput");
- const file=input.files[0];
+  const input=document.getElementById("avatarInput");
+  const file=input.files[0];
 
- if(!file)return;
+  if(!file)return;
 
- if(!file.type.startsWith("image/")){
-  alert("Можно загружать только изображения.");
-  input.value="";
-  return;
- }
-
- if(file.size>10*1024*1024){
-  alert("Максимальный размер аватарки: 10 МБ.");
-  input.value="";
-  return;
- }
-
- const userId=localStorage.getItem("user_id");
- const token=localStorage.getItem("access_token");
-
- if(!userId||!token){
-  alert("Сначала войди в аккаунт.");
-  input.value="";
-  return;
- }
-
- try{
-
-  const prepared=await prepareImageForUpload(file);
-  const extension=getImageExtension(prepared.type||file.type,file.name);
-
-  const filePath=userId+"/"+Date.now()+"-avatar."+extension;
-
-  const uploadResponse=await uploadToStorage(filePath,prepared);
-
-  if(!uploadResponse.ok){
-   alert("Не удалось загрузить аватарку:\n"+uploadResponse.text);
-   input.value="";
-   return;
+  if(!file.type.startsWith("image/")){
+    alert("Можно загружать только изображения.");
+    input.value="";
+    return;
   }
 
-  const avatarUrl=SUPABASE_URL+"/storage/v1/object/public/Stenka/"+filePath;
-
-  const updateResponse=await fetch(
-   SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(userId),
-   {
-    method:"PATCH",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({avatar_url:avatarUrl})
-   }
-  );
-
-  if(!updateResponse.ok){
-   alert("Фото загрузилось, но профиль не обновился.");
-   input.value="";
-   return;
+  if(file.size>10*1024*1024){
+    alert("Максимальный размер: 10 МБ.");
+    input.value="";
+    return;
   }
 
-  input.value="";
-  profilesCache=null;
-  await loadProfile();
+  const id=localStorage.getItem("user_id");
 
- }catch(error){
-  console.error("uploadAvatar:",error);
-  alert("Ошибка загрузки аватарки.");
-  input.value="";
- }
+  try{
+
+    const prepared=await prepareImageForUpload(file);
+    const ext=getImageExtension(prepared.type,file.name);
+
+    const path=id+"/"+Date.now()+"-avatar."+ext;
+
+    const upload=await uploadToStorage(path,prepared);
+
+    if(!upload.ok){
+      alert("Ошибка загрузки:\n"+upload.text);
+      return;
+    }
+
+    const url=
+      SUPABASE_URL+
+      "/storage/v1/object/public/Stenka/"+
+      path;
+
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(id),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        },
+        body:JSON.stringify({avatar_url:url})
+      }
+    );
+
+    if(!response.ok){
+      alert("Фото загрузилось, но профиль не обновился.");
+      return;
+    }
+
+    profilesCache=null;
+    input.value="";
+    await loadProfile();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка загрузки аватарки.");
+  }
 }
-
 
 function openProfileEditor(){
 
- const profile=window.currentProfile;
+  const p=window.currentProfile;
 
- if(!profile){
-  alert("Профиль ещё загружается.");
-  return;
- }
+  if(!p){
+    alert("Профиль ещё загружается.");
+    return;
+  }
 
- document.getElementById("editDisplayName").value=profile.display_name||profile.username||"";
- document.getElementById("editUsername").value=profile.username||"";
- document.getElementById("editBio").value=profile.bio||"";
+  document.getElementById("editDisplayName").value=p.display_name||p.username;
+  document.getElementById("editUsername").value=p.username||"";
+  document.getElementById("editBio").value=p.bio||"";
 
- document.getElementById("profileModal").classList.add("active");
+  document.getElementById("profileModal").classList.add("active");
 }
-
 
 function closeProfileEditor(){
- document.getElementById("profileModal").classList.remove("active");
+  document.getElementById("profileModal").classList.remove("active");
 }
-
 
 async function saveProfile(){
 
- const userId=localStorage.getItem("user_id");
- const displayName=document.getElementById("editDisplayName").value.trim();
- const username=document.getElementById("editUsername").value.trim();
- const bio=document.getElementById("editBio").value.trim();
+  const id=localStorage.getItem("user_id");
 
- if(!username){
-  alert("Username не может быть пустым.");
-  return;
- }
+  const display_name=document.getElementById("editDisplayName").value.trim();
+  const username=document.getElementById("editUsername").value.trim();
+  const bio=document.getElementById("editBio").value.trim();
 
- if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
-  alert("Username: только латиница, цифры, _ . -");
-  return;
- }
-
- if(username.length<3){
-  alert("Username должен быть минимум 3 символа.");
-  return;
- }
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(userId),
-   {
-    method:"PATCH",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({display_name:displayName,username,bio})
-   }
-  );
-
-  if(!response.ok){
-   const text=await response.text();
-
-   if(text.includes("duplicate")||text.includes("23505")){
-    alert("Этот username уже занят.");
-   }else{
-    alert("Не удалось сохранить профиль:\n"+text);
-   }
-
-   return;
+  if(!username){
+    alert("Username не может быть пустым.");
+    return;
   }
 
-  profilesCache=null;
-  closeProfileEditor();
-  await loadProfile();
+  if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
+    alert("Username: только латиница, цифры, _ . -");
+    return;
+  }
 
-  if(document.getElementById("feedPage").classList.contains("active"))await loadPosts();
-  if(document.getElementById("profilePage").classList.contains("active"))await loadWall();
+  try{
 
- }catch(error){
-  console.error("saveProfile:",error);
-  alert("Ошибка соединения с сервером.");
- }
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(id),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        },
+        body:JSON.stringify({
+          display_name,
+          username,
+          bio
+        })
+      }
+    );
+
+    if(!response.ok){
+      const text=await response.text();
+
+      if(text.includes("23505")||text.includes("duplicate")){
+        alert("Этот username уже занят.");
+      }else{
+        alert("Не удалось сохранить:\n"+text);
+      }
+
+      return;
+    }
+
+    profilesCache=null;
+    closeProfileEditor();
+    await loadProfile();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка сохранения.");
+  }
 }
 
 
 /* =========================================================
- SEARCH
+   FOLLOW SYSTEM
 ========================================================= */
 
-function searchUsers(){
- clearTimeout(searchTimeout);
- searchTimeout=setTimeout(performUserSearch,250);
+async function loadFollowStats(userId,followersId,followingId){
+
+  try{
+
+    const [a,b]=await Promise.all([
+
+      fetch(
+        SUPABASE_URL+"/rest/v1/follows?following_id=eq."+encodeURIComponent(userId)+"&select=follower_id",
+        {headers:authHeaders()}
+      ),
+
+      fetch(
+        SUPABASE_URL+"/rest/v1/follows?follower_id=eq."+encodeURIComponent(userId)+"&select=following_id",
+        {headers:authHeaders()}
+      )
+
+    ]);
+
+    if(a.ok){
+      document.getElementById(followersId).textContent=(await a.json()).length;
+    }
+
+    if(b.ok){
+      document.getElementById(followingId).textContent=(await b.json()).length;
+    }
+
+  }catch(e){
+    console.error(e);
+  }
 }
 
+async function isFollowing(target){
 
-async function performUserSearch(){
+  const me=localStorage.getItem("user_id");
 
- const input=document.getElementById("userSearchInput");
- const results=document.getElementById("searchResults");
+  if(!me||me===target)return false;
 
- if(!input||!results)return;
+  try{
 
- const query=input.value.trim();
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/follows?follower_id=eq."+
+      encodeURIComponent(me)+
+      "&following_id=eq."+
+      encodeURIComponent(target)+
+      "&select=follower_id",
+      {headers:authHeaders()}
+    );
 
- if(!query){
-  results.innerHTML='<div class="search-empty">Начни вводить username или имя</div>';
-  return;
- }
+    if(!response.ok)return false;
 
- const safeQuery=query.replace(/[,*()]/g,"").trim();
+    return (await response.json()).length>0;
 
- if(!safeQuery){
-  results.innerHTML='<div class="search-empty">Введи username или имя</div>';
-  return;
- }
-
- results.innerHTML='<div class="search-empty">Ищем...</div>';
-
- try{
-
-  const pattern="*"+safeQuery+"*";
-
-  const url=
-   SUPABASE_URL+"/rest/v1/profiles"+
-   "?or="+encodeURIComponent("(username.ilike."+pattern+",display_name.ilike."+pattern+")")+
-   "&select=id,username,display_name,avatar_url&limit=30";
-
-  const response=await fetch(url,{headers:authHeaders()});
-
-  if(!response.ok){
-   results.innerHTML='<div class="search-empty">Не удалось выполнить поиск.</div>';
-   return;
+  }catch{
+    return false;
   }
+}
 
-  const profiles=await response.json();
-  results.innerHTML="";
+async function isFriend(target){
 
-  if(!profiles.length){
-   results.innerHTML='<div class="search-empty">Пользователей не найдено.</div>';
-   return;
+  const me=localStorage.getItem("user_id");
+
+  if(!me||me===target)return false;
+
+  try{
+
+    const [a,b]=await Promise.all([
+
+      fetch(
+        SUPABASE_URL+
+        "/rest/v1/follows?follower_id=eq."+
+        encodeURIComponent(me)+
+        "&following_id=eq."+
+        encodeURIComponent(target)+
+        "&select=follower_id",
+        {headers:authHeaders()}
+      ),
+
+      fetch(
+        SUPABASE_URL+
+        "/rest/v1/follows?follower_id=eq."+
+        encodeURIComponent(target)+
+        "&following_id=eq."+
+        encodeURIComponent(me)+
+        "&select=follower_id",
+        {headers:authHeaders()}
+      )
+
+    ]);
+
+    if(!a.ok||!b.ok)return false;
+
+    return(
+      (await a.json()).length>0 &&
+      (await b.json()).length>0
+    );
+
+  }catch{
+    return false;
   }
+}
 
-  profiles.forEach(profile=>{
+async function toggleFollow(target){
 
-   const user=document.createElement("div");
-   user.className="search-user";
-   user.onclick=()=>openFoundProfile(profile);
+  const me=localStorage.getItem("user_id");
 
-   appendAvatar(user,profile,"search");
+  if(!me||me===target)return;
 
-   const info=document.createElement("div");
+  try{
 
-   const name=document.createElement("div");
-   name.className="search-user-name";
-   name.textContent=profile.display_name||profile.username;
+    const following=await isFollowing(target);
 
-   const username=document.createElement("div");
-   username.className="search-user-username";
-   username.textContent="@"+profile.username;
+    if(following){
 
-   info.appendChild(name);
-   info.appendChild(username);
-   user.appendChild(info);
-   results.appendChild(user);
-  });
+      const response=await fetch(
+        SUPABASE_URL+
+        "/rest/v1/follows?follower_id=eq."+
+        encodeURIComponent(me)+
+        "&following_id=eq."+
+        encodeURIComponent(target),
+        {
+          method:"DELETE",
+          headers:authHeaders()
+        }
+      );
 
- }catch(error){
-  console.error("Search:",error);
-  results.innerHTML='<div class="search-empty">Ошибка поиска.</div>';
- }
+      if(!response.ok){
+        alert("Не удалось отписаться.");
+        return;
+      }
+
+    }else{
+
+      const response=await fetch(
+        SUPABASE_URL+"/rest/v1/follows",
+        {
+          method:"POST",
+          headers:{
+            ...authHeaders(),
+            Prefer:"return=minimal"
+          },
+          body:JSON.stringify({
+            follower_id:me,
+            following_id:target
+          })
+        }
+      );
+
+      if(!response.ok){
+        const text=await response.text();
+
+        if(!text.includes("23505")&&!text.includes("duplicate")){
+          alert("Не удалось подписаться:\n"+text);
+          return;
+        }
+      }
+    }
+
+    await renderPublicActions(target);
+
+    if(publicProfile){
+      await loadFollowStats(
+        target,
+        "publicFollowersCount",
+        "publicFollowingCount"
+      );
+    }
+
+    await loadFollowStats(
+      me,
+      "myFollowersCount",
+      "myFollowingCount"
+    );
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка подписки.");
+  }
 }
 
 
 /* =========================================================
- PUBLIC PROFILE
+   PUBLIC PROFILE
 ========================================================= */
 
 async function openFoundProfile(profile){
 
- if(!profile||!profile.id)return;
+  if(!profile?.id)return;
 
- if(profile.id===localStorage.getItem("user_id")){
-  showPage("profile");
-  return;
- }
+  publicProfile=profile;
 
- publicProfile=null;
- showPage("publicProfile");
+  showPage("publicProfile");
 
- document.getElementById("publicName").textContent="Загрузка...";
- document.getElementById("publicUsername").textContent="";
- document.getElementById("publicBio").textContent="";
- document.getElementById("publicActions").innerHTML="";
- document.getElementById("publicWall").innerHTML='<div class="wall-empty">Загружаем стену...</div>';
+  document.getElementById("publicName").textContent="Загрузка...";
+  document.getElementById("publicUsername").textContent="";
+  document.getElementById("publicBio").textContent="";
+  document.getElementById("publicActions").innerHTML="";
+  document.getElementById("publicFriendBadge").innerHTML="";
 
- try{
+  try{
 
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(profile.id)+"&select=*",
-   {headers:authHeaders()}
-  );
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(profile.id)+"&select=*",
+      {headers:authHeaders()}
+    );
 
-  if(!response.ok)throw new Error(await response.text());
+    if(!response.ok)throw new Error(await response.text());
 
-  const profiles=await response.json();
+    const rows=await response.json();
 
-  if(!profiles.length){
-   alert("Профиль не найден.");
-   backFromPublicProfile();
-   return;
+    if(!rows.length){
+      alert("Профиль не найден.");
+      backFromPublicProfile();
+      return;
+    }
+
+    publicProfile=rows[0];
+
+    document.getElementById("publicName").textContent=
+      publicProfile.display_name||publicProfile.username;
+
+    document.getElementById("publicUsername").textContent=
+      "@"+publicProfile.username;
+
+    document.getElementById("publicBio").textContent=
+      publicProfile.bio||"Описание профиля пока не добавлено.";
+
+    renderAvatar("publicAvatarContainer",publicProfile,"public");
+
+    await loadFollowStats(
+      publicProfile.id,
+      "publicFollowersCount",
+      "publicFollowingCount"
+    );
+
+    await renderPublicActions(publicProfile.id);
+    await loadPublicWall(publicProfile.id);
+
+  }catch(e){
+
+    console.error(e);
+    alert("Не удалось открыть профиль.");
   }
-
-  publicProfile=profiles[0];
-
-  renderPublicProfile(publicProfile);
-  await loadPublicFollowStats(publicProfile.id);
-  await renderFollowButton(publicProfile.id);
-  await loadPublicWall(publicProfile.id);
-
- }catch(error){
-  console.error("openFoundProfile:",error);
-  alert("Не удалось открыть профиль.");
-  backFromPublicProfile();
- }
 }
 
+async function renderPublicActions(target){
 
-function renderPublicProfile(profile){
-
- document.getElementById("publicName").textContent=profile.display_name||profile.username;
- document.getElementById("publicUsername").textContent="@"+profile.username;
- document.getElementById("publicBio").textContent=profile.bio||"Описание профиля пока не добавлено.";
-
- const container=document.getElementById("publicAvatarContainer");
- container.replaceChildren();
-
- if(profile.avatar_url){
-
-  const img=document.createElement("img");
-  img.className="public-avatar";
-  img.src=profile.avatar_url;
-  img.alt="Аватар";
-  img.loading="lazy";
-  img.onerror=()=>renderPublicProfile({...profile,avatar_url:""});
-  container.appendChild(img);
-
- }else{
-
-  const placeholder=document.createElement("div");
-  placeholder.className="public-avatar-placeholder";
-  placeholder.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
-  container.appendChild(placeholder);
- }
-}
-
-
-/* =========================================================
- FOLLOWS + FRIENDS
-========================================================= */
-
-async function loadFollowStats(userId,followersElement,followingElement){
-
- try{
-
-  const [followersResponse,followingResponse]=await Promise.all([
-
-   fetch(
-    SUPABASE_URL+"/rest/v1/follows?following_id=eq."+encodeURIComponent(userId)+"&select=follower_id",
-    {headers:authHeaders()}
-   ),
-
-   fetch(
-    SUPABASE_URL+"/rest/v1/follows?follower_id=eq."+encodeURIComponent(userId)+"&select=following_id",
-    {headers:authHeaders()}
-   )
-
-  ]);
-
-  const followersNode=document.getElementById(followersElement);
-  const followingNode=document.getElementById(followingElement);
-
-  if(followersResponse.ok){
-   const rows=await followersResponse.json();
-   if(followersNode)followersNode.textContent=rows.length;
-  }
-
-  if(followingResponse.ok){
-   const rows=await followingResponse.json();
-   if(followingNode)followingNode.textContent=rows.length;
-  }
-
- }catch(error){
-  console.error("loadFollowStats:",error);
- }
-}
-
-
-async function getFollowingIds(userId){
-
- const response=await fetch(
-  SUPABASE_URL+"/rest/v1/follows?follower_id=eq."+encodeURIComponent(userId)+"&select=following_id",
-  {headers:authHeaders()}
- );
-
- if(!response.ok)return [];
-
- const rows=await response.json();
- return rows.map(x=>x.following_id);
-}
-
-
-async function getFollowerIds(userId){
-
- const response=await fetch(
-  SUPABASE_URL+"/rest/v1/follows?following_id=eq."+encodeURIComponent(userId)+"&select=follower_id",
-  {headers:authHeaders()}
- );
-
- if(!response.ok)return [];
-
- const rows=await response.json();
- return rows.map(x=>x.follower_id);
-}
-
-
-async function getFriendIds(userId){
-
- const [following,followers]=await Promise.all([
-  getFollowingIds(userId),
-  getFollowerIds(userId)
- ]);
-
- const followerSet=new Set(followers);
- return following.filter(id=>followerSet.has(id));
-}
-
-
-async function loadMyFriends(){
-
- const container=document.getElementById("friendsList");
- const userId=localStorage.getItem("user_id");
-
- if(!container||!userId)return;
-
- container.innerHTML='<div class="wall-empty">Загружаем друзей...</div>';
-
- try{
-
-  const ids=await getFriendIds(userId);
-
-  if(!ids.length){
-   container.innerHTML='<div class="wall-empty">Пока нет взаимных подписок.</div>';
-   return;
-  }
-
-  const profiles=await getProfilesByIds(ids);
+  const container=document.getElementById("publicActions");
+  const badge=document.getElementById("publicFriendBadge");
+  const me=localStorage.getItem("user_id");
 
   container.innerHTML="";
+  badge.innerHTML="";
 
-  ids.forEach(id=>{
+  if(!me)return;
 
-   const profile=profiles[id];
+  if(me===target){
 
-   if(!profile)return;
-
-   const item=document.createElement("div");
-   item.className="friend-item";
-   item.onclick=()=>openFoundProfile(profile);
-
-   appendFriendAvatar(item,profile);
-
-   const info=document.createElement("div");
-
-   const name=document.createElement("div");
-   name.className="friend-name";
-   name.textContent=profile.display_name||profile.username;
-
-   const username=document.createElement("div");
-   username.className="friend-username";
-   username.textContent="@"+profile.username;
-
-   info.appendChild(name);
-   info.appendChild(username);
-   item.appendChild(info);
-
-   container.appendChild(item);
-  });
-
- }catch(error){
-
-  console.error("loadMyFriends:",error);
-  container.innerHTML='<div class="wall-empty">Не удалось загрузить друзей.</div>';
- }
-}
-
-
-async function getProfilesByIds(ids){
-
- if(!ids.length)return {};
-
- const safe=ids.map(id=>`"${id}"`).join(",");
-
- const response=await fetch(
-  SUPABASE_URL+"/rest/v1/profiles?id=in.("+safe+")&select=id,username,display_name,avatar_url",
-  {headers:authHeaders()}
- );
-
- if(!response.ok)return {};
-
- const rows=await response.json();
- const map={};
-
- rows.forEach(profile=>map[profile.id]=profile);
-
- return map;
-}
-
-
-function appendFriendAvatar(container,profile){
-
- if(profile.avatar_url){
-
-  const img=document.createElement("img");
-  img.className="friend-avatar";
-  img.src=profile.avatar_url;
-  img.alt="";
-  img.loading="lazy";
-  container.appendChild(img);
-  return;
- }
-
- const div=document.createElement("div");
- div.className="friend-avatar-placeholder";
- div.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
- container.appendChild(div);
-}
-
-
-async function isFollowing(targetUserId){
-
- const currentUserId=localStorage.getItem("user_id");
-
- if(!currentUserId||currentUserId===targetUserId)return false;
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+
-   "/rest/v1/follows?follower_id=eq."+
-   encodeURIComponent(currentUserId)+
-   "&following_id=eq."+
-   encodeURIComponent(targetUserId)+
-   "&select=follower_id",
-   {headers:authHeaders()}
-  );
-
-  if(!response.ok)return false;
-
-  const rows=await response.json();
-  return rows.length>0;
-
- }catch(error){
-  console.error("isFollowing:",error);
-  return false;
- }
-}
-
-
-async function isFriend(targetUserId){
-
- const currentUserId=localStorage.getItem("user_id");
-
- if(!currentUserId||currentUserId===targetUserId)return false;
-
- const [a,b]=await Promise.all([
-  isFollowing(targetUserId),
-  isFollowingMe(targetUserId)
- ]);
-
- return a&&b;
-}
-
-
-async function isFollowingMe(targetUserId){
-
- const currentUserId=localStorage.getItem("user_id");
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+
-   "/rest/v1/follows?follower_id=eq."+
-   encodeURIComponent(targetUserId)+
-   "&following_id=eq."+
-   encodeURIComponent(currentUserId)+
-   "&select=follower_id",
-   {headers:authHeaders()}
-  );
-
-  if(!response.ok)return false;
-
-  const rows=await response.json();
-  return rows.length>0;
-
- }catch(error){
-  return false;
- }
-}
-
-
-async function renderFollowButton(targetUserId){
-
- const container=document.getElementById("publicActions");
- const currentUserId=localStorage.getItem("user_id");
-
- container.innerHTML="";
-
- if(!currentUserId)return;
-
- if(currentUserId===targetUserId){
-
-  const button=document.createElement("button");
-  button.className="public-action";
-  button.textContent="Это ваш профиль";
-  button.disabled=true;
-  container.appendChild(button);
-  return;
- }
-
- const [following,friend]=await Promise.all([
-  isFollowing(targetUserId),
-  isFriend(targetUserId)
- ]);
-
- const followButton=document.createElement("button");
-
- followButton.className="public-action"+(friend?" friend":following?" following":"");
-
- followButton.textContent=
-  friend
-   ? "🤝 Друзья"
-   : following
-     ? "✓ Вы подписаны"
-     : "Подписаться";
-
- followButton.onclick=async()=>{
-  followButton.disabled=true;
-  await toggleFollow(targetUserId);
-  followButton.disabled=false;
- };
-
- container.appendChild(followButton);
-
- const messageButton=document.createElement("button");
- messageButton.className="public-action";
- messageButton.textContent="💬 Написать";
-
- messageButton.onclick=()=>{
-  if(publicProfile)openChatWithUser(publicProfile);
- };
-
- container.appendChild(messageButton);
-}
-
-
-async function toggleFollow(targetUserId){
-
- const currentUserId=localStorage.getItem("user_id");
-
- if(!currentUserId||currentUserId===targetUserId)return;
-
- try{
-
-  const following=await isFollowing(targetUserId);
-
-  if(following){
-
-   const response=await fetch(
-    SUPABASE_URL+
-    "/rest/v1/follows?follower_id=eq."+
-    encodeURIComponent(currentUserId)+
-    "&following_id=eq."+
-    encodeURIComponent(targetUserId),
-    {
-     method:"DELETE",
-     headers:{...authHeaders(),"Prefer":"return=minimal"}
-    }
-   );
-
-   if(!response.ok){
-    alert("Не удалось отписаться:\n"+await response.text());
+    const b=document.createElement("button");
+    b.className="public-action";
+    b.textContent="Это ваш профиль";
+    b.disabled=true;
+    container.appendChild(b);
     return;
-   }
-
-  }else{
-
-   const response=await fetch(
-    SUPABASE_URL+"/rest/v1/follows",
-    {
-     method:"POST",
-     headers:{...authHeaders(),"Prefer":"return=minimal"},
-     body:JSON.stringify({
-      follower_id:currentUserId,
-      following_id:targetUserId
-     })
-    }
-   );
-
-   if(!response.ok){
-
-    const text=await response.text();
-
-    if(!text.includes("duplicate")&&!text.includes("23505")){
-     alert("Не удалось подписаться:\n"+text);
-     return;
-    }
-   }
   }
 
-  await loadPublicFollowStats(targetUserId);
-  await renderFollowButton(targetUserId);
-  await loadFollowStats(currentUserId,"myFollowersCount","myFollowingCount");
-  await loadMyFriends();
+  const following=await isFollowing(target);
+  const friend=await isFriend(target);
 
- }catch(error){
-
-  console.error("toggleFollow:",error);
-  alert("Ошибка соединения с сервером.");
- }
-}
-
-
-async function loadPublicFollowStats(userId){
- await loadFollowStats(userId,"publicFollowersCount","publicFollowingCount");
-}
-
-
-/* =========================================================
- PEOPLE LISTS
-========================================================= */
-
-async function openPeopleList(userId,type){
-
- if(!userId)return;
-
- const title=document.getElementById("peopleModalTitle");
- const list=document.getElementById("peopleModalList");
-
- title.textContent=type==="followers"?"Подписчики":"Подписки";
- list.innerHTML='<div class="search-empty">Загружаем...</div>';
-
- document.getElementById("peopleModal").classList.add("active");
-
- try{
-
-  const ids=
-   type==="followers"
-    ? await getFollowerIds(userId)
-    : await getFollowingIds(userId);
-
-  if(!ids.length){
-   list.innerHTML='<div class="search-empty">Здесь пока никого нет.</div>';
-   return;
+  if(friend){
+    badge.innerHTML='<div class="friend-badge">🤝 Друзья</div>';
   }
 
-  const profiles=await getProfilesByIds(ids);
+  const follow=document.createElement("button");
 
-  list.innerHTML="";
+  follow.className="public-action"+(following?" following":"");
+  follow.textContent=following?"✓ Вы подписаны":"Подписаться";
 
-  ids.forEach(id=>{
+  follow.onclick=async()=>{
+    follow.disabled=true;
+    await toggleFollow(target);
+    follow.disabled=false;
+  };
 
-   const profile=profiles[id];
-   if(!profile)return;
+  const message=document.createElement("button");
 
-   const item=document.createElement("div");
-   item.className="list-modal-item";
-   item.onclick=()=>{
-    closePeopleModal();
-    openFoundProfile(profile);
-   };
+  message.className="public-action";
+  message.textContent="💬 Написать";
 
-   appendListAvatar(item,profile);
+  message.onclick=()=>{
+    openChatWithUser(publicProfile);
+  };
 
-   const info=document.createElement("div");
-
-   const name=document.createElement("div");
-   name.className="search-user-name";
-   name.textContent=profile.display_name||profile.username;
-
-   const username=document.createElement("div");
-   username.className="search-user-username";
-   username.textContent="@"+profile.username;
-
-   info.appendChild(name);
-   info.appendChild(username);
-   item.appendChild(info);
-
-   list.appendChild(item);
-  });
-
- }catch(error){
-
-  console.error("openPeopleList:",error);
-  list.innerHTML='<div class="search-empty">Не удалось загрузить список.</div>';
- }
+  container.appendChild(follow);
+  container.appendChild(message);
 }
-
-
-async function openPublicPeopleList(type){
-
- if(!publicProfile)return;
-
- await openPeopleList(publicProfile.id,type);
-}
-
-
-function appendListAvatar(container,profile){
-
- if(profile.avatar_url){
-
-  const img=document.createElement("img");
-  img.className="list-modal-avatar";
-  img.src=profile.avatar_url;
-  img.alt="";
-  img.loading="lazy";
-  container.appendChild(img);
-  return;
- }
-
- const div=document.createElement("div");
- div.className="list-modal-placeholder";
- div.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
- container.appendChild(div);
-}
-
-
-function closePeopleModal(){
- document.getElementById("peopleModal").classList.remove("active");
-}
-
 
 function backFromPublicProfile(){
 
- publicProfile=null;
-
- const search=document.getElementById("userSearchInput");
-
- if(search&&search.value){
+  publicProfile=null;
   showPage("search");
- }else{
-  showPage("feed");
- }
 }
-
-
-/* =========================================================
- PUBLIC WALL
-========================================================= */
 
 async function loadPublicWall(userId){
 
- const wall=document.getElementById("publicWall");
- if(!wall)return;
+  const wall=document.getElementById("publicWall");
 
- wall.innerHTML='<div class="wall-empty">Загружаем стену...</div>';
+  wall.innerHTML='<div class="wall-empty">Загружаем стену...</div>';
 
- try{
+  try{
 
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(userId)+
-   "&select=*&order=created_at.desc&limit=50",
-   {headers:authHeaders()}
-  );
-
-  if(!response.ok){
-   wall.innerHTML='<div class="wall-empty">Не удалось загрузить стену.</div>';
-   return;
-  }
-
-  const posts=await response.json();
-  const profiles=await loadProfilesMap();
-
-  wall.innerHTML="";
-
-  if(!posts.length){
-   wall.innerHTML='<div class="wall-empty">На стене пока ничего нет.</div>';
-   return;
-  }
-
-  posts.forEach(post=>renderPost(post,wall,profiles));
-
- }catch(error){
-
-  console.error("loadPublicWall:",error);
-  wall.innerHTML='<div class="wall-empty">Ошибка загрузки стены.</div>';
- }
-}
-
-
-/* =========================================================
- MESSAGES
-========================================================= */
-
-async function loadConversations(){
-
- if(conversationsLoading)return;
-
- const currentUserId=localStorage.getItem("user_id");
- const container=document.getElementById("conversations");
-
- if(!currentUserId||!container)return;
-
- conversationsLoading=true;
-
- try{
-
-  container.innerHTML='<div class="search-empty">Загружаем сообщения...</div>';
-
-  const [messagesResponse,groupMembersResponse]=await Promise.all([
-
-   fetch(
-    SUPABASE_URL+"/rest/v1/messages?or="+
-    encodeURIComponent("(sender_id.eq."+currentUserId+",receiver_id.eq."+currentUserId+")")+
-    "&select=*&order=created_at.desc&limit=500",
-    {headers:authHeaders()}
-   ),
-
-   fetch(
-    SUPABASE_URL+"/rest/v1/group_chat_members?user_id=eq."+
-    encodeURIComponent(currentUserId)+"&select=chat_id",
-    {headers:authHeaders()}
-   )
-
-  ]);
-
-  const profiles=await loadProfilesMap();
-
-  container.innerHTML="";
-
-  if(messagesResponse.ok){
-
-   const messages=await messagesResponse.json();
-   const conversations={};
-
-   messages.forEach(message=>{
-    const otherId=message.sender_id===currentUserId?message.receiver_id:message.sender_id;
-    if(!conversations[otherId])conversations[otherId]=message;
-   });
-
-   Object.entries(conversations).forEach(([userId,message])=>{
-
-    const profile=profiles[userId];
-    if(!profile)return;
-
-    renderConversationItem(container,profile,message);
-   });
-  }
-
-  if(groupMembersResponse.ok){
-
-   const memberRows=await groupMembersResponse.json();
-   const groupIds=[...new Set(memberRows.map(x=>x.chat_id))];
-
-   if(groupIds.length){
-
-    const ids=groupIds.join(",");
-
-    const groupsResponse=await fetch(
-     SUPABASE_URL+
-     "/rest/v1/group_chats?id=in.("+ids+")&select=*",
-     {headers:authHeaders()}
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/posts?user_id=eq."+
+      encodeURIComponent(userId)+
+      "&select=*&order=created_at.desc&limit=50",
+      {headers:authHeaders()}
     );
 
-    if(groupsResponse.ok){
+    if(!response.ok)throw new Error();
 
-     const groups=await groupsResponse.json();
+    const posts=await response.json();
+    const profiles=await loadProfilesMap();
 
-     for(const group of groups){
+    wall.innerHTML="";
 
-      const last=await getLastGroupMessage(group.id);
-
-      renderGroupConversation(container,group,last,profiles);
-     }
+    if(!posts.length){
+      wall.innerHTML='<div class="wall-empty">На стене пока ничего нет.</div>';
+      return;
     }
-   }
+
+    posts.forEach(p=>renderPost(p,wall,profiles));
+
+  }catch(e){
+    console.error(e);
+    wall.innerHTML='<div class="wall-empty">Не удалось загрузить стену.</div>';
   }
-
-  if(!container.children.length){
-   container.innerHTML='<div class="search-empty">Пока нет сообщений.<br>Найди пользователя или создай общий чат.</div>';
-  }
-
- }catch(error){
-
-  console.error("loadConversations:",error);
-  container.innerHTML='<div class="search-empty">Ошибка загрузки сообщений.</div>';
-
- }finally{
-  conversationsLoading=false;
- }
-}
-
-
-function renderConversationItem(container,profile,message){
-
- const element=document.createElement("div");
- element.className="conversation";
- element.onclick=()=>openChatWithUser(profile);
-
- const avatarWrap=document.createElement("div");
- avatarWrap.className="conversation-avatar-wrap";
-
- if(profile.avatar_url){
-  const img=document.createElement("img");
-  img.className="conversation-avatar";
-  img.src=profile.avatar_url;
-  img.alt="";
-  img.loading="lazy";
-  avatarWrap.appendChild(img);
- }else{
-  const avatar=document.createElement("div");
-  avatar.className="conversation-avatar-placeholder";
-  avatar.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
-  avatarWrap.appendChild(avatar);
- }
-
- const dot=document.createElement("span");
- dot.className="online-dot";
- avatarWrap.appendChild(dot);
-
- const main=document.createElement("div");
- main.className="conversation-main";
-
- const top=document.createElement("div");
- top.className="conversation-top";
-
- const name=document.createElement("div");
- name.className="conversation-name";
- name.textContent=profile.display_name||profile.username;
-
- const time=document.createElement("div");
- time.className="conversation-time";
- time.textContent=formatMessageTime(message.created_at);
-
- top.appendChild(name);
- top.appendChild(time);
-
- const bottom=document.createElement("div");
- bottom.className="conversation-bottom";
-
- const preview=document.createElement("div");
- preview.className="conversation-preview";
- preview.textContent=message.content||"";
-
- bottom.appendChild(preview);
- main.appendChild(top);
- main.appendChild(bottom);
-
- element.appendChild(avatarWrap);
- element.appendChild(main);
- container.appendChild(element);
-}
-
-
-async function getLastGroupMessage(chatId){
-
- const response=await fetch(
-  SUPABASE_URL+
-  "/rest/v1/group_messages?chat_id=eq."+
-  encodeURIComponent(chatId)+
-  "&select=*&order=created_at.desc&limit=1",
-  {headers:authHeaders()}
- );
-
- if(!response.ok)return null;
-
- const rows=await response.json();
- return rows[0]||null;
-}
-
-
-async function getGroupMemberProfiles(chatId){
-
- const response=await fetch(
-  SUPABASE_URL+
-  "/rest/v1/group_chat_members?chat_id=eq."+
-  encodeURIComponent(chatId)+
-  "&select=user_id",
-  {headers:authHeaders()}
- );
-
- if(!response.ok)return [];
-
- const rows=await response.json();
- const ids=rows.map(x=>x.user_id);
-
- if(!ids.length)return [];
-
- const map=await getProfilesByIds(ids);
-
- return ids.map(id=>map[id]).filter(Boolean);
-}
-
-
-function renderGroupConversation(container,group,last,profiles){
-
- const element=document.createElement("div");
- element.className="conversation";
- element.onclick=()=>openGroupChat(group);
-
- const avatarWrap=document.createElement("div");
- avatarWrap.className="conversation-avatar-wrap";
-
- const avatar=document.createElement("div");
- avatar.className="group-badge";
- avatar.textContent="👥";
-
- avatarWrap.appendChild(avatar);
-
- const main=document.createElement("div");
- main.className="conversation-main";
-
- const top=document.createElement("div");
- top.className="conversation-top";
-
- const name=document.createElement("div");
- name.className="conversation-name";
- name.textContent=group.name||"Общий чат";
-
- const time=document.createElement("div");
- time.className="conversation-time";
- time.textContent=last?formatMessageTime(last.created_at):"";
-
- top.appendChild(name);
- top.appendChild(time);
-
- const bottom=document.createElement("div");
- bottom.className="conversation-bottom";
-
- const preview=document.createElement("div");
- preview.className="conversation-preview";
- preview.textContent=last?last.content:"Общий чат";
-
- bottom.appendChild(preview);
-
- main.appendChild(top);
- main.appendChild(bottom);
-
- element.appendChild(avatarWrap);
- element.appendChild(main);
- container.appendChild(element);
 }
 
 
 /* =========================================================
- MESSAGE SEARCH
+   FOLLOWERS / FOLLOWING
 ========================================================= */
 
-function searchMessageUsers(){
+async function openFollowList(type,userId){
 
- clearTimeout(messageSearchTimeout);
- messageSearchTimeout=setTimeout(performMessageUserSearch,250);
-}
+  if(!userId)return;
 
+  followListReturn=publicProfile? "publicProfile":"profile";
 
-async function performMessageUserSearch(){
+  showPage("followList");
 
- const input=document.getElementById("messageSearchInput");
- const results=document.getElementById("messageSearchResults");
- const conversations=document.getElementById("conversations");
+  const title=document.getElementById("followListTitle");
+  const content=document.getElementById("followListContent");
 
- if(!input||!results||!conversations)return;
+  title.textContent=type==="followers"?"Подписчики":"Подписки";
+  content.innerHTML='<div class="search-empty">Загружаем...</div>';
 
- const query=input.value.trim();
+  try{
 
- if(!query){
-  results.style.display="none";
-  conversations.style.display="block";
-  await loadConversations();
-  return;
- }
+    const column=
+      type==="followers"
+        ?"following_id"
+        :"follower_id";
 
- const safeQuery=query.replace(/[,*()]/g,"").trim();
+    const selectColumn=
+      type==="followers"
+        ?"follower_id"
+        :"following_id";
 
- if(!safeQuery){
-  results.style.display="block";
-  conversations.style.display="none";
-  results.innerHTML='<div class="search-empty">Введи имя или username</div>';
-  return;
- }
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/follows?"+
+      column+"=eq."+encodeURIComponent(userId)+
+      "&select="+selectColumn,
+      {headers:authHeaders()}
+    );
 
- results.style.display="block";
- conversations.style.display="none";
- results.innerHTML='<div class="search-empty">Ищем...</div>';
+    if(!response.ok)throw new Error(await response.text());
 
- try{
+    const rows=await response.json();
 
-  const pattern="*"+safeQuery+"*";
+    if(!rows.length){
+      content.innerHTML='<div class="search-empty">Здесь пока никого нет.</div>';
+      return;
+    }
 
-  const url=
-   SUPABASE_URL+"/rest/v1/profiles"+
-   "?or="+encodeURIComponent("(username.ilike."+pattern+",display_name.ilike."+pattern+")")+
-   "&select=id,username,display_name,avatar_url&limit=20";
+    const ids=rows.map(x=>x[selectColumn]);
 
-  const response=await fetch(url,{headers:authHeaders()});
+    const profiles=await getProfilesByIds(ids);
 
-  if(!response.ok){
-   results.innerHTML='<div class="search-empty">Ошибка поиска.</div>';
-   return;
+    content.innerHTML="";
+
+    for(const profile of profiles){
+
+      const item=document.createElement("div");
+      item.className="follow-user";
+
+      appendFollowAvatar(item,profile);
+
+      const info=document.createElement("div");
+      info.className="follow-user-info";
+
+      const name=document.createElement("div");
+      name.className="follow-user-name";
+      name.textContent=profile.display_name||profile.username;
+
+      const username=document.createElement("div");
+      username.className="follow-user-username";
+      username.textContent="@"+profile.username;
+
+      info.appendChild(name);
+      info.appendChild(username);
+
+      item.appendChild(info);
+
+      if(await isFriend(profile.id)){
+        const status=document.createElement("div");
+        status.className="follow-status";
+        status.textContent="🤝 Друзья";
+        item.appendChild(status);
+      }
+
+      item.onclick=()=>openFoundProfile(profile);
+
+      content.appendChild(item);
+    }
+
+  }catch(e){
+
+    console.error(e);
+    content.innerHTML='<div class="search-empty">Не удалось загрузить список.</div>';
   }
+}
 
-  const profiles=await response.json();
-  const currentUserId=localStorage.getItem("user_id");
-  const filtered=profiles.filter(profile=>profile.id!==currentUserId);
+function appendFollowAvatar(container,profile){
 
-  results.innerHTML="";
+  if(profile.avatar_url){
 
-  if(!filtered.length){
-   results.innerHTML='<div class="search-empty">Пользователей не найдено.</div>';
-   return;
+    const img=document.createElement("img");
+    img.className="search-avatar";
+    img.src=profile.avatar_url;
+    img.alt="";
+    container.appendChild(img);
+
+  }else{
+
+    const d=document.createElement("div");
+    d.className="search-avatar-placeholder";
+    d.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
+    container.appendChild(d);
   }
-
-  filtered.forEach(profile=>{
-
-   const element=document.createElement("div");
-   element.className="message-user-result";
-
-   element.onclick=()=>openChatWithUser(profile);
-
-   appendAvatar(element,profile,"message");
-
-   const info=document.createElement("div");
-
-   const name=document.createElement("div");
-   name.className="search-user-name";
-   name.textContent=profile.display_name||profile.username;
-
-   const username=document.createElement("div");
-   username.className="search-user-username";
-   username.textContent="@"+profile.username;
-
-   info.appendChild(name);
-   info.appendChild(username);
-   element.appendChild(info);
-   results.appendChild(element);
-  });
-
- }catch(error){
-
-  console.error("Message search:",error);
-  results.innerHTML='<div class="search-empty">Ошибка поиска.</div>';
- }
 }
 
+async function getProfilesByIds(ids){
 
-/* =========================================================
- DIRECT CHAT
-========================================================= */
+  if(!ids.length)return [];
 
-async function openChatWithUser(profile){
+  const unique=[...new Set(ids)];
 
- if(!profile||!profile.id)return;
-
- const currentUserId=localStorage.getItem("user_id");
-
- if(currentUserId===profile.id)return;
-
- currentChatUser=profile;
- currentGroupChat=null;
-
- showPage("chat");
- renderChatHeader(profile);
-
- document.getElementById("chatMessages").innerHTML='<div class="chat-empty">Загружаем переписку...</div>';
- document.getElementById("chatInput").value="";
-
- await loadChatMessages();
- startChatPolling();
-}
-
-
-function renderChatHeader(profile){
-
- const header=document.getElementById("chatHeader");
- header.innerHTML="";
-
- const back=document.createElement("button");
- back.className="chat-back";
- back.textContent="‹";
- back.onclick=closeChat;
- header.appendChild(back);
-
- if(profile.avatar_url){
-
-  const img=document.createElement("img");
-  img.className="chat-avatar";
-  img.src=profile.avatar_url;
-  img.alt="";
-  header.appendChild(img);
-
- }else{
-
-  const placeholder=document.createElement("div");
-  placeholder.className="chat-avatar-placeholder";
-  placeholder.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
-  header.appendChild(placeholder);
- }
-
- const info=document.createElement("div");
- info.className="chat-user-info";
-
- const name=document.createElement("div");
- name.className="chat-user-name";
- name.textContent=profile.display_name||profile.username;
-
- const username=document.createElement("div");
- username.className="chat-user-username";
- username.textContent="@"+profile.username;
-
- info.appendChild(name);
- info.appendChild(username);
- header.appendChild(info);
-}
-
-
-async function loadChatMessages(){
-
- if(!currentChatUser||chatLoading)return;
-
- const currentUserId=localStorage.getItem("user_id");
- const otherUserId=currentChatUser.id;
-
- if(!currentUserId)return;
-
- const container=document.getElementById("chatMessages");
- chatLoading=true;
-
- try{
-
-  const filter=
-   "or="+encodeURIComponent(
-    "(and(sender_id.eq."+currentUserId+",receiver_id.eq."+otherUserId+"),and(sender_id.eq."+otherUserId+",receiver_id.eq."+currentUserId+"))"
-   );
+  const filter=unique
+    .map(id=>`id.eq.${id}`)
+    .join(",");
 
   const response=await fetch(
-   SUPABASE_URL+"/rest/v1/messages?"+filter+"&select=*&order=created_at.asc&limit=500",
-   {headers:authHeaders()}
+    SUPABASE_URL+
+    "/rest/v1/profiles?or="+
+    encodeURIComponent("("+filter+")")+
+    "&select=id,username,display_name,avatar_url",
+    {headers:authHeaders()}
   );
 
-  if(!response.ok){
-   container.innerHTML='<div class="chat-empty">Не удалось загрузить переписку.</div>';
-   return;
-  }
+  if(!response.ok)return [];
 
-  const messages=await response.json();
-  container.innerHTML="";
+  const rows=await response.json();
 
-  if(!messages.length){
-   container.innerHTML='<div class="chat-empty">Здесь пока пусто.<br>Напиши первое сообщение.</div>';
-   return;
-  }
+  const map={};
+  rows.forEach(p=>map[p.id]=p);
 
-  messages.forEach(message=>renderChatMessage(message,currentUserId));
-  scrollChatToBottom();
-
- }catch(error){
-  console.error("loadChatMessages:",error);
- }finally{
-  chatLoading=false;
- }
+  return unique
+    .map(id=>map[id])
+    .filter(Boolean);
 }
 
+function closeFollowList(){
 
-function renderChatMessage(message,currentUserId){
-
- const container=document.getElementById("chatMessages");
-
- const row=document.createElement("div");
- const mine=message.sender_id===currentUserId;
-
- row.className="message-row "+(mine?"mine":"theirs");
-
- const bubble=document.createElement("div");
- bubble.className="message-bubble";
- bubble.textContent=message.content;
-
- const time=document.createElement("div");
- time.className="message-time";
- time.textContent=formatChatTime(message.created_at);
-
- bubble.appendChild(time);
- row.appendChild(bubble);
- container.appendChild(row);
-}
-
-
-function scrollChatToBottom(){
-
- const container=document.getElementById("chatMessages");
- if(container)container.scrollTop=container.scrollHeight;
-}
-
-
-async function sendMessage(){
-
- if(!currentChatUser)return;
-
- const input=document.getElementById("chatInput");
- const content=input.value.trim();
-
- if(!content)return;
-
- const senderId=localStorage.getItem("user_id");
- const receiverId=currentChatUser.id;
-
- if(!senderId||!receiverId)return;
-
- input.disabled=true;
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/messages",
-   {
-    method:"POST",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({
-     sender_id:senderId,
-     receiver_id:receiverId,
-     content
-    })
-   }
-  );
-
-  if(!response.ok){
-   alert("Не удалось отправить сообщение:\n"+await response.text());
-   return;
+  if(followListReturn==="publicProfile"&&publicProfile){
+    showPage("publicProfile");
+    return;
   }
 
-  input.value="";
-  await loadChatMessages();
-
- }catch(error){
-
-  console.error("sendMessage:",error);
-  alert("Ошибка отправки сообщения.");
-
- }finally{
-
-  input.disabled=false;
-  input.focus();
- }
+  showPage("profile");
 }
 
 
 /* =========================================================
- GROUP CHAT
+   SEARCH
 ========================================================= */
 
-async function openGroupCreateModal(){
+function searchUsers(){
 
- const modal=document.getElementById("groupModal");
- const list=document.getElementById("groupFriendsList");
+  clearTimeout(searchTimer);
 
- document.getElementById("groupNameInput").value="";
- modal.classList.add("active");
- list.innerHTML='<div class="search-empty">Загружаем друзей...</div>';
+  searchTimer=setTimeout(performUserSearch,250);
+}
 
- try{
+async function performUserSearch(){
 
-  const userId=localStorage.getItem("user_id");
-  const ids=await getFriendIds(userId);
+  const input=document.getElementById("userSearchInput");
+  const results=document.getElementById("searchResults");
 
-  if(!ids.length){
-   list.innerHTML='<div class="search-empty">Сначала нужны взаимные подписки. Здесь появятся твои друзья.</div>';
-   return;
+  const q=input.value.trim();
+
+  if(!q){
+    results.innerHTML='<div class="search-empty">Начни вводить username или имя</div>';
+    return;
   }
 
-  const profiles=await getProfilesByIds(ids);
-  list.innerHTML="";
+  results.innerHTML='<div class="search-empty">Ищем...</div>';
 
-  ids.forEach(id=>{
+  const safe=q.replace(/[,*()]/g,"");
 
-   const profile=profiles[id];
-   if(!profile)return;
+  try{
 
-   const item=document.createElement("label");
-   item.className="user-select-item";
+    const pattern="*"+safe+"*";
 
-   const checkbox=document.createElement("input");
-   checkbox.type="checkbox";
-   checkbox.value=profile.id;
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/profiles?or="+
+      encodeURIComponent(
+        "(username.ilike."+pattern+",display_name.ilike."+pattern+")"
+      )+
+      "&select=id,username,display_name,avatar_url&limit=30",
+      {headers:authHeaders()}
+    );
 
-   appendSelectAvatar(item,profile);
+    if(!response.ok)throw new Error();
 
-   const info=document.createElement("div");
-   info.className="user-select-info";
+    const rows=await response.json();
 
-   const name=document.createElement("div");
-   name.className="user-select-name";
-   name.textContent=profile.display_name||profile.username;
+    results.innerHTML="";
 
-   const username=document.createElement("div");
-   username.className="user-select-username";
-   username.textContent="@"+profile.username;
+    if(!rows.length){
+      results.innerHTML='<div class="search-empty">Пользователей не найдено.</div>';
+      return;
+    }
 
-   info.appendChild(name);
-   info.appendChild(username);
+    rows.forEach(profile=>{
 
-   item.insertBefore(checkbox,item.firstChild);
-   item.appendChild(info);
+      const item=document.createElement("div");
+      item.className="search-user";
+      item.onclick=()=>openFoundProfile(profile);
 
-   list.appendChild(item);
-  });
+      appendFollowAvatar(item,profile);
 
- }catch(error){
+      const info=document.createElement("div");
 
-  console.error("openGroupCreateModal:",error);
-  list.innerHTML='<div class="search-empty">Не удалось загрузить друзей.</div>';
- }
-}
+      const name=document.createElement("div");
+      name.className="search-user-name";
+      name.textContent=profile.display_name||profile.username;
 
+      const username=document.createElement("div");
+      username.className="search-user-username";
+      username.textContent="@"+profile.username;
 
-function appendSelectAvatar(container,profile){
+      info.appendChild(name);
+      info.appendChild(username);
+      item.appendChild(info);
 
- if(profile.avatar_url){
+      results.appendChild(item);
+    });
 
-  const img=document.createElement("img");
-  img.className="user-select-avatar";
-  img.src=profile.avatar_url;
-  img.alt="";
-  img.loading="lazy";
-  container.appendChild(img);
-  return;
- }
+  }catch(e){
 
- const div=document.createElement("div");
- div.className="user-select-placeholder";
- div.textContent=(profile.display_name||profile.username||"N").charAt(0).toUpperCase();
- container.appendChild(div);
-}
-
-
-function closeGroupCreateModal(){
- document.getElementById("groupModal").classList.remove("active");
-}
-
-
-async function createGroupChat(){
-
- const nameInput=document.getElementById("groupNameInput");
- const name=nameInput.value.trim()||"Общий чат";
- const userId=localStorage.getItem("user_id");
-
- const checkboxes=[
-  ...document.querySelectorAll("#groupFriendsList input[type=checkbox]:checked")
- ];
-
- const selected=checkboxes.map(x=>x.value);
-
- if(!selected.length){
-  alert("Выбери хотя бы одного друга.");
-  return;
- }
-
- try{
-
-  const createResponse=await fetch(
-   SUPABASE_URL+"/rest/v1/group_chats",
-   {
-    method:"POST",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({
-     name,
-     creator_id:userId
-    })
-   }
-  );
-
-  if(!createResponse.ok){
-   alert("Не удалось создать чат:\n"+await createResponse.text());
-   return;
+    console.error(e);
+    results.innerHTML='<div class="search-empty">Ошибка поиска.</div>';
   }
-
-  const created=await createResponse.json();
-  const chat=created[0];
-
-  if(!chat){
-   alert("Сервер не вернул созданный чат.");
-   return;
-  }
-
-  const members=[userId,...selected];
-
-  const memberRows=members.map(id=>({
-   chat_id:chat.id,
-   user_id:id
-  }));
-
-  const membersResponse=await fetch(
-   SUPABASE_URL+"/rest/v1/group_chat_members",
-   {
-    method:"POST",
-    headers:{...authHeaders(),"Prefer":"return=minimal"},
-    body:JSON.stringify(memberRows)
-   }
-  );
-
-  if(!membersResponse.ok){
-   alert("Чат создан, но не удалось добавить участников:\n"+await membersResponse.text());
-   closeGroupCreateModal();
-   await loadConversations();
-   return;
-  }
-
-  closeGroupCreateModal();
-  await loadConversations();
-  await openGroupChat(chat);
-
- }catch(error){
-
-  console.error("createGroupChat:",error);
-  alert("Ошибка создания общего чата.");
- }
-}
-
-
-async function openGroupChat(group){
-
- if(!group||!group.id)return;
-
- currentGroupChat=group;
- currentChatUser=null;
-
- showPage("chat");
-
- await renderGroupChatHeader(group);
-
- document.getElementById("chatMessages").innerHTML='<div class="chat-empty">Загружаем чат...</div>';
- document.getElementById("chatInput").value="";
-
- await loadGroupMessages();
- startChatPolling();
-}
-
-
-async function renderGroupChatHeader(group){
-
- const header=document.getElementById("chatHeader");
- header.innerHTML="";
-
- const back=document.createElement("button");
- back.className="chat-back";
- back.textContent="‹";
- back.onclick=closeChat;
- header.appendChild(back);
-
- const avatar=document.createElement("div");
- avatar.className="chat-avatar-placeholder";
- avatar.textContent="👥";
- header.appendChild(avatar);
-
- const info=document.createElement("div");
- info.className="chat-user-info";
-
- const name=document.createElement("div");
- name.className="chat-user-name";
- name.textContent=group.name||"Общий чат";
-
- const members=document.createElement("div");
- members.className="chat-group-members";
-
- try{
-
-  const users=await getGroupMemberProfiles(group.id);
-  members.textContent=users.map(x=>x.display_name||x.username).join(", ");
-
- }catch(error){
-  members.textContent="Участники чата";
- }
-
- info.appendChild(name);
- info.appendChild(members);
- header.appendChild(info);
-}
-
-
-async function loadGroupMessages(){
-
- if(!currentGroupChat||chatLoading)return;
-
- const container=document.getElementById("chatMessages");
- const currentUserId=localStorage.getItem("user_id");
-
- chatLoading=true;
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+
-   "/rest/v1/group_messages?chat_id=eq."+
-   encodeURIComponent(currentGroupChat.id)+
-   "&select=*&order=created_at.asc&limit=500",
-   {headers:authHeaders()}
-  );
-
-  if(!response.ok){
-   container.innerHTML='<div class="chat-empty">Не удалось загрузить сообщения.</div>';
-   return;
-  }
-
-  const messages=await response.json();
-
-  const users=await getGroupMemberProfiles(currentGroupChat.id);
-  const userMap={};
-
-  users.forEach(user=>userMap[user.id]=user);
-
-  container.innerHTML="";
-
-  if(!messages.length){
-   container.innerHTML='<div class="chat-empty">Здесь пока пусто.<br>Напиши первое сообщение.</div>';
-   return;
-  }
-
-  messages.forEach(message=>{
-
-   const mine=message.sender_id===currentUserId;
-
-   const row=document.createElement("div");
-   row.className="message-row "+(mine?"mine":"theirs");
-
-   const bubble=document.createElement("div");
-   bubble.className="message-bubble";
-
-   if(!mine){
-
-    const sender=document.createElement("div");
-    sender.className="group-sender";
-
-    const user=userMap[message.sender_id];
-
-    sender.textContent=user?(user.display_name||user.username):"Пользователь";
-
-    bubble.appendChild(sender);
-   }
-
-   const text=document.createElement("div");
-   text.textContent=message.content;
-   bubble.appendChild(text);
-
-   const time=document.createElement("div");
-   time.className="message-time";
-   time.textContent=formatChatTime(message.created_at);
-
-   bubble.appendChild(time);
-   row.appendChild(bubble);
-   container.appendChild(row);
-  });
-
-  scrollChatToBottom();
-
- }catch(error){
-
-  console.error("loadGroupMessages:",error);
-
- }finally{
-  chatLoading=false;
- }
-}
-
-
-async function sendGroupMessage(){
-
- if(!currentGroupChat)return;
-
- const input=document.getElementById("chatInput");
- const content=input.value.trim();
-
- if(!content)return;
-
- const senderId=localStorage.getItem("user_id");
-
- if(!senderId)return;
-
- input.disabled=true;
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/group_messages",
-   {
-    method:"POST",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({
-     chat_id:currentGroupChat.id,
-     sender_id:senderId,
-     content
-    })
-   }
-  );
-
-  if(!response.ok){
-   alert("Не удалось отправить сообщение:\n"+await response.text());
-   return;
-  }
-
-  input.value="";
-  await loadGroupMessages();
-
- }catch(error){
-
-  console.error("sendGroupMessage:",error);
-  alert("Ошибка отправки сообщения.");
-
- }finally{
-
-  input.disabled=false;
-  input.focus();
- }
-}
-
-
-function sendCurrentMessage(){
-
- if(currentGroupChat){
-  sendGroupMessage();
- }else if(currentChatUser){
-  sendMessage();
- }
 }
 
 
 /* =========================================================
- POLLING
-========================================================= */
-
-function startChatPolling(){
-
- stopChatPolling();
-
- chatPolling=setInterval(async()=>{
-
-  const page=document.getElementById("chatPage");
-
-  if(!page||!page.classList.contains("active"))return;
-
-  if(currentGroupChat){
-   await loadGroupMessages();
-  }else if(currentChatUser){
-   await loadChatMessages();
-  }
-
- },5000);
-}
-
-
-function stopChatPolling(){
-
- if(chatPolling){
-  clearInterval(chatPolling);
-  chatPolling=null;
- }
-}
-
-
-function closeChat(){
-
- stopChatPolling();
-
- currentChatUser=null;
- currentGroupChat=null;
-
- const search=document.getElementById("messageSearchInput");
- if(search)search.value="";
-
- const results=document.getElementById("messageSearchResults");
- if(results)results.style.display="none";
-
- const conversations=document.getElementById("conversations");
- if(conversations)conversations.style.display="block";
-
- showPage("messages");
-}
-
-
-/* =========================================================
- TIME
-========================================================= */
-
-function formatMessageTime(dateString){
-
- const date=new Date(dateString);
- const now=new Date();
-
- if(date.toDateString()===now.toDateString()){
-  return date.toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});
- }
-
- const yesterday=new Date(now);
- yesterday.setDate(now.getDate()-1);
-
- if(date.toDateString()===yesterday.toDateString()){
-  return "Вчера";
- }
-
- return date.toLocaleDateString("ru-RU",{day:"2-digit",month:"2-digit"});
-}
-
-
-function formatChatTime(dateString){
-
- return new Date(dateString).toLocaleTimeString(
-  "ru-RU",
-  {hour:"2-digit",minute:"2-digit"}
- );
-}
-
-
-/* =========================================================
- PAGES
-========================================================= */
-
-function showPage(page){
-
- if(page!=="chat")stopChatPolling();
-
- document.querySelectorAll(".page").forEach(element=>element.classList.remove("active"));
- document.querySelectorAll(".nav-button").forEach(element=>element.classList.remove("active"));
-
- if(page==="feed"){
-
-  document.getElementById("feedPage").classList.add("active");
-  document.getElementById("feedNav").classList.add("active");
-  loadPosts();
-  return;
- }
-
- if(page==="search"){
-
-  document.getElementById("searchPage").classList.add("active");
-  document.getElementById("searchNav").classList.add("active");
-  return;
- }
-
- if(page==="messages"){
-
-  document.getElementById("messagesPage").classList.add("active");
-  document.getElementById("messagesNav").classList.add("active");
-  loadConversations();
-  return;
- }
-
- if(page==="chat"){
-
-  document.getElementById("chatPage").classList.add("active");
-  document.getElementById("messagesNav").classList.add("active");
-  return;
- }
-
- if(page==="profile"){
-
-  document.getElementById("profilePage").classList.add("active");
-  document.getElementById("profileNav").classList.add("active");
-
-  loadProfile();
-  loadWall();
-
-  return;
- }
-
- if(page==="publicProfile"){
-
-  document.getElementById("publicProfilePage").classList.add("active");
-  document.getElementById("searchNav").classList.add("active");
- }
-}
-
-
-/* =========================================================
- APP
-========================================================= */
-
-async function showApp(){
-
- document.getElementById("authScreen").style.display="none";
- document.getElementById("app").style.display="block";
-
- const profile=await loadProfile();
-
- if(!profile){
-  alert("Не удалось загрузить профиль пользователя.");
- }
-
- showPage("feed");
-}
-
-
-function showAuth(){
-
- stopChatPolling();
-
- currentChatUser=null;
- currentGroupChat=null;
- publicProfile=null;
-
- document.getElementById("authScreen").style.display="flex";
- document.getElementById("app").style.display="none";
-
- showAuthChoice();
-}
-
-
-/* =========================================================
- PROFILE CACHE
+   PROFILES CACHE
 ========================================================= */
 
 async function loadProfilesMap(force=false){
 
- const now=Date.now();
-
- if(
-  !force&&
-  profilesCache&&
-  now-profilesCacheTime<PROFILES_CACHE_MS
- ){
-  return profilesCache;
- }
-
- try{
-
-  const response=await fetch(
-   SUPABASE_URL+
-   "/rest/v1/profiles?select=id,username,display_name,avatar_url",
-   {headers:authHeaders()}
-  );
-
-  if(!response.ok){
-   console.error("loadProfilesMap:",await response.text());
-   return profilesCache||{};
+  if(
+    !force &&
+    profilesCache &&
+    Date.now()-profilesCacheTime<PROFILE_CACHE_TIME
+  ){
+    return profilesCache;
   }
 
-  const profiles=await response.json();
-  const map={};
+  try{
 
-  profiles.forEach(profile=>map[profile.id]=profile);
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/profiles?select=id,username,display_name,avatar_url",
+      {headers:authHeaders()}
+    );
 
-  profilesCache=map;
-  profilesCacheTime=now;
+    if(!response.ok)return profilesCache||{};
 
-  return map;
+    const rows=await response.json();
+    const map={};
 
- }catch(error){
+    rows.forEach(p=>map[p.id]=p);
 
-  console.error("loadProfilesMap:",error);
-  return profilesCache||{};
- }
+    profilesCache=map;
+    profilesCacheTime=Date.now();
+
+    return map;
+
+  }catch{
+    return profilesCache||{};
+  }
 }
 
 
 /* =========================================================
- POSTS
+   POSTS
 ========================================================= */
 
 async function loadPosts(){
 
- if(postsLoading)return;
+  const feed=document.getElementById("feed");
 
- const feed=document.getElementById("feed");
- if(!feed)return;
+  try{
 
- postsLoading=true;
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/posts?select=*&order=created_at.desc&limit=50",
+      {headers:authHeaders()}
+    );
 
- try{
+    if(!response.ok)throw new Error();
 
-  const response=await fetch(
-   SUPABASE_URL+
-   "/rest/v1/posts?select=*&order=created_at.desc&limit=50",
-   {headers:authHeaders()}
-  );
+    const posts=await response.json();
+    const profiles=await loadProfilesMap();
 
-  if(!response.ok){
-   feed.innerHTML='<div class="wall-empty">Не удалось загрузить ленту.</div>';
-   return;
+    feed.innerHTML="";
+
+    if(!posts.length){
+      feed.innerHTML='<div class="wall-empty">Пока нет постов.</div>';
+      return;
+    }
+
+    posts.forEach(p=>renderPost(p,feed,profiles));
+
+  }catch(e){
+
+    console.error(e);
+    feed.innerHTML='<div class="wall-empty">Не удалось загрузить ленту.</div>';
   }
-
-  const posts=await response.json();
-  const profiles=await loadProfilesMap();
-
-  feed.innerHTML="";
-
-  if(!posts.length){
-   feed.innerHTML='<div class="wall-empty">Пока нет постов.</div>';
-   return;
-  }
-
-  posts.forEach(post=>renderPost(post,feed,profiles));
-
- }catch(error){
-
-  console.error("loadPosts:",error);
-  feed.innerHTML='<div class="wall-empty">Ошибка загрузки ленты.</div>';
-
- }finally{
-  postsLoading=false;
- }
 }
-
 
 function renderPost(post,container,profiles){
 
- const reaction=localStorage.getItem("reaction_"+post.id);
- const profile=profiles[post.user_id];
+  const profile=profiles[post.user_id];
 
- const username=profile?.username||post.username||"user";
- const displayName=profile?.display_name||username;
- const avatar=profile?.avatar_url;
+  const username=profile?.username||post.username||"user";
+  const display=profile?.display_name||username;
 
- const div=document.createElement("div");
- div.className="post";
+  const div=document.createElement("div");
+  div.className="post";
 
- const user=document.createElement("div");
- user.className="post-user";
+  const user=document.createElement("div");
+  user.className="post-user";
 
- user.onclick=()=>{
-  if(profile)openFoundProfile(profile);
- };
+  if(profile){
 
- if(avatar){
+    user.onclick=()=>openFoundProfile(profile);
 
-  const img=document.createElement("img");
-  img.className="mini-avatar";
-  img.src=avatar;
-  img.alt="";
-  img.loading="lazy";
-  user.appendChild(img);
+    if(profile.avatar_url){
 
- }else{
+      const img=document.createElement("img");
+      img.className="mini-avatar";
+      img.src=profile.avatar_url;
+      img.alt="";
+      user.appendChild(img);
 
-  const placeholder=document.createElement("div");
-  placeholder.className="mini-avatar-placeholder";
-  placeholder.textContent=displayName.charAt(0).toUpperCase();
-  user.appendChild(placeholder);
- }
+    }else{
 
- const userInfo=document.createElement("div");
+      const a=document.createElement("div");
+      a.className="mini-avatar-placeholder";
+      a.textContent=display.charAt(0).toUpperCase();
+      user.appendChild(a);
+    }
 
- const name=document.createElement("div");
- name.className="user-name";
- name.textContent=displayName;
+  }
 
- const usernameEl=document.createElement("div");
- usernameEl.className="post-date";
- usernameEl.textContent="@"+username;
+  const info=document.createElement("div");
 
- userInfo.appendChild(name);
- userInfo.appendChild(usernameEl);
- user.appendChild(userInfo);
- div.appendChild(user);
+  const name=document.createElement("div");
+  name.className="user-name";
+  name.textContent=display;
 
- if(post.content){
+  const handle=document.createElement("div");
+  handle.className="user-handle";
+  handle.textContent="@"+username;
 
-  const text=document.createElement("div");
-  text.className="post-text";
-  text.textContent=post.content;
-  div.appendChild(text);
- }
+  info.appendChild(name);
+  info.appendChild(handle);
+  user.appendChild(info);
+  div.appendChild(user);
 
- if(post.image_url&&isAllowedImageUrl(post.image_url)){
+  if(post.content){
 
-  const img=document.createElement("img");
-  img.className="post-image";
-  img.src=post.image_url;
-  img.alt="Фото публикации";
-  img.loading="lazy";
-  img.decoding="async";
-  img.onerror=()=>img.remove();
+    const text=document.createElement("div");
+    text.className="post-text";
+    text.textContent=post.content;
+    div.appendChild(text);
+  }
 
-  div.appendChild(img);
- }
+  if(post.image_url&&isAllowedImageUrl(post.image_url)){
 
- const actions=document.createElement("div");
- actions.className="actions";
+    const img=document.createElement("img");
+    img.className="post-image";
+    img.src=post.image_url;
+    img.loading="lazy";
+    img.alt="Фото";
+    div.appendChild(img);
+  }
 
- const likeButton=document.createElement("button");
- likeButton.className="reaction-btn"+(reaction==="like"?" active":"");
- likeButton.textContent="👍 "+Number(post.likes||0);
- likeButton.onclick=()=>reactToPost(Number(post.id),"like");
+  const actions=document.createElement("div");
+  actions.className="actions";
 
- const dislikeButton=document.createElement("button");
- dislikeButton.className="reaction-btn"+(reaction==="dislike"?" active":"");
- dislikeButton.textContent="👎 "+Number(post.dislikes||0);
- dislikeButton.onclick=()=>reactToPost(Number(post.id),"dislike");
+  const reaction=localStorage.getItem("reaction_"+post.id);
 
- actions.appendChild(likeButton);
- actions.appendChild(dislikeButton);
+  const like=document.createElement("button");
+  like.className="reaction-btn"+(reaction==="like"?" active":"");
+  like.textContent="👍 "+Number(post.likes||0);
+  like.onclick=()=>reactToPost(post.id,"like");
 
- div.appendChild(actions);
- container.appendChild(div);
+  const dislike=document.createElement("button");
+  dislike.className="reaction-btn"+(reaction==="dislike"?" active":"");
+  dislike.textContent="👎 "+Number(post.dislikes||0);
+  dislike.onclick=()=>reactToPost(post.id,"dislike");
+
+  actions.appendChild(like);
+  actions.appendChild(dislike);
+  div.appendChild(actions);
+
+  container.appendChild(div);
 }
 
 
 /* =========================================================
- PHOTO
+   PHOTOS
 ========================================================= */
 
-function choosePostImage(target){
-
- const input=
-  target==="wall"
-   ? document.getElementById("wallImageInput")
-   : document.getElementById("postImageInput");
-
- if(input)input.click();
+function choosePostImage(type){
+  document.getElementById(
+    type==="wall"?"wallImageInput":"postImageInput"
+  ).click();
 }
 
+function previewPostImage(event,type){
 
-function previewPostImage(event,target){
+  const input=event.target;
+  const file=input.files[0];
 
- const input=event.target;
- const file=input.files[0];
-
- const preview=
-  target==="wall"
-   ? document.getElementById("wallImagePreview")
-   : document.getElementById("postImagePreview");
-
- const name=
-  target==="wall"
-   ? document.getElementById("wallImageName")
-   : document.getElementById("postImageName");
-
- if(!preview||!name)return;
-
- preview.innerHTML="";
- preview.classList.remove("has-image");
- name.textContent="";
-
- if(!file)return;
-
- if(!file.type.startsWith("image/")){
-  alert("Можно выбрать только изображение.");
-  input.value="";
-  return;
- }
-
- if(file.size>10*1024*1024){
-  alert("Максимальный размер фотографии: 10 МБ.");
-  input.value="";
-  return;
- }
-
- name.textContent=file.name;
-
- const reader=new FileReader();
-
- reader.onload=()=>{
-
-  const wrapper=document.createElement("div");
-  const img=document.createElement("img");
-
-  img.src=reader.result;
-  img.alt="Предпросмотр";
-
-  const remove=document.createElement("button");
-
-  remove.type="button";
-  remove.className="remove-photo";
-  remove.textContent="×";
-
-  remove.onclick=()=>{
-   clearPostImage(target);
-  };
-
-  wrapper.appendChild(img);
-  preview.appendChild(wrapper);
-  preview.classList.add("has-image");
- };
-
- reader.readAsDataURL(file);
-}
-
-
-function clearPostImage(target){
-
- const input=
-  target==="wall"
-   ? document.getElementById("wallImageInput")
-   : document.getElementById("postImageInput");
-
- const preview=
-  target==="wall"
-   ? document.getElementById("wallImagePreview")
-   : document.getElementById("postImagePreview");
-
- const name=
-  target==="wall"
-   ? document.getElementById("wallImageName")
-   : document.getElementById("postImageName");
-
- if(input)input.value="";
-
- if(preview){
-  preview.innerHTML="";
-  preview.classList.remove("has-image");
- }
-
- if(name)name.textContent="";
-}
-
-
-/* =========================================================
- IMAGE PROCESSING
-========================================================= */
-
-function getImageExtension(mime,filename=""){
-
- if(mime==="image/jpeg")return"jpg";
- if(mime==="image/png")return"png";
- if(mime==="image/webp")return"webp";
- if(mime==="image/gif")return"gif";
-
- const original=filename.split(".").pop()?.toLowerCase();
-
- if(original&&/^[a-z0-9]+$/.test(original))return original;
-
- return"jpg";
-}
-
-
-async function prepareImageForUpload(file){
-
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
-  return file;
- }
-
- if(file.size<1200000)return file;
-
- try{
-
-  const image=await loadImage(file);
-  const maxSize=2000;
-
-  const scale=Math.min(
-   1,
-   maxSize/Math.max(image.naturalWidth,image.naturalHeight)
+  const preview=document.getElementById(
+    type==="wall"?"wallImagePreview":"postImagePreview"
   );
 
-  const width=Math.max(1,Math.round(image.naturalWidth*scale));
-  const height=Math.max(1,Math.round(image.naturalHeight*scale));
+  const name=document.getElementById(
+    type==="wall"?"wallImageName":"postImageName"
+  );
 
-  const canvas=document.createElement("canvas");
+  preview.innerHTML="";
+  preview.classList.remove("has-image");
+  name.textContent="";
 
-  canvas.width=width;
-  canvas.height=height;
+  if(!file)return;
 
-  const context=canvas.getContext("2d");
+  if(!file.type.startsWith("image/")){
+    alert("Можно выбрать только изображение.");
+    input.value="";
+    return;
+  }
 
-  context.drawImage(image,0,0,width,height);
+  if(file.size>10*1024*1024){
+    alert("Максимальный размер: 10 МБ.");
+    input.value="";
+    return;
+  }
 
-  const blob=await new Promise(resolve=>{
-   canvas.toBlob(resolve,"image/jpeg",.82);
-  });
+  name.textContent=file.name;
 
-  if(!blob)return file;
+  const reader=new FileReader();
 
-  return new File([blob],"photo.jpg",{
-   type:"image/jpeg",
-   lastModified:Date.now()
-  });
+  reader.onload=()=>{
 
- }catch(error){
+    const img=document.createElement("img");
+    img.src=reader.result;
 
-  console.warn("Image compression skipped:",error);
-  return file;
- }
+    const remove=document.createElement("button");
+    remove.className="remove-photo";
+    remove.textContent="×";
+
+    remove.onclick=()=>{
+      input.value="";
+      preview.innerHTML="";
+      preview.classList.remove("has-image");
+      name.textContent="";
+    };
+
+    preview.appendChild(img);
+    preview.appendChild(remove);
+    preview.classList.add("has-image");
+  };
+
+  reader.readAsDataURL(file);
 }
 
+function clearPostImage(type){
+
+  const input=document.getElementById(
+    type==="wall"?"wallImageInput":"postImageInput"
+  );
+
+  const preview=document.getElementById(
+    type==="wall"?"wallImagePreview":"postImagePreview"
+  );
+
+  const name=document.getElementById(
+    type==="wall"?"wallImageName":"postImageName"
+  );
+
+  input.value="";
+  preview.innerHTML="";
+  preview.classList.remove("has-image");
+  name.textContent="";
+}
+
+function getImageExtension(mime,name){
+
+  if(mime==="image/jpeg")return"jpg";
+  if(mime==="image/png")return"png";
+  if(mime==="image/webp")return"webp";
+  if(mime==="image/gif")return"gif";
+
+  return(
+    name.split(".").pop()?.toLowerCase()||"jpg"
+  );
+}
 
 function loadImage(file){
 
- return new Promise((resolve,reject)=>{
+  return new Promise((resolve,reject)=>{
 
-  const url=URL.createObjectURL(file);
-  const image=new Image();
+    const url=URL.createObjectURL(file);
+    const image=new Image();
 
-  image.onload=()=>{
-   URL.revokeObjectURL(url);
-   resolve(image);
-  };
+    image.onload=()=>{
+      URL.revokeObjectURL(url);
+      resolve(image);
+    };
 
-  image.onerror=()=>{
-   URL.revokeObjectURL(url);
-   reject(new Error("Не удалось прочитать изображение."));
-  };
+    image.onerror=()=>{
+      URL.revokeObjectURL(url);
+      reject();
+    };
 
-  image.src=url;
- });
+    image.src=url;
+  });
+}
+
+async function prepareImageForUpload(file){
+
+  if(
+    !["image/jpeg","image/png","image/webp"].includes(file.type)||
+    file.size<1200000
+  ){
+    return file;
+  }
+
+  try{
+
+    const image=await loadImage(file);
+    const max=2000;
+
+    const scale=Math.min(
+      1,
+      max/Math.max(image.naturalWidth,image.naturalHeight)
+    );
+
+    const canvas=document.createElement("canvas");
+
+    canvas.width=Math.round(image.naturalWidth*scale);
+    canvas.height=Math.round(image.naturalHeight*scale);
+
+    canvas.getContext("2d").drawImage(
+      image,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    const blob=await new Promise(resolve=>
+      canvas.toBlob(resolve,"image/jpeg",.82)
+    );
+
+    if(!blob)return file;
+
+    return new File(
+      [blob],
+      "photo.jpg",
+      {type:"image/jpeg"}
+    );
+
+  }catch{
+    return file;
+  }
 }
 
 
 /* =========================================================
- STORAGE
+   STORAGE
 ========================================================= */
 
-async function uploadToStorage(filePath,file){
+async function uploadToStorage(path,file){
 
- const token=localStorage.getItem("access_token");
+  const token=localStorage.getItem("access_token");
 
- if(!token)return{ok:false,text:"Нет авторизации."};
+  try{
 
- try{
+    const response=await fetch(
+      SUPABASE_URL+"/storage/v1/object/Stenka/"+path,
+      {
+        method:"POST",
+        headers:{
+          apikey:SUPABASE_KEY,
+          Authorization:"Bearer "+token,
+          "Content-Type":file.type||"application/octet-stream",
+          "x-upsert":"false"
+        },
+        body:file
+      }
+    );
 
-  const response=await fetch(
-   SUPABASE_URL+"/storage/v1/object/Stenka/"+filePath,
-   {
-    method:"POST",
-    headers:{
-     "apikey":SUPABASE_KEY,
-     "Authorization":"Bearer "+token,
-     "Content-Type":file.type||"application/octet-stream",
-     "x-upsert":"false"
-    },
-    body:file
-   }
-  );
+    return{
+      ok:response.ok,
+      text:response.ok?"":await response.text()
+    };
 
-  const text=response.ok?"":await response.text();
+  }catch(e){
 
-  return{ok:response.ok,text};
-
- }catch(error){
-
-  console.error("uploadToStorage:",error);
-  return{ok:false,text:"Ошибка соединения при загрузке файла."};
- }
+    return{
+      ok:false,
+      text:"Ошибка соединения."
+    };
+  }
 }
 
+async function deleteStorageFile(path){
 
-async function deleteStorageFile(filePath){
+  const token=localStorage.getItem("access_token");
 
- const token=localStorage.getItem("access_token");
+  try{
 
- if(!token)return;
+    await fetch(
+      SUPABASE_URL+"/storage/v1/object/Stenka/"+path,
+      {
+        method:"DELETE",
+        headers:{
+          apikey:SUPABASE_KEY,
+          Authorization:"Bearer "+token
+        }
+      }
+    );
 
- try{
-
-  await fetch(
-   SUPABASE_URL+"/storage/v1/object/Stenka/"+filePath,
-   {
-    method:"DELETE",
-    headers:{
-     "apikey":SUPABASE_KEY,
-     "Authorization":"Bearer "+token
-    }
-   }
-  );
-
- }catch(error){
-  console.warn("deleteStorageFile:",error);
- }
+  }catch{}
 }
 
 
 /* =========================================================
- CREATE POSTS
+   CREATE POST
 ========================================================= */
 
 async function createPost(){
 
- const input=document.getElementById("postInput");
- const imageInput=document.getElementById("postImageInput");
- const button=document.getElementById("publishPostButton");
+  const text=document.getElementById("postInput").value.trim();
+  const file=document.getElementById("postImageInput").files[0]||null;
+  const button=document.getElementById("publishPostButton");
 
- const text=input.value.trim();
- const file=imageInput.files[0]||null;
+  if(!text&&!file){
+    alert("Напиши что-нибудь или добавь фотографию.");
+    return;
+  }
 
- if(!text&&!file){
-  alert("Напиши что-нибудь или добавь фотографию.");
-  return;
- }
+  button.disabled=true;
+  button.textContent="Публикуем...";
 
- button.disabled=true;
- button.textContent=file?"Загружаем фото...":"Публикуем...";
+  try{
 
- try{
+    const ok=await createPostInDatabase(text,file);
 
-  const success=await createPostInDatabase(text,file);
+    if(ok){
 
-  if(!success)return;
+      document.getElementById("postInput").value="";
+      clearPostImage("feed");
+      await loadPosts();
+    }
 
-  input.value="";
-  clearPostImage("feed");
-  await loadPosts();
+  }finally{
 
- }finally{
-
-  button.disabled=false;
-  button.textContent="Опубликовать";
- }
+    button.disabled=false;
+    button.textContent="Опубликовать";
+  }
 }
-
 
 async function createWallPost(){
 
- const input=document.getElementById("wallInput");
- const imageInput=document.getElementById("wallImageInput");
- const button=document.getElementById("publishWallButton");
+  const text=document.getElementById("wallInput").value.trim();
+  const file=document.getElementById("wallImageInput").files[0]||null;
+  const button=document.getElementById("publishWallButton");
 
- const text=input.value.trim();
- const file=imageInput.files[0]||null;
+  if(!text&&!file){
+    alert("Напиши что-нибудь или добавь фотографию.");
+    return;
+  }
 
- if(!text&&!file){
-  alert("Напиши что-нибудь или добавь фотографию.");
-  return;
- }
+  button.disabled=true;
+  button.textContent="Публикуем...";
 
- button.disabled=true;
- button.textContent=file?"Загружаем фото...":"Публикуем...";
+  try{
 
- try{
+    const ok=await createPostInDatabase(text,file);
 
-  const success=await createPostInDatabase(text,file);
+    if(ok){
 
-  if(!success)return;
+      document.getElementById("wallInput").value="";
+      clearPostImage("wall");
+      await loadWall();
+    }
 
-  input.value="";
-  clearPostImage("wall");
-  await loadWall();
+  }finally{
 
- }finally{
-
-  button.disabled=false;
-  button.textContent="Опубликовать";
- }
+    button.disabled=false;
+    button.textContent="Опубликовать";
+  }
 }
 
+async function createPostInDatabase(text,file){
 
-async function createPostInDatabase(text,file=null){
+  const userId=localStorage.getItem("user_id");
 
- const userId=localStorage.getItem("user_id");
+  if(!userId)return false;
 
- if(!userId){
-  alert("Нужно войти в аккаунт.");
-  return false;
- }
+  let uploadedPath=null;
 
- const username=window.currentProfile?.username||"you";
+  try{
 
- let uploadedPath=null;
- let imageUrl=null;
+    let imageUrl=null;
 
- try{
+    if(file){
 
-  if(file){
+      const prepared=await prepareImageForUpload(file);
+      const ext=getImageExtension(prepared.type,file.name);
 
-   const prepared=await prepareImageForUpload(file);
+      uploadedPath=
+        "posts/"+userId+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+ext;
 
-   const extension=getImageExtension(
-    prepared.type||file.type,
-    file.name
-   );
+      const upload=await uploadToStorage(uploadedPath,prepared);
 
-   uploadedPath=
-    "posts/"+userId+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,8)+"."+extension;
+      if(!upload.ok){
+        alert("Не удалось загрузить фото:\n"+upload.text);
+        return false;
+      }
 
-   const uploadResult=await uploadToStorage(uploadedPath,prepared);
+      imageUrl=
+        SUPABASE_URL+
+        "/storage/v1/object/public/Stenka/"+
+        uploadedPath;
+    }
 
-   if(!uploadResult.ok){
-    alert("Не удалось загрузить фотографию:\n"+uploadResult.text);
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/posts",
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          user_id:userId,
+          username:window.currentProfile?.username||"you",
+          content:text||"",
+          image_url:imageUrl
+        })
+      }
+    );
+
+    if(!response.ok){
+
+      if(uploadedPath)await deleteStorageFile(uploadedPath);
+
+      alert("Не удалось создать пост:\n"+await response.text());
+      return false;
+    }
+
+    return true;
+
+  }catch(e){
+
+    if(uploadedPath)await deleteStorageFile(uploadedPath);
+
+    console.error(e);
+    alert("Ошибка публикации.");
     return false;
-   }
-
-   imageUrl=
-    SUPABASE_URL+"/storage/v1/object/public/Stenka/"+uploadedPath;
   }
-
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/posts",
-   {
-    method:"POST",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({
-     user_id:userId,
-     username,
-     content:text||"",
-     image_url:imageUrl
-    })
-   }
-  );
-
-  if(!response.ok){
-
-   const errorText=await response.text();
-
-   if(uploadedPath)await deleteStorageFile(uploadedPath);
-
-   alert("Не удалось опубликовать пост:\n"+errorText);
-
-   return false;
-  }
-
-  return true;
-
- }catch(error){
-
-  console.error("createPostInDatabase:",error);
-
-  if(uploadedPath)await deleteStorageFile(uploadedPath);
-
-  alert("Ошибка соединения с сервером.");
-
-  return false;
- }
 }
 
 
 /* =========================================================
- WALL
+   WALL
 ========================================================= */
 
 async function loadWall(){
 
- const userId=localStorage.getItem("user_id");
- const wall=document.getElementById("wall");
+  const userId=localStorage.getItem("user_id");
+  const wall=document.getElementById("wall");
 
- if(!userId||!wall)return;
+  if(!userId)return;
 
- try{
+  try{
 
-  const response=await fetch(
-   SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(userId)+
-   "&select=*&order=created_at.desc&limit=50",
-   {headers:authHeaders()}
-  );
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/posts?user_id=eq."+encodeURIComponent(userId)+
+      "&select=*&order=created_at.desc&limit=50",
+      {headers:authHeaders()}
+    );
 
-  if(!response.ok){
-   wall.innerHTML='<div class="wall-empty">Не удалось загрузить стену.</div>';
-   return;
+    if(!response.ok)throw new Error();
+
+    const posts=await response.json();
+    const profiles=await loadProfilesMap();
+
+    wall.innerHTML="";
+
+    if(!posts.length){
+      wall.innerHTML='<div class="wall-empty">На стене пока ничего нет.</div>';
+      return;
+    }
+
+    posts.forEach(p=>renderPost(p,wall,profiles));
+
+  }catch(e){
+
+    wall.innerHTML='<div class="wall-empty">Не удалось загрузить стену.</div>';
   }
-
-  const posts=await response.json();
-  const profiles=await loadProfilesMap();
-
-  wall.innerHTML="";
-
-  if(!posts.length){
-   wall.innerHTML='<div class="wall-empty">На стене пока ничего нет.</div>';
-   return;
-  }
-
-  posts.forEach(post=>renderPost(post,wall,profiles));
-
- }catch(error){
-
-  console.error("loadWall:",error);
-  wall.innerHTML='<div class="wall-empty">Ошибка загрузки стены.</div>';
- }
 }
 
 
 /* =========================================================
- REACTIONS
+   REACTIONS
 ========================================================= */
 
-async function reactToPost(postId,type){
+async function reactToPost(id,type){
 
- const oldReaction=localStorage.getItem("reaction_"+postId);
+  const old=localStorage.getItem("reaction_"+id);
 
- let likeChange=0;
- let dislikeChange=0;
- let newReaction=type;
+  let like=0;
+  let dislike=0;
 
- if(oldReaction===type){
+  if(old===type){
 
-  newReaction=null;
+    if(type==="like")like=-1;
+    else dislike=-1;
 
-  if(type==="like")likeChange=-1;
-  else dislikeChange=-1;
+    localStorage.removeItem("reaction_"+id);
 
- }else{
-
-  if(oldReaction==="like")likeChange=-1;
-  if(oldReaction==="dislike")dislikeChange=-1;
-
-  if(type==="like")likeChange++;
-  else dislikeChange++;
- }
-
- try{
-
-  const getResponse=await fetch(
-   SUPABASE_URL+"/rest/v1/posts?id=eq."+encodeURIComponent(postId)+"&select=likes,dislikes",
-   {headers:authHeaders()}
-  );
-
-  if(!getResponse.ok){
-   alert("Не удалось получить реакцию.");
-   return;
-  }
-
-  const rows=await getResponse.json();
-
-  if(!rows.length)return;
-
-  const post=rows[0];
-
-  const newLikes=Math.max(0,Number(post.likes||0)+likeChange);
-  const newDislikes=Math.max(0,Number(post.dislikes||0)+dislikeChange);
-
-  const updateResponse=await fetch(
-   SUPABASE_URL+"/rest/v1/posts?id=eq."+encodeURIComponent(postId),
-   {
-    method:"PATCH",
-    headers:{...authHeaders(),"Prefer":"return=representation"},
-    body:JSON.stringify({
-     likes:newLikes,
-     dislikes:newDislikes
-    })
-   }
-  );
-
-  if(!updateResponse.ok){
-   alert("Не удалось сохранить реакцию:\n"+await updateResponse.text());
-   return;
-  }
-
-  if(newReaction){
-   localStorage.setItem("reaction_"+postId,newReaction);
   }else{
-   localStorage.removeItem("reaction_"+postId);
+
+    if(old==="like")like=-1;
+    if(old==="dislike")dislike=-1;
+
+    if(type==="like")like++;
+    else dislike++;
+
+    localStorage.setItem("reaction_"+id,type);
   }
 
-  if(document.getElementById("feedPage").classList.contains("active"))await loadPosts();
-  if(document.getElementById("profilePage").classList.contains("active"))await loadWall();
-  if(publicProfile&&document.getElementById("publicProfilePage").classList.contains("active")){
-   await loadPublicWall(publicProfile.id);
+  try{
+
+    const get=await fetch(
+      SUPABASE_URL+"/rest/v1/posts?id=eq."+encodeURIComponent(id)+"&select=likes,dislikes",
+      {headers:authHeaders()}
+    );
+
+    if(!get.ok)return;
+
+    const rows=await get.json();
+    if(!rows.length)return;
+
+    const post=rows[0];
+
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/posts?id=eq."+encodeURIComponent(id),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          likes:Math.max(0,Number(post.likes||0)+like),
+          dislikes:Math.max(0,Number(post.dislikes||0)+dislike)
+        })
+      }
+    );
+
+    if(!response.ok)return;
+
+    await loadPosts();
+
+  }catch(e){
+    console.error(e);
   }
-
- }catch(error){
-
-  console.error("reactToPost:",error);
-  alert("Ошибка соединения с сервером.");
- }
 }
 
 
 /* =========================================================
- HELPERS
+   DIRECT MESSAGES
+========================================================= */
+
+async function loadConversations(){
+
+  const me=localStorage.getItem("user_id");
+  const container=document.getElementById("conversations");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/messages?or="+
+      encodeURIComponent(
+        "(sender_id.eq."+me+",receiver_id.eq."+me+")"
+      )+
+      "&select=*&order=created_at.desc&limit=500",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)throw new Error();
+
+    const messages=await response.json();
+
+    const profiles=await loadProfilesMap();
+    const map={};
+
+    messages.forEach(m=>{
+
+      const other=
+        m.sender_id===me
+          ?m.receiver_id
+          :m.sender_id;
+
+      if(!map[other])map[other]=m;
+    });
+
+    container.innerHTML="";
+
+    if(!Object.keys(map).length){
+      container.innerHTML='<div class="search-empty">Пока нет сообщений.</div>';
+      return;
+    }
+
+    Object.entries(map).forEach(([id,message])=>{
+
+      const profile=profiles[id];
+      if(!profile)return;
+
+      const item=document.createElement("div");
+      item.className="conversation";
+      item.onclick=()=>openChatWithUser(profile);
+
+      if(profile.avatar_url){
+
+        const img=document.createElement("img");
+        img.className="conversation-avatar";
+        img.src=profile.avatar_url;
+        item.appendChild(img);
+
+      }else{
+
+        const a=document.createElement("div");
+        a.className="conversation-placeholder";
+        a.textContent=(profile.display_name||profile.username).charAt(0).toUpperCase();
+        item.appendChild(a);
+      }
+
+      const main=document.createElement("div");
+      main.className="conversation-main";
+
+      const top=document.createElement("div");
+      top.className="conversation-top";
+
+      const name=document.createElement("div");
+      name.className="conversation-name";
+      name.textContent=profile.display_name||profile.username;
+
+      const time=document.createElement("div");
+      time.className="conversation-time";
+      time.textContent=formatMessageTime(message.created_at);
+
+      top.appendChild(name);
+      top.appendChild(time);
+
+      const preview=document.createElement("div");
+      preview.className="conversation-preview";
+      preview.textContent=message.content||"";
+
+      main.appendChild(top);
+      main.appendChild(preview);
+
+      item.appendChild(main);
+      container.appendChild(item);
+    });
+
+  }catch(e){
+
+    console.error(e);
+    container.innerHTML='<div class="search-empty">Не удалось загрузить сообщения.</div>';
+  }
+}
+
+function searchMessageUsers(){
+
+  clearTimeout(messageSearchTimer);
+  messageSearchTimer=setTimeout(performMessageSearch,250);
+}
+
+async function performMessageSearch(){
+
+  const q=document.getElementById("messageSearchInput").value.trim();
+  const results=document.getElementById("messageSearchResults");
+  const conversations=document.getElementById("conversations");
+
+  if(!q){
+
+    results.style.display="none";
+    conversations.style.display="block";
+    await loadConversations();
+    return;
+  }
+
+  results.style.display="block";
+  conversations.style.display="none";
+  results.innerHTML='<div class="search-empty">Ищем...</div>';
+
+  try{
+
+    const safe=q.replace(/[,*()]/g,"");
+    const pattern="*"+safe+"*";
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/profiles?or="+
+      encodeURIComponent(
+        "(username.ilike."+pattern+",display_name.ilike."+pattern+")"
+      )+
+      "&select=id,username,display_name,avatar_url&limit=20",
+      {headers:authHeaders()}
+    );
+
+    const rows=await response.json();
+    const me=localStorage.getItem("user_id");
+
+    results.innerHTML="";
+
+    rows
+      .filter(p=>p.id!==me)
+      .forEach(profile=>{
+
+        const item=document.createElement("div");
+        item.className="message-user-result";
+        item.onclick=()=>openChatWithUser(profile);
+
+        appendFollowAvatar(item,profile);
+
+        const info=document.createElement("div");
+
+        const name=document.createElement("div");
+        name.className="search-user-name";
+        name.textContent=profile.display_name||profile.username;
+
+        const username=document.createElement("div");
+        username.className="search-user-username";
+        username.textContent="@"+profile.username;
+
+        info.appendChild(name);
+        info.appendChild(username);
+        item.appendChild(info);
+
+        results.appendChild(item);
+      });
+
+    if(!results.children.length){
+      results.innerHTML='<div class="search-empty">Пользователь не найден.</div>';
+    }
+
+  }catch(e){
+
+    results.innerHTML='<div class="search-empty">Ошибка поиска.</div>';
+  }
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+async function openChatWithUser(profile){
+
+  if(!profile?.id)return;
+
+  currentChatUser=profile;
+  currentGroupChat=null;
+
+  showPage("chat");
+  renderDirectChatHeader(profile);
+
+  document.getElementById("chatInput").value="";
+
+  await loadDirectMessages();
+  startChatPolling();
+}
+
+function renderDirectChatHeader(profile){
+
+  const header=document.getElementById("chatHeader");
+
+  header.innerHTML="";
+
+  const back=document.createElement("button");
+  back.className="chat-back";
+  back.textContent="‹";
+  back.onclick=closeChat;
+
+  header.appendChild(back);
+
+  if(profile.avatar_url){
+
+    const img=document.createElement("img");
+    img.className="chat-avatar";
+    img.src=profile.avatar_url;
+    header.appendChild(img);
+
+  }else{
+
+    const a=document.createElement("div");
+    a.className="chat-avatar-placeholder";
+    a.textContent=(profile.display_name||profile.username).charAt(0).toUpperCase();
+    header.appendChild(a);
+  }
+
+  const info=document.createElement("div");
+
+  const name=document.createElement("div");
+  name.className="chat-user-name";
+  name.textContent=profile.display_name||profile.username;
+
+  const username=document.createElement("div");
+  username.className="chat-user-username";
+  username.textContent="@"+profile.username;
+
+  info.appendChild(name);
+  info.appendChild(username);
+  header.appendChild(info);
+}
+
+async function loadDirectMessages(){
+
+  if(!currentChatUser)return;
+
+  const me=localStorage.getItem("user_id");
+  const other=currentChatUser.id;
+  const container=document.getElementById("chatMessages");
+
+  try{
+
+    const filter=
+      "(and(sender_id.eq."+me+",receiver_id.eq."+other+"),and(sender_id.eq."+other+",receiver_id.eq."+me+"))";
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/messages?or="+encodeURIComponent(filter)+
+      "&select=*&order=created_at.asc&limit=500",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)throw new Error();
+
+    const messages=await response.json();
+
+    container.innerHTML="";
+
+    if(!messages.length){
+      container.innerHTML='<div class="chat-empty">Здесь пока пусто.<br>Напиши первое сообщение.</div>';
+      return;
+    }
+
+    messages.forEach(m=>renderMessage(m,me));
+
+    container.scrollTop=container.scrollHeight;
+
+  }catch(e){
+
+    container.innerHTML='<div class="chat-empty">Не удалось загрузить сообщения.</div>';
+  }
+}
+
+function renderMessage(message,me){
+
+  const row=document.createElement("div");
+  row.className="message-row "+(
+    message.sender_id===me?"mine":"theirs"
+  );
+
+  const bubble=document.createElement("div");
+  bubble.className="message-bubble";
+
+  bubble.textContent=message.content;
+
+  const time=document.createElement("div");
+  time.className="message-time";
+  time.textContent=formatChatTime(message.created_at);
+
+  bubble.appendChild(time);
+  row.appendChild(bubble);
+
+  document.getElementById("chatMessages").appendChild(row);
+}
+
+async function sendMessage(){
+
+  const input=document.getElementById("chatInput");
+  const content=input.value.trim();
+
+  if(!content)return;
+
+  const me=localStorage.getItem("user_id");
+
+  input.disabled=true;
+
+  try{
+
+    let url;
+    let body;
+
+    if(currentGroupChat){
+
+      url=SUPABASE_URL+"/rest/v1/group_messages";
+
+      body={
+        chat_id:currentGroupChat.id,
+        sender_id:me,
+        content
+      };
+
+    }else{
+
+      if(!currentChatUser)return;
+
+      url=SUPABASE_URL+"/rest/v1/messages";
+
+      body={
+        sender_id:me,
+        receiver_id:currentChatUser.id,
+        content
+      };
+    }
+
+    const response=await fetch(
+      url,
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify(body)
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось отправить сообщение:\n"+await response.text());
+      return;
+    }
+
+    input.value="";
+
+    if(currentGroupChat){
+      await loadGroupMessages();
+    }else{
+      await loadDirectMessages();
+    }
+
+  }catch(e){
+
+    console.error(e);
+    alert("Ошибка отправки.");
+
+  }finally{
+
+    input.disabled=false;
+    input.focus();
+  }
+}
+
+function handleChatKey(event){
+
+  if(event.key==="Enter"&&!event.shiftKey){
+    event.preventDefault();
+    sendMessage();
+  }
+}
+
+function startChatPolling(){
+
+  stopChatPolling();
+
+  chatPolling=setInterval(()=>{
+
+    if(currentGroupChat){
+      loadGroupMessages();
+    }else if(currentChatUser){
+      loadDirectMessages();
+    }
+
+  },5000);
+}
+
+function stopChatPolling(){
+
+  if(chatPolling){
+    clearInterval(chatPolling);
+    chatPolling=null;
+  }
+}
+
+function closeChat(){
+
+  stopChatPolling();
+
+  currentChatUser=null;
+  currentGroupChat=null;
+
+  showPage("messages");
+}
+
+
+/* =========================================================
+   GROUP CHATS
+========================================================= */
+
+async function openCreateGroupModal(){
+
+  const modal=document.getElementById("groupModal");
+  const list=document.getElementById("groupFriendsList");
+
+  modal.classList.add("active");
+  list.innerHTML='<div class="search-empty">Загружаем друзей...</div>';
+
+  try{
+
+    const me=localStorage.getItem("user_id");
+
+    const followingResponse=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/follows?follower_id=eq."+encodeURIComponent(me)+
+      "&select=following_id",
+      {headers:authHeaders()}
+    );
+
+    const followersResponse=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/follows?following_id=eq."+encodeURIComponent(me)+
+      "&select=follower_id",
+      {headers:authHeaders()}
+    );
+
+    const following=await followingResponse.json();
+    const followers=await followersResponse.json();
+
+    const followingSet=new Set(
+      following.map(x=>x.following_id)
+    );
+
+    const friends=followers
+      .map(x=>x.follower_id)
+      .filter(id=>followingSet.has(id));
+
+    const profiles=await getProfilesByIds(friends);
+
+    list.innerHTML="";
+
+    if(!profiles.length){
+
+      list.innerHTML=
+        '<div class="search-empty">У тебя пока нет взаимных друзей.</div>';
+
+      return;
+    }
+
+    profiles.forEach(profile=>{
+
+      const row=document.createElement("label");
+      row.className="friend-select";
+
+      const checkbox=document.createElement("input");
+      checkbox.type="checkbox";
+      checkbox.value=profile.id;
+
+      if(profile.avatar_url){
+
+        const img=document.createElement("img");
+        img.className="search-avatar";
+        img.src=profile.avatar_url;
+        row.appendChild(img);
+
+      }else{
+
+        const a=document.createElement("div");
+        a.className="search-avatar-placeholder";
+        a.textContent=(profile.display_name||profile.username).charAt(0).toUpperCase();
+        row.appendChild(a);
+      }
+
+      const info=document.createElement("div");
+      info.className="friend-select-info";
+
+      const name=document.createElement("div");
+      name.className="search-user-name";
+      name.textContent=profile.display_name||profile.username;
+
+      const username=document.createElement("div");
+      username.className="search-user-username";
+      username.textContent="@"+profile.username;
+
+      info.appendChild(name);
+      info.appendChild(username);
+      row.appendChild(info);
+
+      row.appendChild(checkbox);
+
+      list.appendChild(row);
+    });
+
+  }catch(e){
+
+    console.error(e);
+    list.innerHTML='<div class="search-empty">Не удалось загрузить друзей.</div>';
+  }
+}
+
+function closeGroupModal(){
+  document.getElementById("groupModal").classList.remove("active");
+}
+
+async function createGroupChat(){
+
+  const name=document.getElementById("groupName").value.trim()||"Общий чат";
+  const selected=[
+    ...document.querySelectorAll("#groupFriendsList input[type=checkbox]:checked")
+  ].map(x=>x.value);
+
+  const me=localStorage.getItem("user_id");
+
+  if(!selected.length){
+    alert("Выбери хотя бы одного друга.");
+    return;
+  }
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/group_chats",
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        },
+        body:JSON.stringify({
+          name,
+          creator_id:me
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось создать чат:\n"+await response.text());
+      return;
+    }
+
+    const chats=await response.json();
+    const chat=chats[0];
+
+    const members=[
+      me,
+      ...selected
+    ];
+
+    const memberResponse=await fetch(
+      SUPABASE_URL+"/rest/v1/group_chat_members",
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify(
+          members.map(user_id=>({
+            chat_id:chat.id,
+            user_id
+          }))
+        )
+      }
+    );
+
+    if(!memberResponse.ok){
+      alert("Чат создан, но не удалось добавить участников:\n"+await memberResponse.text());
+      return;
+    }
+
+    closeGroupModal();
+
+    document.getElementById("groupName").value="";
+
+    await loadGroupChats();
+
+  }catch(e){
+
+    console.error(e);
+    alert("Ошибка создания общего чата.");
+  }
+}
+
+async function loadGroupChats(){
+
+  const container=document.getElementById("groupChats");
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const membersResponse=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/group_chat_members?user_id=eq."+encodeURIComponent(me)+
+      "&select=chat_id",
+      {headers:authHeaders()}
+    );
+
+    if(!membersResponse.ok){
+      container.innerHTML="";
+      return;
+    }
+
+    const members=await membersResponse.json();
+
+    if(!members.length){
+      container.innerHTML="";
+      return;
+    }
+
+    const ids=members.map(x=>x.chat_id);
+
+    const filter=ids.map(id=>"id.eq."+id).join(",");
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/group_chats?or="+
+      encodeURIComponent("("+filter+")")+
+      "&select=*&order=created_at.desc",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)return;
+
+    const chats=await response.json();
+
+    container.innerHTML="";
+
+    for(const chat of chats){
+
+      const item=document.createElement("div");
+      item.className="group-card";
+
+      const main=document.createElement("div");
+      main.className="group-card-main";
+      main.onclick=()=>openGroupChat(chat);
+
+      const icon=document.createElement("div");
+      icon.className="group-icon";
+      icon.textContent="👥";
+
+      const info=document.createElement("div");
+      info.className="group-info";
+
+      const name=document.createElement("div");
+      name.className="group-name";
+      name.textContent=chat.name;
+
+      const count=document.createElement("div");
+      count.className="group-members";
+      count.textContent="Общий чат";
+
+      info.appendChild(name);
+      info.appendChild(count);
+
+      main.appendChild(icon);
+      main.appendChild(info);
+
+      item.appendChild(main);
+      container.appendChild(item);
+    }
+
+  }catch(e){
+    console.error(e);
+  }
+}
+
+async function openGroupChat(chat){
+
+  currentGroupChat=chat;
+  currentChatUser=null;
+
+  showPage("chat");
+
+  renderGroupHeader(chat);
+
+  await loadGroupMessages();
+
+  startChatPolling();
+}
+
+function renderGroupHeader(chat){
+
+  const header=document.getElementById("chatHeader");
+
+  header.innerHTML="";
+
+  const back=document.createElement("button");
+  back.className="chat-back";
+  back.textContent="‹";
+  back.onclick=closeChat;
+
+  header.appendChild(back);
+
+  const icon=document.createElement("div");
+  icon.className="group-icon";
+  icon.style.width="43px";
+  icon.style.height="43px";
+  icon.style.fontSize="19px";
+  icon.textContent="👥";
+
+  header.appendChild(icon);
+
+  const info=document.createElement("div");
+
+  const name=document.createElement("div");
+  name.className="chat-user-name";
+  name.textContent=chat.name;
+
+  const members=document.createElement("div");
+  members.className="chat-user-username";
+  members.textContent="Общий чат";
+
+  info.appendChild(name);
+  info.appendChild(members);
+
+  header.appendChild(info);
+}
+
+async function loadGroupMessages(){
+
+  if(!currentGroupChat)return;
+
+  const container=document.getElementById("chatMessages");
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/group_messages?chat_id=eq."+
+      encodeURIComponent(currentGroupChat.id)+
+      "&select=*&order=created_at.asc&limit=500",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)throw new Error();
+
+    const messages=await response.json();
+
+    container.innerHTML="";
+
+    if(!messages.length){
+
+      container.innerHTML=
+        '<div class="chat-empty">Здесь пока пусто.<br>Напиши первое сообщение.</div>';
+
+      return;
+    }
+
+    messages.forEach(message=>{
+
+      const row=document.createElement("div");
+
+      row.className="message-row "+
+        (message.sender_id===me?"mine":"theirs");
+
+      const bubble=document.createElement("div");
+      bubble.className="message-bubble";
+
+      bubble.textContent=message.content;
+
+      const time=document.createElement("div");
+      time.className="message-time";
+      time.textContent=formatChatTime(message.created_at);
+
+      bubble.appendChild(time);
+      row.appendChild(bubble);
+
+      container.appendChild(row);
+    });
+
+    container.scrollTop=container.scrollHeight;
+
+  }catch(e){
+
+    console.error(e);
+    container.innerHTML=
+      '<div class="chat-empty">Не удалось загрузить сообщения.</div>';
+  }
+}
+
+
+/* =========================================================
+   TIME
+========================================================= */
+
+function formatMessageTime(value){
+
+  const date=new Date(value);
+  const now=new Date();
+
+  if(date.toDateString()===now.toDateString()){
+    return date.toLocaleTimeString("ru-RU",{
+      hour:"2-digit",
+      minute:"2-digit"
+    });
+  }
+
+  return date.toLocaleDateString("ru-RU",{
+    day:"2-digit",
+    month:"2-digit"
+  });
+}
+
+function formatChatTime(value){
+
+  return new Date(value).toLocaleTimeString(
+    "ru-RU",
+    {
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+}
+
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+function showPage(page){
+
+  if(page!=="chat")stopChatPolling();
+
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>p.classList.remove("active"));
+
+  document
+    .querySelectorAll(".nav-button")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(page==="feed"){
+
+    document.getElementById("feedPage").classList.add("active");
+    document.getElementById("feedNav").classList.add("active");
+
+    loadPosts();
+    return;
+  }
+
+  if(page==="search"){
+
+    document.getElementById("searchPage").classList.add("active");
+    document.getElementById("searchNav").classList.add("active");
+
+    return;
+  }
+
+  if(page==="messages"){
+
+    document.getElementById("messagesPage").classList.add("active");
+    document.getElementById("messagesNav").classList.add("active");
+
+    loadGroupChats();
+    loadConversations();
+
+    return;
+  }
+
+  if(page==="chat"){
+
+    document.getElementById("chatPage").classList.add("active");
+    document.getElementById("messagesNav").classList.add("active");
+
+    return;
+  }
+
+  if(page==="profile"){
+
+    document.getElementById("profilePage").classList.add("active");
+    document.getElementById("profileNav").classList.add("active");
+
+    loadProfile();
+    loadWall();
+
+    return;
+  }
+
+  if(page==="publicProfile"){
+
+    document.getElementById("publicProfilePage").classList.add("active");
+    document.getElementById("searchNav").classList.add("active");
+
+    return;
+  }
+
+  if(page==="followList"){
+
+    document.getElementById("followListPage").classList.add("active");
+
+    return;
+  }
+}
+
+
+/* =========================================================
+   APP START
+========================================================= */
+
+async function showApp(){
+
+  document.getElementById("authScreen").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  const profile=await loadProfile();
+
+  if(!profile){
+    alert("Не удалось загрузить профиль.");
+    return;
+  }
+
+  showPage("feed");
+}
+
+function showAuth(){
+
+  document.getElementById("authScreen").style.display="flex";
+  document.getElementById("app").style.display="none";
+
+  showAuthChoice();
+}
+
+
+/* =========================================================
+   HELPERS
 ========================================================= */
 
 function isAllowedImageUrl(url){
 
- if(typeof url!=="string"||!url)return false;
-
- return url.startsWith(
-  SUPABASE_URL+"/storage/v1/object/public/Stenka/"
- );
-}
-
-
-function appendAvatar(container,profile,type){
-
- const avatar=profile.avatar_url;
-
- if(avatar){
-
-  const img=document.createElement("img");
-
-  img.className=
-   type==="search"
-    ?"search-avatar"
-    :"message-result-avatar";
-
-  img.src=avatar;
-  img.alt="";
-  img.loading="lazy";
-
-  container.appendChild(img);
-  return;
- }
-
- const placeholder=document.createElement("div");
-
- placeholder.className=
-  type==="search"
-   ?"search-avatar-placeholder"
-   :"message-result-placeholder";
-
- placeholder.textContent=
-  (profile.display_name||profile.username||"N").charAt(0).toUpperCase();
-
- container.appendChild(placeholder);
+  return(
+    typeof url==="string" &&
+    url.startsWith(
+      SUPABASE_URL+
+      "/storage/v1/object/public/Stenka/"
+    )
+  );
 }
 
 
 /* =========================================================
- AUTH ENTER
+   EVENTS
 ========================================================= */
 
-document.addEventListener("keydown",event=>{
+document
+  .getElementById("profileModal")
+  .addEventListener("click",e=>{
+    if(e.target.id==="profileModal"){
+      closeProfileEditor();
+    }
+  });
 
- if(event.key!=="Enter"||event.shiftKey)return;
+document
+  .getElementById("groupModal")
+  .addEventListener("click",e=>{
+    if(e.target.id==="groupModal"){
+      closeGroupModal();
+    }
+  });
 
- const target=event.target;
+document.addEventListener("keydown",e=>{
 
- if(target&&target.tagName==="TEXTAREA")return;
+  if(e.key!=="Enter"||e.shiftKey)return;
 
- const loginVisible=
-  document.getElementById("loginForm").style.display==="block";
+  if(e.target.tagName==="TEXTAREA")return;
 
- const signupVisible=
-  document.getElementById("signupForm").style.display==="block";
+  if(
+    document.getElementById("loginForm").style.display==="block"
+  ){
+    e.preventDefault();
+    signIn();
+  }
 
- if(loginVisible){
-  event.preventDefault();
-  signIn();
- }else if(signupVisible){
-  event.preventDefault();
-  signUp();
- }
+  if(
+    document.getElementById("signupForm").style.display==="block"
+  ){
+    e.preventDefault();
+    signUp();
+  }
 });
 
 
 /* =========================================================
- MODALS
+   START
 ========================================================= */
 
-document.getElementById("profileModal").addEventListener("click",event=>{
- if(event.target.id==="profileModal")closeProfileEditor();
-});
+(async function(){
 
-document.getElementById("peopleModal").addEventListener("click",event=>{
- if(event.target.id==="peopleModal")closePeopleModal();
-});
+  const valid=await validateSession();
 
-document.getElementById("groupModal").addEventListener("click",event=>{
- if(event.target.id==="groupModal")closeGroupCreateModal();
-});
+  if(valid){
+    await showApp();
+  }else{
+    showAuth();
+  }
 
-
-/* =========================================================
- START
-========================================================= */
-
-async function startApp(){
-
- const valid=await validateSession();
-
- if(valid){
-  await showApp();
- }else{
-  showAuth();
- }
-}
-
-startApp();
+})();
 
 </script>
+
 </body>
 </html>
