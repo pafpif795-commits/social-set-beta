@@ -16,6 +16,7 @@
   --text:#102033;
   --muted:#718397;
   --red:#ef4056;
+  --green:#23753a;
 }
 
 html,body{
@@ -152,7 +153,10 @@ input,textarea{
 
 /* APP */
 
-#app{display:none;min-height:100vh}
+#app{
+  display:none;
+  min-height:100vh;
+}
 
 header{
   height:64px;
@@ -171,6 +175,14 @@ header{
   font-size:23px;
   font-weight:900;
   color:var(--navy);
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.header-logo-icons{
+  font-size:18px;
+  letter-spacing:-3px;
 }
 
 .logout{
@@ -257,7 +269,9 @@ textarea{
   cursor:pointer;
 }
 
-.mini-avatar{
+.mini-avatar,
+.search-avatar,
+.message-result-avatar{
   width:42px;
   height:42px;
   border-radius:50%;
@@ -267,7 +281,9 @@ textarea{
   flex-shrink:0;
 }
 
-.mini-avatar-placeholder{
+.mini-avatar-placeholder,
+.search-avatar-placeholder,
+.message-result-placeholder{
   width:42px;
   height:42px;
   border-radius:50%;
@@ -308,13 +324,68 @@ textarea{
   background:#f1f3f5;
 }
 
+.post-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.post-menu{
+  position:relative;
+}
+
+.post-menu-button{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#f1f3f5;
+  color:#555;
+  font-weight:900;
+}
+
+.post-menu-list{
+  display:none;
+  position:absolute;
+  right:0;
+  top:39px;
+  width:150px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  overflow:hidden;
+  z-index:5;
+}
+
+.post-menu.open .post-menu-list{
+  display:block;
+}
+
+.post-menu-list button{
+  width:100%;
+  text-align:left;
+  padding:11px 13px;
+  background:#fff;
+  color:var(--text);
+}
+
+.post-menu-list button:hover{
+  background:var(--sky);
+}
+
+.post-menu-list .danger{
+  color:var(--red);
+}
+
 .actions{
   display:flex;
   gap:8px;
   margin-top:14px;
+  flex-wrap:wrap;
 }
 
-.reaction-btn{
+.reaction-btn,
+.comment-toggle{
   background:#fff;
   border:1px solid var(--line);
   color:var(--muted);
@@ -328,6 +399,117 @@ textarea{
   border-color:#f1a0aa;
   background:#fff5f6;
 }
+
+.comment-toggle{
+  color:var(--navy);
+}
+
+/* COMMENTS */
+
+.comments{
+  display:none;
+  margin-top:14px;
+  border-top:1px solid var(--line);
+  padding-top:13px;
+}
+
+.comments.open{
+  display:block;
+}
+
+.comment-form{
+  display:flex;
+  gap:7px;
+  margin-bottom:12px;
+}
+
+.comment-input{
+  flex:1;
+  min-height:42px;
+  max-height:100px;
+  resize:none;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px;
+  outline:none;
+  background:#fafdff;
+}
+
+.comment-send{
+  width:44px;
+  height:42px;
+  border-radius:11px;
+  background:var(--navy);
+  color:#fff;
+}
+
+.comment{
+  display:flex;
+  gap:9px;
+  padding:9px 0;
+  border-bottom:1px solid #edf1f4;
+}
+
+.comment:last-child{
+  border-bottom:0;
+}
+
+.comment-avatar{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  object-fit:cover;
+  background:var(--sky);
+  flex-shrink:0;
+}
+
+.comment-main{
+  flex:1;
+  min-width:0;
+}
+
+.comment-head{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.comment-author{
+  color:var(--navy);
+  font-weight:800;
+  font-size:14px;
+}
+
+.comment-date{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.comment-text{
+  margin-top:3px;
+  line-height:1.4;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.comment-actions{
+  display:flex;
+  gap:7px;
+  margin-top:5px;
+}
+
+.comment-actions button{
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  padding:2px 0;
+}
+
+.comment-actions .delete{
+  color:var(--red);
+}
+
+/* PHOTOS */
 
 .post-photo-tools{
   display:flex;
@@ -360,7 +542,9 @@ textarea{
   position:relative;
 }
 
-.post-image-preview.has-image{display:block}
+.post-image-preview.has-image{
+  display:block;
+}
 
 .post-image-preview img{
   width:100%;
@@ -513,7 +697,7 @@ textarea{
   padding:7px 10px;
   border-radius:10px;
   background:#edf8ef;
-  color:#23753a;
+  color:var(--green);
   font-size:13px;
   font-weight:800;
 }
@@ -530,7 +714,9 @@ textarea{
   margin-bottom:14px;
 }
 
-.public-wall{margin-top:20px}
+.public-wall{
+  margin-top:20px;
+}
 
 .public-back{
   background:transparent;
@@ -572,28 +758,14 @@ textarea{
   cursor:pointer;
 }
 
-.search-avatar,
-.message-result-avatar{
+.search-avatar{
   width:50px;
   height:50px;
-  border-radius:50%;
-  object-fit:cover;
-  background:var(--sky);
-  flex-shrink:0;
 }
 
-.search-avatar-placeholder,
-.message-result-placeholder{
+.search-avatar-placeholder{
   width:50px;
   height:50px;
-  border-radius:50%;
-  background:var(--navy);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  flex-shrink:0;
 }
 
 .search-user-name{
@@ -607,7 +779,7 @@ textarea{
   margin-top:3px;
 }
 
-/* FOLLOWERS */
+/* FOLLOW */
 
 .follow-list{
   border-radius:17px;
@@ -645,7 +817,9 @@ textarea{
   cursor:pointer;
 }
 
-.follow-user:last-child{border-bottom:0}
+.follow-user:last-child{
+  border-bottom:0;
+}
 
 .follow-user-info{
   flex:1;
@@ -665,7 +839,7 @@ textarea{
 
 .follow-status{
   font-size:12px;
-  color:#23753a;
+  color:var(--green);
   font-weight:800;
 }
 
@@ -718,7 +892,9 @@ textarea{
   cursor:pointer;
 }
 
-.conversation:last-child{border-bottom:0}
+.conversation:last-child{
+  border-bottom:0;
+}
 
 .conversation-avatar{
   width:58px;
@@ -783,7 +959,7 @@ textarea{
   cursor:pointer;
 }
 
-/* GROUP CHAT */
+/* GROUP */
 
 .group-create-button{
   width:100%;
@@ -853,11 +1029,14 @@ textarea{
   border-bottom:1px solid #edf1f4;
 }
 
-.friend-select:last-child{border-bottom:0}
+.friend-select:last-child{
+  border-bottom:0;
+}
 
 .friend-select input{
   width:18px;
   height:18px;
+  order:3;
 }
 
 .friend-select-info{
@@ -872,7 +1051,9 @@ textarea{
   flex-direction:column;
 }
 
-.chat-page.active{display:flex}
+.chat-page.active{
+  display:flex;
+}
 
 .chat-header{
   background:#fff;
@@ -934,15 +1115,30 @@ textarea{
   gap:7px;
 }
 
+.chat-empty{
+  text-align:center;
+  color:var(--muted);
+  padding:30px 10px;
+}
+
 .message-row{
   display:flex;
 }
 
-.message-row.mine{justify-content:flex-end}
-.message-row.theirs{justify-content:flex-start}
+.message-row.mine{
+  justify-content:flex-end;
+}
+
+.message-row.theirs{
+  justify-content:flex-start;
+}
+
+.message-wrap{
+  max-width:78%;
+  position:relative;
+}
 
 .message-bubble{
-  max-width:78%;
   padding:10px 13px;
   border-radius:18px;
   line-height:1.35;
@@ -967,6 +1163,24 @@ textarea{
   font-size:10px;
   opacity:.65;
   text-align:right;
+}
+
+.message-actions{
+  display:flex;
+  gap:8px;
+  margin-top:3px;
+  justify-content:flex-end;
+}
+
+.message-actions button{
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  padding:1px;
+}
+
+.message-actions .delete{
+  color:var(--red);
 }
 
 .chat-input-area{
@@ -1034,8 +1248,13 @@ textarea{
   font-weight:700;
 }
 
-.nav-icon{font-size:21px}
-.nav-button.active{color:var(--navy)}
+.nav-icon{
+  font-size:21px;
+}
+
+.nav-button.active{
+  color:var(--navy);
+}
 
 /* MODALS */
 
@@ -1050,7 +1269,9 @@ textarea{
   padding:18px;
 }
 
-.modal.active{display:flex}
+.modal.active{
+  display:flex;
+}
 
 .modal-card{
   width:100%;
@@ -1162,8 +1383,14 @@ textarea{
 <div id="app">
 
 <header>
-<div class="header-logo">No Cap</div>
+
+<div class="header-logo">
+<span class="header-logo-icons">🌸☕</span>
+<span>No Cap</span>
+</div>
+
 <button class="logout" onclick="signOut()">Выйти</button>
+
 </header>
 
 <main class="container">
@@ -1476,7 +1703,11 @@ textarea{
 
 const SUPABASE_URL="https://jrzoexmvgyyitojbcxvr.supabase.co";
 
+/*
+  ВСТАВЬ СЮДА СВОЙ ТЕКУЩИЙ PUBLISHABLE KEY
+*/
 const SUPABASE_KEY="sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
+
 
 const baseHeaders={
   apikey:SUPABASE_KEY,
@@ -2287,7 +2518,6 @@ async function renderPublicActions(target){
 }
 
 function backFromPublicProfile(){
-
   publicProfile=null;
   showPage("search");
 }
@@ -2320,7 +2550,11 @@ async function loadPublicWall(userId){
       return;
     }
 
-    posts.forEach(p=>renderPost(p,wall,profiles));
+    const comments=await getCommentsForPosts(posts);
+
+    posts.forEach(p=>{
+      renderPost(p,wall,profiles,comments[p.id]||[]);
+    });
 
   }catch(e){
     console.error(e);
@@ -2330,14 +2564,14 @@ async function loadPublicWall(userId){
 
 
 /* =========================================================
-   FOLLOWERS / FOLLOWING
+   FOLLOWERS
 ========================================================= */
 
 async function openFollowList(type,userId){
 
   if(!userId)return;
 
-  followListReturn=publicProfile? "publicProfile":"profile";
+  followListReturn=publicProfile?"publicProfile":"profile";
 
   showPage("followList");
 
@@ -2377,7 +2611,6 @@ async function openFollowList(type,userId){
     }
 
     const ids=rows.map(x=>x[selectColumn]);
-
     const profiles=await getProfilesByIds(ids);
 
     content.innerHTML="";
@@ -2402,7 +2635,6 @@ async function openFollowList(type,userId){
 
       info.appendChild(name);
       info.appendChild(username);
-
       item.appendChild(info);
 
       if(await isFriend(profile.id)){
@@ -2449,14 +2681,11 @@ async function getProfilesByIds(ids){
 
   const unique=[...new Set(ids)];
 
-  const filter=unique
-    .map(id=>`id.eq.${id}`)
-    .join(",");
-
   const response=await fetch(
     SUPABASE_URL+
-    "/rest/v1/profiles?or="+
-    encodeURIComponent("("+filter+")")+
+    "/rest/v1/profiles?id=in.("+
+    unique.map(encodeURIComponent).join(",")+
+    ")"+
     "&select=id,username,display_name,avatar_url",
     {headers:authHeaders()}
   );
@@ -2464,8 +2693,8 @@ async function getProfilesByIds(ids){
   if(!response.ok)return [];
 
   const rows=await response.json();
-
   const map={};
+
   rows.forEach(p=>map[p.id]=p);
 
   return unique
@@ -2570,7 +2799,7 @@ async function performUserSearch(){
 
 
 /* =========================================================
-   PROFILES CACHE
+   PROFILE CACHE
 ========================================================= */
 
 async function loadProfilesMap(force=false){
@@ -2613,6 +2842,40 @@ async function loadProfilesMap(force=false){
    POSTS
 ========================================================= */
 
+async function getCommentsForPosts(posts){
+
+  if(!posts.length)return {};
+
+  const ids=posts.map(p=>p.id);
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?post_id=in.("+
+      ids.join(",")+
+      ")"+
+      "&select=*&order=created_at.asc",
+      {headers:authHeaders()}
+    );
+
+    if(!response.ok)return {};
+
+    const rows=await response.json();
+    const map={};
+
+    rows.forEach(comment=>{
+      if(!map[comment.post_id])map[comment.post_id]=[];
+      map[comment.post_id].push(comment);
+    });
+
+    return map;
+
+  }catch{
+    return {};
+  }
+}
+
 async function loadPosts(){
 
   const feed=document.getElementById("feed");
@@ -2629,6 +2892,7 @@ async function loadPosts(){
 
     const posts=await response.json();
     const profiles=await loadProfilesMap();
+    const comments=await getCommentsForPosts(posts);
 
     feed.innerHTML="";
 
@@ -2637,7 +2901,9 @@ async function loadPosts(){
       return;
     }
 
-    posts.forEach(p=>renderPost(p,feed,profiles));
+    posts.forEach(p=>{
+      renderPost(p,feed,profiles,comments[p.id]||[]);
+    });
 
   }catch(e){
 
@@ -2646,15 +2912,20 @@ async function loadPosts(){
   }
 }
 
-function renderPost(post,container,profiles){
+function renderPost(post,container,profiles,comments=[]){
 
   const profile=profiles[post.user_id];
 
   const username=profile?.username||post.username||"user";
   const display=profile?.display_name||username;
+  const me=localStorage.getItem("user_id");
+  const own=post.user_id===me;
 
   const div=document.createElement("div");
   div.className="post";
+
+  const top=document.createElement("div");
+  top.className="post-top";
 
   const user=document.createElement("div");
   user.className="post-user";
@@ -2694,7 +2965,49 @@ function renderPost(post,container,profiles){
   info.appendChild(name);
   info.appendChild(handle);
   user.appendChild(info);
-  div.appendChild(user);
+  top.appendChild(user);
+
+  if(own){
+
+    const menu=document.createElement("div");
+    menu.className="post-menu";
+
+    const menuButton=document.createElement("button");
+    menuButton.className="post-menu-button";
+    menuButton.textContent="•••";
+
+    const list=document.createElement("div");
+    list.className="post-menu-list";
+
+    const edit=document.createElement("button");
+    edit.textContent="✏️ Редактировать";
+    edit.onclick=()=>{
+      menu.classList.remove("open");
+      editPost(post);
+    };
+
+    const remove=document.createElement("button");
+    remove.className="danger";
+    remove.textContent="🗑️ Удалить";
+    remove.onclick=()=>{
+      menu.classList.remove("open");
+      deletePost(post);
+    };
+
+    list.appendChild(edit);
+    list.appendChild(remove);
+
+    menuButton.onclick=e=>{
+      e.stopPropagation();
+      menu.classList.toggle("open");
+    };
+
+    menu.appendChild(menuButton);
+    menu.appendChild(list);
+    top.appendChild(menu);
+  }
+
+  div.appendChild(top);
 
   if(post.content){
 
@@ -2729,11 +3042,455 @@ function renderPost(post,container,profiles){
   dislike.textContent="👎 "+Number(post.dislikes||0);
   dislike.onclick=()=>reactToPost(post.id,"dislike");
 
+  const commentButton=document.createElement("button");
+  commentButton.className="comment-toggle";
+  commentButton.textContent="💬 Комментарии ("+comments.length+")";
+
   actions.appendChild(like);
   actions.appendChild(dislike);
+  actions.appendChild(commentButton);
+
   div.appendChild(actions);
 
+  const commentsBox=document.createElement("div");
+  commentsBox.className="comments";
+
+  const form=document.createElement("div");
+  form.className="comment-form";
+
+  const input=document.createElement("textarea");
+  input.className="comment-input";
+  input.rows=1;
+  input.maxLength=2000;
+  input.placeholder="Написать комментарий...";
+
+  const send=document.createElement("button");
+  send.className="comment-send";
+  send.textContent="↑";
+
+  send.onclick=async()=>{
+    await addComment(post.id,input,commentsBox,commentButton);
+  };
+
+  input.onkeydown=e=>{
+    if(e.key==="Enter"&&!e.shiftKey){
+      e.preventDefault();
+      send.click();
+    }
+  };
+
+  form.appendChild(input);
+  form.appendChild(send);
+  commentsBox.appendChild(form);
+
+  const list=document.createElement("div");
+  commentsBox.appendChild(list);
+
+  commentButton.onclick=()=>{
+    commentsBox.classList.toggle("open");
+  };
+
+  renderComments(list,comments);
+
+  div.appendChild(commentsBox);
+
   container.appendChild(div);
+}
+
+
+/* =========================================================
+   POST EDIT / DELETE
+========================================================= */
+
+async function editPost(post){
+
+  const current=post.content||"";
+  const value=prompt("Измени публикацию:",current);
+
+  if(value===null)return;
+
+  const content=value.trim();
+
+  if(!content&&!post.image_url){
+    alert("Публикация не может быть полностью пустой.");
+    return;
+  }
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/posts?id=eq."+encodeURIComponent(post.id)+
+      "&user_id=eq."+encodeURIComponent(me),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          content,
+          updated_at:new Date().toISOString()
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось изменить публикацию:\n"+await response.text());
+      return;
+    }
+
+    await loadPosts();
+    await loadWall();
+
+    if(publicProfile){
+      await loadPublicWall(publicProfile.id);
+    }
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка редактирования.");
+  }
+}
+
+async function deletePost(post){
+
+  if(!confirm("Удалить эту публикацию?"))return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/posts?id=eq."+encodeURIComponent(post.id)+
+      "&user_id=eq."+encodeURIComponent(me),
+      {
+        method:"DELETE",
+        headers:authHeaders()
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось удалить публикацию:\n"+await response.text());
+      return;
+    }
+
+    if(post.image_url&&isAllowedImageUrl(post.image_url)){
+      const marker="/storage/v1/object/public/Stenka/";
+      const index=post.image_url.indexOf(marker);
+
+      if(index!==-1){
+        const path=decodeURIComponent(
+          post.image_url.slice(index+marker.length)
+        );
+        await deleteStorageFile(path);
+      }
+    }
+
+    await loadPosts();
+    await loadWall();
+
+    if(publicProfile){
+      await loadPublicWall(publicProfile.id);
+    }
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка удаления.");
+  }
+}
+
+
+/* =========================================================
+   COMMENTS
+========================================================= */
+
+function renderComments(container,comments){
+
+  container.innerHTML="";
+
+  if(!comments.length){
+    const empty=document.createElement("div");
+    empty.className="search-empty";
+    empty.style.padding="12px 0";
+    empty.textContent="Комментариев пока нет.";
+    container.appendChild(empty);
+    return;
+  }
+
+  const profilesPromise=loadProfilesMap();
+
+  profilesPromise.then(profiles=>{
+
+    container.innerHTML="";
+
+    comments.forEach(comment=>{
+      renderComment(comment,container,profiles);
+    });
+
+  });
+}
+
+function renderComment(comment,container,profiles){
+
+  const me=localStorage.getItem("user_id");
+  const profile=profiles[comment.user_id];
+
+  const wrapper=document.createElement("div");
+  wrapper.className="comment";
+
+  if(profile?.avatar_url){
+
+    const avatar=document.createElement("img");
+    avatar.className="comment-avatar";
+    avatar.src=profile.avatar_url;
+    wrapper.appendChild(avatar);
+
+  }else{
+
+    const avatar=document.createElement("div");
+    avatar.className="comment-avatar";
+    avatar.style.display="flex";
+    avatar.style.alignItems="center";
+    avatar.style.justifyContent="center";
+    avatar.style.background="var(--navy)";
+    avatar.style.color="#fff";
+    avatar.style.fontWeight="900";
+    avatar.textContent=(
+      profile?.display_name||
+      profile?.username||
+      "?"
+    ).charAt(0).toUpperCase();
+
+    wrapper.appendChild(avatar);
+  }
+
+  const main=document.createElement("div");
+  main.className="comment-main";
+
+  const head=document.createElement("div");
+  head.className="comment-head";
+
+  const author=document.createElement("div");
+  author.className="comment-author";
+  author.textContent=
+    profile?.display_name||
+    profile?.username||
+    "Пользователь";
+
+  const date=document.createElement("div");
+  date.className="comment-date";
+  date.textContent=formatMessageTime(comment.created_at);
+
+  head.appendChild(author);
+  head.appendChild(date);
+
+  const text=document.createElement("div");
+  text.className="comment-text";
+  text.textContent=comment.content;
+
+  main.appendChild(head);
+  main.appendChild(text);
+
+  if(comment.user_id===me){
+
+    const actions=document.createElement("div");
+    actions.className="comment-actions";
+
+    const edit=document.createElement("button");
+    edit.textContent="Изменить";
+    edit.onclick=()=>editComment(comment,container);
+
+    const remove=document.createElement("button");
+    remove.className="delete";
+    remove.textContent="Удалить";
+    remove.onclick=()=>deleteComment(comment,container);
+
+    actions.appendChild(edit);
+    actions.appendChild(remove);
+    main.appendChild(actions);
+  }
+
+  wrapper.appendChild(main);
+  container.appendChild(wrapper);
+}
+
+async function addComment(postId,input,commentsBox,button){
+
+  const content=input.value.trim();
+
+  if(!content)return;
+
+  const userId=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+"/rest/v1/comments",
+      {
+        method:"POST",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        },
+        body:JSON.stringify({
+          post_id:postId,
+          user_id:userId,
+          content
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось добавить комментарий:\n"+await response.text());
+      return;
+    }
+
+    input.value="";
+
+    const list=commentsBox.querySelector(".comment-form").nextElementSibling;
+
+    const get=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?post_id=eq."+encodeURIComponent(postId)+
+      "&select=*&order=created_at.asc",
+      {headers:authHeaders()}
+    );
+
+    const comments=await get.json();
+
+    const profiles=await loadProfilesMap(true);
+
+    renderCommentsWithProfiles(list,comments,profiles);
+
+    button.textContent="💬 Комментарии ("+comments.length+")";
+    commentsBox.classList.add("open");
+
+  }catch(e){
+
+    console.error(e);
+    alert("Ошибка комментария.");
+  }
+}
+
+function renderCommentsWithProfiles(container,comments,profiles){
+
+  container.innerHTML="";
+
+  if(!comments.length){
+
+    const empty=document.createElement("div");
+    empty.className="search-empty";
+    empty.style.padding="12px 0";
+    empty.textContent="Комментариев пока нет.";
+    container.appendChild(empty);
+    return;
+  }
+
+  comments.forEach(comment=>{
+    renderComment(comment,container,profiles);
+  });
+}
+
+async function editComment(comment,container){
+
+  const value=prompt(
+    "Измени комментарий:",
+    comment.content
+  );
+
+  if(value===null)return;
+
+  const content=value.trim();
+
+  if(!content)return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?id=eq."+encodeURIComponent(comment.id)+
+      "&user_id=eq."+encodeURIComponent(me),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          content,
+          updated_at:new Date().toISOString()
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось изменить комментарий:\n"+await response.text());
+      return;
+    }
+
+    const get=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?post_id=eq."+encodeURIComponent(comment.post_id)+
+      "&select=*&order=created_at.asc",
+      {headers:authHeaders()}
+    );
+
+    const comments=await get.json();
+    const profiles=await loadProfilesMap(true);
+
+    renderCommentsWithProfiles(container,comments,profiles);
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка редактирования.");
+  }
+}
+
+async function deleteComment(comment,container){
+
+  if(!confirm("Удалить комментарий?"))return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?id=eq."+encodeURIComponent(comment.id)+
+      "&user_id=eq."+encodeURIComponent(me),
+      {
+        method:"DELETE",
+        headers:authHeaders()
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось удалить комментарий:\n"+await response.text());
+      return;
+    }
+
+    const get=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/comments?post_id=eq."+encodeURIComponent(comment.post_id)+
+      "&select=*&order=created_at.asc",
+      {headers:authHeaders()}
+    );
+
+    const comments=await get.json();
+    const profiles=await loadProfilesMap(true);
+
+    renderCommentsWithProfiles(container,comments,profiles);
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка удаления.");
+  }
 }
 
 
@@ -2742,6 +3499,7 @@ function renderPost(post,container,profiles){
 ========================================================= */
 
 function choosePostImage(type){
+
   document.getElementById(
     type==="wall"?"wallImageInput":"postImageInput"
   ).click();
@@ -3131,6 +3889,7 @@ async function loadWall(){
 
     const posts=await response.json();
     const profiles=await loadProfilesMap();
+    const comments=await getCommentsForPosts(posts);
 
     wall.innerHTML="";
 
@@ -3139,7 +3898,9 @@ async function loadWall(){
       return;
     }
 
-    posts.forEach(p=>renderPost(p,wall,profiles));
+    posts.forEach(p=>{
+      renderPost(p,wall,profiles,comments[p.id]||[]);
+    });
 
   }catch(e){
 
@@ -3440,6 +4201,8 @@ function renderDirectChatHeader(profile){
     const img=document.createElement("img");
     img.className="chat-avatar";
     img.src=profile.avatar_url;
+    img.onclick=()=>openFoundProfile(profile);
+    img.style.cursor="pointer";
     header.appendChild(img);
 
   }else{
@@ -3447,10 +4210,14 @@ function renderDirectChatHeader(profile){
     const a=document.createElement("div");
     a.className="chat-avatar-placeholder";
     a.textContent=(profile.display_name||profile.username).charAt(0).toUpperCase();
+    a.onclick=()=>openFoundProfile(profile);
+    a.style.cursor="pointer";
     header.appendChild(a);
   }
 
   const info=document.createElement("div");
+  info.style.cursor="pointer";
+  info.onclick=()=>openFoundProfile(profile);
 
   const name=document.createElement("div");
   name.className="chat-user-name";
@@ -3513,9 +4280,11 @@ function renderMessage(message,me){
     message.sender_id===me?"mine":"theirs"
   );
 
+  const wrap=document.createElement("div");
+  wrap.className="message-wrap";
+
   const bubble=document.createElement("div");
   bubble.className="message-bubble";
-
   bubble.textContent=message.content;
 
   const time=document.createElement("div");
@@ -3523,7 +4292,28 @@ function renderMessage(message,me){
   time.textContent=formatChatTime(message.created_at);
 
   bubble.appendChild(time);
-  row.appendChild(bubble);
+  wrap.appendChild(bubble);
+
+  if(message.sender_id===me){
+
+    const actions=document.createElement("div");
+    actions.className="message-actions";
+
+    const edit=document.createElement("button");
+    edit.textContent="Изменить";
+    edit.onclick=()=>editMessage(message);
+
+    const remove=document.createElement("button");
+    remove.className="delete";
+    remove.textContent="Удалить";
+    remove.onclick=()=>deleteMessage(message);
+
+    actions.appendChild(edit);
+    actions.appendChild(remove);
+    wrap.appendChild(actions);
+  }
+
+  row.appendChild(wrap);
 
   document.getElementById("chatMessages").appendChild(row);
 }
@@ -3609,6 +4399,89 @@ function handleChatKey(event){
   if(event.key==="Enter"&&!event.shiftKey){
     event.preventDefault();
     sendMessage();
+  }
+}
+
+
+/* =========================================================
+   EDIT / DELETE DIRECT MESSAGES
+========================================================= */
+
+async function editMessage(message){
+
+  const value=prompt(
+    "Измени сообщение:",
+    message.content
+  );
+
+  if(value===null)return;
+
+  const content=value.trim();
+
+  if(!content)return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/messages?id=eq."+encodeURIComponent(message.id)+
+      "&sender_id=eq."+encodeURIComponent(me),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          content,
+          updated_at:new Date().toISOString()
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось изменить сообщение:\n"+await response.text());
+      return;
+    }
+
+    await loadDirectMessages();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка редактирования сообщения.");
+  }
+}
+
+async function deleteMessage(message){
+
+  if(!confirm("Удалить сообщение?"))return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/messages?id=eq."+encodeURIComponent(message.id)+
+      "&sender_id=eq."+encodeURIComponent(me),
+      {
+        method:"DELETE",
+        headers:authHeaders()
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось удалить сообщение:\n"+await response.text());
+      return;
+    }
+
+    await loadDirectMessages();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка удаления сообщения.");
   }
 }
 
@@ -3704,10 +4577,6 @@ async function openCreateGroupModal(){
       const row=document.createElement("label");
       row.className="friend-select";
 
-      const checkbox=document.createElement("input");
-      checkbox.type="checkbox";
-      checkbox.value=profile.id;
-
       if(profile.avatar_url){
 
         const img=document.createElement("img");
@@ -3738,6 +4607,9 @@ async function openCreateGroupModal(){
       info.appendChild(username);
       row.appendChild(info);
 
+      const checkbox=document.createElement("input");
+      checkbox.type="checkbox";
+      checkbox.value=profile.id;
       row.appendChild(checkbox);
 
       list.appendChild(row);
@@ -3757,6 +4629,7 @@ function closeGroupModal(){
 async function createGroupChat(){
 
   const name=document.getElementById("groupName").value.trim()||"Общий чат";
+
   const selected=[
     ...document.querySelectorAll("#groupFriendsList input[type=checkbox]:checked")
   ].map(x=>x.value);
@@ -4006,9 +4879,11 @@ async function loadGroupMessages(){
       row.className="message-row "+
         (message.sender_id===me?"mine":"theirs");
 
+      const wrap=document.createElement("div");
+      wrap.className="message-wrap";
+
       const bubble=document.createElement("div");
       bubble.className="message-bubble";
-
       bubble.textContent=message.content;
 
       const time=document.createElement("div");
@@ -4016,8 +4891,28 @@ async function loadGroupMessages(){
       time.textContent=formatChatTime(message.created_at);
 
       bubble.appendChild(time);
-      row.appendChild(bubble);
+      wrap.appendChild(bubble);
 
+      if(message.sender_id===me){
+
+        const actions=document.createElement("div");
+        actions.className="message-actions";
+
+        const edit=document.createElement("button");
+        edit.textContent="Изменить";
+        edit.onclick=()=>editGroupMessage(message);
+
+        const remove=document.createElement("button");
+        remove.className="delete";
+        remove.textContent="Удалить";
+        remove.onclick=()=>deleteGroupMessage(message);
+
+        actions.appendChild(edit);
+        actions.appendChild(remove);
+        wrap.appendChild(actions);
+      }
+
+      row.appendChild(wrap);
       container.appendChild(row);
     });
 
@@ -4028,6 +4923,84 @@ async function loadGroupMessages(){
     console.error(e);
     container.innerHTML=
       '<div class="chat-empty">Не удалось загрузить сообщения.</div>';
+  }
+}
+
+async function editGroupMessage(message){
+
+  const value=prompt(
+    "Измени сообщение:",
+    message.content
+  );
+
+  if(value===null)return;
+
+  const content=value.trim();
+
+  if(!content)return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/group_messages?id=eq."+encodeURIComponent(message.id)+
+      "&sender_id=eq."+encodeURIComponent(me),
+      {
+        method:"PATCH",
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=minimal"
+        },
+        body:JSON.stringify({
+          content,
+          updated_at:new Date().toISOString()
+        })
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось изменить сообщение:\n"+await response.text());
+      return;
+    }
+
+    await loadGroupMessages();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка редактирования сообщения.");
+  }
+}
+
+async function deleteGroupMessage(message){
+
+  if(!confirm("Удалить сообщение?"))return;
+
+  const me=localStorage.getItem("user_id");
+
+  try{
+
+    const response=await fetch(
+      SUPABASE_URL+
+      "/rest/v1/group_messages?id=eq."+encodeURIComponent(message.id)+
+      "&sender_id=eq."+encodeURIComponent(me),
+      {
+        method:"DELETE",
+        headers:authHeaders()
+      }
+    );
+
+    if(!response.ok){
+      alert("Не удалось удалить сообщение:\n"+await response.text());
+      return;
+    }
+
+    await loadGroupMessages();
+
+  }catch(e){
+    console.error(e);
+    alert("Ошибка удаления сообщения.");
   }
 }
 
@@ -4147,34 +5120,6 @@ function showPage(page){
 
 
 /* =========================================================
-   APP START
-========================================================= */
-
-async function showApp(){
-
-  document.getElementById("authScreen").style.display="none";
-  document.getElementById("app").style.display="block";
-
-  const profile=await loadProfile();
-
-  if(!profile){
-    alert("Не удалось загрузить профиль.");
-    return;
-  }
-
-  showPage("feed");
-}
-
-function showAuth(){
-
-  document.getElementById("authScreen").style.display="flex";
-  document.getElementById("app").style.display="none";
-
-  showAuthChoice();
-}
-
-
-/* =========================================================
    HELPERS
 ========================================================= */
 
@@ -4210,6 +5155,16 @@ document
     }
   });
 
+document.addEventListener("click",e=>{
+
+  if(!e.target.closest(".post-menu")){
+    document
+      .querySelectorAll(".post-menu.open")
+      .forEach(x=>x.classList.remove("open"));
+  }
+
+});
+
 document.addEventListener("keydown",e=>{
 
   if(e.key!=="Enter"||e.shiftKey)return;
@@ -4235,6 +5190,29 @@ document.addEventListener("keydown",e=>{
 /* =========================================================
    START
 ========================================================= */
+
+async function showApp(){
+
+  document.getElementById("authScreen").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  const profile=await loadProfile();
+
+  if(!profile){
+    alert("Не удалось загрузить профиль.");
+    return;
+  }
+
+  showPage("feed");
+}
+
+function showAuth(){
+
+  document.getElementById("authScreen").style.display="flex";
+  document.getElementById("app").style.display="none";
+
+  showAuthChoice();
+}
 
 (async function(){
 
