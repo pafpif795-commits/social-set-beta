@@ -221,13 +221,23 @@
 
   <script>
    const SUPABASE_URL = "https://jrzoexmvgyyitojbcxvr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
+const SUPABASE_KEY = "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ
+";
 
 const headers = {
   "apikey": SUPABASE_KEY,
   "Authorization": "Bearer " + SUPABASE_KEY,
   "Content-Type": "application/json"
 };
+
+function authHeaders() {
+  return {
+    ...headers,
+    "Authorization": "Bearer " + localStorage.getItem("access_token")
+  };
+}
+
+/* POSTS */
 
 async function loadPosts() {
   const response = await fetch(
@@ -243,9 +253,10 @@ async function loadPosts() {
   const posts = await response.json();
   const feed = document.getElementById("feed");
 
-  feed.innerHTML = "";
+  if (!feed) return;
 
-  posts.forEach(post => renderPost(post));
+  feed.innerHTML = "";
+  posts.forEach(renderPost);
 }
 
 async function createPost() {
@@ -281,11 +292,12 @@ async function createPost() {
 
 function renderPost(post) {
   const feed = document.getElementById("feed");
+  if (!feed) return;
+
+  const reaction = localStorage.getItem("reaction_" + post.id);
 
   const div = document.createElement("div");
   div.className = "post";
-
-  const reaction = localStorage.getItem("reaction_" + post.id);
 
   div.innerHTML = `
     <div class="user">@${escapeHtml(post.username)}</div>
@@ -295,35 +307,33 @@ function renderPost(post) {
     </div>
 
     <div class="actions">
-
       <button
         class="reaction-btn ${reaction === "like" ? "active" : ""}"
-        onclick="reactToPost(${post.id}, 'like', this)"
+        onclick="reactToPost(${post.id}, 'like')"
       >
         👍 ${post.likes || 0}
       </button>
 
       <button
         class="reaction-btn dislike ${reaction === "dislike" ? "active" : ""}"
-        onclick="reactToPost(${post.id}, 'dislike', this)"
+        onclick="reactToPost(${post.id}, 'dislike')"
       >
         👎 ${post.dislikes || 0}
       </button>
-
     </div>
   `;
 
   feed.appendChild(div);
 }
 
-async function reactToPost(postId, type, button) {
-  const savedReaction = localStorage.getItem("reaction_" + postId);
+async function reactToPost(postId, type) {
+  const oldReaction = localStorage.getItem("reaction_" + postId);
 
   let likeChange = 0;
   let dislikeChange = 0;
   let newReaction = type;
 
-  if (savedReaction === type) {
+  if (oldReaction === type) {
     newReaction = null;
 
     if (type === "like") {
@@ -332,18 +342,13 @@ async function reactToPost(postId, type, button) {
       dislikeChange = -1;
     }
   } else {
-    if (savedReaction === "like") {
-      likeChange = -1;
-    }
-
-    if (savedReaction === "dislike") {
-      dislikeChange = -1;
-    }
+    if (oldReaction === "like") likeChange = -1;
+    if (oldReaction === "dislike") dislikeChange = -1;
 
     if (type === "like") {
-      likeChange += 1;
+      likeChange++;
     } else {
-      dislikeChange += 1;
+      dislikeChange++;
     }
   }
 
@@ -356,6 +361,7 @@ async function reactToPost(postId, type, button) {
   );
 
   if (!getResponse.ok) {
+    console.error(await getResponse.text());
     alert("Не удалось получить реакцию");
     return;
   }
@@ -366,8 +372,15 @@ async function reactToPost(postId, type, button) {
 
   const post = rows[0];
 
-  const newLikes = Math.max(0, (post.likes || 0) + likeChange);
-  const newDislikes = Math.max(0, (post.dislikes || 0) + dislikeChange);
+  const newLikes = Math.max(
+    0,
+    (post.likes || 0) + likeChange
+  );
+
+  const newDislikes = Math.max(
+    0,
+    (post.dislikes || 0) + dislikeChange
+  );
 
   const updateResponse = await fetch(
     SUPABASE_URL + "/rest/v1/posts?id=eq." + postId,
@@ -376,10 +389,6 @@ async function reactToPost(postId, type, button) {
       headers: {
         ...headers,
         "Prefer": "return=representation"
-      
-},
-     
-      
       },
       body: JSON.stringify({
         likes: newLikes,
@@ -395,28 +404,28 @@ async function reactToPost(postId, type, button) {
   }
 
   if (newReaction) {
-    localStorage.setItem("reaction_" + postId, newReaction);
+    localStorage.setItem(
+      "reaction_" + postId,
+      newReaction
+    );
   } else {
-    localStorage.removeItem("reaction_" + postId);
+    localStorage.removeItem(
+      "reaction_" + postId
+    );
   }
 
   loadPosts();
 }
 
-function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
-}
+/* AUTH */
 
-loadPosts();
-    async function signUp() {
+async function signUp() {
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
 
   if (!email || !password) {
-    document.getElementById("authMessage").textContent =
-      "Введите email и пароль";
+    message.textContent = "Введите email и пароль";
     return;
   }
 
@@ -429,8 +438,8 @@ loadPosts();
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: email,
-        password: password
+        email,
+        password
       })
     }
   );
@@ -438,27 +447,30 @@ loadPosts();
   const data = await response.json();
 
   if (!response.ok) {
-    document.getElementById("authMessage").textContent =
-      data.msg || data.message || "Ошибка регистрации";
+    message.textContent =
+      data.msg ||
+      data.message ||
+      "Ошибка регистрации";
     return;
   }
 
-  document.getElementById("authMessage").textContent =
+  message.textContent =
     "Регистрация прошла успешно!";
 }
 
 async function signIn() {
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
 
   if (!email || !password) {
-    document.getElementById("authMessage").textContent =
-      "Введите email и пароль";
+    message.textContent = "Введите email и пароль";
     return;
   }
 
   const response = await fetch(
-    SUPABASE_URL + "/auth/v1/token?grant_type=password",
+    SUPABASE_URL +
+    "/auth/v1/token?grant_type=password",
     {
       method: "POST",
       headers: {
@@ -466,8 +478,8 @@ async function signIn() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email: email,
-        password: password
+        email,
+        password
       })
     }
   );
@@ -475,26 +487,43 @@ async function signIn() {
   const data = await response.json();
 
   if (!response.ok) {
-    document.getElementById("authMessage").textContent =
-      data.msg || data.message || "Ошибка входа";
+    message.textContent =
+      data.msg ||
+      data.message ||
+      "Ошибка входа";
     return;
   }
 
-  localStorage.setItem("access_token", data.access_token);
-  localStorage.setItem("user_id", data.user.id);
+  localStorage.setItem(
+    "access_token",
+    data.access_token
+  );
 
-  document.getElementById("authMessage").textContent =
+  localStorage.setItem(
+    "user_id",
+    data.user.id
+  );
+
+  message.textContent =
     "Вы вошли в Social Set!";
+
+  loadProfile();
 }
-    async function loadProfile() {
+
+/* PROFILE */
+
+async function loadProfile() {
   const userId = localStorage.getItem("user_id");
 
   if (!userId) return;
 
   const response = await fetch(
-    SUPABASE_URL + "/rest/v1/profiles?id=eq." + userId + "&select=*",
+    SUPABASE_URL +
+    "/rest/v1/profiles?id=eq." +
+    userId +
+    "&select=*",
     {
-      headers: headers
+      headers
     }
   );
 
@@ -509,23 +538,35 @@ async function signIn() {
 
   const profile = profiles[0];
 
-  document.getElementById("profileUsername").textContent =
-    "@" + profile.username;
+  document.getElementById(
+    "profileUsername"
+  ).textContent = "@" + profile.username;
 
-  document.getElementById("profileBio").textContent =
-    profile.bio || "Описание профиля пока не добавлено.";
+  document.getElementById(
+    "profileBio"
+  ).textContent =
+    profile.bio ||
+    "Описание профиля пока не добавлено.";
 
-  document.getElementById("profilePanel").style.display = "block";
+  document.getElementById(
+    "profilePanel"
+  ).style.display = "block";
 }
 
 async function editProfile() {
   const userId = localStorage.getItem("user_id");
 
-  if (!userId) return;
+  if (!userId) {
+    alert("Сначала войдите в аккаунт");
+    return;
+  }
 
   const username = prompt(
     "Введите новый username:",
-    document.getElementById("profileUsername").textContent.replace("@", "")
+    document
+      .getElementById("profileUsername")
+      .textContent
+      .replace("@", "")
   );
 
   if (!username) return;
@@ -536,31 +577,43 @@ async function editProfile() {
   );
 
   const response = await fetch(
-    SUPABASE_URL + "/rest/v1/profiles?id=eq." + userId,
+    SUPABASE_URL +
+    "/rest/v1/profiles?id=eq." +
+    userId,
     {
       method: "PATCH",
       headers: {
-  ...headers,
-  "Authorization": "Bearer " + localStorage.getItem("access_token"),
-  "Prefer": "return=representation"
-},
+        ...authHeaders(),
+        "Prefer": "return=representation"
       },
       body: JSON.stringify({
-        username: username,
+        username: username.trim(),
         bio: bio || ""
       })
     }
   );
 
   if (!response.ok) {
-    alert("Не удалось сохранить профиль");
     console.error(await response.text());
+    alert("Не удалось сохранить профиль");
     return;
   }
 
   loadProfile();
 }
-    loadProfile();
+
+/* HELPERS */
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+/* START */
+
+loadPosts();
+loadProfile();
   </script>
 
 </body>
