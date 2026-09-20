@@ -41,7 +41,6 @@ button:disabled{
   cursor:default;
 }
 
-
 /* ================= AUTH ================= */
 
 #authScreen{
@@ -137,6 +136,11 @@ button:disabled{
   font-size:15px;
 }
 
+.auth-form input:focus{
+  border-color:#7db9df;
+  box-shadow:0 0 0 3px rgba(98,183,245,.12);
+}
+
 .back-btn{
   background:transparent;
   color:var(--muted);
@@ -150,7 +154,6 @@ button:disabled{
   color:var(--muted);
   font-size:14px;
 }
-
 
 /* ================= APP ================= */
 
@@ -201,7 +204,6 @@ header{
   display:block;
 }
 
-
 /* ================= POSTS ================= */
 
 .create-post,
@@ -231,6 +233,10 @@ textarea{
   outline:none;
 }
 
+textarea:focus{
+  border-color:#7db9df;
+}
+
 .publish{
   margin-top:10px;
   background:var(--navy);
@@ -252,11 +258,18 @@ textarea{
   margin-bottom:12px;
 }
 
+.mini-avatar,
+.search-avatar,
+.conversation-avatar,
+.message-result-avatar,
+.chat-avatar{
+  object-fit:cover;
+}
+
 .mini-avatar{
   width:42px;
   height:42px;
   border-radius:50%;
-  object-fit:cover;
   background:var(--sky);
   border:1px solid var(--line);
 }
@@ -288,6 +301,7 @@ textarea{
   font-size:16px;
   line-height:1.5;
   white-space:pre-wrap;
+  overflow-wrap:anywhere;
 }
 
 .actions{
@@ -310,7 +324,6 @@ textarea{
   border-color:#f1a0aa;
   background:#fff5f6;
 }
-
 
 /* ================= PROFILE ================= */
 
@@ -370,6 +383,7 @@ textarea{
   font-weight:900;
   color:var(--navy);
   margin-top:12px;
+  overflow-wrap:anywhere;
 }
 
 .profile-username,
@@ -382,6 +396,7 @@ textarea{
 .public-bio{
   margin-top:13px;
   line-height:1.5;
+  white-space:pre-wrap;
 }
 
 .profile-buttons,
@@ -455,7 +470,6 @@ textarea{
   padding:25px 10px;
 }
 
-
 /* ================= SEARCH ================= */
 
 .search-box{
@@ -494,11 +508,14 @@ textarea{
   cursor:pointer;
 }
 
+.search-user:active{
+  background:#f4f9fd;
+}
+
 .search-avatar{
   width:48px;
   height:48px;
   border-radius:50%;
-  object-fit:cover;
   background:var(--sky);
   border:1px solid var(--line);
 }
@@ -514,11 +531,13 @@ textarea{
   justify-content:center;
   font-weight:900;
   font-size:18px;
+  flex-shrink:0;
 }
 
 .search-user-name{
   font-weight:800;
   color:var(--navy);
+  overflow-wrap:anywhere;
 }
 
 .search-user-username{
@@ -532,7 +551,6 @@ textarea{
   color:var(--muted);
   padding:30px 10px;
 }
-
 
 /* ================= PUBLIC PROFILE ================= */
 
@@ -550,8 +568,7 @@ textarea{
   overflow:hidden;
 }
 
-
-/* ================= MESSAGES LIST ================= */
+/* ================= MESSAGES ================= */
 
 .messages-header{
   margin-bottom:15px;
@@ -626,7 +643,6 @@ textarea{
   width:58px;
   height:58px;
   border-radius:50%;
-  object-fit:cover;
   background:var(--sky);
 }
 
@@ -697,23 +713,7 @@ textarea{
   white-space:nowrap;
 }
 
-.unread-badge{
-  min-width:23px;
-  height:23px;
-  padding:0 6px;
-  border-radius:50%;
-  background:#555;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  font-weight:800;
-  flex-shrink:0;
-}
-
-
-/* ================= MESSAGE SEARCH RESULTS ================= */
+/* ================= MESSAGE SEARCH ================= */
 
 .message-user-result{
   background:white;
@@ -737,8 +737,8 @@ textarea{
   width:50px;
   height:50px;
   border-radius:50%;
-  object-fit:cover;
   background:var(--sky);
+  flex-shrink:0;
 }
 
 .message-result-placeholder{
@@ -751,8 +751,8 @@ textarea{
   align-items:center;
   justify-content:center;
   font-weight:900;
+  flex-shrink:0;
 }
-
 
 /* ================= CHAT ================= */
 
@@ -789,7 +789,6 @@ textarea{
   width:43px;
   height:43px;
   border-radius:50%;
-  object-fit:cover;
   background:var(--sky);
 }
 
@@ -803,6 +802,7 @@ textarea{
   align-items:center;
   justify-content:center;
   font-weight:900;
+  flex-shrink:0;
 }
 
 .chat-user-info{
@@ -812,6 +812,9 @@ textarea{
 .chat-user-name{
   font-weight:900;
   color:var(--navy);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .chat-user-username{
@@ -912,7 +915,6 @@ textarea{
   flex-shrink:0;
 }
 
-
 /* ================= NAV ================= */
 
 .bottom-nav{
@@ -958,23 +960,6 @@ textarea{
 .nav-button.active{
   color:var(--navy);
 }
-
-.nav-unread{
-  position:absolute;
-  top:1px;
-  right:17px;
-  min-width:17px;
-  height:17px;
-  padding:0 4px;
-  border-radius:9px;
-  background:#555;
-  color:white;
-  font-size:9px;
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-
 
 /* ================= MODAL ================= */
 
@@ -1038,7 +1023,6 @@ textarea{
   background:var(--sky);
   color:var(--navy);
 }
-
 
 /* ================= MOBILE ================= */
 
@@ -1155,6 +1139,7 @@ textarea{
 
       <button
         class="primary"
+        id="loginButton"
         onclick="signIn()"
       >
         Войти
@@ -1178,6 +1163,7 @@ textarea{
         type="text"
         placeholder="Username"
         autocomplete="username"
+        maxlength="30"
       >
 
       <input
@@ -1196,6 +1182,7 @@ textarea{
 
       <button
         class="primary"
+        id="signupButton"
         onclick="signUp()"
       >
         Создать аккаунт
@@ -1239,13 +1226,9 @@ textarea{
 
 <main class="container">
 
-
 <!-- ================= FEED ================= -->
 
-<section
-  id="feedPage"
-  class="page active"
->
+<section id="feedPage" class="page">
 
   <div class="create-post">
 
@@ -1270,10 +1253,7 @@ textarea{
 
 <!-- ================= SEARCH ================= -->
 
-<section
-  id="searchPage"
-  class="page"
->
+<section id="searchPage" class="page">
 
   <div class="search-box">
 
@@ -1282,8 +1262,8 @@ textarea{
       class="search-input"
       type="text"
       placeholder="🔎 Найти пользователя..."
-      oninput="searchUsers()"
       autocomplete="off"
+      oninput="searchUsers()"
     >
 
   </div>
@@ -1304,10 +1284,7 @@ textarea{
 
 <!-- ================= MESSAGES ================= -->
 
-<section
-  id="messagesPage"
-  class="page"
->
+<section id="messagesPage" class="page">
 
   <div class="messages-header">
 
@@ -1326,8 +1303,8 @@ textarea{
         class="messages-search-input"
         type="text"
         placeholder="Поиск"
-        oninput="searchMessageUsers()"
         autocomplete="off"
+        oninput="searchMessageUsers()"
       >
 
     </div>
@@ -1342,13 +1319,7 @@ textarea{
   <div
     id="conversations"
     class="conversations"
-  >
-
-    <div class="search-empty">
-      Загружаем сообщения...
-    </div>
-
-  </div>
+  ></div>
 
 </section>
 
@@ -1394,10 +1365,7 @@ textarea{
 
 <!-- ================= MY PROFILE ================= -->
 
-<section
-  id="profilePage"
-  class="page"
->
+<section id="profilePage" class="page">
 
   <div class="profile-card">
 
@@ -1424,34 +1392,26 @@ textarea{
 
       <div class="profile-stats">
 
-        <div class="stat">
-
+        <div>
           <div
             id="myFollowersCount"
             class="stat-number"
-          >
-            0
-          </div>
+          >0</div>
 
           <div class="stat-label">
             подписчиков
           </div>
-
         </div>
 
-        <div class="stat">
-
+        <div>
           <div
             id="myFollowingCount"
             class="stat-number"
-          >
-            0
-          </div>
+          >0</div>
 
           <div class="stat-label">
             подписок
           </div>
-
         </div>
 
       </div>
@@ -1477,7 +1437,6 @@ textarea{
     </div>
 
   </div>
-
 
   <div class="profile-wall">
 
@@ -1547,34 +1506,26 @@ textarea{
 
       <div class="public-stats">
 
-        <div class="stat">
-
+        <div>
           <div
             id="publicFollowersCount"
             class="stat-number"
-          >
-            0
-          </div>
+          >0</div>
 
           <div class="stat-label">
             подписчиков
           </div>
-
         </div>
 
-        <div class="stat">
-
+        <div>
           <div
             id="publicFollowingCount"
             class="stat-number"
-          >
-            0
-          </div>
+          >0</div>
 
           <div class="stat-label">
             подписок
           </div>
-
         </div>
 
       </div>
@@ -1590,10 +1541,7 @@ textarea{
 
   <div class="public-wall">
 
-    <div
-      id="publicWallTitle"
-      class="wall-title"
-    >
+    <div class="wall-title">
       Стена
     </div>
 
@@ -1603,11 +1551,10 @@ textarea{
 
 </section>
 
-
 </main>
 
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- ================= NAV ================= -->
 
 <nav class="bottom-nav">
 
@@ -1615,76 +1562,38 @@ textarea{
 
     <button
       id="feedNav"
-      class="nav-button active"
+      class="nav-button"
       onclick="showPage('feed')"
     >
-
-      <span class="nav-icon">
-        🏠
-      </span>
-
-      <span>
-        Лента
-      </span>
-
+      <span class="nav-icon">🏠</span>
+      <span>Лента</span>
     </button>
-
 
     <button
       id="searchNav"
       class="nav-button"
       onclick="showPage('search')"
     >
-
-      <span class="nav-icon">
-        🔎
-      </span>
-
-      <span>
-        Поиск
-      </span>
-
+      <span class="nav-icon">🔎</span>
+      <span>Поиск</span>
     </button>
-
 
     <button
       id="messagesNav"
       class="nav-button"
       onclick="showPage('messages')"
     >
-
-      <span class="nav-icon">
-        💬
-      </span>
-
-      <span>
-        Сообщения
-      </span>
-
-      <span
-        id="navUnread"
-        class="nav-unread"
-      >
-        0
-      </span>
-
+      <span class="nav-icon">💬</span>
+      <span>Сообщения</span>
     </button>
-
 
     <button
       id="profileNav"
       class="nav-button"
       onclick="showPage('profile')"
     >
-
-      <span class="nav-icon">
-        👤
-      </span>
-
-      <span>
-        Профиль
-      </span>
-
+      <span class="nav-icon">👤</span>
+      <span>Профиль</span>
     </button>
 
   </div>
@@ -1711,17 +1620,20 @@ textarea{
       id="editDisplayName"
       type="text"
       placeholder="Имя"
+      maxlength="50"
     >
 
     <input
       id="editUsername"
       type="text"
       placeholder="Username"
+      maxlength="30"
     >
 
     <textarea
       id="editBio"
       placeholder="Расскажи о себе"
+      maxlength="300"
     ></textarea>
 
     <div class="modal-actions">
@@ -1765,26 +1677,14 @@ textarea{
 const SUPABASE_URL =
   "https://jrzoexmvgyyitojbcxvr.supabase.co";
 
-
-/*
-  ВСТАВЬ СЮДА СВОЙ ТЕКУЩИЙ PUBLISHABLE KEY
-*/
-
 const SUPABASE_KEY =
   "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
 
 
-const headers = {
 
-  "apikey":
-    SUPABASE_KEY,
-
-  "Authorization":
-    "Bearer " + SUPABASE_KEY,
-
-  "Content-Type":
-    "application/json"
-
+const baseHeaders = {
+  "apikey": SUPABASE_KEY,
+  "Content-Type": "application/json"
 };
 
 
@@ -1794,46 +1694,59 @@ function authHeaders(){
     localStorage.getItem("access_token");
 
   return {
-
-    ...headers,
-
+    ...baseHeaders,
     "Authorization":
-      "Bearer " +
-      (token || SUPABASE_KEY)
-
+      "Bearer " + (token || SUPABASE_KEY)
   };
 
 }
 
 
 /* =====================================================
-   AUTH
+   GLOBAL STATE
+===================================================== */
+
+let currentChatUser = null;
+let chatPolling = null;
+let searchTimeout = null;
+let messageSearchTimeout = null;
+let publicProfile = null;
+
+
+/* =====================================================
+   AUTH UI
 ===================================================== */
 
 function showAuthChoice(){
 
-  document.getElementById("authChoice").style.display="block";
+  document.getElementById("authChoice").style.display =
+    "block";
 
-  document.getElementById("loginForm").style.display="none";
+  document.getElementById("loginForm").style.display =
+    "none";
 
-  document.getElementById("signupForm").style.display="none";
+  document.getElementById("signupForm").style.display =
+    "none";
 
-  document.getElementById("authMessage").textContent="";
+  document.getElementById("authMessage").textContent =
+    "";
 
 }
 
 
 function showAuthForm(type){
 
-  document.getElementById("authChoice").style.display="none";
+  document.getElementById("authChoice").style.display =
+    "none";
 
   document.getElementById("loginForm").style.display =
-    type==="login" ? "block" : "none";
+    type === "login" ? "block" : "none";
 
   document.getElementById("signupForm").style.display =
-    type==="signup" ? "block" : "none";
+    type === "signup" ? "block" : "none";
 
-  document.getElementById("authMessage").textContent="";
+  document.getElementById("authMessage").textContent =
+    "";
 
 }
 
@@ -1845,29 +1758,47 @@ function showAuthForm(type){
 async function signUp(){
 
   const username =
-    document.getElementById("signupUsername").value.trim();
+    document.getElementById("signupUsername")
+      .value
+      .trim();
 
   const email =
-    document.getElementById("signupEmail").value.trim();
+    document.getElementById("signupEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("signupPassword").value;
+    document.getElementById("signupPassword")
+      .value;
 
   const message =
     document.getElementById("authMessage");
+
+  const button =
+    document.getElementById("signupButton");
 
 
   if(!username || !email || !password){
 
     message.textContent =
-      "Заполни username, email и пароль.";
+      "Заполни все поля.";
 
     return;
 
   }
 
 
-  if(username.length<3){
+  if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
+
+    message.textContent =
+      "Username: только латиница, цифры, _ . -";
+
+    return;
+
+  }
+
+
+  if(username.length < 3){
 
     message.textContent =
       "Username должен быть минимум 3 символа.";
@@ -1877,7 +1808,7 @@ async function signUp(){
   }
 
 
-  if(password.length<6){
+  if(password.length < 6){
 
     message.textContent =
       "Пароль должен быть минимум 6 символов.";
@@ -1886,6 +1817,8 @@ async function signUp(){
 
   }
 
+
+  button.disabled = true;
 
   message.textContent =
     "Создаём аккаунт...";
@@ -1898,19 +1831,12 @@ async function signUp(){
         SUPABASE_URL +
         "/auth/v1/signup",
         {
-
           method:"POST",
-
-          headers:{
-            "apikey":SUPABASE_KEY,
-            "Content-Type":"application/json"
-          },
-
+          headers:baseHeaders,
           body:JSON.stringify({
             email,
             password
           })
-
         }
       );
 
@@ -1925,14 +1851,24 @@ async function signUp(){
         data.msg ||
         data.message ||
         data.error_description ||
-        "Ошибка регистрации.";
+        "Не удалось создать аккаунт.";
 
       return;
 
     }
 
 
-    if(!data.user || !data.access_token){
+    if(!data.user){
+
+      message.textContent =
+        "Не удалось получить данные аккаунта.";
+
+      return;
+
+    }
+
+
+    if(!data.access_token){
 
       message.textContent =
         "Аккаунт создан. Теперь войди.";
@@ -1958,20 +1894,38 @@ async function signUp(){
     );
 
 
-    await createProfile(
-      data.user.id,
-      username
-    );
+    const profileCreated =
+      await createProfile(
+        data.user.id,
+        username
+      );
+
+
+    if(!profileCreated){
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user_id");
+
+      message.textContent =
+        "Аккаунт создан, но профиль не создался. Проверь username.";
+
+      return;
+
+    }
 
 
     showApp();
 
   }catch(error){
 
-    console.error(error);
+    console.error("signUp:",error);
 
     message.textContent =
       "Ошибка соединения с сервером.";
+
+  }finally{
+
+    button.disabled = false;
 
   }
 
@@ -1985,13 +1939,19 @@ async function signUp(){
 async function signIn(){
 
   const email =
-    document.getElementById("loginEmail").value.trim();
+    document.getElementById("loginEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("loginPassword").value;
+    document.getElementById("loginPassword")
+      .value;
 
   const message =
     document.getElementById("authMessage");
+
+  const button =
+    document.getElementById("loginButton");
 
 
   if(!email || !password){
@@ -2004,6 +1964,8 @@ async function signIn(){
   }
 
 
+  button.disabled = true;
+
   message.textContent =
     "Входим...";
 
@@ -2015,19 +1977,12 @@ async function signIn(){
         SUPABASE_URL +
         "/auth/v1/token?grant_type=password",
         {
-
           method:"POST",
-
-          headers:{
-            "apikey":SUPABASE_KEY,
-            "Content-Type":"application/json"
-          },
-
+          headers:baseHeaders,
           body:JSON.stringify({
             email,
             password
           })
-
         }
       );
 
@@ -2042,7 +1997,17 @@ async function signIn(){
         data.msg ||
         data.message ||
         data.error_description ||
-        "Ошибка входа.";
+        "Неверный email или пароль.";
+
+      return;
+
+    }
+
+
+    if(!data.access_token || !data.user){
+
+      message.textContent =
+        "Сервер не вернул данные входа.";
 
       return;
 
@@ -2064,10 +2029,85 @@ async function signIn(){
 
   }catch(error){
 
-    console.error(error);
+    console.error("signIn:",error);
 
     message.textContent =
       "Ошибка соединения с сервером.";
+
+  }finally{
+
+    button.disabled = false;
+
+  }
+
+}
+
+
+/* =====================================================
+   VALIDATE SESSION
+===================================================== */
+
+async function validateSession(){
+
+  const token =
+    localStorage.getItem("access_token");
+
+  const userId =
+    localStorage.getItem("user_id");
+
+
+  if(!token || !userId){
+
+    return false;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL + "/auth/v1/user",
+        {
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":"Bearer " + token
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user_id");
+
+      return false;
+
+    }
+
+
+    const user =
+      await response.json();
+
+
+    if(!user || user.id !== userId){
+
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user_id");
+
+      return false;
+
+    }
+
+
+    return true;
+
+  }catch(error){
+
+    console.error("validateSession:",error);
+
+    return false;
 
   }
 
@@ -2080,17 +2120,15 @@ async function signIn(){
 
 function signOut(){
 
-  localStorage.removeItem("access_token");
+  stopChatPolling();
 
+  currentChatUser = null;
+  publicProfile = null;
+
+  localStorage.removeItem("access_token");
   localStorage.removeItem("user_id");
 
-  window.currentProfile=null;
-
-  window.publicProfile=null;
-
-  window.currentChatUser=null;
-
-  stopChatPolling();
+  window.currentProfile = null;
 
   showAuth();
 
@@ -2101,7 +2139,10 @@ function signOut(){
    PROFILE CREATION
 ===================================================== */
 
-async function createProfile(userId,username){
+async function createProfile(
+  userId,
+  username
+){
 
   try{
 
@@ -2110,44 +2151,44 @@ async function createProfile(userId,username){
         SUPABASE_URL +
         "/rest/v1/profiles",
         {
-
           method:"POST",
-
           headers:{
             ...authHeaders(),
             "Prefer":"return=minimal"
           },
-
           body:JSON.stringify({
-
             id:userId,
-
             username,
-
             display_name:username,
-
             bio:"",
-
             avatar_url:""
-
           })
-
         }
       );
 
 
-    if(!response.ok){
+    if(response.ok){
 
-      console.error(
-        "Profile creation:",
-        await response.text()
-      );
+      return true;
 
     }
 
+
+    console.error(
+      "Profile creation:",
+      await response.text()
+    );
+
+    return false;
+
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "createProfile:",
+      error
+    );
+
+    return false;
 
   }
 
@@ -2155,7 +2196,7 @@ async function createProfile(userId,username){
 
 
 /* =====================================================
-   PROFILE
+   LOAD MY PROFILE
 ===================================================== */
 
 async function loadProfile(){
@@ -2163,8 +2204,7 @@ async function loadProfile(){
   const userId =
     localStorage.getItem("user_id");
 
-
-  if(!userId)return;
+  if(!userId)return null;
 
 
   try{
@@ -2175,17 +2215,20 @@ async function loadProfile(){
         "/rest/v1/profiles?id=eq." +
         encodeURIComponent(userId) +
         "&select=*",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
     if(!response.ok){
 
       console.error(
+        "loadProfile:",
         await response.text()
       );
 
-      return;
+      return null;
 
     }
 
@@ -2194,7 +2237,15 @@ async function loadProfile(){
       await response.json();
 
 
-    if(!profiles.length)return;
+    if(!profiles.length){
+
+      console.error(
+        "Профиль пользователя отсутствует."
+      );
+
+      return null;
+
+    }
 
 
     const profile =
@@ -2205,17 +2256,19 @@ async function loadProfile(){
       profile;
 
 
-    document.getElementById("profileName").textContent =
+    document.getElementById("profileName")
+      .textContent =
       profile.display_name ||
       profile.username;
 
 
-    document.getElementById("profileUsername").textContent =
-      "@" +
-      profile.username;
+    document.getElementById("profileUsername")
+      .textContent =
+      "@" + profile.username;
 
 
-    document.getElementById("profileBio").textContent =
+    document.getElementById("profileBio")
+      .textContent =
       profile.bio ||
       "Описание профиля пока не добавлено.";
 
@@ -2230,6 +2283,8 @@ async function loadProfile(){
     );
 
 
+    return profile;
+
   }catch(error){
 
     console.error(
@@ -2237,10 +2292,16 @@ async function loadProfile(){
       error
     );
 
+    return null;
+
   }
 
 }
 
+
+/* =====================================================
+   AVATAR
+===================================================== */
 
 function renderProfileAvatar(profile){
 
@@ -2251,6 +2312,9 @@ function renderProfileAvatar(profile){
 
 
   if(!container)return;
+
+
+  container.replaceChildren();
 
 
   if(profile.avatar_url){
@@ -2267,7 +2331,6 @@ function renderProfileAvatar(profile){
     img.alt =
       "Аватар";
 
-
     img.onerror=()=>{
 
       renderProfileAvatar({
@@ -2277,25 +2340,200 @@ function renderProfileAvatar(profile){
 
     };
 
+    container.appendChild(img);
 
-    container.replaceChildren(img);
+    return;
 
-  }else{
-
-    const letter =
-      (
-        profile.display_name ||
-        profile.username ||
-        "N"
-      )
-      .charAt(0)
-      .toUpperCase();
+  }
 
 
-    container.innerHTML =
-      `<div class="avatar-placeholder">
-        ${escapeHtml(letter)}
-      </div>`;
+  const letter =
+    (
+      profile.display_name ||
+      profile.username ||
+      "N"
+    )
+    .charAt(0)
+    .toUpperCase();
+
+
+  const div =
+    document.createElement("div");
+
+  div.className =
+    "avatar-placeholder";
+
+  div.textContent =
+    letter;
+
+  container.appendChild(div);
+
+}
+
+
+function chooseAvatar(){
+
+  document.getElementById(
+    "avatarInput"
+  ).click();
+
+}
+
+
+async function uploadAvatar(){
+
+  const input =
+    document.getElementById(
+      "avatarInput"
+    );
+
+  const file =
+    input.files[0];
+
+
+  if(!file)return;
+
+
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "Можно загружать только изображения."
+    );
+
+    input.value="";
+    return;
+
+  }
+
+
+  if(file.size > 5 * 1024 * 1024){
+
+    alert(
+      "Максимальный размер аватарки: 5 МБ."
+    );
+
+    input.value="";
+    return;
+
+  }
+
+
+  const userId =
+    localStorage.getItem("user_id");
+
+  const token =
+    localStorage.getItem("access_token");
+
+
+  if(!userId || !token){
+
+    alert(
+      "Сначала войди в аккаунт."
+    );
+
+    return;
+
+  }
+
+
+  const extension =
+    (
+      file.name.split(".").pop() ||
+      "jpg"
+    ).toLowerCase();
+
+
+  const filePath =
+    userId +
+    "/" +
+    Date.now() +
+    "." +
+    extension;
+
+
+  try{
+
+    const uploadResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/storage/v1/object/Stenka/" +
+        filePath,
+        {
+          method:"POST",
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":"Bearer " + token,
+            "Content-Type":file.type,
+            "x-upsert":"true"
+          },
+          body:file
+        }
+      );
+
+
+    if(!uploadResponse.ok){
+
+      alert(
+        "Не удалось загрузить аватарку:\n" +
+        await uploadResponse.text()
+      );
+
+      return;
+
+    }
+
+
+    const avatarUrl =
+      SUPABASE_URL +
+      "/storage/v1/object/public/Stenka/" +
+      filePath;
+
+
+    const updateResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles?id=eq." +
+        encodeURIComponent(userId),
+        {
+          method:"PATCH",
+          headers:{
+            ...authHeaders(),
+            "Prefer":"return=representation"
+          },
+          body:JSON.stringify({
+            avatar_url:avatarUrl
+          })
+        }
+      );
+
+
+    if(!updateResponse.ok){
+
+      alert(
+        "Фото загрузилось, но профиль не обновился."
+      );
+
+      return;
+
+    }
+
+
+    input.value="";
+
+    await loadProfile();
+    await loadPosts();
+    await loadWall();
+
+  }catch(error){
+
+    console.error(
+      "uploadAvatar:",
+      error
+    );
+
+    alert(
+      "Ошибка загрузки аватарки."
+    );
 
   }
 
@@ -2303,7 +2541,7 @@ function renderProfileAvatar(profile){
 
 
 /* =====================================================
-   PROFILE EDIT
+   PROFILE EDITOR
 ===================================================== */
 
 function openProfileEditor(){
@@ -2366,9 +2604,6 @@ async function saveProfile(){
   const userId =
     localStorage.getItem("user_id");
 
-  const accessToken =
-    localStorage.getItem("access_token");
-
 
   const displayName =
     document.getElementById(
@@ -2399,6 +2634,17 @@ async function saveProfile(){
   }
 
 
+  if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
+
+    alert(
+      "Username: только латиница, цифры, _ . -"
+    );
+
+    return;
+
+  }
+
+
   try{
 
     const response =
@@ -2407,48 +2653,39 @@ async function saveProfile(){
         "/rest/v1/profiles?id=eq." +
         encodeURIComponent(userId),
         {
-
           method:"PATCH",
-
           headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              accessToken,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=representation"
-
+            ...authHeaders(),
+            "Prefer":"return=representation"
           },
-
-          body:
-            JSON.stringify({
-
-              display_name:
-                displayName,
-
-              username,
-
-              bio
-
-            })
-
+          body:JSON.stringify({
+            display_name:displayName,
+            username,
+            bio
+          })
         }
       );
 
 
     if(!response.ok){
 
-      alert(
-        "Не удалось сохранить профиль:\n" +
-        await response.text()
-      );
+      const text =
+        await response.text();
+
+      if(text.includes("duplicate")){
+
+        alert(
+          "Этот username уже занят."
+        );
+
+      }else{
+
+        alert(
+          "Не удалось сохранить профиль:\n" +
+          text
+        );
+
+      }
 
       return;
 
@@ -2458,15 +2695,15 @@ async function saveProfile(){
     closeProfileEditor();
 
     await loadProfile();
-
     await loadPosts();
-
     await loadWall();
-
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "saveProfile:",
+      error
+    );
 
     alert(
       "Ошибка соединения с сервером."
@@ -2478,222 +2715,8 @@ async function saveProfile(){
 
 
 /* =====================================================
-   AVATAR
+   SEARCH
 ===================================================== */
-
-function chooseAvatar(){
-
-  document.getElementById(
-    "avatarInput"
-  ).click();
-
-}
-
-
-async function uploadAvatar(){
-
-  const input =
-    document.getElementById(
-      "avatarInput"
-    );
-
-
-  const file =
-    input.files[0];
-
-
-  if(!file)return;
-
-
-  if(!file.type.startsWith("image/")){
-
-    alert(
-      "Можно загружать только изображения."
-    );
-
-    input.value="";
-
-    return;
-
-  }
-
-
-  if(file.size>5*1024*1024){
-
-    alert(
-      "Максимальный размер аватарки: 5 МБ."
-    );
-
-    input.value="";
-
-    return;
-
-  }
-
-
-  const userId =
-    localStorage.getItem("user_id");
-
-
-  const accessToken =
-    localStorage.getItem("access_token");
-
-
-  if(!userId || !accessToken){
-
-    alert(
-      "Нужно войти в аккаунт."
-    );
-
-    return;
-
-  }
-
-
-  const extension =
-    file.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-
-  const filePath =
-    userId +
-    "/" +
-    Date.now() +
-    "." +
-    extension;
-
-
-  try{
-
-    const uploadResponse =
-      await fetch(
-        SUPABASE_URL +
-        "/storage/v1/object/Stenka/" +
-        filePath,
-        {
-
-          method:"POST",
-
-          headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              accessToken,
-
-            "Content-Type":
-              file.type,
-
-            "x-upsert":
-              "true"
-
-          },
-
-          body:file
-
-        }
-      );
-
-
-    if(!uploadResponse.ok){
-
-      alert(
-        "Не удалось загрузить аватарку:\n" +
-        await uploadResponse.text()
-      );
-
-      return;
-
-    }
-
-
-    const avatarUrl =
-      SUPABASE_URL +
-      "/storage/v1/object/public/Stenka/" +
-      filePath;
-
-
-    const updateResponse =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/profiles?id=eq." +
-        encodeURIComponent(userId),
-        {
-
-          method:"PATCH",
-
-          headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              accessToken,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=representation"
-
-          },
-
-          body:
-            JSON.stringify({
-
-              avatar_url:
-                avatarUrl
-
-            })
-
-        }
-      );
-
-
-    if(!updateResponse.ok){
-
-      alert(
-        "Фото загрузилось, но профиль не обновился."
-      );
-
-      return;
-
-    }
-
-
-    input.value="";
-
-    await loadProfile();
-
-    await loadPosts();
-
-    await loadWall();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Ошибка загрузки аватарки."
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   SEARCH USERS
-===================================================== */
-
-let searchTimeout=null;
-
 
 function searchUsers(){
 
@@ -2714,7 +2737,6 @@ async function performUserSearch(){
     document.getElementById(
       "userSearchInput"
     );
-
 
   const results =
     document.getElementById(
@@ -2749,10 +2771,12 @@ async function performUserSearch(){
 
   try{
 
+    const safeQuery =
+      query.replace(/[,*()]/g,"");
+
+
     const pattern =
-      "*" +
-      query.replace(/[,*()]/g,"") +
-      "*";
+      "*" + safeQuery + "*";
 
 
     const url =
@@ -2773,15 +2797,21 @@ async function performUserSearch(){
     const response =
       await fetch(
         url,
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
     if(!response.ok){
 
+      console.error(
+        await response.text()
+      );
+
       results.innerHTML =
         `<div class="search-empty">
-          Не удалось выполнить поиск
+          Не удалось выполнить поиск.
         </div>`;
 
       return;
@@ -2800,7 +2830,7 @@ async function performUserSearch(){
 
       results.innerHTML =
         `<div class="search-empty">
-          Пользователей не найдено
+          Пользователей не найдено.
         </div>`;
 
       return;
@@ -2820,27 +2850,38 @@ async function performUserSearch(){
 
 
         user.onclick=()=>{
-          openFoundProfile(profile);
+
+          openFoundProfile(
+            profile
+          );
+
         };
-
-
-        let avatarHTML;
 
 
         if(profile.avatar_url){
 
-          avatarHTML =
-            `<img
-              class="search-avatar"
-              src="${escapeHtml(
-                profile.avatar_url
-              )}"
-              alt=""
-            >`;
+          const img =
+            document.createElement("img");
+
+          img.className =
+            "search-avatar";
+
+          img.src =
+            profile.avatar_url;
+
+          img.alt="";
+
+          user.appendChild(img);
 
         }else{
 
-          const letter =
+          const placeholder =
+            document.createElement("div");
+
+          placeholder.className =
+            "search-avatar-placeholder";
+
+          placeholder.textContent =
             (
               profile.display_name ||
               profile.username ||
@@ -2849,55 +2890,58 @@ async function performUserSearch(){
             .charAt(0)
             .toUpperCase();
 
-
-          avatarHTML =
-            `<div class="search-avatar-placeholder">
-              ${escapeHtml(letter)}
-            </div>`;
+          user.appendChild(
+            placeholder
+          );
 
         }
 
 
-        user.innerHTML = `
+        const info =
+          document.createElement("div");
 
-          ${avatarHTML}
 
-          <div>
+        const name =
+          document.createElement("div");
 
-            <div class="search-user-name">
-              ${escapeHtml(
-                profile.display_name ||
-                profile.username
-              )}
-            </div>
+        name.className =
+          "search-user-name";
 
-            <div class="search-user-username">
-              @${escapeHtml(
-                profile.username
-              )}
-            </div>
+        name.textContent =
+          profile.display_name ||
+          profile.username;
 
-          </div>
 
-        `;
+        const username =
+          document.createElement("div");
 
+        username.className =
+          "search-user-username";
+
+        username.textContent =
+          "@" + profile.username;
+
+
+        info.appendChild(name);
+        info.appendChild(username);
+
+        user.appendChild(info);
 
         results.appendChild(user);
 
       }
     );
 
-
   }catch(error){
 
     console.error(
-      "Search error:",
+      "Search:",
       error
     );
 
     results.innerHTML =
       `<div class="search-empty">
-        Ошибка поиска
+        Ошибка поиска.
       </div>`;
 
   }
@@ -2911,10 +2955,12 @@ async function performUserSearch(){
 
 async function openFoundProfile(profile){
 
+  if(!profile || !profile.id)return;
+
+
+  publicProfile=null;
+
   showPage("publicProfile");
-
-
-  window.publicProfile=null;
 
 
   document.getElementById(
@@ -2924,8 +2970,28 @@ async function openFoundProfile(profile){
 
 
   document.getElementById(
+    "publicUsername"
+  ).textContent =
+    "";
+
+
+  document.getElementById(
+    "publicBio"
+  ).textContent =
+    "";
+
+
+  document.getElementById(
     "publicActions"
   ).innerHTML="";
+
+
+  document.getElementById(
+    "publicWall"
+  ).innerHTML =
+    `<div class="wall-empty">
+      Загружаем стену...
+    </div>`;
 
 
   try{
@@ -2936,7 +3002,9 @@ async function openFoundProfile(profile){
         "/rest/v1/profiles?id=eq." +
         encodeURIComponent(profile.id) +
         "&select=*",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
@@ -2966,12 +3034,8 @@ async function openFoundProfile(profile){
     }
 
 
-    const publicProfile =
+    publicProfile =
       profiles[0];
-
-
-    window.publicProfile =
-      publicProfile;
 
 
     renderPublicProfile(
@@ -2993,11 +3057,10 @@ async function openFoundProfile(profile){
       publicProfile.id
     );
 
-
   }catch(error){
 
     console.error(
-      "Public profile:",
+      "openFoundProfile:",
       error
     );
 
@@ -3024,8 +3087,7 @@ function renderPublicProfile(profile){
   document.getElementById(
     "publicUsername"
   ).textContent =
-    "@" +
-    profile.username;
+    "@" + profile.username;
 
 
   document.getElementById(
@@ -3041,29 +3103,43 @@ function renderPublicProfile(profile){
     );
 
 
+  container.replaceChildren();
+
+
   if(profile.avatar_url){
 
     const img =
       document.createElement("img");
 
-
     img.className =
       "public-avatar";
-
 
     img.src =
       profile.avatar_url;
 
-
     img.alt =
       "Аватар";
 
+    img.onerror=()=>{
 
-    container.replaceChildren(img);
+      renderPublicProfile({
+        ...profile,
+        avatar_url:""
+      });
+
+    };
+
+    container.appendChild(img);
 
   }else{
 
-    const letter =
+    const placeholder =
+      document.createElement("div");
+
+    placeholder.className =
+      "public-avatar-placeholder";
+
+    placeholder.textContent =
       (
         profile.display_name ||
         profile.username ||
@@ -3072,11 +3148,9 @@ function renderPublicProfile(profile){
       .charAt(0)
       .toUpperCase();
 
-
-    container.innerHTML =
-      `<div class="public-avatar-placeholder">
-        ${escapeHtml(letter)}
-      </div>`;
+    container.appendChild(
+      placeholder
+    );
 
   }
 
@@ -3084,7 +3158,7 @@ function renderPublicProfile(profile){
 
 
 /* =====================================================
-   FOLLOW
+   FOLLOWS
 ===================================================== */
 
 async function loadFollowStats(
@@ -3098,20 +3172,38 @@ async function loadFollowStats(
     const followersResponse =
       await fetch(
         SUPABASE_URL +
-        "/rest/v1/follows?following_id=eq." +
+        "/rest/v1/follows" +
+        "?following_id=eq." +
         encodeURIComponent(userId) +
         "&select=follower_id",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
     const followingResponse =
       await fetch(
         SUPABASE_URL +
-        "/rest/v1/follows?follower_id=eq." +
+        "/rest/v1/follows" +
+        "?follower_id=eq." +
         encodeURIComponent(userId) +
         "&select=following_id",
-        {headers}
+        {
+          headers:authHeaders()
+        }
+      );
+
+
+    const followersElementNode =
+      document.getElementById(
+        followersElement
+      );
+
+
+    const followingElementNode =
+      document.getElementById(
+        followingElement
       );
 
 
@@ -3120,16 +3212,9 @@ async function loadFollowStats(
       const rows =
         await followersResponse.json();
 
+      if(followersElementNode){
 
-      const element =
-        document.getElementById(
-          followersElement
-        );
-
-
-      if(element){
-
-        element.textContent =
+        followersElementNode.textContent =
           rows.length;
 
       }
@@ -3142,27 +3227,19 @@ async function loadFollowStats(
       const rows =
         await followingResponse.json();
 
+      if(followingElementNode){
 
-      const element =
-        document.getElementById(
-          followingElement
-        );
-
-
-      if(element){
-
-        element.textContent =
+        followingElementNode.textContent =
           rows.length;
 
       }
 
     }
 
-
   }catch(error){
 
     console.error(
-      "Follow stats:",
+      "loadFollowStats:",
       error
     );
 
@@ -3171,7 +3248,9 @@ async function loadFollowStats(
 }
 
 
-async function loadPublicFollowStats(userId){
+async function loadPublicFollowStats(
+  userId
+){
 
   await loadFollowStats(
     userId,
@@ -3182,17 +3261,17 @@ async function loadPublicFollowStats(userId){
 }
 
 
-async function isFollowing(targetUserId){
+async function isFollowing(
+  targetUserId
+){
 
   const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   if(
     !currentUserId ||
-    currentUserId===targetUserId
+    currentUserId === targetUserId
   ){
 
     return false;
@@ -3219,6 +3298,11 @@ async function isFollowing(targetUserId){
 
     if(!response.ok){
 
+      console.error(
+        "isFollowing:",
+        await response.text()
+      );
+
       return false;
 
     }
@@ -3228,8 +3312,7 @@ async function isFollowing(targetUserId){
       await response.json();
 
 
-    return rows.length>0;
-
+    return rows.length > 0;
 
   }catch(error){
 
@@ -3245,7 +3328,9 @@ async function isFollowing(targetUserId){
 }
 
 
-async function renderFollowButton(targetUserId){
+async function renderFollowButton(
+  targetUserId
+){
 
   const container =
     document.getElementById(
@@ -3254,9 +3339,7 @@ async function renderFollowButton(targetUserId){
 
 
   const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   container.innerHTML="";
@@ -3265,22 +3348,18 @@ async function renderFollowButton(targetUserId){
   if(!currentUserId)return;
 
 
-  if(currentUserId===targetUserId){
+  if(currentUserId === targetUserId){
 
     const button =
       document.createElement("button");
 
-
     button.className =
       "public-action";
-
 
     button.textContent =
       "Это ваш профиль";
 
-
     button.disabled=true;
-
 
     container.appendChild(button);
 
@@ -3347,9 +3426,13 @@ async function renderFollowButton(targetUserId){
 
   messageButton.onclick=()=>{
 
-    openChatWithUser(
-      window.publicProfile
-    );
+    if(publicProfile){
+
+      openChatWithUser(
+        publicProfile
+      );
+
+    }
 
   };
 
@@ -3361,17 +3444,17 @@ async function renderFollowButton(targetUserId){
 }
 
 
-async function toggleFollow(targetUserId){
+async function toggleFollow(
+  targetUserId
+){
 
   const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   if(
     !currentUserId ||
-    currentUserId===targetUserId
+    currentUserId === targetUserId
   ){
 
     return;
@@ -3398,14 +3481,11 @@ async function toggleFollow(targetUserId){
           "&following_id=eq." +
           encodeURIComponent(targetUserId),
           {
-
             method:"DELETE",
-
             headers:{
               ...authHeaders(),
               "Prefer":"return=minimal"
             }
-
           }
         );
 
@@ -3428,36 +3508,38 @@ async function toggleFollow(targetUserId){
           SUPABASE_URL +
           "/rest/v1/follows",
           {
-
             method:"POST",
-
             headers:{
               ...authHeaders(),
               "Prefer":"return=minimal"
             },
-
             body:JSON.stringify({
-
-              follower_id:
-                currentUserId,
-
-              following_id:
-                targetUserId
-
+              follower_id:currentUserId,
+              following_id:targetUserId
             })
-
           }
         );
 
 
       if(!response.ok){
 
-        alert(
-          "Не удалось подписаться:\n" +
-          await response.text()
-        );
+        const text =
+          await response.text();
 
-        return;
+        if(text.includes("duplicate")){
+
+          // Уже подписан, просто обновляем интерфейс.
+
+        }else{
+
+          alert(
+            "Не удалось подписаться:\n" +
+            text
+          );
+
+          return;
+
+        }
 
       }
 
@@ -3473,6 +3555,19 @@ async function toggleFollow(targetUserId){
       targetUserId
     );
 
+
+    if(
+      window.currentProfile &&
+      window.currentProfile.id === currentUserId
+    ){
+
+      await loadFollowStats(
+        currentUserId,
+        "myFollowersCount",
+        "myFollowingCount"
+      );
+
+    }
 
   }catch(error){
 
@@ -3490,16 +3585,36 @@ async function toggleFollow(targetUserId){
 }
 
 
+function backToSearch(){
+
+  publicProfile=null;
+
+  showPage("search");
+
+}
+
+
 /* =====================================================
    PUBLIC WALL
 ===================================================== */
 
-async function loadPublicWall(userId){
+async function loadPublicWall(
+  userId
+){
 
   const wall =
     document.getElementById(
       "publicWall"
     );
+
+
+  if(!wall)return;
+
+
+  wall.innerHTML =
+    `<div class="wall-empty">
+      Загружаем стену...
+    </div>`;
 
 
   try{
@@ -3510,7 +3625,9 @@ async function loadPublicWall(userId){
         "/rest/v1/posts?user_id=eq." +
         encodeURIComponent(userId) +
         "&select=*&order=created_at.desc",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
@@ -3559,7 +3676,6 @@ async function loadPublicWall(userId){
       }
     );
 
-
   }catch(error){
 
     console.error(
@@ -3567,16 +3683,12 @@ async function loadPublicWall(userId){
       error
     );
 
+    wall.innerHTML =
+      `<div class="wall-empty">
+        Ошибка загрузки стены.
+      </div>`;
+
   }
-
-}
-
-
-function backToSearch(){
-
-  window.publicProfile=null;
-
-  showPage("search");
 
 }
 
@@ -3585,17 +3697,10 @@ function backToSearch(){
    MESSAGES
 ===================================================== */
 
-let chatPolling=null;
-
-let currentChatUser=null;
-
-
 async function loadConversations(){
 
   const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   const container =
@@ -3609,7 +3714,7 @@ async function loadConversations(){
 
   container.innerHTML =
     `<div class="search-empty">
-      Загружаем...
+      Загружаем сообщения...
     </div>`;
 
 
@@ -3637,14 +3742,20 @@ async function loadConversations(){
 
     if(!response.ok){
 
-      container.innerHTML =
-        `<div class="search-empty">
-          Не удалось загрузить сообщения.
-        </div>`;
+      const errorText =
+        await response.text();
 
       console.error(
-        await response.text()
+        "Messages:",
+        errorText
       );
+
+
+      container.innerHTML =
+        `<div class="search-empty">
+          Не удалось загрузить сообщения.<br><br>
+          ${escapeHtml(errorText)}
+        </div>`;
 
       return;
 
@@ -3663,8 +3774,6 @@ async function loadConversations(){
           Найди пользователя и начни чат.
         </div>`;
 
-      updateUnreadBadge(0);
-
       return;
 
     }
@@ -3677,175 +3786,192 @@ async function loadConversations(){
     const conversations={};
 
 
-    messages.forEach(message=>{
+    messages.forEach(
+      message=>{
 
-      const otherId =
-        message.sender_id===currentUserId
-          ? message.receiver_id
-          : message.sender_id;
-
-
-      if(!conversations[otherId]){
-
-        conversations[otherId]={
-          message,
-          unread:0
-        };
-
-      }
+        const otherId =
+          message.sender_id === currentUserId
+            ? message.receiver_id
+            : message.sender_id;
 
 
-      if(
-        message.receiver_id===currentUserId &&
-        !message.read_at
-      ){
+        if(!conversations[otherId]){
 
-        conversations[otherId].unread++;
+          conversations[otherId] =
+            message;
+
+        }
 
       }
-
-    });
-
-
-    const items =
-      Object.entries(conversations)
-      .sort(
-        (a,b)=>
-          new Date(b[1].message.created_at) -
-          new Date(a[1].message.created_at)
-      );
+    );
 
 
     container.innerHTML="";
 
 
-    let totalUnread=0;
+    Object.entries(conversations)
+      .forEach(
+        ([userId,message])=>{
+
+          const profile =
+            profiles[userId];
 
 
-    items.forEach(
-      ([userId,data])=>{
-
-        const profile =
-          profiles[userId];
+          if(!profile)return;
 
 
-        if(!profile)return;
+          const element =
+            document.createElement("div");
 
 
-        totalUnread +=
-          data.unread;
+          element.className =
+            "conversation";
 
 
-        const element =
-          document.createElement("div");
+          element.onclick=()=>{
+
+            openChatWithUser(
+              profile
+            );
+
+          };
 
 
-        element.className =
-          "conversation";
+          const avatarWrap =
+            document.createElement("div");
+
+          avatarWrap.className =
+            "conversation-avatar-wrap";
 
 
-        element.onclick=()=>{
+          if(profile.avatar_url){
 
-          openChatWithUser(
-            profile
+            const img =
+              document.createElement("img");
+
+            img.className =
+              "conversation-avatar";
+
+            img.src =
+              profile.avatar_url;
+
+            img.alt="";
+
+            avatarWrap.appendChild(img);
+
+          }else{
+
+            const avatar =
+              document.createElement("div");
+
+            avatar.className =
+              "conversation-avatar-placeholder";
+
+            avatar.textContent =
+              (
+                profile.display_name ||
+                profile.username ||
+                "N"
+              )
+              .charAt(0)
+              .toUpperCase();
+
+            avatarWrap.appendChild(avatar);
+
+          }
+
+
+          const dot =
+            document.createElement("span");
+
+          dot.className =
+            "online-dot";
+
+          avatarWrap.appendChild(dot);
+
+
+          const main =
+            document.createElement("div");
+
+          main.className =
+            "conversation-main";
+
+
+          const top =
+            document.createElement("div");
+
+          top.className =
+            "conversation-top";
+
+
+          const name =
+            document.createElement("div");
+
+          name.className =
+            "conversation-name";
+
+          name.textContent =
+            profile.display_name ||
+            profile.username;
+
+
+          const time =
+            document.createElement("div");
+
+          time.className =
+            "conversation-time";
+
+          time.textContent =
+            formatMessageTime(
+              message.created_at
+            );
+
+
+          top.appendChild(name);
+          top.appendChild(time);
+
+
+          const bottom =
+            document.createElement("div");
+
+          bottom.className =
+            "conversation-bottom";
+
+
+          const preview =
+            document.createElement("div");
+
+          preview.className =
+            "conversation-preview";
+
+          preview.textContent =
+            message.content || "";
+
+
+          bottom.appendChild(
+            preview
           );
 
-        };
+
+          main.appendChild(top);
+          main.appendChild(bottom);
 
 
-        const avatar =
-          profile.avatar_url
-            ? `<img
-                class="conversation-avatar"
-                src="${escapeHtml(
-                  profile.avatar_url
-                )}"
-                alt=""
-              >`
-            : `<div class="conversation-avatar-placeholder">
-                ${escapeHtml(
-                  (
-                    profile.display_name ||
-                    profile.username ||
-                    "N"
-                  ).charAt(0).toUpperCase()
-                )}
-              </div>`;
+          element.appendChild(
+            avatarWrap
+          );
 
-
-        const time =
-          formatMessageTime(
-            data.message.created_at
+          element.appendChild(
+            main
           );
 
 
-        const preview =
-          data.message.content ||
-          "";
+          container.appendChild(
+            element
+          );
 
-
-        const badge =
-          data.unread>0
-            ? `<span class="unread-badge">
-                ${data.unread>99 ? "99+" : data.unread}
-              </span>`
-            : "";
-
-
-        element.innerHTML=`
-
-          <div class="conversation-avatar-wrap">
-
-            ${avatar}
-
-            <span class="online-dot"></span>
-
-          </div>
-
-          <div class="conversation-main">
-
-            <div class="conversation-top">
-
-              <div class="conversation-name">
-                ${escapeHtml(
-                  profile.display_name ||
-                  profile.username
-                )}
-              </div>
-
-              <div class="conversation-time">
-                ${time}
-              </div>
-
-            </div>
-
-            <div class="conversation-bottom">
-
-              <div class="conversation-preview">
-                ${escapeHtml(preview)}
-              </div>
-
-              ${badge}
-
-            </div>
-
-          </div>
-
-        `;
-
-
-        container.appendChild(
-          element
-        );
-
-      }
-    );
-
-
-    updateUnreadBadge(
-      totalUnread
-    );
-
+        }
+      );
 
   }catch(error){
 
@@ -3865,11 +3991,8 @@ async function loadConversations(){
 
 
 /* =====================================================
-   SEARCH USERS FOR MESSAGE
+   MESSAGE USER SEARCH
 ===================================================== */
-
-let messageSearchTimeout=null;
-
 
 function searchMessageUsers(){
 
@@ -3894,17 +4017,18 @@ async function performMessageUserSearch(){
       "messageSearchInput"
     );
 
-
   const results =
     document.getElementById(
       "messageSearchResults"
     );
 
-
   const conversations =
     document.getElementById(
       "conversations"
     );
+
+
+  if(!input || !results || !conversations)return;
 
 
   const query =
@@ -3914,10 +4038,9 @@ async function performMessageUserSearch(){
   if(!query){
 
     results.style.display="none";
-
     conversations.style.display="block";
 
-    loadConversations();
+    await loadConversations();
 
     return;
 
@@ -3925,7 +4048,6 @@ async function performMessageUserSearch(){
 
 
   results.style.display="block";
-
   conversations.style.display="none";
 
 
@@ -3961,7 +4083,9 @@ async function performMessageUserSearch(){
     const response =
       await fetch(
         url,
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
@@ -3969,7 +4093,7 @@ async function performMessageUserSearch(){
 
       results.innerHTML =
         `<div class="search-empty">
-          Ошибка поиска
+          Ошибка поиска.
         </div>`;
 
       return;
@@ -3982,15 +4106,13 @@ async function performMessageUserSearch(){
 
 
     const currentUserId =
-      localStorage.getItem(
-        "user_id"
-      );
+      localStorage.getItem("user_id");
 
 
     const filtered =
       profiles.filter(
-        profile=>
-          profile.id!==currentUserId
+        profile =>
+          profile.id !== currentUserId
       );
 
 
@@ -4001,7 +4123,7 @@ async function performMessageUserSearch(){
 
       results.innerHTML =
         `<div class="search-empty">
-          Пользователей не найдено
+          Пользователей не найдено.
         </div>`;
 
       return;
@@ -4029,23 +4151,30 @@ async function performMessageUserSearch(){
         };
 
 
-        let avatarHTML;
-
-
         if(profile.avatar_url){
 
-          avatarHTML =
-            `<img
-              class="message-result-avatar"
-              src="${escapeHtml(
-                profile.avatar_url
-              )}"
-              alt=""
-            >`;
+          const img =
+            document.createElement("img");
+
+          img.className =
+            "message-result-avatar";
+
+          img.src =
+            profile.avatar_url;
+
+          img.alt="";
+
+          element.appendChild(img);
 
         }else{
 
-          const letter =
+          const placeholder =
+            document.createElement("div");
+
+          placeholder.className =
+            "message-result-placeholder";
+
+          placeholder.textContent =
             (
               profile.display_name ||
               profile.username ||
@@ -4054,52 +4183,59 @@ async function performMessageUserSearch(){
             .charAt(0)
             .toUpperCase();
 
-
-          avatarHTML =
-            `<div class="message-result-placeholder">
-              ${escapeHtml(letter)}
-            </div>`;
+          element.appendChild(
+            placeholder
+          );
 
         }
 
 
-        element.innerHTML=`
-
-          ${avatarHTML}
-
-          <div>
-
-            <div class="search-user-name">
-              ${escapeHtml(
-                profile.display_name ||
-                profile.username
-              )}
-            </div>
-
-            <div class="search-user-username">
-              @${escapeHtml(
-                profile.username
-              )}
-            </div>
-
-          </div>
-
-        `;
+        const info =
+          document.createElement("div");
 
 
-        results.appendChild(
-          element
-        );
+        const name =
+          document.createElement("div");
+
+        name.className =
+          "search-user-name";
+
+        name.textContent =
+          profile.display_name ||
+          profile.username;
+
+
+        const username =
+          document.createElement("div");
+
+        username.className =
+          "search-user-username";
+
+        username.textContent =
+          "@" + profile.username;
+
+
+        info.appendChild(name);
+        info.appendChild(username);
+
+        element.appendChild(info);
+
+        results.appendChild(element);
 
       }
     );
 
-
   }catch(error){
 
     console.error(
+      "Message search:",
       error
     );
+
+    results.innerHTML =
+      `<div class="search-empty">
+        Ошибка поиска.
+      </div>`;
 
   }
 
@@ -4107,12 +4243,26 @@ async function performMessageUserSearch(){
 
 
 /* =====================================================
-   OPEN CHAT
+   CHAT
 ===================================================== */
 
 async function openChatWithUser(profile){
 
-  if(!profile)return;
+  if(!profile || !profile.id)return;
+
+
+  const currentUserId =
+    localStorage.getItem("user_id");
+
+
+  if(
+    currentUserId &&
+    currentUserId === profile.id
+  ){
+
+    return;
+
+  }
 
 
   currentChatUser =
@@ -4142,10 +4292,6 @@ async function openChatWithUser(profile){
 
   await loadChatMessages();
 
-
-  await markChatAsRead();
-
-
   startChatPolling();
 
 }
@@ -4159,55 +4305,96 @@ function renderChatHeader(profile){
     );
 
 
-  const avatar =
-    profile.avatar_url
-      ? `<img
-          class="chat-avatar"
-          src="${escapeHtml(
-            profile.avatar_url
-          )}"
-          alt=""
-        >`
-      : `<div class="chat-avatar-placeholder">
-          ${escapeHtml(
-            (
-              profile.display_name ||
-              profile.username ||
-              "N"
-            ).charAt(0).toUpperCase()
-          )}
-        </div>`;
+  header.innerHTML="";
 
 
-  header.innerHTML=`
+  const back =
+    document.createElement("button");
 
-    <button
-      class="chat-back"
-      onclick="closeChat()"
-    >
-      ‹
-    </button>
+  back.className =
+    "chat-back";
 
-    ${avatar}
+  back.textContent =
+    "‹";
 
-    <div class="chat-user-info">
+  back.onclick =
+    closeChat;
 
-      <div class="chat-user-name">
-        ${escapeHtml(
-          profile.display_name ||
-          profile.username
-        )}
-      </div>
 
-      <div class="chat-user-username">
-        @${escapeHtml(
-          profile.username
-        )}
-      </div>
+  header.appendChild(back);
 
-    </div>
 
-  `;
+  if(profile.avatar_url){
+
+    const img =
+      document.createElement("img");
+
+    img.className =
+      "chat-avatar";
+
+    img.src =
+      profile.avatar_url;
+
+    img.alt="";
+
+    header.appendChild(img);
+
+  }else{
+
+    const placeholder =
+      document.createElement("div");
+
+    placeholder.className =
+      "chat-avatar-placeholder";
+
+    placeholder.textContent =
+      (
+        profile.display_name ||
+        profile.username ||
+        "N"
+      )
+      .charAt(0)
+      .toUpperCase();
+
+    header.appendChild(
+      placeholder
+    );
+
+  }
+
+
+  const info =
+    document.createElement("div");
+
+  info.className =
+    "chat-user-info";
+
+
+  const name =
+    document.createElement("div");
+
+  name.className =
+    "chat-user-name";
+
+  name.textContent =
+    profile.display_name ||
+    profile.username;
+
+
+  const username =
+    document.createElement("div");
+
+  username.className =
+    "chat-user-username";
+
+  username.textContent =
+    "@" + profile.username;
+
+
+  info.appendChild(name);
+  info.appendChild(username);
+
+  header.appendChild(info);
 
 }
 
@@ -4222,13 +4409,14 @@ async function loadChatMessages(){
 
 
   const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   const otherUserId =
     currentChatUser.id;
+
+
+  if(!currentUserId)return;
 
 
   const container =
@@ -4269,9 +4457,17 @@ async function loadChatMessages(){
 
     if(!response.ok){
 
+      const errorText =
+        await response.text();
+
+      console.error(
+        "loadChatMessages:",
+        errorText
+      );
+
       container.innerHTML =
         `<div class="chat-empty">
-          Не удалось загрузить сообщения.
+          Не удалось загрузить переписку.
         </div>`;
 
       return;
@@ -4313,13 +4509,17 @@ async function loadChatMessages(){
 
     scrollChatToBottom();
 
-
   }catch(error){
 
     console.error(
       "loadChatMessages:",
       error
     );
+
+    container.innerHTML =
+      `<div class="chat-empty">
+        Ошибка загрузки переписки.
+      </div>`;
 
   }
 
@@ -4342,12 +4542,16 @@ function renderChatMessage(
 
 
   const mine =
-    message.sender_id===currentUserId;
+    message.sender_id === currentUserId;
 
 
   row.className =
     "message-row " +
-    (mine ? "mine" : "theirs");
+    (
+      mine
+        ? "mine"
+        : "theirs"
+    );
 
 
   const bubble =
@@ -4376,19 +4580,27 @@ function renderChatMessage(
     );
 
 
-  bubble.appendChild(
-    time
-  );
+  bubble.appendChild(time);
+  row.appendChild(bubble);
+  container.appendChild(row);
+
+}
 
 
-  row.appendChild(
-    bubble
-  );
+function scrollChatToBottom(){
+
+  const container =
+    document.getElementById(
+      "chatMessages"
+    );
 
 
-  container.appendChild(
-    row
-  );
+  if(container){
+
+    container.scrollTop =
+      container.scrollHeight;
+
+  }
 
 }
 
@@ -4416,10 +4628,7 @@ async function sendMessage(){
 
 
   const senderId =
-    localStorage.getItem(
-      "user_id"
-    );
-
+    localStorage.getItem("user_id");
 
   const receiverId =
     currentChatUser.id;
@@ -4438,27 +4647,16 @@ async function sendMessage(){
         SUPABASE_URL +
         "/rest/v1/messages",
         {
-
           method:"POST",
-
           headers:{
             ...authHeaders(),
             "Prefer":"return=representation"
           },
-
           body:JSON.stringify({
-
-            sender_id:
-              senderId,
-
-            receiver_id:
-              receiverId,
-
-            content:
-              content
-
+            sender_id:senderId,
+            receiver_id:receiverId,
+            content
           })
-
         }
       );
 
@@ -4477,9 +4675,7 @@ async function sendMessage(){
 
     input.value="";
 
-
     await loadChatMessages();
-
 
   }catch(error){
 
@@ -4495,7 +4691,6 @@ async function sendMessage(){
   }finally{
 
     input.disabled=false;
-
     input.focus();
 
   }
@@ -4506,7 +4701,7 @@ async function sendMessage(){
 function handleChatKey(event){
 
   if(
-    event.key==="Enter" &&
+    event.key === "Enter" &&
     !event.shiftKey
   ){
 
@@ -4519,70 +4714,6 @@ function handleChatKey(event){
 }
 
 
-/* =====================================================
-   MARK READ
-===================================================== */
-
-async function markChatAsRead(){
-
-  if(!currentChatUser)return;
-
-
-  const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
-
-
-  try{
-
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/messages" +
-      "?sender_id=eq." +
-      encodeURIComponent(
-        currentChatUser.id
-      ) +
-      "&receiver_id=eq." +
-      encodeURIComponent(
-        currentUserId
-      ) +
-      "&read_at=is.null",
-      {
-
-        method:"PATCH",
-
-        headers:{
-          ...authHeaders(),
-          "Prefer":"return=minimal"
-        },
-
-        body:JSON.stringify({
-          read_at:new Date().toISOString()
-        })
-
-      }
-    );
-
-
-    updateUnreadBadgeFromMessages();
-
-  }catch(error){
-
-    console.error(
-      "markChatAsRead:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   CHAT POLLING
-===================================================== */
-
 function startChatPolling(){
 
   stopChatPolling();
@@ -4594,14 +4725,13 @@ function startChatPolling(){
 
         if(
           currentChatUser &&
-          document.getElementById(
-            "chatPage"
-          ).classList.contains("active")
+          document
+            .getElementById("chatPage")
+            .classList
+            .contains("active")
         ){
 
           await loadChatMessages();
-
-          await markChatAsRead();
 
         }
 
@@ -4616,9 +4746,7 @@ function stopChatPolling(){
 
   if(chatPolling){
 
-    clearInterval(
-      chatPolling
-    );
+    clearInterval(chatPolling);
 
     chatPolling=null;
 
@@ -4633,9 +4761,17 @@ function closeChat(){
 
   currentChatUser=null;
 
-  document.getElementById(
-    "messageSearchInput"
-  ).value="";
+  const search =
+    document.getElementById(
+      "messageSearchInput"
+    );
+
+
+  if(search){
+
+    search.value="";
+
+  }
 
 
   showPage("messages");
@@ -4644,110 +4780,24 @@ function closeChat(){
 
 
 /* =====================================================
-   UNREAD
+   TIME
 ===================================================== */
 
-async function updateUnreadBadgeFromMessages(){
-
-  const currentUserId =
-    localStorage.getItem(
-      "user_id"
-    );
-
-
-  if(!currentUserId)return;
-
-
-  try{
-
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/messages" +
-        "?receiver_id=eq." +
-        encodeURIComponent(
-          currentUserId
-        ) +
-        "&read_at=is.null" +
-        "&select=id",
-        {
-          headers:authHeaders()
-        }
-      );
-
-
-    if(!response.ok)return;
-
-
-    const rows =
-      await response.json();
-
-
-    updateUnreadBadge(
-      rows.length
-    );
-
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-function updateUnreadBadge(count){
-
-  const badge =
-    document.getElementById(
-      "navUnread"
-    );
-
-
-  if(!badge)return;
-
-
-  if(count>0){
-
-    badge.style.display="flex";
-
-    badge.textContent =
-      count>99
-        ? "99+"
-        : count;
-
-  }else{
-
-    badge.style.display="none";
-
-  }
-
-}
-
-
-/* =====================================================
-   MESSAGE TIME
-===================================================== */
-
-function formatMessageTime(dateString){
+function formatMessageTime(
+  dateString
+){
 
   const date =
     new Date(dateString);
-
 
   const now =
     new Date();
 
 
-  const sameDay =
-    date.toDateString()===
-    now.toDateString();
-
-
-  if(sameDay){
+  if(
+    date.toDateString() ===
+    now.toDateString()
+  ){
 
     return date.toLocaleTimeString(
       "ru-RU",
@@ -4763,14 +4813,13 @@ function formatMessageTime(dateString){
   const yesterday =
     new Date(now);
 
-
   yesterday.setDate(
-    now.getDate()-1
+    now.getDate() - 1
   );
 
 
   if(
-    date.toDateString()===
+    date.toDateString() ===
     yesterday.toDateString()
   ){
 
@@ -4790,7 +4839,9 @@ function formatMessageTime(dateString){
 }
 
 
-function formatChatTime(dateString){
+function formatChatTime(
+  dateString
+){
 
   return new Date(
     dateString
@@ -4832,17 +4883,15 @@ function showPage(page){
     );
 
 
-  if(page==="feed"){
+  if(page === "feed"){
 
     document
       .getElementById("feedPage")
       .classList.add("active");
 
-
     document
       .getElementById("feedNav")
       .classList.add("active");
-
 
     loadPosts();
 
@@ -4851,70 +4900,66 @@ function showPage(page){
   }
 
 
-  if(page==="search"){
+  if(page === "search"){
 
     document
       .getElementById("searchPage")
       .classList.add("active");
 
-
     document
       .getElementById("searchNav")
       .classList.add("active");
-
 
     return;
 
   }
 
 
-  if(page==="messages"){
+  if(page === "messages"){
 
     document
       .getElementById("messagesPage")
       .classList.add("active");
 
-
     document
       .getElementById("messagesNav")
       .classList.add("active");
 
-
     loadConversations();
-
-    updateUnreadBadgeFromMessages();
 
     return;
 
   }
 
 
-  if(page==="chat"){
+  if(page === "chat"){
 
     document
       .getElementById("chatPage")
       .classList.add("active");
 
+    document
+      .getElementById("messagesNav")
+      .classList.add("active");
+
+    startChatPolling();
 
     return;
 
   }
 
 
-  if(page==="profile"){
+  if(page === "profile"){
 
     document
       .getElementById("profilePage")
       .classList.add("active");
 
-
     document
       .getElementById("profileNav")
       .classList.add("active");
 
-
     loadProfile();
-
     loadWall();
 
     return;
@@ -4922,14 +4967,15 @@ function showPage(page){
   }
 
 
-  if(page==="publicProfile"){
+  if(page === "publicProfile"){
 
     document
       .getElementById("publicProfilePage")
       .classList.add("active");
 
-
-    return;
+    document
+      .getElementById("searchNav")
+      .classList.add("active");
 
   }
 
@@ -4937,7 +4983,7 @@ function showPage(page){
 
 
 /* =====================================================
-   APP
+   APP / AUTH SCREEN
 ===================================================== */
 
 function showApp(){
@@ -4954,19 +5000,16 @@ function showApp(){
 
   showPage("feed");
 
-
   loadProfile();
-
   loadPosts();
-
   loadWall();
-
-  updateUnreadBadgeFromMessages();
 
 }
 
 
 function showAuth(){
+
+  stopChatPolling();
 
   document.getElementById(
     "authScreen"
@@ -4996,13 +5039,16 @@ async function loadProfilesMap(){
         SUPABASE_URL +
         "/rest/v1/profiles" +
         "?select=id,username,display_name,avatar_url",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
     if(!response.ok){
 
       console.error(
+        "loadProfilesMap:",
         await response.text()
       );
 
@@ -5026,7 +5072,6 @@ async function loadProfilesMap(){
 
 
     return map;
-
 
   }catch(error){
 
@@ -5063,7 +5108,9 @@ async function loadPosts(){
       await fetch(
         SUPABASE_URL +
         "/rest/v1/posts?select=*&order=created_at.desc",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
@@ -5112,13 +5159,17 @@ async function loadPosts(){
       }
     );
 
-
   }catch(error){
 
     console.error(
       "loadPosts:",
       error
     );
+
+    feed.innerHTML =
+      `<div class="wall-empty">
+        Ошибка загрузки ленты.
+      </div>`;
 
   }
 
@@ -5133,7 +5184,7 @@ function renderPost(
 
   const reaction =
     localStorage.getItem(
-      "reaction_"+post.id
+      "reaction_" + post.id
     );
 
 
@@ -5160,111 +5211,167 @@ function renderPost(
     document.createElement("div");
 
 
-  div.className="post";
+  div.className =
+    "post";
 
 
-  let avatarHTML;
+  const user =
+    document.createElement("div");
+
+  user.className =
+    "post-user";
 
 
   if(avatar){
 
-    avatarHTML =
-      `<img
-        class="mini-avatar"
-        src="${escapeHtml(avatar)}"
-        alt=""
-      >`;
+    const img =
+      document.createElement("img");
+
+    img.className =
+      "mini-avatar";
+
+    img.src =
+      avatar;
+
+    img.alt="";
+
+    user.appendChild(img);
 
   }else{
 
-    avatarHTML =
-      `<div class="mini-avatar-placeholder">
-        ${escapeHtml(
-          displayName
-            .charAt(0)
-            .toUpperCase()
-        )}
-      </div>`;
+    const placeholder =
+      document.createElement("div");
+
+    placeholder.className =
+      "mini-avatar-placeholder";
+
+    placeholder.textContent =
+      displayName
+        .charAt(0)
+        .toUpperCase();
+
+    user.appendChild(
+      placeholder
+    );
 
   }
 
 
-  const likes =
-    Number(post.likes||0);
+  const userInfo =
+    document.createElement("div");
 
 
-  const dislikes =
-    Number(post.dislikes||0);
+  const name =
+    document.createElement("div");
+
+  name.className =
+    "user-name";
+
+  name.textContent =
+    displayName;
 
 
-  div.innerHTML=`
+  const usernameEl =
+    document.createElement("div");
 
-    <div class="post-user">
+  usernameEl.className =
+    "post-date";
 
-      ${avatarHTML}
-
-      <div>
-
-        <div class="user-name">
-          ${escapeHtml(displayName)}
-        </div>
-
-        <div class="post-date">
-          @${escapeHtml(username)}
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="post-text">
-      ${escapeHtml(post.content)}
-    </div>
-
-    <div class="actions">
-
-      <button
-        class="reaction-btn ${
-          reaction==="like"
-            ? "active"
-            : ""
-        }"
-        onclick="reactToPost(
-          ${Number(post.id)},
-          'like'
-        )"
-      >
-        👍 ${likes}
-      </button>
-
-      <button
-        class="reaction-btn ${
-          reaction==="dislike"
-            ? "active"
-            : ""
-        }"
-        onclick="reactToPost(
-          ${Number(post.id)},
-          'dislike'
-        )"
-      >
-        👎 ${dislikes}
-      </button>
-
-    </div>
-
-  `;
+  usernameEl.textContent =
+    "@" + username;
 
 
-  container.appendChild(
-    div
+  userInfo.appendChild(name);
+  userInfo.appendChild(usernameEl);
+
+  user.appendChild(userInfo);
+
+
+  const text =
+    document.createElement("div");
+
+  text.className =
+    "post-text";
+
+  text.textContent =
+    post.content;
+
+
+  const actions =
+    document.createElement("div");
+
+  actions.className =
+    "actions";
+
+
+  const likeButton =
+    document.createElement("button");
+
+  likeButton.className =
+    "reaction-btn" +
+    (
+      reaction === "like"
+        ? " active"
+        : ""
+    );
+
+  likeButton.textContent =
+    "👍 " + Number(post.likes || 0);
+
+  likeButton.onclick=()=>{
+
+    reactToPost(
+      Number(post.id),
+      "like"
+    );
+
+  };
+
+
+  const dislikeButton =
+    document.createElement("button");
+
+  dislikeButton.className =
+    "reaction-btn" +
+    (
+      reaction === "dislike"
+        ? " active"
+        : ""
+    );
+
+  dislikeButton.textContent =
+    "👎 " + Number(post.dislikes || 0);
+
+  dislikeButton.onclick=()=>{
+
+    reactToPost(
+      Number(post.id),
+      "dislike"
+    );
+
+  };
+
+
+  actions.appendChild(
+    likeButton
   );
+
+  actions.appendChild(
+    dislikeButton
+  );
+
+
+  div.appendChild(user);
+  div.appendChild(text);
+  div.appendChild(actions);
+
+  container.appendChild(div);
 
 }
 
 
 /* =====================================================
-   CREATE POST
+   CREATE POSTS
 ===================================================== */
 
 async function createPost(){
@@ -5292,7 +5399,6 @@ async function createPost(){
 
 
   input.value="";
-
 
   await loadPosts();
 
@@ -5325,18 +5431,17 @@ async function createWallPost(){
 
   input.value="";
 
-
   await loadWall();
 
 }
 
 
-async function createPostInDatabase(text){
+async function createPostInDatabase(
+  text
+){
 
   const userId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   if(!userId){
@@ -5362,24 +5467,16 @@ async function createPostInDatabase(text){
         SUPABASE_URL +
         "/rest/v1/posts",
         {
-
           method:"POST",
-
           headers:{
             ...authHeaders(),
             "Prefer":"return=representation"
           },
-
           body:JSON.stringify({
-
             user_id:userId,
-
-            username:username,
-
+            username,
             content:text
-
           })
-
         }
       );
 
@@ -5398,10 +5495,12 @@ async function createPostInDatabase(text){
 
     return true;
 
-
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "createPost:",
+      error
+    );
 
     alert(
       "Ошибка соединения с сервером."
@@ -5421,9 +5520,7 @@ async function createPostInDatabase(text){
 async function loadWall(){
 
   const userId =
-    localStorage.getItem(
-      "user_id"
-    );
+    localStorage.getItem("user_id");
 
 
   const wall =
@@ -5443,11 +5540,22 @@ async function loadWall(){
         "/rest/v1/posts?user_id=eq." +
         encodeURIComponent(userId) +
         "&select=*&order=created_at.desc",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
-    if(!response.ok)return;
+    if(!response.ok){
+
+      wall.innerHTML =
+        `<div class="wall-empty">
+          Не удалось загрузить стену.
+        </div>`;
+
+      return;
+
+    }
 
 
     const posts =
@@ -5483,7 +5591,6 @@ async function loadWall(){
       }
     );
 
-
   }catch(error){
 
     console.error(
@@ -5507,56 +5614,39 @@ async function reactToPost(
 
   const oldReaction =
     localStorage.getItem(
-      "reaction_"+postId
+      "reaction_" + postId
     );
 
 
   let likeChange=0;
-
   let dislikeChange=0;
-
   let newReaction=type;
 
 
-  if(oldReaction===type){
+  if(oldReaction === type){
 
     newReaction=null;
 
-
-    if(type==="like"){
-
+    if(type === "like"){
       likeChange=-1;
-
     }else{
-
       dislikeChange=-1;
-
     }
 
   }else{
 
-    if(oldReaction==="like"){
-
+    if(oldReaction === "like"){
       likeChange=-1;
-
     }
 
-
-    if(oldReaction==="dislike"){
-
+    if(oldReaction === "dislike"){
       dislikeChange=-1;
-
     }
 
-
-    if(type==="like"){
-
+    if(type === "like"){
       likeChange+=1;
-
     }else{
-
       dislikeChange+=1;
-
     }
 
   }
@@ -5570,7 +5660,9 @@ async function reactToPost(
         "/rest/v1/posts?id=eq." +
         encodeURIComponent(postId) +
         "&select=likes,dislikes",
-        {headers}
+        {
+          headers:authHeaders()
+        }
       );
 
 
@@ -5599,7 +5691,7 @@ async function reactToPost(
     const newLikes =
       Math.max(
         0,
-        Number(post.likes||0) +
+        Number(post.likes || 0) +
         likeChange
       );
 
@@ -5607,7 +5699,7 @@ async function reactToPost(
     const newDislikes =
       Math.max(
         0,
-        Number(post.dislikes||0) +
+        Number(post.dislikes || 0) +
         dislikeChange
       );
 
@@ -5618,22 +5710,15 @@ async function reactToPost(
         "/rest/v1/posts?id=eq." +
         encodeURIComponent(postId),
         {
-
           method:"PATCH",
-
           headers:{
             ...authHeaders(),
             "Prefer":"return=representation"
           },
-
           body:JSON.stringify({
-
             likes:newLikes,
-
             dislikes:newDislikes
-
           })
-
         }
       );
 
@@ -5653,37 +5738,35 @@ async function reactToPost(
     if(newReaction){
 
       localStorage.setItem(
-        "reaction_"+postId,
+        "reaction_" + postId,
         newReaction
       );
 
     }else{
 
       localStorage.removeItem(
-        "reaction_"+postId
+        "reaction_" + postId
       );
 
     }
 
 
     await loadPosts();
-
     await loadWall();
 
 
-    if(window.publicProfile){
+    if(publicProfile){
 
       await loadPublicWall(
-        window.publicProfile.id
+        publicProfile.id
       );
 
     }
 
-
   }catch(error){
 
     console.error(
-      "reaction error:",
+      "reactToPost:",
       error
     );
 
@@ -5707,7 +5790,7 @@ function escapeHtml(text){
 
 
   div.textContent =
-    text==null
+    text == null
       ? ""
       : String(text);
 
@@ -5718,24 +5801,62 @@ function escapeHtml(text){
 
 
 /* =====================================================
+   ENTER ON AUTH
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key !== "Enter" ||
+      event.shiftKey
+    ){
+
+      return;
+
+    }
+
+
+    const loginVisible =
+      document.getElementById(
+        "loginForm"
+      ).style.display === "block";
+
+
+    const signupVisible =
+      document.getElementById(
+        "signupForm"
+      ).style.display === "block";
+
+
+    if(loginVisible){
+
+      event.preventDefault();
+      signIn();
+
+    }else if(signupVisible){
+
+      event.preventDefault();
+      signUp();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
    START
 ===================================================== */
 
-function startApp(){
+async function startApp(){
 
-  const token =
-    localStorage.getItem(
-      "access_token"
-    );
+  const valid =
+    await validateSession();
 
 
-  const userId =
-    localStorage.getItem(
-      "user_id"
-    );
-
-
-  if(token && userId){
+  if(valid){
 
     showApp();
 
