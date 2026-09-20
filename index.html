@@ -12,11 +12,11 @@
 
 :root {
   --navy: #0b1f3a;
-  --navy-2: #12365d;
+  --navy2: #12365d;
   --sky: #62b7f5;
   --sky-soft: #e9f6ff;
-  --white: #ffffff;
   --bg: #f4f9fd;
+  --white: #fff;
   --line: #d8e6f0;
   --text: #102033;
   --muted: #718397;
@@ -36,7 +36,7 @@ button {
   font: inherit;
 }
 
-/* AUTH */
+/* ================= AUTH ================= */
 
 #authScreen {
   min-height: 100vh;
@@ -46,32 +46,19 @@ button {
   padding: 24px;
 
   background:
-    radial-gradient(
-      circle at 15% 15%,
-      #c7eaff 0,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 85%,
-      #dcefff 0,
-      transparent 30%
-    ),
+    radial-gradient(circle at 15% 15%, #c7eaff 0, transparent 30%),
+    radial-gradient(circle at 85% 85%, #dcefff 0, transparent 30%),
     var(--bg);
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
-
-  background: rgba(255,255,255,.96);
-
+  background: rgba(255,255,255,.97);
   border: 1px solid var(--line);
   border-radius: 24px;
-
   padding: 34px;
-
-  box-shadow:
-    0 22px 65px rgba(11,31,58,.13);
+  box-shadow: 0 22px 65px rgba(11,31,58,.13);
 }
 
 .brand {
@@ -119,31 +106,18 @@ button {
 .auth-form input {
   width: 100%;
   padding: 13px;
-
   margin-top: 10px;
-
   border: 1px solid var(--line);
   border-radius: 11px;
-
   outline: none;
-
   background: white;
   color: var(--text);
-
   font-size: 15px;
-}
-
-.auth-form input:focus {
-  border-color: var(--sky);
-
-  box-shadow:
-    0 0 0 3px rgba(98,183,245,.16);
 }
 
 .back-btn {
   background: transparent;
   color: var(--muted);
-
   margin-top: 12px;
   padding: 8px 0;
 }
@@ -151,22 +125,20 @@ button {
 #authMessage {
   min-height: 20px;
   margin-top: 12px;
-
   color: var(--muted);
   font-size: 14px;
 }
 
-/* APP */
+/* ================= APP ================= */
 
 #app {
   display: none;
+  min-height: 100vh;
 }
 
 header {
   height: 64px;
-
-  background: var(--white);
-
+  background: white;
   border-bottom: 1px solid var(--line);
 
   display: flex;
@@ -177,7 +149,7 @@ header {
 
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
 }
 
 .header-logo {
@@ -189,163 +161,394 @@ header {
 .logout {
   background: var(--navy);
   color: white;
-
   border-radius: 10px;
-
   padding: 9px 13px;
-
   font-size: 13px;
   font-weight: 700;
 }
 
 .container {
   max-width: 650px;
-
-  margin: 25px auto;
-
+  margin: 25px auto 90px;
   padding: 0 15px;
 }
 
-/* PROFILE */
+/* ================= PAGES ================= */
 
-#profilePanel,
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+/* ================= FEED ================= */
+
 .create-post,
-.post {
-  background: var(--white);
-
+.post,
+.profile-card,
+.profile-wall {
+  background: white;
   border: 1px solid var(--line);
-
   border-radius: 17px;
-
-  padding: 17px;
 }
-
-#profilePanel {
-  margin-bottom: 20px;
-}
-
-#profileUsername {
-  color: var(--navy);
-
-  font-size: 22px;
-  font-weight: 800;
-
-  margin-bottom: 7px;
-}
-
-#profileBio {
-  color: var(--muted);
-
-  margin-bottom: 12px;
-}
-
-.profile-edit {
-  background: var(--sky-soft);
-  color: var(--navy);
-
-  border-radius: 10px;
-
-  padding: 9px 13px;
-
-  font-weight: 700;
-}
-
-/* CREATE POST */
 
 .create-post {
+  padding: 17px;
   margin-bottom: 20px;
 }
 
 textarea {
   width: 100%;
-
   min-height: 90px;
-
   resize: vertical;
 
   background: #fafdff;
   color: var(--text);
 
   border: 1px solid var(--line);
-
   border-radius: 12px;
 
   padding: 12px;
-
   font-size: 16px;
-
   outline: none;
 }
 
 .publish {
   margin-top: 10px;
-
   background: var(--navy);
   color: white;
-
   border-radius: 10px;
-
   padding: 11px 18px;
-
   font-weight: 700;
 }
 
-/* POSTS */
-
 .post {
   margin-bottom: 15px;
+  padding: 16px;
 }
 
-.user {
-  color: var(--navy);
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mini-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--sky-soft);
+  border: 1px solid var(--line);
+}
+
+.mini-avatar-placeholder {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-weight: 800;
+}
 
-  margin-bottom: 10px;
+.user-name {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+.post-date {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
 }
 
 .post-text {
   font-size: 16px;
-
   line-height: 1.5;
-
-  color: var(--text);
+  white-space: pre-wrap;
 }
 
 .actions {
   margin-top: 15px;
-
   display: flex;
-
   gap: 8px;
 }
 
 .reaction-btn {
   background: white;
-
   border: 1px solid var(--line);
-
   color: var(--muted);
-
   border-radius: 10px;
-
   padding: 8px 12px;
-
   font-weight: 700;
 }
 
 .reaction-btn.active {
   color: var(--red);
-
   border-color: #f1a0aa;
-
   background: #fff5f6;
 }
 
-@media (max-width: 700px) {
+/* ================= PROFILE ================= */
+
+.profile-card {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cover {
+  height: 145px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b1f3a,
+      #23608f,
+      #62b7f5
+    );
+}
+
+.profile-info {
+  padding: 0 20px 20px;
+  position: relative;
+}
+
+.big-avatar {
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  background: var(--sky-soft);
+
+  border: 5px solid white;
+
+  margin-top: -55px;
+
+  display: block;
+}
+
+.avatar-placeholder {
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  background: var(--navy);
+  color: white;
+
+  border: 5px solid white;
+
+  margin-top: -55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 36px;
+  font-weight: 900;
+}
+
+.profile-name {
+  font-size: 25px;
+  font-weight: 900;
+  color: var(--navy);
+  margin-top: 12px;
+}
+
+.profile-username {
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.profile-bio {
+  margin-top: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.profile-button {
+  background: var(--sky-soft);
+  color: var(--navy);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+
+.profile-button.dark {
+  background: var(--navy);
+  color: white;
+}
+
+.profile-wall {
+  padding: 17px;
+}
+
+.wall-title {
+  color: var(--navy);
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 15px;
+}
+
+.wall-empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 25px 10px;
+}
+
+/* ================= NAVIGATION ================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  height: 68px;
+
+  background: rgba(255,255,255,.96);
+
+  border-top: 1px solid var(--line);
+
+  display: flex;
+
+  justify-content: center;
+
+  z-index: 30;
+
+  backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 650px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-button {
+  background: transparent;
+  color: var(--muted);
+
+  min-width: 100px;
+
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nav-icon {
+  font-size: 23px;
+}
+
+.nav-button.active {
+  color: var(--navy);
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(11,31,58,.45);
+
+  z-index: 100;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 22px;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+}
+
+.modal-card h2 {
+  margin-top: 0;
+  color: var(--navy);
+}
+
+.modal-card input,
+.modal-card textarea {
+  margin-top: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 11px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.cancel {
+  background: var(--sky-soft);
+  color: var(--navy);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px) {
 
   .container {
     margin-top: 15px;
+  }
+
+  .cover {
+    height: 125px;
+  }
+
+  .profile-info {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .auth-card {
@@ -358,23 +561,19 @@ textarea {
 
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- ================= AUTH ================= -->
 
 <section id="authScreen">
 
   <div class="auth-card">
 
-    <div class="brand">
-      No Cap
-    </div>
+    <div class="brand">No Cap</div>
 
     <div class="tagline">
       Своя соцсеть. Без лишнего.
     </div>
 
-    <!-- CHOICE -->
-
-    <div id="authChoice" class="auth-choice">
+    <div id="authChoice">
 
       <button
         class="primary"
@@ -392,14 +591,9 @@ textarea {
 
     </div>
 
-
-    <!-- LOGIN -->
-
     <div id="loginForm" class="auth-form">
 
-      <h2>
-        Войти
-      </h2>
+      <h2>Войти</h2>
 
       <input
         id="loginEmail"
@@ -429,14 +623,9 @@ textarea {
 
     </div>
 
-
-    <!-- SIGNUP -->
-
     <div id="signupForm" class="auth-form">
 
-      <h2>
-        Создать аккаунт
-      </h2>
+      <h2>Создать аккаунт</h2>
 
       <input
         id="signupUsername"
@@ -472,7 +661,6 @@ textarea {
 
     </div>
 
-
     <div id="authMessage"></div>
 
   </div>
@@ -480,7 +668,7 @@ textarea {
 </section>
 
 
-<!-- APP -->
+<!-- ================= APP ================= -->
 
 <div id="app">
 
@@ -502,80 +690,239 @@ textarea {
 
   <main class="container">
 
-    <!-- PROFILE -->
+    <!-- ================= FEED ================= -->
 
-    <div id="profilePanel">
+    <section
+      id="feedPage"
+      class="page active"
+    >
 
-      <h2 style="margin-top:0;">
-        Мой профиль
-      </h2>
+      <div class="create-post">
 
-      <div id="profileUsername"></div>
+        <textarea
+          id="postInput"
+          placeholder="Что у тебя нового?"
+        ></textarea>
 
-      <div id="profileBio">
-        Описание профиля пока не добавлено.
+        <button
+          class="publish"
+          onclick="createPost()"
+        >
+          Опубликовать
+        </button>
+
       </div>
 
-      <button
-        class="profile-edit"
-        onclick="editProfile()"
-      >
-        Редактировать профиль
-      </button>
+      <div id="feed"></div>
 
-    </div>
+    </section>
 
 
-    <!-- CREATE POST -->
+    <!-- ================= PROFILE ================= -->
 
-    <div class="create-post">
+    <section
+      id="profilePage"
+      class="page"
+    >
 
-      <textarea
-        id="postInput"
-        placeholder="Что у тебя нового?"
-      ></textarea>
+      <div class="profile-card">
 
-      <button
-        class="publish"
-        onclick="createPost()"
-      >
-        Опубликовать
-      </button>
+        <div class="cover"></div>
 
-    </div>
+        <div class="profile-info">
+
+          <div id="profileAvatarContainer"></div>
+
+          <div
+            id="profileName"
+            class="profile-name"
+          >
+          </div>
+
+          <div
+            id="profileUsername"
+            class="profile-username"
+          >
+          </div>
+
+          <div
+            id="profileBio"
+            class="profile-bio"
+          >
+          </div>
+
+          <div class="profile-buttons">
+
+            <button
+              class="profile-button dark"
+              onclick="openProfileEditor()"
+            >
+              Редактировать профиль
+            </button>
+
+            <button
+              class="profile-button"
+              onclick="chooseAvatar()"
+            >
+              📷 Изменить аватар
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
 
 
-    <!-- FEED -->
+      <div class="profile-wall">
 
-    <div id="feed"></div>
+        <div class="wall-title">
+          Моя стена
+        </div>
+
+        <div class="create-post">
+
+          <textarea
+            id="wallInput"
+            placeholder="Что написать на стене?"
+          ></textarea>
+
+          <button
+            class="publish"
+            onclick="createWallPost()"
+          >
+            Опубликовать
+          </button>
+
+        </div>
+
+        <div id="wall"></div>
+
+      </div>
+
+    </section>
 
   </main>
+
+
+  <!-- ================= BOTTOM NAV ================= -->
+
+  <nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+      <button
+        id="feedNav"
+        class="nav-button active"
+        onclick="showPage('feed')"
+      >
+        <span class="nav-icon">🏠</span>
+        Лента
+      </button>
+
+      <button
+        id="profileNav"
+        class="nav-button"
+        onclick="showPage('profile')"
+      >
+        <span class="nav-icon">👤</span>
+        Профиль
+      </button>
+
+    </div>
+
+  </nav>
 
 </div>
 
 
+<!-- ================= PROFILE MODAL ================= -->
+
+<div
+  id="profileModal"
+  class="modal"
+>
+
+  <div class="modal-card">
+
+    <h2>
+      Редактировать профиль
+    </h2>
+
+    <input
+      id="editDisplayName"
+      type="text"
+      placeholder="Имя"
+    >
+
+    <input
+      id="editUsername"
+      type="text"
+      placeholder="Username"
+    >
+
+    <textarea
+      id="editBio"
+      placeholder="Расскажи о себе"
+    ></textarea>
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        onclick="closeProfileEditor()"
+      >
+        Отмена
+      </button>
+
+      <button
+        class="primary"
+        onclick="saveProfile()"
+      >
+        Сохранить
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= HIDDEN FILE INPUT ================= -->
+
+<input
+  id="avatarInput"
+  type="file"
+  accept="image/*"
+  style="display:none"
+  onchange="uploadAvatar()"
+>
+
+
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
   "https://jrzoexmvgyyitojbcxvr.supabase.co";
 
 
 /*
-  ВАЖНО:
-
-  Вставь сюда свой текущий
-  Supabase Publishable Key.
-
-  Не вставляй service_role key.
+  ВСТАВЬ СЮДА СВОЙ ТЕКУЩИЙ PUBLISHABLE KEY
 */
 
 const SUPABASE_KEY =
   "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
 
 
+
 const headers = {
 
-  "apikey": SUPABASE_KEY,
+  "apikey":
+    SUPABASE_KEY,
 
   "Authorization":
     "Bearer " + SUPABASE_KEY,
@@ -594,14 +941,18 @@ function authHeaders() {
 
     "Authorization":
       "Bearer " +
-      localStorage.getItem("access_token")
+      localStorage.getItem(
+        "access_token"
+      )
 
   };
 
 }
 
 
-/* AUTH SCREEN */
+/* =====================================================
+   AUTH
+===================================================== */
 
 function showAuthChoice() {
 
@@ -650,44 +1001,6 @@ function showAuthForm(type) {
 
 }
 
-
-/* SHOW APP */
-
-function showApp() {
-
-  document.getElementById(
-    "authScreen"
-  ).style.display = "none";
-
-  document.getElementById(
-    "app"
-  ).style.display = "block";
-
-  loadPosts();
-
-  loadProfile();
-
-}
-
-
-/* SHOW AUTH */
-
-function showAuth() {
-
-  document.getElementById(
-    "authScreen"
-  ).style.display = "flex";
-
-  document.getElementById(
-    "app"
-  ).style.display = "none";
-
-  showAuthChoice();
-
-}
-
-
-/* SIGN UP */
 
 async function signUp() {
 
@@ -813,8 +1126,6 @@ async function signUp() {
 }
 
 
-/* SIGN IN */
-
 async function signIn() {
 
   const email =
@@ -833,10 +1144,7 @@ async function signIn() {
     );
 
 
-  if (
-    !email ||
-    !password
-  ) {
+  if (!email || !password) {
 
     message.textContent =
       "Введите email и пароль.";
@@ -908,8 +1216,6 @@ async function signIn() {
 }
 
 
-/* LOGOUT */
-
 function signOut() {
 
   localStorage.removeItem(
@@ -925,7 +1231,9 @@ function signOut() {
 }
 
 
-/* CREATE PROFILE */
+/* =====================================================
+   PROFILE
+===================================================== */
 
 async function createProfile(
   userId,
@@ -956,7 +1264,12 @@ async function createProfile(
 
             username: username,
 
-            bio: ""
+            display_name:
+              username,
+
+            bio: "",
+
+            avatar_url: ""
 
           })
 
@@ -967,7 +1280,6 @@ async function createProfile(
   if (!response.ok) {
 
     console.error(
-      "Profile creation:",
       await response.text()
     );
 
@@ -975,8 +1287,6 @@ async function createProfile(
 
 }
 
-
-/* LOAD PROFILE */
 
 async function loadProfile() {
 
@@ -1023,6 +1333,21 @@ async function loadProfile() {
     profiles[0];
 
 
+  window.currentProfile =
+    profile;
+
+
+  const displayName =
+    profile.display_name ||
+    profile.username;
+
+
+  document.getElementById(
+    "profileName"
+  ).textContent =
+    displayName;
+
+
   document.getElementById(
     "profileUsername"
   ).textContent =
@@ -1035,12 +1360,118 @@ async function loadProfile() {
     profile.bio ||
     "Описание профиля пока не добавлено.";
 
+
+  renderProfileAvatar(
+    profile
+  );
+
 }
 
 
-/* EDIT PROFILE */
+function renderProfileAvatar(
+  profile
+) {
 
-async function editProfile() {
+  const container =
+    document.getElementById(
+      "profileAvatarContainer"
+    );
+
+
+  if (!container) return;
+
+
+  if (profile.avatar_url) {
+
+    container.innerHTML = `
+
+      <img
+        class="big-avatar"
+        src="${escapeHtml(
+          profile.avatar_url
+        )}"
+        alt="Аватар"
+      >
+
+    `;
+
+  } else {
+
+    const letter =
+      (
+        profile.display_name ||
+        profile.username ||
+        "N"
+      )
+      .charAt(0)
+      .toUpperCase();
+
+
+    container.innerHTML = `
+
+      <div class="avatar-placeholder">
+        ${escapeHtml(letter)}
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+function openProfileEditor() {
+
+  const profile =
+    window.currentProfile;
+
+
+  if (!profile) return;
+
+
+  document.getElementById(
+    "editDisplayName"
+  ).value =
+    profile.display_name ||
+    profile.username ||
+    "";
+
+
+  document.getElementById(
+    "editUsername"
+  ).value =
+    profile.username ||
+    "";
+
+
+  document.getElementById(
+    "editBio"
+  ).value =
+    profile.bio ||
+    "";
+
+
+  document.getElementById(
+    "profileModal"
+  ).classList.add(
+    "active"
+  );
+
+}
+
+
+function closeProfileEditor() {
+
+  document.getElementById(
+    "profileModal"
+  ).classList.remove(
+    "active"
+  );
+
+}
+
+
+async function saveProfile() {
 
   const userId =
     localStorage.getItem(
@@ -1053,42 +1484,33 @@ async function editProfile() {
     );
 
 
-  if (
-    !userId ||
-    !accessToken
-  ) {
+  const displayName =
+    document.getElementById(
+      "editDisplayName"
+    ).value.trim();
+
+
+  const username =
+    document.getElementById(
+      "editUsername"
+    ).value.trim();
+
+
+  const bio =
+    document.getElementById(
+      "editBio"
+    ).value.trim();
+
+
+  if (!username) {
 
     alert(
-      "Сначала войдите в аккаунт"
+      "Username не может быть пустым."
     );
 
     return;
 
   }
-
-
-  const username =
-    prompt(
-      "Введите новый username:",
-      document
-        .getElementById(
-          "profileUsername"
-        )
-        .textContent
-        .replace("@", "")
-    );
-
-
-  if (!username) return;
-
-
-  const bio =
-    prompt(
-      "Введите описание профиля:",
-      document.getElementById(
-        "profileBio"
-      ).textContent
-    );
 
 
   const response =
@@ -1120,11 +1542,14 @@ async function editProfile() {
         body:
           JSON.stringify({
 
+            display_name:
+              displayName,
+
             username:
-              username.trim(),
+              username,
 
             bio:
-              bio || ""
+              bio
 
           })
 
@@ -1137,8 +1562,6 @@ async function editProfile() {
     const error =
       await response.text();
 
-    console.error(error);
-
     alert(
       "Не удалось сохранить профиль:\n" +
       error
@@ -1149,12 +1572,394 @@ async function editProfile() {
   }
 
 
+  closeProfileEditor();
+
   await loadProfile();
+
+  await loadPosts();
+
+  await loadWall();
 
 }
 
 
-/* LOAD POSTS */
+/* =====================================================
+   AVATAR
+===================================================== */
+
+function chooseAvatar() {
+
+  document.getElementById(
+    "avatarInput"
+  ).click();
+
+}
+
+
+async function uploadAvatar() {
+
+  const input =
+    document.getElementById(
+      "avatarInput"
+    );
+
+
+  const file =
+    input.files[0];
+
+
+  if (!file) return;
+
+
+  if (
+    !file.type.startsWith(
+      "image/"
+    )
+  ) {
+
+    alert(
+      "Можно загружать только изображения."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  if (
+    file.size >
+    5 * 1024 * 1024
+  ) {
+
+    alert(
+      "Максимальный размер аватарки: 5 МБ."
+    );
+
+    input.value = "";
+
+    return;
+
+  }
+
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
+
+  const accessToken =
+    localStorage.getItem(
+      "access_token"
+    );
+
+
+  const extension =
+    file.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const filePath =
+    userId +
+    "/" +
+    Date.now() +
+    "." +
+    extension;
+
+
+  const uploadResponse =
+    await fetch(
+      SUPABASE_URL +
+      "/storage/v1/object/Stenka/" +
+      filePath,
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            accessToken,
+
+          "Content-Type":
+            file.type,
+
+          "x-upsert":
+            "true"
+
+        },
+
+        body: file
+
+      }
+    );
+
+
+  if (!uploadResponse.ok) {
+
+    const error =
+      await uploadResponse.text();
+
+    console.error(error);
+
+    alert(
+      "Не удалось загрузить аватарку:\n" +
+      error
+    );
+
+    return;
+
+  }
+
+
+  const avatarUrl =
+    SUPABASE_URL +
+    "/storage/v1/object/public/Stenka/" +
+    filePath;
+
+
+  const updateResponse =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles?id=eq." +
+      userId,
+      {
+
+        method: "PATCH",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            accessToken,
+
+          "Content-Type":
+            "application/json",
+
+          "Prefer":
+            "return=representation"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            avatar_url:
+              avatarUrl
+
+          })
+
+      }
+    );
+
+
+  if (!updateResponse.ok) {
+
+    alert(
+      "Фото загрузилось, но профиль не обновился."
+    );
+
+    return;
+
+  }
+
+
+  input.value = "";
+
+  await loadProfile();
+
+  await loadPosts();
+
+  await loadWall();
+
+}
+
+
+/* =====================================================
+   PAGES
+===================================================== */
+
+function showPage(page) {
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
+
+  document
+    .querySelectorAll(".nav-button")
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
+
+  if (page === "feed") {
+
+    document
+      .getElementById(
+        "feedPage"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "feedNav"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    loadPosts();
+
+  }
+
+
+  if (page === "profile") {
+
+    document
+      .getElementById(
+        "profilePage"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "profileNav"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    loadProfile();
+
+    loadWall();
+
+  }
+
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+function showApp() {
+
+  document.getElementById(
+    "authScreen"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "app"
+  ).style.display =
+    "block";
+
+
+  loadProfile();
+
+  loadPosts();
+
+  loadWall();
+
+}
+
+
+function showAuth() {
+
+  document.getElementById(
+    "authScreen"
+  ).style.display =
+    "flex";
+
+
+  document.getElementById(
+    "app"
+  ).style.display =
+    "none";
+
+
+  showAuthChoice();
+
+}
+
+
+/* =====================================================
+   PROFILES FOR POSTS
+===================================================== */
+
+async function loadProfilesMap() {
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles?select=id,username,display_name,avatar_url",
+      {
+        headers
+      }
+    );
+
+
+  if (!response.ok) {
+
+    return {};
+
+  }
+
+
+  const profiles =
+    await response.json();
+
+
+  const map = {};
+
+
+  profiles.forEach(
+    profile => {
+
+      map[profile.id] =
+        profile;
+
+    }
+  );
+
+
+  return map;
+
+}
+
+
+/* =====================================================
+   FEED
+===================================================== */
 
 async function loadPosts() {
 
@@ -1183,6 +1988,10 @@ async function loadPosts() {
     await response.json();
 
 
+  const profiles =
+    await loadProfilesMap();
+
+
   const feed =
     document.getElementById(
       "feed"
@@ -1196,97 +2005,47 @@ async function loadPosts() {
 
 
   posts.forEach(
-    renderPost
+    post =>
+      renderPost(
+        post,
+        feed,
+        profiles
+      )
   );
 
 }
 
 
-/* CREATE POST */
-
-async function createPost() {
-
-  const input =
-    document.getElementById(
-      "postInput"
-    );
-
-  const text =
-    input.value.trim();
-
-
-  if (!text) return;
-
-
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts",
-      {
-
-        method: "POST",
-
-        headers: {
-
-          ...headers,
-
-          "Prefer":
-            "return=representation"
-
-        },
-
-        body:
-          JSON.stringify({
-
-            username: "you",
-
-            content: text
-
-          })
-
-        }
-    );
-
-
-  if (!response.ok) {
-
-    console.error(
-      await response.text()
-    );
-
-    alert(
-      "Не удалось опубликовать пост"
-    );
-
-    return;
-
-  }
-
-
-  input.value = "";
-
-  loadPosts();
-
-}
-
-
-/* RENDER POST */
-
-function renderPost(post) {
-
-  const feed =
-    document.getElementById(
-      "feed"
-    );
-
-
-  if (!feed) return;
-
+function renderPost(
+  post,
+  container,
+  profiles
+) {
 
   const reaction =
     localStorage.getItem(
-      "reaction_" + post.id
+      "reaction_" +
+      post.id
     );
+
+
+  const profile =
+    profiles[post.user_id];
+
+
+  const username =
+    profile?.username ||
+    post.username ||
+    "user";
+
+
+  const displayName =
+    profile?.display_name ||
+    username;
+
+
+  const avatar =
+    profile?.avatar_url;
 
 
   const div =
@@ -1299,14 +2058,58 @@ function renderPost(post) {
     "post";
 
 
+  const avatarHTML =
+    avatar
+
+      ? `
+        <img
+          class="mini-avatar"
+          src="${escapeHtml(
+            avatar
+          )}"
+          alt=""
+        >
+      `
+
+      : `
+        <div class="mini-avatar-placeholder">
+          ${escapeHtml(
+            displayName
+              .charAt(0)
+              .toUpperCase()
+          )}
+        </div>
+      `;
+
+
   div.innerHTML = `
 
-    <div class="user">
-      @${escapeHtml(post.username)}
+    <div class="post-user">
+
+      ${avatarHTML}
+
+      <div>
+
+        <div class="user-name">
+          ${escapeHtml(
+            displayName
+          )}
+        </div>
+
+        <div class="post-date">
+          @${escapeHtml(
+            username
+          )}
+        </div>
+
+      </div>
+
     </div>
 
     <div class="post-text">
-      ${escapeHtml(post.content)}
+      ${escapeHtml(
+        post.content
+      )}
     </div>
 
     <div class="actions">
@@ -1324,7 +2127,6 @@ function renderPost(post) {
       >
         👍 ${post.likes || 0}
       </button>
-
 
       <button
         class="reaction-btn ${
@@ -1345,14 +2147,232 @@ function renderPost(post) {
   `;
 
 
-  feed.appendChild(
+  container.appendChild(
     div
   );
 
 }
 
 
-/* REACTIONS */
+/* =====================================================
+   CREATE POST
+===================================================== */
+
+async function createPost() {
+
+  const input =
+    document.getElementById(
+      "postInput"
+    );
+
+
+  const text =
+    input.value.trim();
+
+
+  if (!text) return;
+
+
+  await createPostInDatabase(
+    text
+  );
+
+
+  input.value = "";
+
+
+  await loadPosts();
+
+}
+
+
+async function createWallPost() {
+
+  const input =
+    document.getElementById(
+      "wallInput"
+    );
+
+
+  const text =
+    input.value.trim();
+
+
+  if (!text) return;
+
+
+  await createPostInDatabase(
+    text
+  );
+
+
+  input.value = "";
+
+
+  await loadWall();
+
+}
+
+
+async function createPostInDatabase(
+  text
+) {
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
+
+  const profile =
+    window.currentProfile;
+
+
+  const username =
+    profile?.username ||
+    "you";
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          ...authHeaders(),
+
+          "Prefer":
+            "return=representation"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            user_id:
+              userId,
+
+            username:
+              username,
+
+            content:
+              text
+
+          })
+
+      }
+    );
+
+
+  if (!response.ok) {
+
+    const error =
+      await response.text();
+
+    console.error(error);
+
+    alert(
+      "Не удалось опубликовать пост:\n" +
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   WALL
+===================================================== */
+
+async function loadWall() {
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
+
+  if (!userId) return;
+
+
+  const wall =
+    document.getElementById(
+      "wall"
+    );
+
+
+  if (!wall) return;
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts?user_id=eq." +
+      userId +
+      "&select=*&order=created_at.desc",
+      {
+        headers
+      }
+    );
+
+
+  if (!response.ok) {
+
+    console.error(
+      await response.text()
+    );
+
+    return;
+
+  }
+
+
+  const posts =
+    await response.json();
+
+
+  const profiles =
+    await loadProfilesMap();
+
+
+  wall.innerHTML = "";
+
+
+  if (!posts.length) {
+
+    wall.innerHTML = `
+
+      <div class="wall-empty">
+        На стене пока ничего нет.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  posts.forEach(
+    post =>
+      renderPost(
+        post,
+        wall,
+        profiles
+      )
+  );
+
+}
+
+
+/* =====================================================
+   REACTIONS
+===================================================== */
 
 async function reactToPost(
   postId,
@@ -1361,7 +2381,8 @@ async function reactToPost(
 
   const oldReaction =
     localStorage.getItem(
-      "reaction_" + postId
+      "reaction_" +
+      postId
     );
 
 
@@ -1369,7 +2390,8 @@ async function reactToPost(
 
   let dislikeChange = 0;
 
-  let newReaction = type;
+  let newReaction =
+    type;
 
 
   if (
@@ -1379,7 +2401,9 @@ async function reactToPost(
     newReaction = null;
 
 
-    if (type === "like") {
+    if (
+      type === "like"
+    ) {
 
       likeChange = -1;
 
@@ -1409,7 +2433,9 @@ async function reactToPost(
     }
 
 
-    if (type === "like") {
+    if (
+      type === "like"
+    ) {
 
       likeChange += 1;
 
@@ -1483,7 +2509,7 @@ async function reactToPost(
 
         headers: {
 
-          ...headers,
+          ...authHeaders(),
 
           "Prefer":
             "return=representation"
@@ -1523,14 +2549,16 @@ async function reactToPost(
   if (newReaction) {
 
     localStorage.setItem(
-      "reaction_" + postId,
+      "reaction_" +
+      postId,
       newReaction
     );
 
   } else {
 
     localStorage.removeItem(
-      "reaction_" + postId
+      "reaction_" +
+      postId
     );
 
   }
@@ -1538,10 +2566,14 @@ async function reactToPost(
 
   loadPosts();
 
+  loadWall();
+
 }
 
 
-/* SECURITY */
+/* =====================================================
+   SECURITY
+===================================================== */
 
 function escapeHtml(text) {
 
@@ -1550,15 +2582,19 @@ function escapeHtml(text) {
       "div"
     );
 
+
   div.textContent =
     text;
+
 
   return div.innerHTML;
 
 }
 
 
-/* START */
+/* =====================================================
+   START
+===================================================== */
 
 function startApp() {
 
