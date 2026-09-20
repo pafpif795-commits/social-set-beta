@@ -435,6 +435,18 @@ textarea{
   padding:8px 12px;
   font-weight:700;
 }
+.reaction-icon{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  vertical-align:middle;
+}
+
+.reaction-btn.active .reaction-icon{
+  filter:brightness(0) saturate(100%)
+  invert(24%) sepia(96%) saturate(3300%)
+  hue-rotate(350deg) brightness(100%) contrast(105%);
+}
 
 .reaction-btn.active{
   color:var(--red);
@@ -3260,17 +3272,17 @@ function renderPost(post,container,profiles,comments=[]){
 
   const like=document.createElement("button");
   like.className="reaction-btn"+(reaction==="like"?" active":"");
-  like.textContent="👍 "+Number(post.likes||0);
+  like.innerHTML='<img src="like.png" class="reaction-icon"> '+Number(post.likes||0);
   like.onclick=()=>reactToPost(post.id,"like",post.user_id);
 
   const dislike=document.createElement("button");
   dislike.className="reaction-btn"+(reaction==="dislike"?" active":"");
-  dislike.textContent="👎 "+Number(post.dislikes||0);
+  dislike.innerHTML='<img src="dislike.png" class="reaction-icon"> '+Number(post.dislikes||0);
   dislike.onclick=()=>reactToPost(post.id,"dislike",post.user_id);
 
   const commentButton=document.createElement("button");
   commentButton.className="comment-toggle";
-  commentButton.textContent="💬 Комментарии ("+comments.length+")";
+  commentButton.innerHTML='<img src="comment.png" class="reaction-icon"> Комментарии ('+comments.length+')';
 
   actions.appendChild(like);
   actions.appendChild(dislike);
