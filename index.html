@@ -374,8 +374,12 @@ async function reactToPost(postId, type, button) {
     {
       method: "PATCH",
       headers: {
-        ...headers,
-        "Prefer": "return=minimal"
+  ...headers,
+  "Authorization": "Bearer " + localStorage.getItem("access_token"),
+  "Prefer": "return=representation"
+},
+     
+      
       },
       body: JSON.stringify({
         likes: newLikes,
