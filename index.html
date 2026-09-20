@@ -20,8 +20,14 @@
   --red: #ef4056;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
   font-family: Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
@@ -33,11 +39,17 @@ button {
   font: inherit;
 }
 
+button:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
 /* ================= AUTH ================= */
 
 #authScreen {
   position: relative;
   overflow: hidden;
+
   min-height: 100vh;
   min-height: 100dvh;
 
@@ -46,6 +58,7 @@ button {
   justify-content: center;
 
   padding: 24px;
+
   background: #000;
 }
 
@@ -60,14 +73,18 @@ button {
   object-position: center;
 
   z-index: 0;
+
   pointer-events: none;
 }
 
 .auth-overlay {
   position: absolute;
   inset: 0;
+
   background: rgba(0, 0, 0, .18);
+
   z-index: 1;
+
   pointer-events: none;
 }
 
@@ -83,9 +100,11 @@ button {
   background: rgba(255,255,255,.94);
 
   border: 1px solid rgba(255,255,255,.7);
+
   border-radius: 24px;
 
-  box-shadow: 0 22px 65px rgba(0,0,0,.35);
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.35);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -94,23 +113,32 @@ button {
 .brand {
   font-size: 44px;
   font-weight: 900;
+
   letter-spacing: -2.5px;
+
   color: var(--navy);
+
   text-align: center;
 }
 
 .tagline {
   text-align: center;
+
   color: var(--muted);
+
   margin: 8px 0 28px;
 }
 
 .auth-choice button,
 .auth-form button {
   width: 100%;
+
   padding: 13px 16px;
+
   border-radius: 12px;
+
   margin-top: 10px;
+
   font-weight: 700;
 }
 
@@ -135,10 +163,13 @@ button {
 
 .auth-form input {
   width: 100%;
+
   padding: 13px;
+
   margin-top: 10px;
 
   border: 1px solid var(--line);
+
   border-radius: 11px;
 
   outline: none;
@@ -154,13 +185,17 @@ button {
   color: var(--muted);
 
   margin-top: 12px;
+
   padding: 8px 0;
 }
 
 #authMessage {
   min-height: 20px;
+
   margin-top: 12px;
+
   color: var(--muted);
+
   font-size: 14px;
 }
 
@@ -175,6 +210,7 @@ header {
   height: 64px;
 
   background: white;
+
   border-bottom: 1px solid var(--line);
 
   display: flex;
@@ -185,17 +221,20 @@ header {
 
   position: sticky;
   top: 0;
+
   z-index: 20;
 }
 
 .header-logo {
   font-size: 23px;
   font-weight: 900;
+
   color: var(--navy);
 }
 
 .logout {
   background: var(--navy);
+
   color: white;
 
   border-radius: 10px;
@@ -203,6 +242,7 @@ header {
   padding: 9px 13px;
 
   font-size: 13px;
+
   font-weight: 700;
 }
 
@@ -231,30 +271,37 @@ header {
 .profile-card,
 .profile-wall {
   background: white;
+
   border: 1px solid var(--line);
+
   border-radius: 17px;
 }
 
 .create-post {
   padding: 17px;
+
   margin-bottom: 20px;
 }
 
 textarea {
   width: 100%;
+
   min-height: 90px;
 
   resize: vertical;
 
   background: #fafdff;
+
   color: var(--text);
 
   border: 1px solid var(--line);
+
   border-radius: 12px;
 
   padding: 12px;
 
   font-size: 16px;
+
   outline: none;
 }
 
@@ -262,6 +309,7 @@ textarea {
   margin-top: 10px;
 
   background: var(--navy);
+
   color: white;
 
   border-radius: 10px;
@@ -273,12 +321,15 @@ textarea {
 
 .post {
   margin-bottom: 15px;
+
   padding: 16px;
 }
 
 .post-user {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
 
   margin-bottom: 12px;
@@ -304,9 +355,11 @@ textarea {
   border-radius: 50%;
 
   background: var(--navy);
+
   color: white;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -315,17 +368,21 @@ textarea {
 
 .user-name {
   color: var(--navy);
+
   font-weight: 800;
 }
 
 .post-date {
   color: var(--muted);
+
   font-size: 12px;
+
   margin-top: 3px;
 }
 
 .post-text {
   font-size: 16px;
+
   line-height: 1.5;
 
   white-space: pre-wrap;
@@ -335,6 +392,7 @@ textarea {
   margin-top: 15px;
 
   display: flex;
+
   gap: 8px;
 }
 
@@ -364,6 +422,7 @@ textarea {
 
 .profile-card {
   overflow: hidden;
+
   margin-bottom: 20px;
 }
 
@@ -381,6 +440,7 @@ textarea {
 
 .profile-info {
   padding: 0 20px 20px;
+
   position: relative;
 }
 
@@ -408,6 +468,7 @@ textarea {
   border-radius: 50%;
 
   background: var(--navy);
+
   color: white;
 
   border: 5px solid white;
@@ -415,15 +476,18 @@ textarea {
   margin-top: -55px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   font-size: 36px;
+
   font-weight: 900;
 }
 
 .profile-name {
   font-size: 25px;
+
   font-weight: 900;
 
   color: var(--navy);
@@ -433,6 +497,7 @@ textarea {
 
 .profile-username {
   color: var(--muted);
+
   margin-top: 3px;
 }
 
@@ -468,6 +533,7 @@ textarea {
 
 .profile-button.dark {
   background: var(--navy);
+
   color: white;
 }
 
@@ -492,26 +558,34 @@ textarea {
 
   padding: 25px 10px;
 }
+
 /* ================= SEARCH ================= */
 
 .search-box {
   background: white;
+
   border: 1px solid var(--line);
+
   border-radius: 17px;
+
   padding: 15px;
+
   margin-bottom: 15px;
 }
 
 .search-input {
   width: 100%;
+
   padding: 13px 15px;
 
   border: 1px solid var(--line);
+
   border-radius: 12px;
 
   outline: none;
 
   background: #fafdff;
+
   color: var(--text);
 
   font-size: 16px;
@@ -519,19 +593,25 @@ textarea {
 
 .search-results {
   display: flex;
+
   flex-direction: column;
+
   gap: 10px;
 }
 
 .search-user {
   background: white;
+
   border: 1px solid var(--line);
+
   border-radius: 15px;
 
   padding: 12px;
 
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 
   cursor: pointer;
@@ -563,13 +643,16 @@ textarea {
   border-radius: 50%;
 
   background: var(--navy);
+
   color: white;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   font-weight: 900;
+
   font-size: 18px;
 
   flex-shrink: 0;
@@ -577,26 +660,33 @@ textarea {
 
 .search-user-name {
   font-weight: 800;
+
   color: var(--navy);
 }
 
 .search-user-username {
   color: var(--muted);
+
   font-size: 13px;
+
   margin-top: 3px;
 }
 
 .search-empty {
   text-align: center;
+
   color: var(--muted);
+
   padding: 30px 10px;
 }
+
 /* ================= NAV ================= */
 
 .bottom-nav {
   position: fixed;
 
   bottom: 0;
+
   left: 0;
   right: 0;
 
@@ -613,10 +703,13 @@ textarea {
   z-index: 30;
 
   backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-inner {
   width: 100%;
+
   max-width: 650px;
 
   display: flex;
@@ -631,7 +724,7 @@ textarea {
 
   color: var(--muted);
 
-  min-width: 100px;
+  min-width: 90px;
 
   padding: 8px;
 
@@ -705,6 +798,20 @@ textarea {
   margin-top: 10px;
 }
 
+.modal-card input {
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 11px;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
 .modal-actions {
   display: flex;
 
@@ -725,6 +832,7 @@ textarea {
 
 .cancel {
   background: var(--sky-soft);
+
   color: var(--navy);
 }
 
@@ -752,6 +860,10 @@ textarea {
   .brand {
     font-size: 38px;
   }
+
+  .nav-button {
+    min-width: 80px;
+  }
 }
 </style>
 </head>
@@ -770,12 +882,10 @@ textarea {
     playsinline
     preload="auto"
   >
-
     <source
       src="https://jrzoexmvgyyitojbcxvr.supabase.co/storage/v1/object/public/Stenka/auth-bg.mp4/3992627239181363251.mp4"
       type="video/mp4"
     >
-
   </video>
 
   <div class="auth-overlay"></div>
@@ -821,12 +931,14 @@ textarea {
         id="loginEmail"
         type="email"
         placeholder="Email"
+        autocomplete="email"
       >
 
       <input
         id="loginPassword"
         type="password"
         placeholder="Пароль"
+        autocomplete="current-password"
       >
 
       <button
@@ -858,18 +970,21 @@ textarea {
         id="signupUsername"
         type="text"
         placeholder="Username"
+        autocomplete="username"
       >
 
       <input
         id="signupEmail"
         type="email"
         placeholder="Email"
+        autocomplete="email"
       >
 
       <input
         id="signupPassword"
         type="password"
         placeholder="Пароль"
+        autocomplete="new-password"
       >
 
       <button
@@ -915,6 +1030,8 @@ textarea {
 
   <main class="container">
 
+    <!-- ================= FEED ================= -->
+
     <section
       id="feedPage"
       class="page active"
@@ -939,36 +1056,42 @@ textarea {
       <div id="feed"></div>
 
     </section>
-<section
-  id="searchPage"
-  class="page"
->
 
-  <div class="search-box">
+    <!-- ================= SEARCH ================= -->
 
-    <input
-      id="userSearchInput"
-      class="search-input"
-      type="text"
-      placeholder="🔎 Найти пользователя..."
-      oninput="searchUsers()"
-      autocomplete="off"
+    <section
+      id="searchPage"
+      class="page"
     >
 
-  </div>
+      <div class="search-box">
 
-  <div
-    id="searchResults"
-    class="search-results"
-  >
+        <input
+          id="userSearchInput"
+          class="search-input"
+          type="text"
+          placeholder="🔎 Найти пользователя..."
+          oninput="searchUsers()"
+          autocomplete="off"
+        >
 
-    <div class="search-empty">
-      Начни вводить username или имя
-    </div>
+      </div>
 
-  </div>
+      <div
+        id="searchResults"
+        class="search-results"
+      >
 
-</section>
+        <div class="search-empty">
+          Начни вводить username или имя
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= PROFILE ================= -->
+
     <section
       id="profilePage"
       class="page"
@@ -1049,6 +1172,8 @@ textarea {
 
   </main>
 
+  <!-- ================= BOTTOM NAV ================= -->
+
   <nav class="bottom-nav">
 
     <div class="nav-inner">
@@ -1063,20 +1188,26 @@ textarea {
           🏠
         </span>
 
-        Лента
-<button
-  id="searchNav"
-  class="nav-button"
-  onclick="showPage('search')"
->
+        <span>
+          Лента
+        </span>
 
-  <span class="nav-icon">
-    🔎
-  </span>
+      </button>
 
-  Поиск
+      <button
+        id="searchNav"
+        class="nav-button"
+        onclick="showPage('search')"
+      >
 
-</button>
+        <span class="nav-icon">
+          🔎
+        </span>
+
+        <span>
+          Поиск
+        </span>
+
       </button>
 
       <button
@@ -1089,7 +1220,9 @@ textarea {
           👤
         </span>
 
-        Профиль
+        <span>
+          Профиль
+        </span>
 
       </button>
 
@@ -1178,20 +1311,22 @@ const SUPABASE_KEY =
 
 
 const headers = {
-
-  "apikey":
-    SUPABASE_KEY,
+  "apikey": SUPABASE_KEY,
 
   "Authorization":
     "Bearer " + SUPABASE_KEY,
 
   "Content-Type":
     "application/json"
-
 };
 
 
 function authHeaders() {
+
+  const token =
+    localStorage.getItem(
+      "access_token"
+    );
 
   return {
 
@@ -1199,9 +1334,7 @@ function authHeaders() {
 
     "Authorization":
       "Bearer " +
-      localStorage.getItem(
-        "access_token"
-      )
+      (token || SUPABASE_KEY)
 
   };
 
@@ -1209,26 +1342,42 @@ function authHeaders() {
 
 
 /* =====================================================
-   AUTH
+   AUTH UI
 ===================================================== */
 
 function showAuthChoice() {
 
-  document.getElementById(
-    "authChoice"
-  ).style.display = "block";
+  const choice =
+    document.getElementById(
+      "authChoice"
+    );
 
-  document.getElementById(
-    "loginForm"
-  ).style.display = "none";
+  const login =
+    document.getElementById(
+      "loginForm"
+    );
 
-  document.getElementById(
-    "signupForm"
-  ).style.display = "none";
+  const signup =
+    document.getElementById(
+      "signupForm"
+    );
 
-  document.getElementById(
-    "authMessage"
-  ).textContent = "";
+  const message =
+    document.getElementById(
+      "authMessage"
+    );
+
+  choice.style.display =
+    "block";
+
+  login.style.display =
+    "none";
+
+  signup.style.display =
+    "none";
+
+  message.textContent =
+    "";
 
 }
 
@@ -1237,7 +1386,8 @@ function showAuthForm(type) {
 
   document.getElementById(
     "authChoice"
-  ).style.display = "none";
+  ).style.display =
+    "none";
 
   document.getElementById(
     "loginForm"
@@ -1253,8 +1403,17 @@ function showAuthForm(type) {
       ? "block"
       : "none";
 
+  document.getElementById(
+    "authMessage"
+  ).textContent =
+    "";
+
 }
 
+
+/* =====================================================
+   SIGN UP
+===================================================== */
 
 async function signUp() {
 
@@ -1293,92 +1452,135 @@ async function signUp() {
   }
 
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/auth/v1/signup",
-      {
+  if (username.length < 3) {
 
-        method: "POST",
+    message.textContent =
+      "Username должен быть минимум 3 символа.";
 
-        headers: {
+    return;
 
-          "apikey":
-            SUPABASE_KEY,
+  }
 
-          "Content-Type":
-            "application/json"
 
-        },
+  if (password.length < 6) {
 
-        body:
-          JSON.stringify({
+    message.textContent =
+      "Пароль должен быть минимум 6 символов.";
 
-            email,
-            password
+    return;
 
-          })
+  }
 
-      }
+
+  message.textContent =
+    "Создаём аккаунт...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/signup",
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              email,
+              password
+
+            })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      message.textContent =
+        data.msg ||
+        data.message ||
+        data.error_description ||
+        "Ошибка регистрации.";
+
+      return;
+
+    }
+
+
+    if (
+      !data.user ||
+      !data.access_token
+    ) {
+
+      message.textContent =
+        "Аккаунт создан. Теперь войди.";
+
+      showAuthForm(
+        "login"
+      );
+
+      document.getElementById(
+        "loginEmail"
+      ).value =
+        email;
+
+      return;
+
+    }
+
+
+    localStorage.setItem(
+      "access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "user_id",
+      data.user.id
     );
 
 
-  const data =
-    await response.json();
+    await createProfile(
+      data.user.id,
+      username
+    );
 
 
-  if (!response.ok) {
+    showApp();
 
-    message.textContent =
-      data.msg ||
-      data.message ||
-      "Ошибка регистрации";
+  } catch (error) {
 
-    return;
-
-  }
-
-
-  if (
-    !data.user ||
-    !data.access_token
-  ) {
+    console.error(error);
 
     message.textContent =
-      "Аккаунт создан. Теперь войди.";
-
-    showAuthForm("login");
-
-    document.getElementById(
-      "loginEmail"
-    ).value = email;
-
-    return;
+      "Ошибка соединения с сервером.";
 
   }
-
-
-  localStorage.setItem(
-    "access_token",
-    data.access_token
-  );
-
-  localStorage.setItem(
-    "user_id",
-    data.user.id
-  );
-
-
-  await createProfile(
-    data.user.id,
-    username
-  );
-
-
-  showApp();
 
 }
 
+
+/* =====================================================
+   SIGN IN
+===================================================== */
 
 async function signIn() {
 
@@ -1411,67 +1613,87 @@ async function signIn() {
   }
 
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/auth/v1/token?grant_type=password",
-      {
+  message.textContent =
+    "Входим...";
 
-        method: "POST",
 
-        headers: {
+  try {
 
-          "apikey":
-            SUPABASE_KEY,
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
+        {
 
-          "Content-Type":
-            "application/json"
+          method: "POST",
 
-        },
+          headers: {
 
-        body:
-          JSON.stringify({
+            "apikey":
+              SUPABASE_KEY,
 
-            email,
-            password
+            "Content-Type":
+              "application/json"
 
-          })
+          },
 
-      }
+          body:
+            JSON.stringify({
+
+              email,
+              password
+
+            })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      message.textContent =
+        data.msg ||
+        data.message ||
+        data.error_description ||
+        "Ошибка входа.";
+
+      return;
+
+    }
+
+
+    localStorage.setItem(
+      "access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "user_id",
+      data.user.id
     );
 
 
-  const data =
-    await response.json();
+    showApp();
 
+  } catch (error) {
 
-  if (!response.ok) {
+    console.error(error);
 
     message.textContent =
-      data.msg ||
-      data.message ||
-      "Ошибка входа";
-
-    return;
+      "Ошибка соединения с сервером.";
 
   }
 
-
-  localStorage.setItem(
-    "access_token",
-    data.access_token
-  );
-
-  localStorage.setItem(
-    "user_id",
-    data.user.id
-  );
-
-
-  showApp();
-
 }
 
+
+/* =====================================================
+   SIGN OUT
+===================================================== */
 
 function signOut() {
 
@@ -1482,6 +1704,9 @@ function signOut() {
   localStorage.removeItem(
     "user_id"
   );
+
+  window.currentProfile =
+    null;
 
   showAuth();
 
@@ -1497,47 +1722,62 @@ async function createProfile(
   username
 ) {
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/profiles",
-      {
+  try {
 
-        method: "POST",
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles",
+        {
 
-        headers: {
+          method: "POST",
 
-          ...authHeaders(),
+          headers: {
 
-          "Prefer":
-            "return=minimal"
+            ...authHeaders(),
 
-        },
+            "Prefer":
+              "return=minimal"
 
-        body:
-          JSON.stringify({
+          },
 
-            id: userId,
+          body:
+            JSON.stringify({
 
-            username,
+              id: userId,
 
-            display_name:
               username,
 
-            bio: "",
+              display_name:
+                username,
 
-            avatar_url: ""
+              bio: "",
 
-          })
+              avatar_url: ""
 
-      }
-    );
+            })
+
+        }
+      );
 
 
-  if (!response.ok) {
+    if (!response.ok) {
+
+      const error =
+        await response.text();
+
+      console.error(
+        "Profile creation error:",
+        error
+      );
+
+    }
+
+  } catch (error) {
 
     console.error(
-      await response.text()
+      "Profile creation error:",
+      error
     );
 
   }
@@ -1556,70 +1796,112 @@ async function loadProfile() {
   if (!userId) return;
 
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/profiles?id=eq." +
-      encodeURIComponent(userId) +
-      "&select=*",
-      {
-        headers
-      }
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles?id=eq." +
+        encodeURIComponent(userId) +
+        "&select=*",
+        {
+          headers
+        }
+      );
+
+
+    if (!response.ok) {
+
+      console.error(
+        await response.text()
+      );
+
+      return;
+
+    }
+
+
+    const profiles =
+      await response.json();
+
+
+    if (!profiles.length) {
+
+      return;
+
+    }
+
+
+    const profile =
+      profiles[0];
+
+
+    window.currentProfile =
+      profile;
+
+
+    const name =
+      document.getElementById(
+        "profileName"
+      );
+
+    const username =
+      document.getElementById(
+        "profileUsername"
+      );
+
+    const bio =
+      document.getElementById(
+        "profileBio"
+      );
+
+
+    if (name) {
+
+      name.textContent =
+        profile.display_name ||
+        profile.username;
+
+    }
+
+
+    if (username) {
+
+      username.textContent =
+        "@" +
+        profile.username;
+
+    }
+
+
+    if (bio) {
+
+      bio.textContent =
+        profile.bio ||
+        "Описание профиля пока не добавлено.";
+
+    }
+
+
+    renderProfileAvatar(
+      profile
     );
 
-
-  if (!response.ok) {
+  } catch (error) {
 
     console.error(
-      await response.text()
+      "loadProfile:",
+      error
     );
-
-    return;
 
   }
 
-
-  const profiles =
-    await response.json();
-
-
-  if (!profiles.length) return;
-
-
-  const profile =
-    profiles[0];
-
-
-  window.currentProfile =
-    profile;
-
-
-  document.getElementById(
-    "profileName"
-  ).textContent =
-    profile.display_name ||
-    profile.username;
-
-
-  document.getElementById(
-    "profileUsername"
-  ).textContent =
-    "@" + profile.username;
-
-
-  document.getElementById(
-    "profileBio"
-  ).textContent =
-    profile.bio ||
-    "Описание профиля пока не добавлено.";
-
-
-  renderProfileAvatar(
-    profile
-  );
-
 }
 
+
+/* =====================================================
+   PROFILE AVATAR
+===================================================== */
 
 function renderProfileAvatar(
   profile
@@ -1650,6 +1932,18 @@ function renderProfileAvatar(
     img.alt =
       "Аватар";
 
+    img.onerror = () => {
+
+      container.innerHTML = "";
+
+      renderProfileAvatar({
+        ...profile,
+        avatar_url: ""
+      });
+
+    };
+
+
     container.replaceChildren(
       img
     );
@@ -1679,13 +1973,25 @@ function renderProfileAvatar(
 }
 
 
+/* =====================================================
+   PROFILE EDITOR
+===================================================== */
+
 function openProfileEditor() {
 
   const profile =
     window.currentProfile;
 
 
-  if (!profile) return;
+  if (!profile) {
+
+    alert(
+      "Профиль ещё загружается."
+    );
+
+    return;
+
+  }
 
 
   document.getElementById(
@@ -1748,12 +2054,10 @@ async function saveProfile() {
       "editDisplayName"
     ).value.trim();
 
-
   const username =
     document.getElementById(
       "editUsername"
     ).value.trim();
-
 
   const bio =
     document.getElementById(
@@ -1772,73 +2076,85 @@ async function saveProfile() {
   }
 
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/profiles?id=eq." +
-      encodeURIComponent(userId),
-      {
+  try {
 
-        method: "PATCH",
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles?id=eq." +
+        encodeURIComponent(userId),
+        {
 
-        headers: {
+          method: "PATCH",
 
-          "apikey":
-            SUPABASE_KEY,
+          headers: {
 
-          "Authorization":
-            "Bearer " +
-            accessToken,
+            "apikey":
+              SUPABASE_KEY,
 
-          "Content-Type":
-            "application/json",
+            "Authorization":
+              "Bearer " +
+              accessToken,
 
-          "Prefer":
-            "return=representation"
+            "Content-Type":
+              "application/json",
 
-        },
+            "Prefer":
+              "return=representation"
 
-        body:
-          JSON.stringify({
+          },
 
-            display_name:
-              displayName,
+          body:
+            JSON.stringify({
 
-            username,
+              display_name:
+                displayName,
 
-            bio
+              username,
 
-          })
+              bio
 
-      }
-    );
+            })
+
+        }
+      );
 
 
-  if (!response.ok) {
+    if (!response.ok) {
+
+      alert(
+        "Не удалось сохранить профиль:\n" +
+        await response.text()
+      );
+
+      return;
+
+    }
+
+
+    closeProfileEditor();
+
+    await loadProfile();
+
+    await loadPosts();
+
+    await loadWall();
+
+  } catch (error) {
+
+    console.error(error);
 
     alert(
-      "Не удалось сохранить профиль:\n" +
-      await response.text()
+      "Ошибка соединения с сервером."
     );
 
-    return;
-
   }
-
-
-  closeProfileEditor();
-
-  await loadProfile();
-
-  await loadPosts();
-
-  await loadWall();
 
 }
 
 
 /* =====================================================
-   AVATAR
+   AVATAR UPLOAD
 ===================================================== */
 
 function chooseAvatar() {
@@ -1908,6 +2224,17 @@ async function uploadAvatar() {
     );
 
 
+  if (!userId || !accessToken) {
+
+    alert(
+      "Нужно войти в аккаунт."
+    );
+
+    return;
+
+  }
+
+
   const extension =
     file.name
       .split(".")
@@ -1923,120 +2250,129 @@ async function uploadAvatar() {
     extension;
 
 
-  const uploadResponse =
-    await fetch(
+  try {
+
+    const uploadResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/storage/v1/object/Stenka/" +
+        filePath,
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              accessToken,
+
+            "Content-Type":
+              file.type,
+
+            "x-upsert":
+              "true"
+
+          },
+
+          body:
+            file
+
+        }
+      );
+
+
+    if (!uploadResponse.ok) {
+
+      alert(
+        "Не удалось загрузить аватарку:\n" +
+        await uploadResponse.text()
+      );
+
+      return;
+
+    }
+
+
+    const avatarUrl =
       SUPABASE_URL +
-      "/storage/v1/object/Stenka/" +
-      filePath,
-      {
-
-        method: "POST",
-
-        headers: {
-
-          "apikey":
-            SUPABASE_KEY,
-
-          "Authorization":
-            "Bearer " +
-            accessToken,
-
-          "Content-Type":
-            file.type,
-
-          "x-upsert":
-            "true"
-
-        },
-
-        body:
-          file
-
-      }
-    );
+      "/storage/v1/object/public/Stenka/" +
+      filePath;
 
 
-  if (!uploadResponse.ok) {
+    const updateResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles?id=eq." +
+        encodeURIComponent(userId),
+        {
+
+          method: "PATCH",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              accessToken,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              avatar_url:
+                avatarUrl
+
+            })
+
+        }
+      );
+
+
+    if (!updateResponse.ok) {
+
+      alert(
+        "Фото загрузилось, но профиль не обновился."
+      );
+
+      return;
+
+    }
+
+
+    input.value = "";
+
+    await loadProfile();
+
+    await loadPosts();
+
+    await loadWall();
+
+  } catch (error) {
+
+    console.error(error);
 
     alert(
-      "Не удалось загрузить аватарку:\n" +
-      await uploadResponse.text()
+      "Ошибка загрузки аватарки."
     );
-
-    return;
 
   }
-
-
-  const avatarUrl =
-    SUPABASE_URL +
-    "/storage/v1/object/public/Stenka/" +
-    filePath;
-
-
-  const updateResponse =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/profiles?id=eq." +
-      encodeURIComponent(userId),
-      {
-
-        method: "PATCH",
-
-        headers: {
-
-          "apikey":
-            SUPABASE_KEY,
-
-          "Authorization":
-            "Bearer " +
-            accessToken,
-
-          "Content-Type":
-            "application/json",
-
-          "Prefer":
-            "return=representation"
-
-        },
-
-        body:
-          JSON.stringify({
-
-            avatar_url:
-              avatarUrl
-
-          })
-
-      }
-    );
-
-
-  if (!updateResponse.ok) {
-
-    alert(
-      "Фото загрузилось, но профиль не обновился."
-    );
-
-    return;
-
-  }
-
-
-  input.value = "";
-
-  await loadProfile();
-
-  await loadPosts();
-
-  await loadWall();
 
 }
 
 
-/* =====================================================
-   PAGES
-===================================================== */
 /* =====================================================
    SEARCH USERS
 ===================================================== */
@@ -2046,12 +2382,15 @@ let searchTimeout = null;
 
 function searchUsers() {
 
-  clearTimeout(searchTimeout);
-
-  searchTimeout = setTimeout(
-    performUserSearch,
-    250
+  clearTimeout(
+    searchTimeout
   );
+
+  searchTimeout =
+    setTimeout(
+      performUserSearch,
+      250
+    );
 
 }
 
@@ -2068,7 +2407,10 @@ async function performUserSearch() {
       "searchResults"
     );
 
-  if (!input || !results) return;
+
+  if (!input || !results) {
+    return;
+  }
 
 
   const query =
@@ -2090,192 +2432,257 @@ async function performUserSearch() {
   }
 
 
-  const encodedQuery =
-    encodeURIComponent(
-      "%" + query + "%"
-    );
+  results.innerHTML = `
+
+    <div class="search-empty">
+      Ищем...
+    </div>
+
+  `;
 
 
-  const response =
-    await fetch(
+  try {
+
+    const pattern =
+      "*" +
+      query.replace(
+        /[,*()]/g,
+        ""
+      ) +
+      "*";
+
+
+    const encodedPattern =
+      encodeURIComponent(
+        pattern
+      );
+
+
+    const url =
       SUPABASE_URL +
       "/rest/v1/profiles" +
-      "?or=(username.ilike." +
-      encodedQuery +
-      ",display_name.ilike." +
-      encodedQuery +
-      ")" +
+      "?or=" +
+      encodeURIComponent(
+        "(username.ilike." +
+        pattern +
+        ",display_name.ilike." +
+        pattern +
+        ")"
+      ) +
       "&select=id,username,display_name,avatar_url" +
-      "&limit=30",
-      {
-        headers
-      }
-    );
+      "&limit=30";
 
 
-  if (!response.ok) {
-
-    results.innerHTML = `
-
-      <div class="search-empty">
-        Не удалось выполнить поиск
-      </div>
-
-    `;
-
-    console.error(
-      await response.text()
-    );
-
-    return;
-
-  }
+    const response =
+      await fetch(
+        url,
+        {
+          headers
+        }
+      );
 
 
-  const profiles =
-    await response.json();
+    if (!response.ok) {
 
+      results.innerHTML = `
 
-  results.innerHTML = "";
-
-
-  if (!profiles.length) {
-
-    results.innerHTML = `
-
-      <div class="search-empty">
-        Пользователей не найдено
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  profiles.forEach(
-    profile => {
-
-      const user =
-        document.createElement(
-          "div"
-        );
-
-      user.className =
-        "search-user";
-
-
-      user.onclick = () => {
-
-        openFoundProfile(
-          profile
-        );
-
-      };
-
-
-      let avatarHTML;
-
-
-      if (profile.avatar_url) {
-
-        avatarHTML = `
-
-          <img
-            class="search-avatar"
-            src="${escapeHtml(profile.avatar_url)}"
-            alt=""
-          >
-
-        `;
-
-      } else {
-
-        const letter =
-          (
-            profile.display_name ||
-            profile.username ||
-            "N"
-          )
-          .charAt(0)
-          .toUpperCase();
-
-
-        avatarHTML = `
-
-          <div class="search-avatar-placeholder">
-            ${escapeHtml(letter)}
-          </div>
-
-        `;
-
-      }
-
-
-      user.innerHTML = `
-
-        ${avatarHTML}
-
-        <div>
-
-          <div class="search-user-name">
-            ${escapeHtml(
-              profile.display_name ||
-              profile.username
-            )}
-          </div>
-
-          <div class="search-user-username">
-            @${escapeHtml(
-              profile.username
-            )}
-          </div>
-
+        <div class="search-empty">
+          Не удалось выполнить поиск
         </div>
 
       `;
 
-
-      results.appendChild(
-        user
+      console.error(
+        await response.text()
       );
 
+      return;
+
     }
-  );
+
+
+    const profiles =
+      await response.json();
+
+
+    results.innerHTML = "";
+
+
+    if (!profiles.length) {
+
+      results.innerHTML = `
+
+        <div class="search-empty">
+          Пользователей не найдено
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    profiles.forEach(
+      profile => {
+
+        const user =
+          document.createElement(
+            "div"
+          );
+
+
+        user.className =
+          "search-user";
+
+
+        user.onclick = () => {
+
+          openFoundProfile(
+            profile
+          );
+
+        };
+
+
+        let avatarHTML;
+
+
+        if (profile.avatar_url) {
+
+          avatarHTML = `
+
+            <img
+              class="search-avatar"
+              src="${escapeHtml(
+                profile.avatar_url
+              )}"
+              alt=""
+            >
+
+          `;
+
+        } else {
+
+          const letter =
+            (
+              profile.display_name ||
+              profile.username ||
+              "N"
+            )
+            .charAt(0)
+            .toUpperCase();
+
+
+          avatarHTML = `
+
+            <div class="search-avatar-placeholder">
+              ${escapeHtml(letter)}
+            </div>
+
+          `;
+
+        }
+
+
+        user.innerHTML = `
+
+          ${avatarHTML}
+
+          <div>
+
+            <div class="search-user-name">
+              ${escapeHtml(
+                profile.display_name ||
+                profile.username
+              )}
+            </div>
+
+            <div class="search-user-username">
+              @${escapeHtml(
+                profile.username
+              )}
+            </div>
+
+          </div>
+
+        `;
+
+
+        results.appendChild(
+          user
+        );
+
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "Search error:",
+      error
+    );
+
+    results.innerHTML = `
+
+      <div class="search-empty">
+        Ошибка поиска
+      </div>
+
+    `;
+
+  }
 
 }
 
 
-function openFoundProfile(profile) {
+function openFoundProfile(
+  profile
+) {
 
   alert(
     "Профиль @" +
     profile.username +
     " найден.\n\n" +
-    "Следующим шагом сделаем открытие чужого профиля и кнопку «Подписаться»."
+    "Следующим шагом подключим открытие чужого профиля и подписки."
   );
 
 }
+
+
+/* =====================================================
+   PAGES
+===================================================== */
+
 function showPage(page) {
 
   document
-    .querySelectorAll(".page")
+    .querySelectorAll(
+      ".page"
+    )
     .forEach(
-      element =>
+      element => {
+
         element.classList.remove(
           "active"
-        )
+        );
+
+      }
     );
 
 
   document
-    .querySelectorAll(".nav-button")
+    .querySelectorAll(
+      ".nav-button"
+    )
     .forEach(
-      element =>
+      element => {
+
         element.classList.remove(
           "active"
-        )
+        );
+
+      }
     );
 
 
@@ -2301,6 +2708,8 @@ function showPage(page) {
 
     loadPosts();
 
+    return;
+
   }
 
 
@@ -2324,11 +2733,23 @@ function showPage(page) {
       );
 
 
-    document
-      .getElementById(
-        "userSearchInput"
-      )
-      .focus();
+    setTimeout(
+      () => {
+
+        const input =
+          document.getElementById(
+            "userSearchInput"
+          );
+
+        if (input) {
+          input.focus();
+        }
+
+      },
+      50
+    );
+
+    return;
 
   }
 
@@ -2357,34 +2778,7 @@ function showPage(page) {
 
     loadWall();
 
-  }
-
-}
-
-
-  if (page === "profile") {
-
-    document
-      .getElementById(
-        "profilePage"
-      )
-      .classList.add(
-        "active"
-      );
-
-
-    document
-      .getElementById(
-        "profileNav"
-      )
-      .classList.add(
-        "active"
-      );
-
-
-    loadProfile();
-
-    loadWall();
+    return;
 
   }
 
@@ -2407,6 +2801,11 @@ function showApp() {
     "app"
   ).style.display =
     "block";
+
+
+  showPage(
+    "feed"
+  );
 
 
   loadProfile();
@@ -2438,76 +2837,72 @@ function showAuth() {
 
 
 /* =====================================================
-   POSTS
+   PROFILES MAP
 ===================================================== */
 
 async function loadProfilesMap() {
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/profiles?select=id,username,display_name,avatar_url",
-      {
-        headers
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/profiles?select=id,username,display_name,avatar_url",
+        {
+          headers
+        }
+      );
+
+
+    if (!response.ok) {
+
+      console.error(
+        await response.text()
+      );
+
+      return {};
+
+    }
+
+
+    const profiles =
+      await response.json();
+
+
+    const map = {};
+
+
+    profiles.forEach(
+      profile => {
+
+        map[profile.id] =
+          profile;
+
       }
     );
 
 
-  if (!response.ok) return {};
+    return map;
 
+  } catch (error) {
 
-  const profiles =
-    await response.json();
+    console.error(
+      "loadProfilesMap:",
+      error
+    );
 
+    return {};
 
-  const map = {};
-
-
-  profiles.forEach(
-    profile => {
-
-      map[profile.id] =
-        profile;
-
-    }
-  );
-
-
-  return map;
+  }
 
 }
 
 
+/* =====================================================
+   POSTS
+===================================================== */
+
 async function loadPosts() {
-
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts?select=*&order=created_at.desc",
-      {
-        headers
-      }
-    );
-
-
-  if (!response.ok) {
-
-    console.error(
-      await response.text()
-    );
-
-    return;
-
-  }
-
-
-  const posts =
-    await response.json();
-
-
-  const profiles =
-    await loadProfilesMap();
-
 
   const feed =
     document.getElementById(
@@ -2518,20 +2913,90 @@ async function loadPosts() {
   if (!feed) return;
 
 
-  feed.innerHTML = "";
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/posts?select=*&order=created_at.desc",
+        {
+          headers
+        }
+      );
 
 
-  posts.forEach(
-    post =>
-      renderPost(
-        post,
-        feed,
-        profiles
-      )
-  );
+    if (!response.ok) {
+
+      console.error(
+        await response.text()
+      );
+
+      feed.innerHTML = `
+
+        <div class="wall-empty">
+          Не удалось загрузить ленту.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    const posts =
+      await response.json();
+
+
+    const profiles =
+      await loadProfilesMap();
+
+
+    feed.innerHTML = "";
+
+
+    if (!posts.length) {
+
+      feed.innerHTML = `
+
+        <div class="wall-empty">
+          Пока нет постов.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    posts.forEach(
+      post => {
+
+        renderPost(
+          post,
+          feed,
+          profiles
+        );
+
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      "loadPosts:",
+      error
+    );
+
+  }
 
 }
 
+
+/* =====================================================
+   RENDER POST
+===================================================== */
 
 function renderPost(
   post,
@@ -2575,26 +3040,43 @@ function renderPost(
     "post";
 
 
-  const avatarHTML =
-    avatar
+  let avatarHTML;
 
-      ? `
-        <img
-          class="mini-avatar"
-          src="${escapeHtml(avatar)}"
-          alt=""
-        >
-      `
 
-      : `
-        <div class="mini-avatar-placeholder">
-          ${escapeHtml(
-            displayName
-              .charAt(0)
-              .toUpperCase()
-          )}
-        </div>
-      `;
+  if (avatar) {
+
+    avatarHTML = `
+
+      <img
+        class="mini-avatar"
+        src="${escapeHtml(avatar)}"
+        alt=""
+      >
+
+    `;
+
+  } else {
+
+    avatarHTML = `
+
+      <div class="mini-avatar-placeholder">
+        ${escapeHtml(
+          displayName
+            .charAt(0)
+            .toUpperCase()
+        )}
+      </div>
+
+    `;
+
+  }
+
+
+  const likes =
+    Number(post.likes || 0);
+
+  const dislikes =
+    Number(post.dislikes || 0);
 
 
   div.innerHTML = `
@@ -2629,9 +3111,12 @@ function renderPost(
             ? "active"
             : ""
         }"
-        onclick="reactToPost(${post.id}, 'like')"
+        onclick="reactToPost(
+          ${Number(post.id)},
+          'like'
+        )"
       >
-        👍 ${post.likes || 0}
+        👍 ${likes}
       </button>
 
       <button
@@ -2640,9 +3125,12 @@ function renderPost(
             ? "active"
             : ""
         }"
-        onclick="reactToPost(${post.id}, 'dislike')"
+        onclick="reactToPost(
+          ${Number(post.id)},
+          'dislike'
+        )"
       >
-        👎 ${post.dislikes || 0}
+        👎 ${dislikes}
       </button>
 
     </div>
@@ -2657,12 +3145,19 @@ function renderPost(
 }
 
 
+/* =====================================================
+   CREATE POST
+===================================================== */
+
 async function createPost() {
 
   const input =
     document.getElementById(
       "postInput"
     );
+
+
+  if (!input) return;
 
 
   const text =
@@ -2688,12 +3183,19 @@ async function createPost() {
 }
 
 
+/* =====================================================
+   CREATE WALL POST
+===================================================== */
+
 async function createWallPost() {
 
   const input =
     document.getElementById(
       "wallInput"
     );
+
+
+  if (!input) return;
 
 
   const text =
@@ -2719,6 +3221,10 @@ async function createWallPost() {
 }
 
 
+/* =====================================================
+   CREATE POST IN DATABASE
+===================================================== */
+
 async function createPostInDatabase(
   text
 ) {
@@ -2729,51 +3235,10 @@ async function createPostInDatabase(
     );
 
 
-  const username =
-    window.currentProfile?.username ||
-    "you";
-
-
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts",
-      {
-
-        method: "POST",
-
-        headers: {
-
-          ...authHeaders(),
-
-          "Prefer":
-            "return=representation"
-
-        },
-
-        body:
-          JSON.stringify({
-
-            user_id:
-              userId,
-
-            username:
-              username,
-
-            content:
-              text
-
-          })
-
-      }
-    );
-
-
-  if (!response.ok) {
+  if (!userId) {
 
     alert(
-      "Не удалось опубликовать пост:\n" +
-      await response.text()
+      "Нужно войти в аккаунт."
     );
 
     return false;
@@ -2781,7 +3246,73 @@ async function createPostInDatabase(
   }
 
 
-  return true;
+  const username =
+    window.currentProfile?.username ||
+    "you";
+
+
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/posts",
+        {
+
+          method: "POST",
+
+          headers: {
+
+            ...authHeaders(),
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              user_id:
+                userId,
+
+              username:
+                username,
+
+              content:
+                text
+
+            })
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      alert(
+        "Не удалось опубликовать пост:\n" +
+        await response.text()
+      );
+
+      return false;
+
+    }
+
+
+    return true;
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Ошибка соединения с сервером."
+    );
+
+    return false;
+
+  }
 
 }
 
@@ -2810,63 +3341,77 @@ async function loadWall() {
   if (!wall) return;
 
 
-  const response =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts?user_id=eq." +
-      encodeURIComponent(userId) +
-      "&select=*&order=created_at.desc",
-      {
-        headers
+  try {
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/posts?user_id=eq." +
+        encodeURIComponent(userId) +
+        "&select=*&order=created_at.desc",
+        {
+          headers
+        }
+      );
+
+
+    if (!response.ok) {
+
+      console.error(
+        await response.text()
+      );
+
+      return;
+
+    }
+
+
+    const posts =
+      await response.json();
+
+
+    const profiles =
+      await loadProfilesMap();
+
+
+    wall.innerHTML = "";
+
+
+    if (!posts.length) {
+
+      wall.innerHTML = `
+
+        <div class="wall-empty">
+          На стене пока ничего нет.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    posts.forEach(
+      post => {
+
+        renderPost(
+          post,
+          wall,
+          profiles
+        );
+
       }
     );
 
-
-  if (!response.ok) {
+  } catch (error) {
 
     console.error(
-      await response.text()
+      "loadWall:",
+      error
     );
 
-    return;
-
   }
-
-
-  const posts =
-    await response.json();
-
-
-  const profiles =
-    await loadProfilesMap();
-
-
-  wall.innerHTML = "";
-
-
-  if (!posts.length) {
-
-    wall.innerHTML = `
-
-      <div class="wall-empty">
-        На стене пока ничего нет.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  posts.forEach(
-    post =>
-      renderPost(
-        post,
-        wall,
-        profiles
-      )
-  );
 
 }
 
@@ -2900,6 +3445,7 @@ async function reactToPost(
   ) {
 
     newReaction = null;
+
 
     if (
       type === "like"
@@ -2948,121 +3494,141 @@ async function reactToPost(
   }
 
 
-  const getResponse =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts?id=eq." +
-      postId +
-      "&select=likes,dislikes",
-      {
-        headers
-      }
+  try {
+
+    const getResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/posts?id=eq." +
+        encodeURIComponent(postId) +
+        "&select=likes,dislikes",
+        {
+          headers
+        }
+      );
+
+
+    if (!getResponse.ok) {
+
+      alert(
+        "Не удалось получить реакцию."
+      );
+
+      return;
+
+    }
+
+
+    const rows =
+      await getResponse.json();
+
+
+    if (!rows.length) {
+
+      return;
+
+    }
+
+
+    const post =
+      rows[0];
+
+
+    const newLikes =
+      Math.max(
+        0,
+        Number(post.likes || 0) +
+        likeChange
+      );
+
+
+    const newDislikes =
+      Math.max(
+        0,
+        Number(post.dislikes || 0) +
+        dislikeChange
+      );
+
+
+    const updateResponse =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/posts?id=eq." +
+        encodeURIComponent(postId),
+        {
+
+          method: "PATCH",
+
+          headers: {
+
+            ...authHeaders(),
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              likes:
+                newLikes,
+
+              dislikes:
+                newDislikes
+
+            })
+
+        }
+      );
+
+
+    if (!updateResponse.ok) {
+
+      alert(
+        "Не удалось сохранить реакцию:\n" +
+        await updateResponse.text()
+      );
+
+      return;
+
+    }
+
+
+    if (newReaction) {
+
+      localStorage.setItem(
+        "reaction_" +
+        postId,
+        newReaction
+      );
+
+    } else {
+
+      localStorage.removeItem(
+        "reaction_" +
+        postId
+      );
+
+    }
+
+
+    await loadPosts();
+
+    await loadWall();
+
+  } catch (error) {
+
+    console.error(
+      "reaction error:",
+      error
     );
-
-
-  if (!getResponse.ok) {
 
     alert(
-      "Не удалось получить реакцию"
-    );
-
-    return;
-
-  }
-
-
-  const rows =
-    await getResponse.json();
-
-
-  if (!rows.length) return;
-
-
-  const post =
-    rows[0];
-
-
-  const newLikes =
-    Math.max(
-      0,
-      (post.likes || 0) +
-      likeChange
-    );
-
-
-  const newDislikes =
-    Math.max(
-      0,
-      (post.dislikes || 0) +
-      dislikeChange
-    );
-
-
-  const updateResponse =
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/posts?id=eq." +
-      postId,
-      {
-
-        method: "PATCH",
-
-        headers: {
-
-          ...authHeaders(),
-
-          "Prefer":
-            "return=representation"
-
-        },
-
-        body:
-          JSON.stringify({
-
-            likes:
-              newLikes,
-
-            dislikes:
-              newDislikes
-
-          })
-
-      }
-    );
-
-
-  if (!updateResponse.ok) {
-
-    alert(
-      "Не удалось сохранить реакцию"
-    );
-
-    return;
-
-  }
-
-
-  if (newReaction) {
-
-    localStorage.setItem(
-      "reaction_" +
-      postId,
-      newReaction
-    );
-
-  } else {
-
-    localStorage.removeItem(
-      "reaction_" +
-      postId
+      "Ошибка соединения с сервером."
     );
 
   }
-
-
-  await loadPosts();
-
-  await loadWall();
 
 }
 
@@ -3078,10 +3644,12 @@ function escapeHtml(text) {
       "div"
     );
 
+
   div.textContent =
     text == null
       ? ""
       : String(text);
+
 
   return div.innerHTML;
 
