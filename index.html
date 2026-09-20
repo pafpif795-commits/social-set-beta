@@ -120,6 +120,54 @@
   <header>
     <div class="logo">Social Set</div>
   </header>
+  <div id="authPanel" style="
+  max-width:650px;
+  margin:20px auto;
+  padding:20px;
+  background:#17181d;
+  border:1px solid #292b33;
+  border-radius:15px;
+">
+  <h2 style="margin-top:0;">Войти в Social Set</h2>
+
+  <input
+    id="authEmail"
+    type="email"
+    placeholder="Email"
+    style="
+      width:100%;
+      padding:12px;
+      margin-bottom:10px;
+      background:#0f1014;
+      color:white;
+      border:1px solid #30323a;
+      border-radius:10px;
+      font-size:16px;
+    "
+  >
+
+  <input
+    id="authPassword"
+    type="password"
+    placeholder="Пароль"
+    style="
+      width:100%;
+      padding:12px;
+      margin-bottom:10px;
+      background:#0f1014;
+      color:white;
+      border:1px solid #30323a;
+      border-radius:10px;
+      font-size:16px;
+    "
+  >
+
+  <button onclick="signUp()">Регистрация</button>
+  <button onclick="signIn()">Войти</button>
+
+  <div id="authMessage" style="margin-top:12px;color:#aaa;"></div>
+</div>
+    <div class="logo">Social Set</div>
 
   <main class="container">
 
@@ -334,6 +382,82 @@ function escapeHtml(text) {
 }
 
 loadPosts();
+    async function signUp() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  if (!email || !password) {
+    document.getElementById("authMessage").textContent =
+      "Введите email и пароль";
+    return;
+  }
+
+  const response = await fetch(
+    SUPABASE_URL + "/auth/v1/signup",
+    {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    document.getElementById("authMessage").textContent =
+      data.msg || data.message || "Ошибка регистрации";
+    return;
+  }
+
+  document.getElementById("authMessage").textContent =
+    "Регистрация прошла успешно!";
+}
+
+async function signIn() {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  if (!email || !password) {
+    document.getElementById("authMessage").textContent =
+      "Введите email и пароль";
+    return;
+  }
+
+  const response = await fetch(
+    SUPABASE_URL + "/auth/v1/token?grant_type=password",
+    {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    document.getElementById("authMessage").textContent =
+      data.msg || data.message || "Ошибка входа";
+    return;
+  }
+
+  localStorage.setItem("access_token", data.access_token);
+  localStorage.setItem("user_id", data.user.id);
+
+  document.getElementById("authMessage").textContent =
+    "Вы вошли в Social Set!";
+}
   </script>
 
 </body>
