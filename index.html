@@ -1,497 +1,795 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Set</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No Cap</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f1014;
-      color: white;
-    }
-
-    header {
-      height: 65px;
-      background: #17181d;
-      border-bottom: 1px solid #292b33;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      position: sticky;
-      top: 0;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 650px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
-
-    .create-post {
-      background: #17181d;
-      border: 1px solid #292b33;
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 20px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 90px;
-      resize: none;
-      background: #0f1014;
-      color: white;
-      border: 1px solid #30323a;
-      border-radius: 10px;
-      padding: 12px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    button {
-      margin-top: 10px;
-      background: #5865f2;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 11px 18px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .post {
-      background: #17181d;
-      border: 1px solid #292b33;
-      border-radius: 15px;
-      padding: 17px;
-      margin-bottom: 15px;
-    }
-
-    .user {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .post-text {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .actions {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .like {
-      background: transparent;
-      border: 1px solid #30323a;
-      color: #aaa;
-    }
-
-    .like.active {
-      color: #ff4f70;
-      border-color: #ff4f70;
-    }
-
-    @media (max-width: 700px) {
-      .container {
-        margin-top: 15px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="logo">Social Set</div>
-  </header>
-  <div id="profilePanel" style="
-  max-width:650px;
-  margin:20px auto;
-  padding:20px;
-  background:#17181d;
-  border:1px solid #292b33;
-  border-radius:15px;
-  display:none;
-">
-  <h2 style="margin-top:0;">Мой профиль</h2>
-
-  <div id="profileUsername" style="
-    font-size:22px;
-    font-weight:bold;
-    margin-bottom:8px;
-  "></div>
-
-  <div id="profileBio" style="
-    color:#aaa;
-    margin-bottom:15px;
-  "></div>
-
-  <button onclick="editProfile()">Редактировать профиль</button>
-</div>
-  <div id="authPanel" style="
-  max-width:650px;
-  margin:20px auto;
-  padding:20px;
-  background:#17181d;
-  border:1px solid #292b33;
-  border-radius:15px;
-">
-  <h2 style="margin-top:0;">Войти в Social Set</h2>
-
-  <input
-    id="authEmail"
-    type="email"
-    placeholder="Email"
-    style="
-      width:100%;
-      padding:12px;
-      margin-bottom:10px;
-      background:#0f1014;
-      color:white;
-      border:1px solid #30323a;
-      border-radius:10px;
-      font-size:16px;
-    "
-  >
-
-  <input
-    id="authPassword"
-    type="password"
-    placeholder="Пароль"
-    style="
-      width:100%;
-      padding:12px;
-      margin-bottom:10px;
-      background:#0f1014;
-      color:white;
-      border:1px solid #30323a;
-      border-radius:10px;
-      font-size:16px;
-    "
-  >
-
-  <button onclick="signUp()">Регистрация</button>
-  <button onclick="signIn()">Войти</button>
-
-  <div id="authMessage" style="margin-top:12px;color:#aaa;"></div>
-</div>
-    <div class="logo">Social Set</div>
-
-  <main class="container">
-
-    <div class="create-post">
-      <textarea id="postInput" placeholder="Что у тебя нового?"></textarea>
-      <button onclick="createPost()">Опубликовать</button>
-    </div>
-
-    <div id="feed">
-
-      <div class="post">
-        <div class="user">@admin</div>
-        <div class="post-text">
-          Добро пожаловать в Social Set 👋
-        </div>
-
-        <div class="actions">
-          <button class="like" onclick="likePost(this)">
-            ♡ 0
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-  <script>
-   const SUPABASE_URL = "https://jrzoexmvgyyitojbcxvr.supabase.co";
-const SUPABASE_KEY = "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
-
-const headers = {
-  "apikey": SUPABASE_KEY,
-  "Authorization": "Bearer " + SUPABASE_KEY,
-  "Content-Type": "application/json"
-};
-
-function authHeaders() {
-  return {
-    ...headers,
-    "Authorization": "Bearer " + localStorage.getItem("access_token")
-  };
+<style>
+* {
+  box-sizing: border-box;
 }
 
-/* POSTS */
-
-async function loadPosts() {
-  const response = await fetch(
-    SUPABASE_URL + "/rest/v1/posts?select=*&order=created_at.desc",
-    { headers }
-  );
-
-  if (!response.ok) {
-    console.error(await response.text());
-    return;
-  }
-
-  const posts = await response.json();
-  const feed = document.getElementById("feed");
-
-  if (!feed) return;
-
-  feed.innerHTML = "";
-  posts.forEach(renderPost);
+:root {
+  --navy: #0b1f3a;
+  --navy-2: #12365d;
+  --sky: #62b7f5;
+  --sky-soft: #e9f6ff;
+  --white: #ffffff;
+  --bg: #f4f9fd;
+  --line: #d8e6f0;
+  --text: #102033;
+  --muted: #718397;
+  --red: #ef4056;
 }
 
-async function createPost() {
-  const input = document.getElementById("postInput");
-  const text = input.value.trim();
-
-  if (!text) return;
-
-  const response = await fetch(
-    SUPABASE_URL + "/rest/v1/posts",
-    {
-      method: "POST",
-      headers: {
-        ...headers,
-        "Prefer": "return=representation"
-      },
-      body: JSON.stringify({
-        username: "you",
-        content: text
-      })
-    }
-  );
-
-  if (!response.ok) {
-    console.error(await response.text());
-    alert("Не удалось опубликовать пост");
-    return;
-  }
-
-  input.value = "";
-  loadPosts();
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-function renderPost(post) {
-  const feed = document.getElementById("feed");
-  if (!feed) return;
-
-  const reaction = localStorage.getItem("reaction_" + post.id);
-
-  const div = document.createElement("div");
-  div.className = "post";
-
-  div.innerHTML = `
-    <div class="user">@${escapeHtml(post.username)}</div>
-
-    <div class="post-text">
-      ${escapeHtml(post.content)}
-    </div>
-
-    <div class="actions">
-      <button
-        class="reaction-btn ${reaction === "like" ? "active" : ""}"
-        onclick="reactToPost(${post.id}, 'like')"
-      >
-        👍 ${post.likes || 0}
-      </button>
-
-      <button
-        class="reaction-btn dislike ${reaction === "dislike" ? "active" : ""}"
-        onclick="reactToPost(${post.id}, 'dislike')"
-      >
-        👎 ${post.dislikes || 0}
-      </button>
-    </div>
-  `;
-
-  feed.appendChild(div);
-}
-
-async function reactToPost(postId, type) {
-  const oldReaction = localStorage.getItem("reaction_" + postId);
-
-  let likeChange = 0;
-  let dislikeChange = 0;
-  let newReaction = type;
-
-  if (oldReaction === type) {
-    newReaction = null;
-
-    if (type === "like") {
-      likeChange = -1;
-    } else {
-      dislikeChange = -1;
-    }
-  } else {
-    if (oldReaction === "like") likeChange = -1;
-    if (oldReaction === "dislike") dislikeChange = -1;
-
-    if (type === "like") {
-      likeChange++;
-    } else {
-      dislikeChange++;
-    }
-  }
-
-  const getResponse = await fetch(
-    SUPABASE_URL +
-    "/rest/v1/posts?id=eq." +
-    postId +
-    "&select=likes,dislikes",
-    { headers }
-  );
-
-  if (!getResponse.ok) {
-    console.error(await getResponse.text());
-    alert("Не удалось получить реакцию");
-    return;
-  }
-
-  const rows = await getResponse.json();
-
-  if (!rows.length) return;
-
-  const post = rows[0];
-
-  const newLikes = Math.max(
-    0,
-    (post.likes || 0) + likeChange
-  );
-
-  const newDislikes = Math.max(
-    0,
-    (post.dislikes || 0) + dislikeChange
-  );
-
-  const updateResponse = await fetch(
-    SUPABASE_URL + "/rest/v1/posts?id=eq." + postId,
-    {
-      method: "PATCH",
-      headers: {
-        ...headers,
-        "Prefer": "return=representation"
-      },
-      body: JSON.stringify({
-        likes: newLikes,
-        dislikes: newDislikes
-      })
-    }
-  );
-
-  if (!updateResponse.ok) {
-    console.error(await updateResponse.text());
-    alert("Не удалось сохранить реакцию");
-    return;
-  }
-
-  if (newReaction) {
-    localStorage.setItem(
-      "reaction_" + postId,
-      newReaction
-    );
-  } else {
-    localStorage.removeItem(
-      "reaction_" + postId
-    );
-  }
-
-  loadPosts();
+button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 /* AUTH */
 
-async function signUp() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const message = document.getElementById("authMessage");
+#authScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 
-  if (!email || !password) {
-    message.textContent = "Введите email и пароль";
-    return;
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      #c7eaff 0,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      #dcefff 0,
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: rgba(255,255,255,.96);
+
+  border: 1px solid var(--line);
+  border-radius: 24px;
+
+  padding: 34px;
+
+  box-shadow:
+    0 22px 65px rgba(11,31,58,.13);
+}
+
+.brand {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  color: var(--navy);
+  text-align: center;
+}
+
+.tagline {
+  text-align: center;
+  color: var(--muted);
+  margin: 8px 0 28px;
+}
+
+.auth-choice button,
+.auth-form button {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.primary {
+  background: var(--navy);
+  color: white;
+}
+
+.secondary {
+  background: var(--sky-soft);
+  color: var(--navy);
+}
+
+.auth-form {
+  display: none;
+}
+
+.auth-form h2 {
+  margin-top: 0;
+  color: var(--navy);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 13px;
+
+  margin-top: 10px;
+
+  border: 1px solid var(--line);
+  border-radius: 11px;
+
+  outline: none;
+
+  background: white;
+  color: var(--text);
+
+  font-size: 15px;
+}
+
+.auth-form input:focus {
+  border-color: var(--sky);
+
+  box-shadow:
+    0 0 0 3px rgba(98,183,245,.16);
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--muted);
+
+  margin-top: 12px;
+  padding: 8px 0;
+}
+
+#authMessage {
+  min-height: 20px;
+  margin-top: 12px;
+
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* APP */
+
+#app {
+  display: none;
+}
+
+header {
+  height: 64px;
+
+  background: var(--white);
+
+  border-bottom: 1px solid var(--line);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-logo {
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.logout {
+  background: var(--navy);
+  color: white;
+
+  border-radius: 10px;
+
+  padding: 9px 13px;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 650px;
+
+  margin: 25px auto;
+
+  padding: 0 15px;
+}
+
+/* PROFILE */
+
+#profilePanel,
+.create-post,
+.post {
+  background: var(--white);
+
+  border: 1px solid var(--line);
+
+  border-radius: 17px;
+
+  padding: 17px;
+}
+
+#profilePanel {
+  margin-bottom: 20px;
+}
+
+#profileUsername {
+  color: var(--navy);
+
+  font-size: 22px;
+  font-weight: 800;
+
+  margin-bottom: 7px;
+}
+
+#profileBio {
+  color: var(--muted);
+
+  margin-bottom: 12px;
+}
+
+.profile-edit {
+  background: var(--sky-soft);
+  color: var(--navy);
+
+  border-radius: 10px;
+
+  padding: 9px 13px;
+
+  font-weight: 700;
+}
+
+/* CREATE POST */
+
+.create-post {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+
+  min-height: 90px;
+
+  resize: vertical;
+
+  background: #fafdff;
+  color: var(--text);
+
+  border: 1px solid var(--line);
+
+  border-radius: 12px;
+
+  padding: 12px;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.publish {
+  margin-top: 10px;
+
+  background: var(--navy);
+  color: white;
+
+  border-radius: 10px;
+
+  padding: 11px 18px;
+
+  font-weight: 700;
+}
+
+/* POSTS */
+
+.post {
+  margin-bottom: 15px;
+}
+
+.user {
+  color: var(--navy);
+
+  font-weight: 800;
+
+  margin-bottom: 10px;
+}
+
+.post-text {
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  color: var(--text);
+}
+
+.actions {
+  margin-top: 15px;
+
+  display: flex;
+
+  gap: 8px;
+}
+
+.reaction-btn {
+  background: white;
+
+  border: 1px solid var(--line);
+
+  color: var(--muted);
+
+  border-radius: 10px;
+
+  padding: 8px 12px;
+
+  font-weight: 700;
+}
+
+.reaction-btn.active {
+  color: var(--red);
+
+  border-color: #f1a0aa;
+
+  background: #fff5f6;
+}
+
+@media (max-width: 700px) {
+
+  .container {
+    margin-top: 15px;
   }
 
-  const response = await fetch(
-    SUPABASE_URL + "/auth/v1/signup",
-    {
-      method: "POST",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    }
-  );
+  .auth-card {
+    padding: 26px;
+  }
 
-  const data = await response.json();
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUTH SCREEN -->
+
+<section id="authScreen">
+
+  <div class="auth-card">
+
+    <div class="brand">
+      No Cap
+    </div>
+
+    <div class="tagline">
+      Своя соцсеть. Без лишнего.
+    </div>
+
+    <!-- CHOICE -->
+
+    <div id="authChoice" class="auth-choice">
+
+      <button
+        class="primary"
+        onclick="showAuthForm('login')"
+      >
+        Войти
+      </button>
+
+      <button
+        class="secondary"
+        onclick="showAuthForm('signup')"
+      >
+        Создать аккаунт
+      </button>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginForm" class="auth-form">
+
+      <h2>
+        Войти
+      </h2>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Email"
+      >
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Пароль"
+      >
+
+      <button
+        class="primary"
+        onclick="signIn()"
+      >
+        Войти
+      </button>
+
+      <button
+        class="back-btn"
+        onclick="showAuthChoice()"
+      >
+        ← Назад
+      </button>
+
+    </div>
+
+
+    <!-- SIGNUP -->
+
+    <div id="signupForm" class="auth-form">
+
+      <h2>
+        Создать аккаунт
+      </h2>
+
+      <input
+        id="signupUsername"
+        type="text"
+        placeholder="Username"
+      >
+
+      <input
+        id="signupEmail"
+        type="email"
+        placeholder="Email"
+      >
+
+      <input
+        id="signupPassword"
+        type="password"
+        placeholder="Пароль"
+      >
+
+      <button
+        class="primary"
+        onclick="signUp()"
+      >
+        Создать аккаунт
+      </button>
+
+      <button
+        class="back-btn"
+        onclick="showAuthChoice()"
+      >
+        ← Назад
+      </button>
+
+    </div>
+
+
+    <div id="authMessage"></div>
+
+  </div>
+
+</section>
+
+
+<!-- APP -->
+
+<div id="app">
+
+  <header>
+
+    <div class="header-logo">
+      No Cap
+    </div>
+
+    <button
+      class="logout"
+      onclick="signOut()"
+    >
+      Выйти
+    </button>
+
+  </header>
+
+
+  <main class="container">
+
+    <!-- PROFILE -->
+
+    <div id="profilePanel">
+
+      <h2 style="margin-top:0;">
+        Мой профиль
+      </h2>
+
+      <div id="profileUsername"></div>
+
+      <div id="profileBio">
+        Описание профиля пока не добавлено.
+      </div>
+
+      <button
+        class="profile-edit"
+        onclick="editProfile()"
+      >
+        Редактировать профиль
+      </button>
+
+    </div>
+
+
+    <!-- CREATE POST -->
+
+    <div class="create-post">
+
+      <textarea
+        id="postInput"
+        placeholder="Что у тебя нового?"
+      ></textarea>
+
+      <button
+        class="publish"
+        onclick="createPost()"
+      >
+        Опубликовать
+      </button>
+
+    </div>
+
+
+    <!-- FEED -->
+
+    <div id="feed"></div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://jrzoexmvgyyitojbcxvr.supabase.co";
+
+
+/*
+  ВАЖНО:
+
+  Вставь сюда свой текущий
+  Supabase Publishable Key.
+
+  Не вставляй service_role key.
+*/
+
+const SUPABASE_KEY =
+  "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
+
+
+const headers = {
+
+  "apikey": SUPABASE_KEY,
+
+  "Authorization":
+    "Bearer " + SUPABASE_KEY,
+
+  "Content-Type":
+    "application/json"
+
+};
+
+
+function authHeaders() {
+
+  return {
+
+    ...headers,
+
+    "Authorization":
+      "Bearer " +
+      localStorage.getItem("access_token")
+
+  };
+
+}
+
+
+/* AUTH SCREEN */
+
+function showAuthChoice() {
+
+  document.getElementById(
+    "authChoice"
+  ).style.display = "block";
+
+  document.getElementById(
+    "loginForm"
+  ).style.display = "none";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display = "none";
+
+  document.getElementById(
+    "authMessage"
+  ).textContent = "";
+
+}
+
+
+function showAuthForm(type) {
+
+  document.getElementById(
+    "authChoice"
+  ).style.display = "none";
+
+  document.getElementById(
+    "loginForm"
+  ).style.display =
+    type === "login"
+      ? "block"
+      : "none";
+
+  document.getElementById(
+    "signupForm"
+  ).style.display =
+    type === "signup"
+      ? "block"
+      : "none";
+
+  document.getElementById(
+    "authMessage"
+  ).textContent = "";
+
+}
+
+
+/* SHOW APP */
+
+function showApp() {
+
+  document.getElementById(
+    "authScreen"
+  ).style.display = "none";
+
+  document.getElementById(
+    "app"
+  ).style.display = "block";
+
+  loadPosts();
+
+  loadProfile();
+
+}
+
+
+/* SHOW AUTH */
+
+function showAuth() {
+
+  document.getElementById(
+    "authScreen"
+  ).style.display = "flex";
+
+  document.getElementById(
+    "app"
+  ).style.display = "none";
+
+  showAuthChoice();
+
+}
+
+
+/* SIGN UP */
+
+async function signUp() {
+
+  const username =
+    document.getElementById(
+      "signupUsername"
+    ).value.trim();
+
+  const email =
+    document.getElementById(
+      "signupEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "signupPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "authMessage"
+    );
+
+
+  if (
+    !username ||
+    !email ||
+    !password
+  ) {
+
+    message.textContent =
+      "Заполни username, email и пароль.";
+
+    return;
+
+  }
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/auth/v1/signup",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            email,
+            password
+
+          })
+
+      }
+    );
+
+
+  const data =
+    await response.json();
+
 
   if (!response.ok) {
+
     message.textContent =
       data.msg ||
       data.message ||
       "Ошибка регистрации";
+
     return;
+
   }
 
-  message.textContent =
-    "Регистрация прошла успешно!";
-}
 
-async function signIn() {
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const message = document.getElementById("authMessage");
+  if (
+    !data.user ||
+    !data.access_token
+  ) {
 
-  if (!email || !password) {
-    message.textContent = "Введите email и пароль";
-    return;
-  }
-
-  const response = await fetch(
-    SUPABASE_URL +
-    "/auth/v1/token?grant_type=password",
-    {
-      method: "POST",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    }
-  );
-
-  const data = await response.json();
-
-  if (!response.ok) {
     message.textContent =
-      data.msg ||
-      data.message ||
-      "Ошибка входа";
+      "Аккаунт создан. Теперь войди.";
+
+    showAuthForm("login");
+
+    document.getElementById(
+      "loginEmail"
+    ).value = email;
+
     return;
+
   }
+
 
   localStorage.setItem(
     "access_token",
@@ -503,43 +801,233 @@ async function signIn() {
     data.user.id
   );
 
-  message.textContent =
-    "Вы вошли в Social Set!";
 
-  loadProfile();
+  await createProfile(
+    data.user.id,
+    username
+  );
+
+
+  showApp();
+
 }
 
-/* PROFILE */
+
+/* SIGN IN */
+
+async function signIn() {
+
+  const email =
+    document.getElementById(
+      "loginEmail"
+    ).value.trim();
+
+  const password =
+    document.getElementById(
+      "loginPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "authMessage"
+    );
+
+
+  if (
+    !email ||
+    !password
+  ) {
+
+    message.textContent =
+      "Введите email и пароль.";
+
+    return;
+
+  }
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/auth/v1/token?grant_type=password",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Content-Type":
+            "application/json"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            email,
+            password
+
+          })
+
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    message.textContent =
+      data.msg ||
+      data.message ||
+      "Ошибка входа";
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    "access_token",
+    data.access_token
+  );
+
+  localStorage.setItem(
+    "user_id",
+    data.user.id
+  );
+
+
+  showApp();
+
+}
+
+
+/* LOGOUT */
+
+function signOut() {
+
+  localStorage.removeItem(
+    "access_token"
+  );
+
+  localStorage.removeItem(
+    "user_id"
+  );
+
+  showAuth();
+
+}
+
+
+/* CREATE PROFILE */
+
+async function createProfile(
+  userId,
+  username
+) {
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          ...authHeaders(),
+
+          "Prefer":
+            "return=minimal"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            id: userId,
+
+            username: username,
+
+            bio: ""
+
+          })
+
+      }
+    );
+
+
+  if (!response.ok) {
+
+    console.error(
+      "Profile creation:",
+      await response.text()
+    );
+
+  }
+
+}
+
+
+/* LOAD PROFILE */
 
 async function loadProfile() {
-  const userId = localStorage.getItem("user_id");
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
 
   if (!userId) return;
 
-  const response = await fetch(
-    SUPABASE_URL +
-    "/rest/v1/profiles?id=eq." +
-    userId +
-    "&select=*",
-    {
-      headers
-    }
-  );
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles?id=eq." +
+      userId +
+      "&select=*",
+      {
+        headers
+      }
+    );
+
 
   if (!response.ok) {
-    console.error(await response.text());
+
+    console.error(
+      await response.text()
+    );
+
     return;
+
   }
 
-  const profiles = await response.json();
+
+  const profiles =
+    await response.json();
+
 
   if (!profiles.length) return;
 
-  const profile = profiles[0];
+
+  const profile =
+    profiles[0];
+
 
   document.getElementById(
     "profileUsername"
-  ).textContent = "@" + profile.username;
+  ).textContent =
+    "@" + profile.username;
+
 
   document.getElementById(
     "profileBio"
@@ -547,78 +1035,563 @@ async function loadProfile() {
     profile.bio ||
     "Описание профиля пока не добавлено.";
 
-  document.getElementById(
-    "profilePanel"
-  ).style.display = "block";
 }
 
-async function editProfile() {
-  const userId = localStorage.getItem("user_id");
-  const accessToken = localStorage.getItem("access_token");
 
-  if (!userId || !accessToken) {
-    alert("Сначала войдите в аккаунт");
+/* EDIT PROFILE */
+
+async function editProfile() {
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
+  const accessToken =
+    localStorage.getItem(
+      "access_token"
+    );
+
+
+  if (
+    !userId ||
+    !accessToken
+  ) {
+
+    alert(
+      "Сначала войдите в аккаунт"
+    );
+
     return;
+
   }
 
-  const username = prompt(
-    "Введите новый username:",
-    document
-      .getElementById("profileUsername")
-      .textContent
-      .replace("@", "")
-  );
+
+  const username =
+    prompt(
+      "Введите новый username:",
+      document
+        .getElementById(
+          "profileUsername"
+        )
+        .textContent
+        .replace("@", "")
+    );
+
 
   if (!username) return;
 
-  const bio = prompt(
-    "Введите описание профиля:",
-    document.getElementById("profileBio").textContent
-  );
 
-  const response = await fetch(
-    SUPABASE_URL + "/rest/v1/profiles?id=eq." + userId,
-    {
-      method: "PATCH",
-      headers: {
-        "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + accessToken,
-        "Content-Type": "application/json",
-        "Prefer": "return=representation"
-      },
-      body: JSON.stringify({
-        username: username.trim(),
-        bio: bio || ""
-      })
-    }
-  );
+  const bio =
+    prompt(
+      "Введите описание профиля:",
+      document.getElementById(
+        "profileBio"
+      ).textContent
+    );
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles?id=eq." +
+      userId,
+      {
+
+        method: "PATCH",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            accessToken,
+
+          "Content-Type":
+            "application/json",
+
+          "Prefer":
+            "return=representation"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            username:
+              username.trim(),
+
+            bio:
+              bio || ""
+
+          })
+
+      }
+    );
+
 
   if (!response.ok) {
-    const error = await response.text();
+
+    const error =
+      await response.text();
+
     console.error(error);
-    alert("Не удалось сохранить профиль:\n" + error);
+
+    alert(
+      "Не удалось сохранить профиль:\n" +
+      error
+    );
+
     return;
+
   }
 
-  alert("Профиль сохранён!");
 
   await loadProfile();
+
 }
 
-/* HELPERS */
+
+/* LOAD POSTS */
+
+async function loadPosts() {
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts?select=*&order=created_at.desc",
+      {
+        headers
+      }
+    );
+
+
+  if (!response.ok) {
+
+    console.error(
+      await response.text()
+    );
+
+    return;
+
+  }
+
+
+  const posts =
+    await response.json();
+
+
+  const feed =
+    document.getElementById(
+      "feed"
+    );
+
+
+  if (!feed) return;
+
+
+  feed.innerHTML = "";
+
+
+  posts.forEach(
+    renderPost
+  );
+
+}
+
+
+/* CREATE POST */
+
+async function createPost() {
+
+  const input =
+    document.getElementById(
+      "postInput"
+    );
+
+  const text =
+    input.value.trim();
+
+
+  if (!text) return;
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts",
+      {
+
+        method: "POST",
+
+        headers: {
+
+          ...headers,
+
+          "Prefer":
+            "return=representation"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            username: "you",
+
+            content: text
+
+          })
+
+        }
+    );
+
+
+  if (!response.ok) {
+
+    console.error(
+      await response.text()
+    );
+
+    alert(
+      "Не удалось опубликовать пост"
+    );
+
+    return;
+
+  }
+
+
+  input.value = "";
+
+  loadPosts();
+
+}
+
+
+/* RENDER POST */
+
+function renderPost(post) {
+
+  const feed =
+    document.getElementById(
+      "feed"
+    );
+
+
+  if (!feed) return;
+
+
+  const reaction =
+    localStorage.getItem(
+      "reaction_" + post.id
+    );
+
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "post";
+
+
+  div.innerHTML = `
+
+    <div class="user">
+      @${escapeHtml(post.username)}
+    </div>
+
+    <div class="post-text">
+      ${escapeHtml(post.content)}
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="reaction-btn ${
+          reaction === "like"
+            ? "active"
+            : ""
+        }"
+        onclick="reactToPost(
+          ${post.id},
+          'like'
+        )"
+      >
+        👍 ${post.likes || 0}
+      </button>
+
+
+      <button
+        class="reaction-btn ${
+          reaction === "dislike"
+            ? "active"
+            : ""
+        }"
+        onclick="reactToPost(
+          ${post.id},
+          'dislike'
+        )"
+      >
+        👎 ${post.dislikes || 0}
+      </button>
+
+    </div>
+
+  `;
+
+
+  feed.appendChild(
+    div
+  );
+
+}
+
+
+/* REACTIONS */
+
+async function reactToPost(
+  postId,
+  type
+) {
+
+  const oldReaction =
+    localStorage.getItem(
+      "reaction_" + postId
+    );
+
+
+  let likeChange = 0;
+
+  let dislikeChange = 0;
+
+  let newReaction = type;
+
+
+  if (
+    oldReaction === type
+  ) {
+
+    newReaction = null;
+
+
+    if (type === "like") {
+
+      likeChange = -1;
+
+    } else {
+
+      dislikeChange = -1;
+
+    }
+
+  } else {
+
+    if (
+      oldReaction === "like"
+    ) {
+
+      likeChange = -1;
+
+    }
+
+
+    if (
+      oldReaction === "dislike"
+    ) {
+
+      dislikeChange = -1;
+
+    }
+
+
+    if (type === "like") {
+
+      likeChange += 1;
+
+    } else {
+
+      dislikeChange += 1;
+
+    }
+
+  }
+
+
+  const getResponse =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts?id=eq." +
+      postId +
+      "&select=likes,dislikes",
+      {
+        headers
+      }
+    );
+
+
+  if (!getResponse.ok) {
+
+    alert(
+      "Не удалось получить реакцию"
+    );
+
+    return;
+
+  }
+
+
+  const rows =
+    await getResponse.json();
+
+
+  if (!rows.length) return;
+
+
+  const post =
+    rows[0];
+
+
+  const newLikes =
+    Math.max(
+      0,
+      (post.likes || 0) +
+      likeChange
+    );
+
+
+  const newDislikes =
+    Math.max(
+      0,
+      (post.dislikes || 0) +
+      dislikeChange
+    );
+
+
+  const updateResponse =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/posts?id=eq." +
+      postId,
+      {
+
+        method: "PATCH",
+
+        headers: {
+
+          ...headers,
+
+          "Prefer":
+            "return=representation"
+
+        },
+
+        body:
+          JSON.stringify({
+
+            likes:
+              newLikes,
+
+            dislikes:
+              newDislikes
+
+          })
+
+      }
+    );
+
+
+  if (!updateResponse.ok) {
+
+    console.error(
+      await updateResponse.text()
+    );
+
+    alert(
+      "Не удалось сохранить реакцию"
+    );
+
+    return;
+
+  }
+
+
+  if (newReaction) {
+
+    localStorage.setItem(
+      "reaction_" + postId,
+      newReaction
+    );
+
+  } else {
+
+    localStorage.removeItem(
+      "reaction_" + postId
+    );
+
+  }
+
+
+  loadPosts();
+
+}
+
+
+/* SECURITY */
 
 function escapeHtml(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    text;
+
   return div.innerHTML;
+
 }
+
 
 /* START */
 
-loadPosts();
-loadProfile();
-  </script>
+function startApp() {
+
+  const token =
+    localStorage.getItem(
+      "access_token"
+    );
+
+  const userId =
+    localStorage.getItem(
+      "user_id"
+    );
+
+
+  if (
+    token &&
+    userId
+  ) {
+
+    showApp();
+
+  } else {
+
+    showAuth();
+
+  }
+
+}
+
+
+startApp();
+
+</script>
 
 </body>
 </html>
-
