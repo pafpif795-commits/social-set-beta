@@ -492,7 +492,105 @@ textarea {
 
   padding: 25px 10px;
 }
+/* ================= SEARCH ================= */
 
+.search-box {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 13px 15px;
+
+  border: 1px solid var(--line);
+  border-radius: 12px;
+
+  outline: none;
+
+  background: #fafdff;
+  color: var(--text);
+
+  font-size: 16px;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-user {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  cursor: pointer;
+}
+
+.search-user:hover {
+  background: #fafdff;
+}
+
+.search-avatar {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  background: var(--sky-soft);
+
+  border: 1px solid var(--line);
+
+  flex-shrink: 0;
+}
+
+.search-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: var(--navy);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 900;
+  font-size: 18px;
+
+  flex-shrink: 0;
+}
+
+.search-user-name {
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.search-user-username {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.search-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 10px;
+}
 /* ================= NAV ================= */
 
 .bottom-nav {
@@ -841,7 +939,36 @@ textarea {
       <div id="feed"></div>
 
     </section>
+<section
+  id="searchPage"
+  class="page"
+>
 
+  <div class="search-box">
+
+    <input
+      id="userSearchInput"
+      class="search-input"
+      type="text"
+      placeholder="🔎 Найти пользователя..."
+      oninput="searchUsers()"
+      autocomplete="off"
+    >
+
+  </div>
+
+  <div
+    id="searchResults"
+    class="search-results"
+  >
+
+    <div class="search-empty">
+      Начни вводить username или имя
+    </div>
+
+  </div>
+
+</section>
     <section
       id="profilePage"
       class="page"
@@ -937,7 +1064,19 @@ textarea {
         </span>
 
         Лента
+<button
+  id="searchNav"
+  class="nav-button"
+  onclick="showPage('search')"
+>
 
+  <span class="nav-icon">
+    🔎
+  </span>
+
+  Поиск
+
+</button>
       </button>
 
       <button
@@ -1898,7 +2037,226 @@ async function uploadAvatar() {
 /* =====================================================
    PAGES
 ===================================================== */
+/* =====================================================
+   SEARCH USERS
+===================================================== */
 
+let searchTimeout = null;
+
+
+function searchUsers() {
+
+  clearTimeout(searchTimeout);
+
+  searchTimeout = setTimeout(
+    performUserSearch,
+    250
+  );
+
+}
+
+
+async function performUserSearch() {
+
+  const input =
+    document.getElementById(
+      "userSearchInput"
+    );
+
+  const results =
+    document.getElementById(
+      "searchResults"
+    );
+
+  if (!input || !results) return;
+
+
+  const query =
+    input.value.trim();
+
+
+  if (!query) {
+
+    results.innerHTML = `
+
+      <div class="search-empty">
+        Начни вводить username или имя
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const encodedQuery =
+    encodeURIComponent(
+      "%" + query + "%"
+    );
+
+
+  const response =
+    await fetch(
+      SUPABASE_URL +
+      "/rest/v1/profiles" +
+      "?or=(username.ilike." +
+      encodedQuery +
+      ",display_name.ilike." +
+      encodedQuery +
+      ")" +
+      "&select=id,username,display_name,avatar_url" +
+      "&limit=30",
+      {
+        headers
+      }
+    );
+
+
+  if (!response.ok) {
+
+    results.innerHTML = `
+
+      <div class="search-empty">
+        Не удалось выполнить поиск
+      </div>
+
+    `;
+
+    console.error(
+      await response.text()
+    );
+
+    return;
+
+  }
+
+
+  const profiles =
+    await response.json();
+
+
+  results.innerHTML = "";
+
+
+  if (!profiles.length) {
+
+    results.innerHTML = `
+
+      <div class="search-empty">
+        Пользователей не найдено
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  profiles.forEach(
+    profile => {
+
+      const user =
+        document.createElement(
+          "div"
+        );
+
+      user.className =
+        "search-user";
+
+
+      user.onclick = () => {
+
+        openFoundProfile(
+          profile
+        );
+
+      };
+
+
+      let avatarHTML;
+
+
+      if (profile.avatar_url) {
+
+        avatarHTML = `
+
+          <img
+            class="search-avatar"
+            src="${escapeHtml(profile.avatar_url)}"
+            alt=""
+          >
+
+        `;
+
+      } else {
+
+        const letter =
+          (
+            profile.display_name ||
+            profile.username ||
+            "N"
+          )
+          .charAt(0)
+          .toUpperCase();
+
+
+        avatarHTML = `
+
+          <div class="search-avatar-placeholder">
+            ${escapeHtml(letter)}
+          </div>
+
+        `;
+
+      }
+
+
+      user.innerHTML = `
+
+        ${avatarHTML}
+
+        <div>
+
+          <div class="search-user-name">
+            ${escapeHtml(
+              profile.display_name ||
+              profile.username
+            )}
+          </div>
+
+          <div class="search-user-username">
+            @${escapeHtml(
+              profile.username
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      results.appendChild(
+        user
+      );
+
+    }
+  );
+
+}
+
+
+function openFoundProfile(profile) {
+
+  alert(
+    "Профиль @" +
+    profile.username +
+    " найден.\n\n" +
+    "Следующим шагом сделаем открытие чужого профиля и кнопку «Подписаться»."
+  );
+
+}
 function showPage(page) {
 
   document
@@ -1944,6 +2302,64 @@ function showPage(page) {
     loadPosts();
 
   }
+
+
+  if (page === "search") {
+
+    document
+      .getElementById(
+        "searchPage"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "searchNav"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "userSearchInput"
+      )
+      .focus();
+
+  }
+
+
+  if (page === "profile") {
+
+    document
+      .getElementById(
+        "profilePage"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    document
+      .getElementById(
+        "profileNav"
+      )
+      .classList.add(
+        "active"
+      );
+
+
+    loadProfile();
+
+    loadWall();
+
+  }
+
+}
 
 
   if (page === "profile") {
