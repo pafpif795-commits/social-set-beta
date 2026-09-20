@@ -45,7 +45,7 @@ input,textarea{
   font-family:inherit;
 }
 
-/* AUTH */
+/* ================= AUTH ================= */
 
 #authScreen{
   position:relative;
@@ -159,7 +159,7 @@ input,textarea{
   font-size:14px;
 }
 
-/* APP */
+/* ================= APP ================= */
 
 #app{
   display:none;
@@ -208,7 +208,7 @@ header{
   display:block;
 }
 
-/* POSTS */
+/* ================= POSTS ================= */
 
 .create-post,
 .post,
@@ -254,6 +254,62 @@ textarea:focus{
   font-weight:700;
 }
 
+.post-photo-tools{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.photo-button{
+  background:var(--sky);
+  color:var(--navy);
+  border-radius:10px;
+  padding:9px 13px;
+  font-weight:700;
+}
+
+.photo-name{
+  color:var(--muted);
+  font-size:13px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:240px;
+}
+
+.post-image-preview{
+  display:none;
+  margin-top:12px;
+  position:relative;
+}
+
+.post-image-preview.has-image{
+  display:block;
+}
+
+.post-image-preview img{
+  display:block;
+  width:100%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:14px;
+  background:#f1f3f5;
+}
+
+.remove-photo{
+  position:absolute;
+  right:8px;
+  top:8px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(0,0,0,.7);
+  color:white;
+  font-size:18px;
+}
+
 .post{
   margin-bottom:15px;
   padding:16px;
@@ -281,6 +337,7 @@ textarea:focus{
   border-radius:50%;
   background:var(--sky);
   border:1px solid var(--line);
+  flex-shrink:0;
 }
 
 .mini-avatar-placeholder{
@@ -293,6 +350,7 @@ textarea:focus{
   align-items:center;
   justify-content:center;
   font-weight:800;
+  flex-shrink:0;
 }
 
 .user-name{
@@ -311,6 +369,16 @@ textarea:focus{
   line-height:1.5;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
+}
+
+.post-image{
+  display:block;
+  width:100%;
+  max-height:650px;
+  object-fit:contain;
+  border-radius:14px;
+  margin-top:12px;
+  background:#f1f3f5;
 }
 
 .actions{
@@ -334,7 +402,7 @@ textarea:focus{
   background:#fff5f6;
 }
 
-/* PROFILE */
+/* ================= PROFILE ================= */
 
 .profile-card{
   overflow:hidden;
@@ -476,7 +544,7 @@ textarea:focus{
   padding:25px 10px;
 }
 
-/* SEARCH */
+/* ================= SEARCH ================= */
 
 .search-box{
   border-radius:17px;
@@ -520,6 +588,7 @@ textarea:focus{
   border-radius:50%;
   background:var(--sky);
   border:1px solid var(--line);
+  flex-shrink:0;
 }
 
 .search-avatar-placeholder{
@@ -554,7 +623,7 @@ textarea:focus{
   padding:30px 10px;
 }
 
-/* PUBLIC PROFILE */
+/* ================= PUBLIC PROFILE ================= */
 
 .public-back{
   background:transparent;
@@ -568,7 +637,7 @@ textarea:focus{
   overflow:hidden;
 }
 
-/* MESSAGES */
+/* ================= MESSAGES ================= */
 
 .messages-header{
   margin-bottom:15px;
@@ -712,7 +781,7 @@ textarea:focus{
   white-space:nowrap;
 }
 
-/* MESSAGE SEARCH */
+/* ================= MESSAGE SEARCH ================= */
 
 .message-user-result{
   background:white;
@@ -753,7 +822,7 @@ textarea:focus{
   flex-shrink:0;
 }
 
-/* CHAT */
+/* ================= CHAT ================= */
 
 .chat-page{
   height:calc(100vh - 154px);
@@ -914,7 +983,7 @@ textarea:focus{
   flex-shrink:0;
 }
 
-/* NAV */
+/* ================= NAV ================= */
 
 .bottom-nav{
   position:fixed;
@@ -960,7 +1029,7 @@ textarea:focus{
   color:var(--navy);
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
 
 .modal{
   display:none;
@@ -1023,7 +1092,7 @@ textarea:focus{
   color:var(--navy);
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
@@ -1061,13 +1130,17 @@ textarea:focus{
   .conversation-name{
     font-size:17px;
   }
+
+  .post-image{
+    max-height:500px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUTH -->
+<!-- ================= AUTH ================= -->
 
 <section id="authScreen">
 
@@ -1186,7 +1259,7 @@ textarea:focus{
 </section>
 
 
-<!-- APP -->
+<!-- ================= APP ================= -->
 
 <div id="app">
 
@@ -1202,10 +1275,9 @@ textarea:focus{
 
 </header>
 
-
 <main class="container">
 
-<!-- FEED -->
+<!-- ================= FEED ================= -->
 
 <section id="feedPage" class="page">
 
@@ -1214,9 +1286,44 @@ textarea:focus{
     <textarea
       id="postInput"
       placeholder="Что у тебя нового?"
+      maxlength="5000"
     ></textarea>
 
-    <button class="publish" onclick="createPost()">
+    <div class="post-photo-tools">
+
+      <button
+        type="button"
+        class="photo-button"
+        onclick="choosePostImage('feed')"
+      >
+        📷 Фото
+      </button>
+
+      <span
+        id="postImageName"
+        class="photo-name"
+      ></span>
+
+    </div>
+
+    <div
+      id="postImagePreview"
+      class="post-image-preview"
+    ></div>
+
+    <input
+      id="postImageInput"
+      type="file"
+      accept="image/*"
+      hidden
+      onchange="previewPostImage(event,'feed')"
+    >
+
+    <button
+      class="publish"
+      id="publishPostButton"
+      onclick="createPost()"
+    >
       Опубликовать
     </button>
 
@@ -1227,7 +1334,7 @@ textarea:focus{
 </section>
 
 
-<!-- SEARCH -->
+<!-- ================= SEARCH ================= -->
 
 <section id="searchPage" class="page">
 
@@ -1255,7 +1362,7 @@ textarea:focus{
 </section>
 
 
-<!-- MESSAGES -->
+<!-- ================= MESSAGES ================= -->
 
 <section id="messagesPage" class="page">
 
@@ -1282,20 +1389,35 @@ textarea:focus{
 
   </div>
 
-  <div id="messageSearchResults" style="display:none"></div>
+  <div
+    id="messageSearchResults"
+    style="display:none"
+  ></div>
 
-  <div id="conversations" class="conversations"></div>
+  <div
+    id="conversations"
+    class="conversations"
+  ></div>
 
 </section>
 
 
-<!-- CHAT -->
+<!-- ================= CHAT ================= -->
 
-<section id="chatPage" class="page chat-page">
+<section
+  id="chatPage"
+  class="page chat-page"
+>
 
-  <div id="chatHeader" class="chat-header"></div>
+  <div
+    id="chatHeader"
+    class="chat-header"
+  ></div>
 
-  <div id="chatMessages" class="chat-messages"></div>
+  <div
+    id="chatMessages"
+    class="chat-messages"
+  ></div>
 
   <div class="chat-input-area">
 
@@ -1307,7 +1429,10 @@ textarea:focus{
       onkeydown="handleChatKey(event)"
     ></textarea>
 
-    <button class="chat-send" onclick="sendMessage()">
+    <button
+      class="chat-send"
+      onclick="sendMessage()"
+    >
       ↑
     </button>
 
@@ -1316,7 +1441,7 @@ textarea:focus{
 </section>
 
 
-<!-- MY PROFILE -->
+<!-- ================= MY PROFILE ================= -->
 
 <section id="profilePage" class="page">
 
@@ -1328,22 +1453,47 @@ textarea:focus{
 
       <div id="profileAvatarContainer"></div>
 
-      <div id="profileName" class="profile-name"></div>
+      <div
+        id="profileName"
+        class="profile-name"
+      ></div>
 
-      <div id="profileUsername" class="profile-username"></div>
+      <div
+        id="profileUsername"
+        class="profile-username"
+      ></div>
 
-      <div id="profileBio" class="profile-bio"></div>
+      <div
+        id="profileBio"
+        class="profile-bio"
+      ></div>
 
       <div class="profile-stats">
 
         <div>
-          <div id="myFollowersCount" class="stat-number">0</div>
-          <div class="stat-label">подписчиков</div>
+          <div
+            id="myFollowersCount"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            подписчиков
+          </div>
         </div>
 
         <div>
-          <div id="myFollowingCount" class="stat-number">0</div>
-          <div class="stat-label">подписок</div>
+          <div
+            id="myFollowingCount"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            подписок
+          </div>
         </div>
 
       </div>
@@ -1381,9 +1531,44 @@ textarea:focus{
       <textarea
         id="wallInput"
         placeholder="Что написать на стене?"
+        maxlength="5000"
       ></textarea>
 
-      <button class="publish" onclick="createWallPost()">
+      <div class="post-photo-tools">
+
+        <button
+          type="button"
+          class="photo-button"
+          onclick="choosePostImage('wall')"
+        >
+          📷 Фото
+        </button>
+
+        <span
+          id="wallImageName"
+          class="photo-name"
+        ></span>
+
+      </div>
+
+      <div
+        id="wallImagePreview"
+        class="post-image-preview"
+      ></div>
+
+      <input
+        id="wallImageInput"
+        type="file"
+        accept="image/*"
+        hidden
+        onchange="previewPostImage(event,'wall')"
+      >
+
+      <button
+        class="publish"
+        id="publishWallButton"
+        onclick="createWallPost()"
+      >
         Опубликовать
       </button>
 
@@ -1396,11 +1581,17 @@ textarea:focus{
 </section>
 
 
-<!-- PUBLIC PROFILE -->
+<!-- ================= PUBLIC PROFILE ================= -->
 
-<section id="publicProfilePage" class="page">
+<section
+  id="publicProfilePage"
+  class="page"
+>
 
-  <button class="public-back" onclick="backToSearch()">
+  <button
+    class="public-back"
+    onclick="backToSearch()"
+  >
     ← Вернуться к поиску
   </button>
 
@@ -1412,27 +1603,55 @@ textarea:focus{
 
       <div id="publicAvatarContainer"></div>
 
-      <div id="publicName" class="public-name"></div>
+      <div
+        id="publicName"
+        class="public-name"
+      ></div>
 
-      <div id="publicUsername" class="public-username"></div>
+      <div
+        id="publicUsername"
+        class="public-username"
+      ></div>
 
-      <div id="publicBio" class="public-bio"></div>
+      <div
+        id="publicBio"
+        class="public-bio"
+      ></div>
 
       <div class="public-stats">
 
         <div>
-          <div id="publicFollowersCount" class="stat-number">0</div>
-          <div class="stat-label">подписчиков</div>
+          <div
+            id="publicFollowersCount"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            подписчиков
+          </div>
         </div>
 
         <div>
-          <div id="publicFollowingCount" class="stat-number">0</div>
-          <div class="stat-label">подписок</div>
+          <div
+            id="publicFollowingCount"
+            class="stat-number"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            подписок
+          </div>
         </div>
 
       </div>
 
-      <div id="publicActions" class="public-actions"></div>
+      <div
+        id="publicActions"
+        class="public-actions"
+      ></div>
 
     </div>
 
@@ -1453,28 +1672,44 @@ textarea:focus{
 </main>
 
 
-<!-- NAV -->
+<!-- ================= NAV ================= -->
 
 <nav class="bottom-nav">
 
   <div class="nav-inner">
 
-    <button id="feedNav" class="nav-button" onclick="showPage('feed')">
+    <button
+      id="feedNav"
+      class="nav-button"
+      onclick="showPage('feed')"
+    >
       <span class="nav-icon">🏠</span>
       <span>Лента</span>
     </button>
 
-    <button id="searchNav" class="nav-button" onclick="showPage('search')">
+    <button
+      id="searchNav"
+      class="nav-button"
+      onclick="showPage('search')"
+    >
       <span class="nav-icon">🔎</span>
       <span>Поиск</span>
     </button>
 
-    <button id="messagesNav" class="nav-button" onclick="showPage('messages')">
+    <button
+      id="messagesNav"
+      class="nav-button"
+      onclick="showPage('messages')"
+    >
       <span class="nav-icon">💬</span>
       <span>Сообщения</span>
     </button>
 
-    <button id="profileNav" class="nav-button" onclick="showPage('profile')">
+    <button
+      id="profileNav"
+      class="nav-button"
+      onclick="showPage('profile')"
+    >
       <span class="nav-icon">👤</span>
       <span>Профиль</span>
     </button>
@@ -1486,9 +1721,12 @@ textarea:focus{
 </div>
 
 
-<!-- PROFILE MODAL -->
+<!-- ================= PROFILE MODAL ================= -->
 
-<div id="profileModal" class="modal">
+<div
+  id="profileModal"
+  class="modal"
+>
 
   <div class="modal-card">
 
@@ -1516,11 +1754,17 @@ textarea:focus{
 
     <div class="modal-actions">
 
-      <button class="cancel" onclick="closeProfileEditor()">
+      <button
+        class="cancel"
+        onclick="closeProfileEditor()"
+      >
         Отмена
       </button>
 
-      <button class="primary" onclick="saveProfile()">
+      <button
+        class="primary"
+        onclick="saveProfile()"
+      >
         Сохранить
       </button>
 
@@ -1530,6 +1774,8 @@ textarea:focus{
 
 </div>
 
+
+<!-- ================= HIDDEN INPUTS ================= -->
 
 <input
   id="avatarInput"
@@ -1542,7 +1788,9 @@ textarea:focus{
 
 <script>
 
-/* ================= SUPABASE ================= */
+/* =========================================================
+   SUPABASE
+========================================================= */
 
 const SUPABASE_URL =
   "https://jrzoexmvgyyitojbcxvr.supabase.co";
@@ -1555,7 +1803,7 @@ const SUPABASE_KEY =
 
 
 
-const baseHeaders = {
+const baseHeaders={
   "apikey":SUPABASE_KEY,
   "Content-Type":"application/json"
 };
@@ -1563,28 +1811,43 @@ const baseHeaders = {
 
 function authHeaders(){
 
-  const token =
+  const token=
     localStorage.getItem("access_token");
 
-  return {
+  return{
     ...baseHeaders,
     "Authorization":
-      "Bearer " + (token || SUPABASE_KEY)
+      "Bearer "+(token || SUPABASE_KEY)
   };
 
 }
 
 
-/* ================= STATE ================= */
+/* =========================================================
+   STATE
+========================================================= */
 
-let currentChatUser = null;
-let chatPolling = null;
-let searchTimeout = null;
-let messageSearchTimeout = null;
-let publicProfile = null;
+let currentChatUser=null;
+let chatPolling=null;
+
+let searchTimeout=null;
+let messageSearchTimeout=null;
+
+let publicProfile=null;
+
+let profilesCache=null;
+let profilesCacheTime=0;
+
+let postsLoading=false;
+let conversationsLoading=false;
+let chatLoading=false;
+
+const PROFILES_CACHE_MS=30000;
 
 
-/* ================= AUTH UI ================= */
+/* =========================================================
+   AUTH UI
+========================================================= */
 
 function showAuthChoice(){
 
@@ -1600,10 +1863,10 @@ function showAuthForm(type){
 
   document.getElementById("authChoice").style.display="none";
 
-  document.getElementById("loginForm").style.display =
+  document.getElementById("loginForm").style.display=
     type==="login" ? "block" : "none";
 
-  document.getElementById("signupForm").style.display =
+  document.getElementById("signupForm").style.display=
     type==="signup" ? "block" : "none";
 
   document.getElementById("authMessage").textContent="";
@@ -1611,23 +1874,25 @@ function showAuthForm(type){
 }
 
 
-/* ================= SIGN UP ================= */
+/* =========================================================
+   SIGN UP
+========================================================= */
 
 async function signUp(){
 
-  const username =
+  const username=
     document.getElementById("signupUsername").value.trim();
 
-  const email =
+  const email=
     document.getElementById("signupEmail").value.trim();
 
-  const password =
+  const password=
     document.getElementById("signupPassword").value;
 
-  const message =
+  const message=
     document.getElementById("authMessage");
 
-  const button =
+  const button=
     document.getElementById("signupButton");
 
 
@@ -1641,7 +1906,7 @@ async function signUp(){
 
   if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
 
-    message.textContent =
+    message.textContent=
       "Username: только латиница, цифры, _ . -";
 
     return;
@@ -1651,7 +1916,7 @@ async function signUp(){
 
   if(username.length<3){
 
-    message.textContent =
+    message.textContent=
       "Username должен быть минимум 3 символа.";
 
     return;
@@ -1661,7 +1926,7 @@ async function signUp(){
 
   if(password.length<6){
 
-    message.textContent =
+    message.textContent=
       "Пароль должен быть минимум 6 символов.";
 
     return;
@@ -1675,7 +1940,7 @@ async function signUp(){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+"/auth/v1/signup",
         {
@@ -1689,13 +1954,12 @@ async function signUp(){
       );
 
 
-    const data =
-      await response.json();
+    const data=await response.json();
 
 
     if(!response.ok){
 
-      message.textContent =
+      message.textContent=
         data.msg ||
         data.message ||
         data.error_description ||
@@ -1708,7 +1972,7 @@ async function signUp(){
 
     if(!data.user){
 
-      message.textContent =
+      message.textContent=
         "Не удалось получить данные аккаунта.";
 
       return;
@@ -1718,7 +1982,7 @@ async function signUp(){
 
     if(!data.access_token){
 
-      message.textContent =
+      message.textContent=
         "Аккаунт создан. Теперь войди.";
 
       showAuthForm("login");
@@ -1741,7 +2005,7 @@ async function signUp(){
     );
 
 
-    const profileCreated =
+    const profileCreated=
       await createProfile(
         data.user.id,
         username
@@ -1750,11 +2014,10 @@ async function signUp(){
 
     if(!profileCreated){
 
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user_id");
+      clearSession();
 
-      message.textContent =
-        "Аккаунт создан, но профиль не создался. Проверь username.";
+      message.textContent=
+        "Аккаунт создан, но профиль не создался.";
 
       return;
 
@@ -1767,7 +2030,7 @@ async function signUp(){
 
     console.error("signUp:",error);
 
-    message.textContent =
+    message.textContent=
       "Ошибка соединения с сервером.";
 
   }finally{
@@ -1779,26 +2042,28 @@ async function signUp(){
 }
 
 
-/* ================= SIGN IN ================= */
+/* =========================================================
+   SIGN IN
+========================================================= */
 
 async function signIn(){
 
-  const email =
+  const email=
     document.getElementById("loginEmail").value.trim();
 
-  const password =
+  const password=
     document.getElementById("loginPassword").value;
 
-  const message =
+  const message=
     document.getElementById("authMessage");
 
-  const button =
+  const button=
     document.getElementById("loginButton");
 
 
   if(!email || !password){
 
-    message.textContent =
+    message.textContent=
       "Введите email и пароль.";
 
     return;
@@ -1812,7 +2077,7 @@ async function signIn(){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/auth/v1/token?grant_type=password",
@@ -1827,13 +2092,12 @@ async function signIn(){
       );
 
 
-    const data =
-      await response.json();
+    const data=await response.json();
 
 
     if(!response.ok){
 
-      message.textContent =
+      message.textContent=
         data.msg ||
         data.message ||
         data.error_description ||
@@ -1846,7 +2110,7 @@ async function signIn(){
 
     if(!data.access_token || !data.user){
 
-      message.textContent =
+      message.textContent=
         "Сервер не вернул данные входа.";
 
       return;
@@ -1871,7 +2135,7 @@ async function signIn(){
 
     console.error("signIn:",error);
 
-    message.textContent =
+    message.textContent=
       "Ошибка соединения с сервером.";
 
   }finally{
@@ -1883,23 +2147,27 @@ async function signIn(){
 }
 
 
-/* ================= SESSION ================= */
+/* =========================================================
+   SESSION
+========================================================= */
 
 async function validateSession(){
 
-  const token =
+  const token=
     localStorage.getItem("access_token");
 
-  const userId =
+  const userId=
     localStorage.getItem("user_id");
 
 
-  if(!token || !userId)return false;
+  if(!token || !userId){
+    return false;
+  }
 
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+"/auth/v1/user",
         {
@@ -1919,8 +2187,7 @@ async function validateSession(){
     }
 
 
-    const user =
-      await response.json();
+    const user=await response.json();
 
 
     if(!user || user.id!==userId){
@@ -1963,18 +2230,22 @@ function signOut(){
 
   window.currentProfile=null;
 
+  profilesCache=null;
+
   showAuth();
 
 }
 
 
-/* ================= PROFILE CREATION ================= */
+/* =========================================================
+   PROFILE CREATION
+========================================================= */
 
 async function createProfile(userId,username){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+"/rest/v1/profiles",
         {
@@ -1995,12 +2266,18 @@ async function createProfile(userId,username){
       );
 
 
-    if(response.ok)return true;
+    if(response.ok){
+
+      profilesCache=null;
+      return true;
+
+    }
 
 
-    const text=await response.text();
-
-    console.error("Profile creation:",text);
+    console.error(
+      "Profile creation:",
+      await response.text()
+    );
 
     return false;
 
@@ -2015,19 +2292,23 @@ async function createProfile(userId,username){
 }
 
 
-/* ================= MY PROFILE ================= */
+/* =========================================================
+   MY PROFILE
+========================================================= */
 
 async function loadProfile(){
 
-  const userId =
+  const userId=
     localStorage.getItem("user_id");
 
-  if(!userId)return null;
+  if(!userId){
+    return null;
+  }
 
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/profiles?id=eq."+
@@ -2041,19 +2322,25 @@ async function loadProfile(){
 
     if(!response.ok){
 
-      console.error("loadProfile:",await response.text());
+      console.error(
+        "loadProfile:",
+        await response.text()
+      );
+
       return null;
 
     }
 
 
-    const profiles =
-      await response.json();
+    const profiles=await response.json();
 
 
     if(!profiles.length){
 
-      console.error("Профиль пользователя отсутствует.");
+      console.error(
+        "Профиль пользователя отсутствует."
+      );
+
       return null;
 
     }
@@ -2063,14 +2350,16 @@ async function loadProfile(){
 
     window.currentProfile=profile;
 
+    profilesCache=null;
 
-    document.getElementById("profileName").textContent =
+
+    document.getElementById("profileName").textContent=
       profile.display_name || profile.username;
 
-    document.getElementById("profileUsername").textContent =
+    document.getElementById("profileUsername").textContent=
       "@"+profile.username;
 
-    document.getElementById("profileBio").textContent =
+    document.getElementById("profileBio").textContent=
       profile.bio ||
       "Описание профиля пока не добавлено.";
 
@@ -2098,11 +2387,13 @@ async function loadProfile(){
 }
 
 
-/* ================= AVATAR ================= */
+/* =========================================================
+   AVATAR
+========================================================= */
 
 function renderProfileAvatar(profile){
 
-  const container =
+  const container=
     document.getElementById("profileAvatarContainer");
 
   if(!container)return;
@@ -2117,6 +2408,7 @@ function renderProfileAvatar(profile){
     img.className="big-avatar";
     img.src=profile.avatar_url;
     img.alt="Аватар";
+    img.loading="lazy";
 
     img.onerror=()=>{
 
@@ -2128,12 +2420,13 @@ function renderProfileAvatar(profile){
     };
 
     container.appendChild(img);
+
     return;
 
   }
 
 
-  const letter =
+  const letter=
     (
       profile.display_name ||
       profile.username ||
@@ -2160,11 +2453,10 @@ function chooseAvatar(){
 
 async function uploadAvatar(){
 
-  const input =
+  const input=
     document.getElementById("avatarInput");
 
-  const file =
-    input.files[0];
+  const file=input.files[0];
 
   if(!file)return;
 
@@ -2178,55 +2470,56 @@ async function uploadAvatar(){
   }
 
 
-  if(file.size>5*1024*1024){
+  if(file.size>10*1024*1024){
 
-    alert("Максимальный размер аватарки: 5 МБ.");
+    alert("Максимальный размер аватарки: 10 МБ.");
     input.value="";
     return;
 
   }
 
 
-  const userId =
+  const userId=
     localStorage.getItem("user_id");
 
-  const token =
+  const token=
     localStorage.getItem("access_token");
 
 
   if(!userId || !token){
 
     alert("Сначала войди в аккаунт.");
+    input.value="";
     return;
 
   }
 
 
-  const extension =
-    (file.name.split(".").pop() || "jpg").toLowerCase();
-
-
-  const filePath =
-    userId+"/"+Date.now()+"."+extension;
-
-
   try{
 
-    const uploadResponse =
-      await fetch(
-        SUPABASE_URL+
-        "/storage/v1/object/Stenka/"+
+    const prepared=
+      await prepareImageForUpload(file);
+
+
+    const extension=
+      getImageExtension(
+        prepared.type || file.type,
+        file.name
+      );
+
+
+    const filePath=
+      userId+
+      "/"+
+      Date.now()+
+      "-avatar."+
+      extension;
+
+
+    const uploadResponse=
+      await uploadToStorage(
         filePath,
-        {
-          method:"POST",
-          headers:{
-            "apikey":SUPABASE_KEY,
-            "Authorization":"Bearer "+token,
-            "Content-Type":file.type,
-            "x-upsert":"true"
-          },
-          body:file
-        }
+        prepared
       );
 
 
@@ -2234,21 +2527,22 @@ async function uploadAvatar(){
 
       alert(
         "Не удалось загрузить аватарку:\n"+
-        await uploadResponse.text()
+        uploadResponse.text
       );
 
+      input.value="";
       return;
 
     }
 
 
-    const avatarUrl =
+    const avatarUrl=
       SUPABASE_URL+
       "/storage/v1/object/public/Stenka/"+
       filePath;
 
 
-    const updateResponse =
+    const updateResponse=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/profiles?id=eq."+
@@ -2272,12 +2566,14 @@ async function uploadAvatar(){
         "Фото загрузилось, но профиль не обновился."
       );
 
+      input.value="";
       return;
 
     }
 
 
     input.value="";
+    profilesCache=null;
 
     await loadProfile();
 
@@ -2285,14 +2581,20 @@ async function uploadAvatar(){
 
     console.error("uploadAvatar:",error);
 
-    alert("Ошибка загрузки аватарки.");
+    alert(
+      "Ошибка загрузки аватарки."
+    );
+
+    input.value="";
 
   }
 
 }
 
 
-/* ================= PROFILE EDITOR ================= */
+/* =========================================================
+   PROFILE EDITOR
+========================================================= */
 
 function openProfileEditor(){
 
@@ -2307,17 +2609,22 @@ function openProfileEditor(){
   }
 
 
-  document.getElementById("editDisplayName").value =
-    profile.display_name || profile.username || "";
+  document.getElementById("editDisplayName").value=
+    profile.display_name ||
+    profile.username ||
+    "";
 
-  document.getElementById("editUsername").value =
-    profile.username || "";
+  document.getElementById("editUsername").value=
+    profile.username ||
+    "";
 
-  document.getElementById("editBio").value =
-    profile.bio || "";
+  document.getElementById("editBio").value=
+    profile.bio ||
+    "";
 
 
-  document.getElementById("profileModal")
+  document
+    .getElementById("profileModal")
     .classList.add("active");
 
 }
@@ -2325,7 +2632,8 @@ function openProfileEditor(){
 
 function closeProfileEditor(){
 
-  document.getElementById("profileModal")
+  document
+    .getElementById("profileModal")
     .classList.remove("active");
 
 }
@@ -2333,21 +2641,27 @@ function closeProfileEditor(){
 
 async function saveProfile(){
 
-  const userId =
+  const userId=
     localStorage.getItem("user_id");
 
 
-  const displayName =
-    document.getElementById("editDisplayName")
-      .value.trim();
+  const displayName=
+    document
+      .getElementById("editDisplayName")
+      .value
+      .trim();
 
-  const username =
-    document.getElementById("editUsername")
-      .value.trim();
+  const username=
+    document
+      .getElementById("editUsername")
+      .value
+      .trim();
 
-  const bio =
-    document.getElementById("editBio")
-      .value.trim();
+  const bio=
+    document
+      .getElementById("editBio")
+      .value
+      .trim();
 
 
   if(!username){
@@ -2371,7 +2685,10 @@ async function saveProfile(){
 
   if(username.length<3){
 
-    alert("Username должен быть минимум 3 символа.");
+    alert(
+      "Username должен быть минимум 3 символа."
+    );
+
     return;
 
   }
@@ -2379,7 +2696,7 @@ async function saveProfile(){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/profiles?id=eq."+
@@ -2408,12 +2725,15 @@ async function saveProfile(){
         text.includes("23505")
       ){
 
-        alert("Этот username уже занят.");
+        alert(
+          "Этот username уже занят."
+        );
 
       }else{
 
         alert(
-          "Не удалось сохранить профиль:\n"+text
+          "Не удалось сохранить профиль:\n"+
+          text
         );
 
       }
@@ -2423,52 +2743,77 @@ async function saveProfile(){
     }
 
 
+    profilesCache=null;
+
     closeProfileEditor();
 
     await loadProfile();
 
-    if(document.getElementById("feedPage").classList.contains("active")){
+    if(
+      document
+        .getElementById("feedPage")
+        .classList
+        .contains("active")
+    ){
+
       await loadPosts();
+
     }
 
-    if(document.getElementById("profilePage").classList.contains("active")){
+    if(
+      document
+        .getElementById("profilePage")
+        .classList
+        .contains("active")
+    ){
+
       await loadWall();
+
     }
 
   }catch(error){
 
     console.error("saveProfile:",error);
 
-    alert("Ошибка соединения с сервером.");
+    alert(
+      "Ошибка соединения с сервером."
+    );
 
   }
 
 }
 
 
-/* ================= SEARCH ================= */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 function searchUsers(){
 
   clearTimeout(searchTimeout);
 
-  searchTimeout=setTimeout(
-    performUserSearch,
-    250
-  );
+  searchTimeout=
+    setTimeout(
+      performUserSearch,
+      250
+    );
 
 }
 
 
 async function performUserSearch(){
 
-  const input=document.getElementById("userSearchInput");
-  const results=document.getElementById("searchResults");
+  const input=
+    document.getElementById("userSearchInput");
+
+  const results=
+    document.getElementById("searchResults");
 
   if(!input || !results)return;
 
 
-  const query=input.value.trim();
+  const query=
+    input.value.trim();
 
 
   if(!query){
@@ -2483,8 +2828,10 @@ async function performUserSearch(){
   }
 
 
-  const safeQuery =
-    query.replace(/[,*()]/g,"").trim();
+  const safeQuery=
+    query
+      .replace(/[,*()]/g,"")
+      .trim();
 
 
   if(!safeQuery){
@@ -2500,15 +2847,18 @@ async function performUserSearch(){
 
 
   results.innerHTML=
-    `<div class="search-empty">Ищем...</div>`;
+    `<div class="search-empty">
+      Ищем...
+    </div>`;
 
 
   try{
 
-    const pattern="*"+safeQuery+"*";
+    const pattern=
+      "*"+safeQuery+"*";
 
 
-    const url =
+    const url=
       SUPABASE_URL+
       "/rest/v1/profiles"+
       "?or="+
@@ -2520,7 +2870,7 @@ async function performUserSearch(){
       "&limit=30";
 
 
-    const response =
+    const response=
       await fetch(
         url,
         {
@@ -2531,7 +2881,9 @@ async function performUserSearch(){
 
     if(!response.ok){
 
-      console.error(await response.text());
+      console.error(
+        await response.text()
+      );
 
       results.innerHTML=
         `<div class="search-empty">
@@ -2562,7 +2914,8 @@ async function performUserSearch(){
 
     profiles.forEach(profile=>{
 
-      const user=document.createElement("div");
+      const user=
+        document.createElement("div");
 
       user.className="search-user";
 
@@ -2571,61 +2924,53 @@ async function performUserSearch(){
       };
 
 
-      if(profile.avatar_url){
-
-        const img=document.createElement("img");
-
-        img.className="search-avatar";
-        img.src=profile.avatar_url;
-        img.alt="";
-
-        user.appendChild(img);
-
-      }else{
-
-        const placeholder=document.createElement("div");
-
-        placeholder.className="search-avatar-placeholder";
-
-        placeholder.textContent=
-          (
-            profile.display_name ||
-            profile.username ||
-            "N"
-          ).charAt(0).toUpperCase();
-
-        user.appendChild(placeholder);
-
-      }
+      appendAvatar(
+        user,
+        profile,
+        "search"
+      );
 
 
-      const info=document.createElement("div");
+      const info=
+        document.createElement("div");
 
-      const name=document.createElement("div");
 
-      name.className="search-user-name";
+      const name=
+        document.createElement("div");
+
+      name.className=
+        "search-user-name";
+
       name.textContent=
         profile.display_name ||
         profile.username;
 
 
-      const username=document.createElement("div");
+      const username=
+        document.createElement("div");
 
-      username.className="search-user-username";
-      username.textContent="@"+profile.username;
+      username.className=
+        "search-user-username";
+
+      username.textContent=
+        "@"+profile.username;
 
 
       info.appendChild(name);
       info.appendChild(username);
 
       user.appendChild(info);
+
       results.appendChild(user);
 
     });
 
   }catch(error){
 
-    console.error("Search:",error);
+    console.error(
+      "Search:",
+      error
+    );
 
     results.innerHTML=
       `<div class="search-empty">
@@ -2637,7 +2982,9 @@ async function performUserSearch(){
 }
 
 
-/* ================= PUBLIC PROFILE ================= */
+/* =========================================================
+   PUBLIC PROFILE
+========================================================= */
 
 async function openFoundProfile(profile){
 
@@ -2649,20 +2996,28 @@ async function openFoundProfile(profile){
   showPage("publicProfile");
 
 
-  document.getElementById("publicName").textContent="Загрузка...";
-  document.getElementById("publicUsername").textContent="";
-  document.getElementById("publicBio").textContent="";
-  document.getElementById("publicActions").innerHTML="";
+  document.getElementById("publicName")
+    .textContent="Загрузка...";
 
-  document.getElementById("publicWall").innerHTML=
-    `<div class="wall-empty">
-      Загружаем стену...
-    </div>`;
+  document.getElementById("publicUsername")
+    .textContent="";
+
+  document.getElementById("publicBio")
+    .textContent="";
+
+  document.getElementById("publicActions")
+    .innerHTML="";
+
+  document.getElementById("publicWall")
+    .innerHTML=
+      `<div class="wall-empty">
+        Загружаем стену...
+      </div>`;
 
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/profiles?id=eq."+
@@ -2675,11 +3030,16 @@ async function openFoundProfile(profile){
 
 
     if(!response.ok){
-      throw new Error(await response.text());
+
+      throw new Error(
+        await response.text()
+      );
+
     }
 
 
-    const profiles=await response.json();
+    const profiles=
+      await response.json();
 
 
     if(!profiles.length){
@@ -2693,19 +3053,33 @@ async function openFoundProfile(profile){
 
     publicProfile=profiles[0];
 
-    renderPublicProfile(publicProfile);
+    renderPublicProfile(
+      publicProfile
+    );
 
-    await loadPublicFollowStats(publicProfile.id);
+    await loadPublicFollowStats(
+      publicProfile.id
+    );
 
-    await renderFollowButton(publicProfile.id);
+    await renderFollowButton(
+      publicProfile.id
+    );
 
-    await loadPublicWall(publicProfile.id);
+    await loadPublicWall(
+      publicProfile.id
+    );
 
   }catch(error){
 
-    console.error("openFoundProfile:",error);
+    console.error(
+      "openFoundProfile:",
+      error
+    );
 
-    alert("Не удалось открыть профиль.");
+    alert(
+      "Не удалось открыть профиль."
+    );
+
     backToSearch();
 
   }
@@ -2715,61 +3089,79 @@ async function openFoundProfile(profile){
 
 function renderPublicProfile(profile){
 
-  document.getElementById("publicName").textContent =
-    profile.display_name || profile.username;
+  document.getElementById("publicName")
+    .textContent=
+      profile.display_name ||
+      profile.username;
 
-  document.getElementById("publicUsername").textContent =
-    "@"+profile.username;
+  document.getElementById("publicUsername")
+    .textContent=
+      "@"+profile.username;
 
-  document.getElementById("publicBio").textContent =
-    profile.bio ||
-    "Описание профиля пока не добавлено.";
+  document.getElementById("publicBio")
+    .textContent=
+      profile.bio ||
+      "Описание профиля пока не добавлено.";
 
 
-  const container =
-    document.getElementById("publicAvatarContainer");
+  const container=
+    document.getElementById(
+      "publicAvatarContainer"
+    );
 
   container.replaceChildren();
 
 
   if(profile.avatar_url){
 
-    const img=document.createElement("img");
+    const img=
+      document.createElement("img");
 
     img.className="public-avatar";
     img.src=profile.avatar_url;
     img.alt="Аватар";
+    img.loading="lazy";
 
     img.onerror=()=>{
+
       renderPublicProfile({
         ...profile,
         avatar_url:""
       });
+
     };
 
     container.appendChild(img);
 
   }else{
 
-    const placeholder=document.createElement("div");
+    const placeholder=
+      document.createElement("div");
 
-    placeholder.className="public-avatar-placeholder";
+    placeholder.className=
+      "public-avatar-placeholder";
 
     placeholder.textContent=
       (
         profile.display_name ||
         profile.username ||
         "N"
-      ).charAt(0).toUpperCase();
+      )
+      .charAt(0)
+      .toUpperCase();
 
-    container.appendChild(placeholder);
+    container.appendChild(
+      placeholder
+    );
 
   }
 
 }
 
 
-/* ================= FOLLOWS ================= */
+/* =========================================================
+   FOLLOWS
+========================================================= */
 
 async function loadFollowStats(
   userId,
@@ -2779,45 +3171,56 @@ async function loadFollowStats(
 
   try{
 
-    const followersResponse =
-      await fetch(
-        SUPABASE_URL+
-        "/rest/v1/follows"+
-        "?following_id=eq."+
-        encodeURIComponent(userId)+
-        "&select=follower_id",
-        {
-          headers:authHeaders()
-        }
+    const [
+      followersResponse,
+      followingResponse
+    ]=
+      await Promise.all([
+
+        fetch(
+          SUPABASE_URL+
+          "/rest/v1/follows"+
+          "?following_id=eq."+
+          encodeURIComponent(userId)+
+          "&select=follower_id",
+          {
+            headers:authHeaders()
+          }
+        ),
+
+        fetch(
+          SUPABASE_URL+
+          "/rest/v1/follows"+
+          "?follower_id=eq."+
+          encodeURIComponent(userId)+
+          "&select=following_id",
+          {
+            headers:authHeaders()
+          }
+        )
+
+      ]);
+
+
+    const followersNode=
+      document.getElementById(
+        followersElement
       );
 
-
-    const followingResponse =
-      await fetch(
-        SUPABASE_URL+
-        "/rest/v1/follows"+
-        "?follower_id=eq."+
-        encodeURIComponent(userId)+
-        "&select=following_id",
-        {
-          headers:authHeaders()
-        }
+    const followingNode=
+      document.getElementById(
+        followingElement
       );
-
-
-    const followersNode =
-      document.getElementById(followersElement);
-
-    const followingNode =
-      document.getElementById(followingElement);
 
 
     if(followersResponse.ok){
 
-      const rows=await followersResponse.json();
+      const rows=
+        await followersResponse.json();
 
       if(followersNode){
-        followersNode.textContent=rows.length;
+        followersNode.textContent=
+          rows.length;
       }
 
     }
@@ -2825,17 +3228,22 @@ async function loadFollowStats(
 
     if(followingResponse.ok){
 
-      const rows=await followingResponse.json();
+      const rows=
+        await followingResponse.json();
 
       if(followingNode){
-        followingNode.textContent=rows.length;
+        followingNode.textContent=
+          rows.length;
       }
 
     }
 
   }catch(error){
 
-    console.error("loadFollowStats:",error);
+    console.error(
+      "loadFollowStats:",
+      error
+    );
 
   }
 
@@ -2855,7 +3263,7 @@ async function loadPublicFollowStats(userId){
 
 async function isFollowing(targetUserId){
 
-  const currentUserId =
+  const currentUserId=
     localStorage.getItem("user_id");
 
 
@@ -2871,7 +3279,7 @@ async function isFollowing(targetUserId){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/follows"+
@@ -2888,19 +3296,28 @@ async function isFollowing(targetUserId){
 
     if(!response.ok){
 
-      console.error("isFollowing:",await response.text());
+      console.error(
+        "isFollowing:",
+        await response.text()
+      );
+
       return false;
 
     }
 
 
-    const rows=await response.json();
+    const rows=
+      await response.json();
 
     return rows.length>0;
 
   }catch(error){
 
-    console.error("isFollowing:",error);
+    console.error(
+      "isFollowing:",
+      error
+    );
+
     return false;
 
   }
@@ -2910,10 +3327,12 @@ async function isFollowing(targetUserId){
 
 async function renderFollowButton(targetUserId){
 
-  const container =
-    document.getElementById("publicActions");
+  const container=
+    document.getElementById(
+      "publicActions"
+    );
 
-  const currentUserId =
+  const currentUserId=
     localStorage.getItem("user_id");
 
 
@@ -2925,10 +3344,15 @@ async function renderFollowButton(targetUserId){
 
   if(currentUserId===targetUserId){
 
-    const button=document.createElement("button");
+    const button=
+      document.createElement("button");
 
-    button.className="public-action";
-    button.textContent="Это ваш профиль";
+    button.className=
+      "public-action";
+
+    button.textContent=
+      "Это ваш профиль";
+
     button.disabled=true;
 
     container.appendChild(button);
@@ -2938,15 +3362,22 @@ async function renderFollowButton(targetUserId){
   }
 
 
-  const following =
-    await isFollowing(targetUserId);
+  const following=
+    await isFollowing(
+      targetUserId
+    );
 
 
-  const followButton=document.createElement("button");
+  const followButton=
+    document.createElement("button");
 
   followButton.className=
     "public-action"+
-    (following ? " following" : "");
+    (
+      following
+        ? " following"
+        : ""
+    );
 
   followButton.textContent=
     following
@@ -2958,37 +3389,49 @@ async function renderFollowButton(targetUserId){
 
     followButton.disabled=true;
 
-    await toggleFollow(targetUserId);
+    await toggleFollow(
+      targetUserId
+    );
 
     followButton.disabled=false;
 
   };
 
 
-  container.appendChild(followButton);
+  container.appendChild(
+    followButton
+  );
 
 
-  const messageButton=document.createElement("button");
+  const messageButton=
+    document.createElement("button");
 
-  messageButton.className="public-action";
-  messageButton.textContent="💬 Написать";
+  messageButton.className=
+    "public-action";
+
+  messageButton.textContent=
+    "💬 Написать";
 
   messageButton.onclick=()=>{
 
     if(publicProfile){
-      openChatWithUser(publicProfile);
+      openChatWithUser(
+        publicProfile
+      );
     }
 
   };
 
-  container.appendChild(messageButton);
+  container.appendChild(
+    messageButton
+  );
 
 }
 
 
 async function toggleFollow(targetUserId){
 
-  const currentUserId =
+  const currentUserId=
     localStorage.getItem("user_id");
 
 
@@ -3004,13 +3447,15 @@ async function toggleFollow(targetUserId){
 
   try{
 
-    const following =
-      await isFollowing(targetUserId);
+    const following=
+      await isFollowing(
+        targetUserId
+      );
 
 
     if(following){
 
-      const response =
+      const response=
         await fetch(
           SUPABASE_URL+
           "/rest/v1/follows"+
@@ -3041,9 +3486,10 @@ async function toggleFollow(targetUserId){
 
     }else{
 
-      const response =
+      const response=
         await fetch(
-          SUPABASE_URL+"/rest/v1/follows",
+          SUPABASE_URL+
+          "/rest/v1/follows",
           {
             method:"POST",
             headers:{
@@ -3060,7 +3506,8 @@ async function toggleFollow(targetUserId){
 
       if(!response.ok){
 
-        const text=await response.text();
+        const text=
+          await response.text();
 
         if(
           !text.includes("duplicate") &&
@@ -3068,7 +3515,8 @@ async function toggleFollow(targetUserId){
         ){
 
           alert(
-            "Не удалось подписаться:\n"+text
+            "Не удалось подписаться:\n"+
+            text
           );
 
           return;
@@ -3080,25 +3528,31 @@ async function toggleFollow(targetUserId){
     }
 
 
-    await loadPublicFollowStats(targetUserId);
-    await renderFollowButton(targetUserId);
+    await loadPublicFollowStats(
+      targetUserId
+    );
+
+    await renderFollowButton(
+      targetUserId
+    );
 
 
-    if(window.currentProfile){
-
-      await loadFollowStats(
-        currentUserId,
-        "myFollowersCount",
-        "myFollowingCount"
-      );
-
-    }
+    await loadFollowStats(
+      currentUserId,
+      "myFollowersCount",
+      "myFollowingCount"
+    );
 
   }catch(error){
 
-    console.error("toggleFollow:",error);
+    console.error(
+      "toggleFollow:",
+      error
+    );
 
-    alert("Ошибка соединения с сервером.");
+    alert(
+      "Ошибка соединения с сервером."
+    );
 
   }
 
@@ -3108,16 +3562,22 @@ async function toggleFollow(targetUserId){
 function backToSearch(){
 
   publicProfile=null;
+
   showPage("search");
 
 }
 
 
-/* ================= PUBLIC WALL ================= */
+/* =========================================================
+   PUBLIC WALL
+========================================================= */
 
 async function loadPublicWall(userId){
 
-  const wall=document.getElementById("publicWall");
+  const wall=
+    document.getElementById(
+      "publicWall"
+    );
 
   if(!wall)return;
 
@@ -3130,12 +3590,14 @@ async function loadPublicWall(userId){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/posts?user_id=eq."+
         encodeURIComponent(userId)+
-        "&select=*&order=created_at.desc",
+        "&select=*"+
+        "&order=created_at.desc"+
+        "&limit=50",
         {
           headers:authHeaders()
         }
@@ -3154,8 +3616,12 @@ async function loadPublicWall(userId){
     }
 
 
-    const posts=await response.json();
-    const profiles=await loadProfilesMap();
+    const posts=
+      await response.json();
+
+    const profiles=
+      await loadProfilesMap();
+
 
     wall.innerHTML="";
 
@@ -3173,12 +3639,19 @@ async function loadPublicWall(userId){
 
 
     posts.forEach(post=>{
-      renderPost(post,wall,profiles);
+      renderPost(
+        post,
+        wall,
+        profiles
+      );
     });
 
   }catch(error){
 
-    console.error("loadPublicWall:",error);
+    console.error(
+      "loadPublicWall:",
+      error
+    );
 
     wall.innerHTML=
       `<div class="wall-empty">
@@ -3190,39 +3663,57 @@ async function loadPublicWall(userId){
 }
 
 
-/* ================= MESSAGES ================= */
+/* =========================================================
+   MESSAGES
+========================================================= */
 
 async function loadConversations(){
 
-  const currentUserId =
+  if(conversationsLoading)return;
+
+  const currentUserId=
     localStorage.getItem("user_id");
 
-  const container =
-    document.getElementById("conversations");
+  const container=
+    document.getElementById(
+      "conversations"
+    );
 
 
-  if(!currentUserId || !container)return;
+  if(
+    !currentUserId ||
+    !container
+  ){
+    return;
+  }
 
 
-  container.innerHTML=
-    `<div class="search-empty">
-      Загружаем сообщения...
-    </div>`;
+  conversationsLoading=true;
 
 
   try{
 
-    const response =
+    container.innerHTML=
+      `<div class="search-empty">
+        Загружаем сообщения...
+      </div>`;
+
+
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/messages"+
         "?or="+
         encodeURIComponent(
-          "(sender_id.eq."+currentUserId+
-          ",receiver_id.eq."+currentUserId+")"
+          "(sender_id.eq."+
+          currentUserId+
+          ",receiver_id.eq."+
+          currentUserId+
+          ")"
         )+
         "&select=*"+
-        "&order=created_at.desc",
+        "&order=created_at.desc"+
+        "&limit=500",
         {
           headers:authHeaders()
         }
@@ -3231,14 +3722,17 @@ async function loadConversations(){
 
     if(!response.ok){
 
-      const errorText=await response.text();
+      const errorText=
+        await response.text();
 
-      console.error("Messages:",errorText);
+      console.error(
+        "Messages:",
+        errorText
+      );
 
       container.innerHTML=
         `<div class="search-empty">
-          Не удалось загрузить сообщения.<br><br>
-          ${escapeHtml(errorText)}
+          Не удалось загрузить сообщения.
         </div>`;
 
       return;
@@ -3246,7 +3740,8 @@ async function loadConversations(){
     }
 
 
-    const messages=await response.json();
+    const messages=
+      await response.json();
 
 
     if(!messages.length){
@@ -3262,13 +3757,15 @@ async function loadConversations(){
     }
 
 
-    const profiles=await loadProfilesMap();
+    const profiles=
+      await loadProfilesMap();
+
     const conversations={};
 
 
     messages.forEach(message=>{
 
-      const otherId =
+      const otherId=
         message.sender_id===currentUserId
           ? message.receiver_id
           : message.sender_id;
@@ -3284,41 +3781,58 @@ async function loadConversations(){
     container.innerHTML="";
 
 
-    Object.entries(conversations).forEach(
+    Object.entries(
+      conversations
+    ).forEach(
       ([userId,message])=>{
 
-        const profile=profiles[userId];
+        const profile=
+          profiles[userId];
 
         if(!profile)return;
 
 
-        const element=document.createElement("div");
+        const element=
+          document.createElement("div");
 
-        element.className="conversation";
+        element.className=
+          "conversation";
 
         element.onclick=()=>{
-          openChatWithUser(profile);
+          openChatWithUser(
+            profile
+          );
         };
 
 
-        const avatarWrap=document.createElement("div");
+        const avatarWrap=
+          document.createElement("div");
 
-        avatarWrap.className="conversation-avatar-wrap";
+        avatarWrap.className=
+          "conversation-avatar-wrap";
 
 
         if(profile.avatar_url){
 
-          const img=document.createElement("img");
+          const img=
+            document.createElement("img");
 
-          img.className="conversation-avatar";
-          img.src=profile.avatar_url;
+          img.className=
+            "conversation-avatar";
+
+          img.src=
+            profile.avatar_url;
+
           img.alt="";
+
+          img.loading="lazy";
 
           avatarWrap.appendChild(img);
 
         }else{
 
-          const avatar=document.createElement("div");
+          const avatar=
+            document.createElement("div");
 
           avatar.className=
             "conversation-avatar-placeholder";
@@ -3328,95 +3842,136 @@ async function loadConversations(){
               profile.display_name ||
               profile.username ||
               "N"
-            ).charAt(0).toUpperCase();
+            )
+            .charAt(0)
+            .toUpperCase();
 
-          avatarWrap.appendChild(avatar);
+          avatarWrap.appendChild(
+            avatar
+          );
 
         }
 
 
-        const dot=document.createElement("span");
+        const dot=
+          document.createElement("span");
 
-        dot.className="online-dot";
+        dot.className=
+          "online-dot";
 
         avatarWrap.appendChild(dot);
 
 
-        const main=document.createElement("div");
+        const main=
+          document.createElement("div");
 
-        main.className="conversation-main";
-
-
-        const top=document.createElement("div");
-
-        top.className="conversation-top";
+        main.className=
+          "conversation-main";
 
 
-        const name=document.createElement("div");
+        const top=
+          document.createElement("div");
 
-        name.className="conversation-name";
+        top.className=
+          "conversation-top";
+
+
+        const name=
+          document.createElement("div");
+
+        name.className=
+          "conversation-name";
 
         name.textContent=
           profile.display_name ||
           profile.username;
 
 
-        const time=document.createElement("div");
+        const time=
+          document.createElement("div");
 
-        time.className="conversation-time";
+        time.className=
+          "conversation-time";
 
         time.textContent=
-          formatMessageTime(message.created_at);
+          formatMessageTime(
+            message.created_at
+          );
 
 
         top.appendChild(name);
         top.appendChild(time);
 
 
-        const bottom=document.createElement("div");
+        const bottom=
+          document.createElement("div");
 
-        bottom.className="conversation-bottom";
-
-
-        const preview=document.createElement("div");
-
-        preview.className="conversation-preview";
-
-        preview.textContent=message.content || "";
+        bottom.className=
+          "conversation-bottom";
 
 
-        bottom.appendChild(preview);
+        const preview=
+          document.createElement("div");
+
+        preview.className=
+          "conversation-preview";
+
+        preview.textContent=
+          message.content || "";
+
+
+        bottom.appendChild(
+          preview
+        );
 
         main.appendChild(top);
         main.appendChild(bottom);
 
-        element.appendChild(avatarWrap);
-        element.appendChild(main);
+        element.appendChild(
+          avatarWrap
+        );
 
-        container.appendChild(element);
+        element.appendChild(
+          main
+        );
+
+        container.appendChild(
+          element
+        );
 
       }
     );
 
   }catch(error){
 
-    console.error("loadConversations:",error);
+    console.error(
+      "loadConversations:",
+      error
+    );
 
     container.innerHTML=
       `<div class="search-empty">
         Ошибка загрузки сообщений.
       </div>`;
 
+  }finally{
+
+    conversationsLoading=false;
+
   }
 
 }
 
 
-/* ================= MESSAGE SEARCH ================= */
+/* =========================================================
+   MESSAGE SEARCH
+========================================================= */
 
 function searchMessageUsers(){
 
-  clearTimeout(messageSearchTimeout);
+  clearTimeout(
+    messageSearchTimeout
+  );
 
   messageSearchTimeout=
     setTimeout(
@@ -3429,20 +3984,33 @@ function searchMessageUsers(){
 
 async function performMessageUserSearch(){
 
-  const input =
-    document.getElementById("messageSearchInput");
+  const input=
+    document.getElementById(
+      "messageSearchInput"
+    );
 
-  const results =
-    document.getElementById("messageSearchResults");
+  const results=
+    document.getElementById(
+      "messageSearchResults"
+    );
 
-  const conversations =
-    document.getElementById("conversations");
+  const conversations=
+    document.getElementById(
+      "conversations"
+    );
 
 
-  if(!input || !results || !conversations)return;
+  if(
+    !input ||
+    !results ||
+    !conversations
+  ){
+    return;
+  }
 
 
-  const query=input.value.trim();
+  const query=
+    input.value.trim();
 
 
   if(!query){
@@ -3457,8 +4025,10 @@ async function performMessageUserSearch(){
   }
 
 
-  const safeQuery =
-    query.replace(/[,*()]/g,"").trim();
+  const safeQuery=
+    query
+      .replace(/[,*()]/g,"")
+      .trim();
 
 
   if(!safeQuery){
@@ -3480,15 +4050,18 @@ async function performMessageUserSearch(){
   conversations.style.display="none";
 
   results.innerHTML=
-    `<div class="search-empty">Ищем...</div>`;
+    `<div class="search-empty">
+      Ищем...
+    </div>`;
 
 
   try{
 
-    const pattern="*"+safeQuery+"*";
+    const pattern=
+      "*"+safeQuery+"*";
 
 
-    const url =
+    const url=
       SUPABASE_URL+
       "/rest/v1/profiles"+
       "?or="+
@@ -3500,7 +4073,7 @@ async function performMessageUserSearch(){
       "&limit=20";
 
 
-    const response =
+    const response=
       await fetch(
         url,
         {
@@ -3521,7 +4094,8 @@ async function performMessageUserSearch(){
     }
 
 
-    const profiles=await response.json();
+    const profiles=
+      await response.json();
 
     const currentUserId=
       localStorage.getItem("user_id");
@@ -3529,7 +4103,8 @@ async function performMessageUserSearch(){
 
     const filtered=
       profiles.filter(
-        profile=>profile.id!==currentUserId
+        profile=>
+          profile.id!==currentUserId
       );
 
 
@@ -3550,71 +4125,68 @@ async function performMessageUserSearch(){
 
     filtered.forEach(profile=>{
 
-      const element=document.createElement("div");
+      const element=
+        document.createElement("div");
 
-      element.className="message-user-result";
+      element.className=
+        "message-user-result";
 
       element.onclick=()=>{
-        openChatWithUser(profile);
+        openChatWithUser(
+          profile
+        );
       };
 
 
-      if(profile.avatar_url){
-
-        const img=document.createElement("img");
-
-        img.className="message-result-avatar";
-        img.src=profile.avatar_url;
-        img.alt="";
-
-        element.appendChild(img);
-
-      }else{
-
-        const placeholder=document.createElement("div");
-
-        placeholder.className="message-result-placeholder";
-
-        placeholder.textContent=
-          (
-            profile.display_name ||
-            profile.username ||
-            "N"
-          ).charAt(0).toUpperCase();
-
-        element.appendChild(placeholder);
-
-      }
+      appendAvatar(
+        element,
+        profile,
+        "message"
+      );
 
 
-      const info=document.createElement("div");
+      const info=
+        document.createElement("div");
 
 
-      const name=document.createElement("div");
+      const name=
+        document.createElement("div");
 
-      name.className="search-user-name";
+      name.className=
+        "search-user-name";
+
       name.textContent=
         profile.display_name ||
         profile.username;
 
 
-      const username=document.createElement("div");
+      const username=
+        document.createElement("div");
 
-      username.className="search-user-username";
-      username.textContent="@"+profile.username;
+      username.className=
+        "search-user-username";
+
+      username.textContent=
+        "@"+profile.username;
 
 
       info.appendChild(name);
       info.appendChild(username);
 
       element.appendChild(info);
-      results.appendChild(element);
+
+      results.appendChild(
+        element
+      );
 
     });
 
   }catch(error){
 
-    console.error("Message search:",error);
+    console.error(
+      "Message search:",
+      error
+    );
 
     results.innerHTML=
       `<div class="search-empty">
@@ -3626,11 +4198,15 @@ async function performMessageUserSearch(){
 }
 
 
-/* ================= CHAT ================= */
+/* =========================================================
+   CHAT
+========================================================= */
 
 async function openChatWithUser(profile){
 
-  if(!profile || !profile.id)return;
+  if(!profile || !profile.id){
+    return;
+  }
 
 
   const currentUserId=
@@ -3654,13 +4230,17 @@ async function openChatWithUser(profile){
   renderChatHeader(profile);
 
 
-  document.getElementById("chatMessages").innerHTML=
+  document.getElementById(
+    "chatMessages"
+  ).innerHTML=
     `<div class="chat-empty">
       Загружаем переписку...
     </div>`;
 
 
-  document.getElementById("chatInput").value="";
+  document.getElementById(
+    "chatInput"
+  ).value="";
 
 
   await loadChatMessages();
@@ -3672,67 +4252,93 @@ async function openChatWithUser(profile){
 
 function renderChatHeader(profile){
 
-  const header=document.getElementById("chatHeader");
+  const header=
+    document.getElementById(
+      "chatHeader"
+    );
 
   header.innerHTML="";
 
 
-  const back=document.createElement("button");
+  const back=
+    document.createElement("button");
 
-  back.className="chat-back";
+  back.className=
+    "chat-back";
+
   back.textContent="‹";
-  back.onclick=closeChat;
+
+  back.onclick=
+    closeChat;
 
   header.appendChild(back);
 
 
   if(profile.avatar_url){
 
-    const img=document.createElement("img");
+    const img=
+      document.createElement("img");
 
-    img.className="chat-avatar";
-    img.src=profile.avatar_url;
+    img.className=
+      "chat-avatar";
+
+    img.src=
+      profile.avatar_url;
+
     img.alt="";
 
     header.appendChild(img);
 
   }else{
 
-    const placeholder=document.createElement("div");
+    const placeholder=
+      document.createElement("div");
 
-    placeholder.className="chat-avatar-placeholder";
+    placeholder.className=
+      "chat-avatar-placeholder";
 
     placeholder.textContent=
       (
         profile.display_name ||
         profile.username ||
         "N"
-      ).charAt(0).toUpperCase();
+      )
+      .charAt(0)
+      .toUpperCase();
 
-    header.appendChild(placeholder);
+    header.appendChild(
+      placeholder
+    );
 
   }
 
 
-  const info=document.createElement("div");
+  const info=
+    document.createElement("div");
 
-  info.className="chat-user-info";
+  info.className=
+    "chat-user-info";
 
 
-  const name=document.createElement("div");
+  const name=
+    document.createElement("div");
 
-  name.className="chat-user-name";
+  name.className=
+    "chat-user-name";
 
   name.textContent=
     profile.display_name ||
     profile.username;
 
 
-  const username=document.createElement("div");
+  const username=
+    document.createElement("div");
 
-  username.className="chat-user-username";
+  username.className=
+    "chat-user-username";
 
-  username.textContent="@"+profile.username;
+  username.textContent=
+    "@"+profile.username;
 
 
   info.appendChild(name);
@@ -3743,11 +4349,18 @@ function renderChatHeader(profile){
 }
 
 
-/* ================= LOAD CHAT ================= */
+/* =========================================================
+   LOAD CHAT
+========================================================= */
 
 async function loadChatMessages(){
 
-  if(!currentChatUser)return;
+  if(
+    !currentChatUser ||
+    chatLoading
+  ){
+    return;
+  }
 
 
   const currentUserId=
@@ -3757,32 +4370,45 @@ async function loadChatMessages(){
     currentChatUser.id;
 
 
-  if(!currentUserId)return;
+  if(!currentUserId){
+    return;
+  }
 
 
   const container=
-    document.getElementById("chatMessages");
+    document.getElementById(
+      "chatMessages"
+    );
+
+
+  chatLoading=true;
 
 
   try{
 
-    const filter =
+    const filter=
       "or="+
       encodeURIComponent(
-        "(and(sender_id.eq."+currentUserId+
-        ",receiver_id.eq."+otherUserId+
-        "),and(sender_id.eq."+otherUserId+
-        ",receiver_id.eq."+currentUserId+"))"
+        "(and(sender_id.eq."+
+        currentUserId+
+        ",receiver_id.eq."+
+        otherUserId+
+        "),and(sender_id.eq."+
+        otherUserId+
+        ",receiver_id.eq."+
+        currentUserId+
+        "))"
       );
 
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/messages?"+
         filter+
         "&select=*"+
-        "&order=created_at.asc",
+        "&order=created_at.asc"+
+        "&limit=500",
         {
           headers:authHeaders()
         }
@@ -3806,7 +4432,9 @@ async function loadChatMessages(){
     }
 
 
-    const messages=await response.json();
+    const messages=
+      await response.json();
+
 
     container.innerHTML="";
 
@@ -3825,10 +4453,12 @@ async function loadChatMessages(){
 
 
     messages.forEach(message=>{
+
       renderChatMessage(
         message,
         currentUserId
       );
+
     });
 
 
@@ -3836,50 +4466,73 @@ async function loadChatMessages(){
 
   }catch(error){
 
-    console.error("loadChatMessages:",error);
+    console.error(
+      "loadChatMessages:",
+      error
+    );
 
-    container.innerHTML=
-      `<div class="chat-empty">
-        Ошибка загрузки переписки.
-      </div>`;
+  }finally{
+
+    chatLoading=false;
 
   }
 
 }
 
 
-function renderChatMessage(message,currentUserId){
+function renderChatMessage(
+  message,
+  currentUserId
+){
 
   const container=
-    document.getElementById("chatMessages");
+    document.getElementById(
+      "chatMessages"
+    );
 
 
-  const row=document.createElement("div");
+  const row=
+    document.createElement("div");
+
 
   const mine=
-    message.sender_id===currentUserId;
+    message.sender_id===
+    currentUserId;
 
 
   row.className=
-    "message-row "+(mine ? "mine" : "theirs");
+    "message-row "+
+    (
+      mine
+        ? "mine"
+        : "theirs"
+    );
 
 
-  const bubble=document.createElement("div");
+  const bubble=
+    document.createElement("div");
 
-  bubble.className="message-bubble";
+  bubble.className=
+    "message-bubble";
 
-  bubble.textContent=message.content;
+  bubble.textContent=
+    message.content;
 
 
-  const time=document.createElement("div");
+  const time=
+    document.createElement("div");
 
-  time.className="message-time";
+  time.className=
+    "message-time";
 
   time.textContent=
-    formatChatTime(message.created_at);
+    formatChatTime(
+      message.created_at
+    );
 
 
   bubble.appendChild(time);
+
   row.appendChild(bubble);
 
   container.appendChild(row);
@@ -3890,39 +4543,59 @@ function renderChatMessage(message,currentUserId){
 function scrollChatToBottom(){
 
   const container=
-    document.getElementById("chatMessages");
+    document.getElementById(
+      "chatMessages"
+    );
 
   if(container){
-    container.scrollTop=container.scrollHeight;
+    container.scrollTop=
+      container.scrollHeight;
   }
 
 }
 
 
-/* ================= SEND MESSAGE ================= */
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
 
 async function sendMessage(){
 
-  if(!currentChatUser)return;
+  if(!currentChatUser){
+    return;
+  }
 
 
   const input=
-    document.getElementById("chatInput");
+    document.getElementById(
+      "chatInput"
+    );
 
 
-  const content=input.value.trim();
+  const content=
+    input.value.trim();
 
-  if(!content)return;
+
+  if(!content){
+    return;
+  }
 
 
   const senderId=
-    localStorage.getItem("user_id");
+    localStorage.getItem(
+      "user_id"
+    );
 
   const receiverId=
     currentChatUser.id;
 
 
-  if(!senderId || !receiverId)return;
+  if(
+    !senderId ||
+    !receiverId
+  ){
+    return;
+  }
 
 
   input.disabled=true;
@@ -3930,7 +4603,7 @@ async function sendMessage(){
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/messages",
@@ -3967,9 +4640,14 @@ async function sendMessage(){
 
   }catch(error){
 
-    console.error("sendMessage:",error);
+    console.error(
+      "sendMessage:",
+      error
+    );
 
-    alert("Ошибка отправки сообщения.");
+    alert(
+      "Ошибка отправки сообщения."
+    );
 
   }finally{
 
@@ -3989,6 +4667,7 @@ function handleChatKey(event){
   ){
 
     event.preventDefault();
+
     sendMessage();
 
   }
@@ -4006,13 +4685,17 @@ function startChatPolling(){
       async()=>{
 
         const chatPage=
-          document.getElementById("chatPage");
+          document.getElementById(
+            "chatPage"
+          );
 
 
         if(
           currentChatUser &&
           chatPage &&
-          chatPage.classList.contains("active")
+          chatPage.classList.contains(
+            "active"
+          )
         ){
 
           await loadChatMessages();
@@ -4020,7 +4703,7 @@ function startChatPolling(){
         }
 
       },
-      3000
+      5000
     );
 
 }
@@ -4030,7 +4713,10 @@ function stopChatPolling(){
 
   if(chatPolling){
 
-    clearInterval(chatPolling);
+    clearInterval(
+      chatPolling
+    );
+
     chatPolling=null;
 
   }
@@ -4046,7 +4732,9 @@ function closeChat(){
 
 
   const search=
-    document.getElementById("messageSearchInput");
+    document.getElementById(
+      "messageSearchInput"
+    );
 
 
   if(search){
@@ -4055,20 +4743,26 @@ function closeChat(){
 
 
   const results=
-    document.getElementById("messageSearchResults");
+    document.getElementById(
+      "messageSearchResults"
+    );
 
 
   if(results){
-    results.style.display="none";
+    results.style.display=
+      "none";
   }
 
 
   const conversations=
-    document.getElementById("conversations");
+    document.getElementById(
+      "conversations"
+    );
 
 
   if(conversations){
-    conversations.style.display="block";
+    conversations.style.display=
+      "block";
   }
 
 
@@ -4077,12 +4771,19 @@ function closeChat(){
 }
 
 
-/* ================= TIME ================= */
+/* =========================================================
+   TIME
+========================================================= */
 
-function formatMessageTime(dateString){
+function formatMessageTime(
+  dateString
+){
 
-  const date=new Date(dateString);
-  const now=new Date();
+  const date=
+    new Date(dateString);
+
+  const now=
+    new Date();
 
 
   if(
@@ -4101,7 +4802,8 @@ function formatMessageTime(dateString){
   }
 
 
-  const yesterday=new Date(now);
+  const yesterday=
+    new Date(now);
 
   yesterday.setDate(
     now.getDate()-1
@@ -4129,7 +4831,9 @@ function formatMessageTime(dateString){
 }
 
 
-function formatChatTime(dateString){
+function formatChatTime(
+  dateString
+){
 
   return new Date(dateString)
     .toLocaleTimeString(
@@ -4143,36 +4847,47 @@ function formatChatTime(dateString){
 }
 
 
-/* ================= PAGES ================= */
+/* =========================================================
+   PAGES
+========================================================= */
 
 function showPage(page){
 
-  stopChatPolling();
+  if(page!=="chat"){
+    stopChatPolling();
+  }
 
 
   document
     .querySelectorAll(".page")
     .forEach(element=>{
-      element.classList.remove("active");
+      element.classList.remove(
+        "active"
+      );
     });
 
 
   document
     .querySelectorAll(".nav-button")
     .forEach(element=>{
-      element.classList.remove("active");
+      element.classList.remove(
+        "active"
+      );
     });
 
 
   if(page==="feed"){
 
-    document.getElementById("feedPage")
+    document
+      .getElementById("feedPage")
       .classList.add("active");
 
-    document.getElementById("feedNav")
+    document
+      .getElementById("feedNav")
       .classList.add("active");
 
     loadPosts();
+
     return;
 
   }
@@ -4180,10 +4895,12 @@ function showPage(page){
 
   if(page==="search"){
 
-    document.getElementById("searchPage")
+    document
+      .getElementById("searchPage")
       .classList.add("active");
 
-    document.getElementById("searchNav")
+    document
+      .getElementById("searchNav")
       .classList.add("active");
 
     return;
@@ -4193,13 +4910,16 @@ function showPage(page){
 
   if(page==="messages"){
 
-    document.getElementById("messagesPage")
+    document
+      .getElementById("messagesPage")
       .classList.add("active");
 
-    document.getElementById("messagesNav")
+    document
+      .getElementById("messagesNav")
       .classList.add("active");
 
     loadConversations();
+
     return;
 
   }
@@ -4207,10 +4927,12 @@ function showPage(page){
 
   if(page==="chat"){
 
-    document.getElementById("chatPage")
+    document
+      .getElementById("chatPage")
       .classList.add("active");
 
-    document.getElementById("messagesNav")
+    document
+      .getElementById("messagesNav")
       .classList.add("active");
 
     return;
@@ -4220,14 +4942,17 @@ function showPage(page){
 
   if(page==="profile"){
 
-    document.getElementById("profilePage")
+    document
+      .getElementById("profilePage")
       .classList.add("active");
 
-    document.getElementById("profileNav")
+    document
+      .getElementById("profileNav")
       .classList.add("active");
 
     loadProfile();
     loadWall();
+
     return;
 
   }
@@ -4235,10 +4960,14 @@ function showPage(page){
 
   if(page==="publicProfile"){
 
-    document.getElementById("publicProfilePage")
+    document
+      .getElementById(
+        "publicProfilePage"
+      )
       .classList.add("active");
 
-    document.getElementById("searchNav")
+    document
+      .getElementById("searchNav")
       .classList.add("active");
 
   }
@@ -4246,18 +4975,23 @@ function showPage(page){
 }
 
 
-/* ================= APP ================= */
+/* =========================================================
+   APP
+========================================================= */
 
 async function showApp(){
 
-  document.getElementById("authScreen")
-    .style.display="none";
+  document.getElementById(
+    "authScreen"
+  ).style.display="none";
 
-  document.getElementById("app")
-    .style.display="block";
+  document.getElementById(
+    "app"
+  ).style.display="block";
 
 
-  const profile=await loadProfile();
+  const profile=
+    await loadProfile();
 
 
   if(!profile){
@@ -4281,24 +5015,46 @@ function showAuth(){
   currentChatUser=null;
   publicProfile=null;
 
-  document.getElementById("authScreen")
-    .style.display="flex";
+  document.getElementById(
+    "authScreen"
+  ).style.display="flex";
 
-  document.getElementById("app")
-    .style.display="none";
+  document.getElementById(
+    "app"
+  ).style.display="none";
 
   showAuthChoice();
 
 }
 
 
-/* ================= PROFILES MAP ================= */
+/* =========================================================
+   PROFILE CACHE
+========================================================= */
 
-async function loadProfilesMap(){
+async function loadProfilesMap(
+  force=false
+){
+
+  const now=
+    Date.now();
+
+
+  if(
+    !force &&
+    profilesCache &&
+    now-profilesCacheTime<
+      PROFILES_CACHE_MS
+  ){
+
+    return profilesCache;
+
+  }
+
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/profiles"+
@@ -4316,12 +5072,13 @@ async function loadProfilesMap(){
         await response.text()
       );
 
-      return {};
+      return profilesCache || {};
 
     }
 
 
-    const profiles=await response.json();
+    const profiles=
+      await response.json();
 
     const map={};
 
@@ -4331,34 +5088,57 @@ async function loadProfilesMap(){
     });
 
 
+    profilesCache=map;
+    profilesCacheTime=now;
+
+
     return map;
 
   }catch(error){
 
-    console.error("loadProfilesMap:",error);
+    console.error(
+      "loadProfilesMap:",
+      error
+    );
 
-    return {};
+    return profilesCache || {};
 
   }
 
 }
 
 
-/* ================= POSTS ================= */
+/* =========================================================
+   POSTS
+========================================================= */
 
 async function loadPosts(){
 
-  const feed=document.getElementById("feed");
+  if(postsLoading){
+    return;
+  }
+
+
+  const feed=
+    document.getElementById(
+      "feed"
+    );
 
   if(!feed)return;
 
 
+  postsLoading=true;
+
+
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
-        "/rest/v1/posts?select=*&order=created_at.desc",
+        "/rest/v1/posts"+
+        "?select=*"+
+        "&order=created_at.desc"+
+        "&limit=50",
         {
           headers:authHeaders()
         }
@@ -4377,9 +5157,12 @@ async function loadPosts(){
     }
 
 
-    const posts=await response.json();
+    const posts=
+      await response.json();
 
-    const profiles=await loadProfilesMap();
+    const profiles=
+      await loadProfilesMap();
+
 
     feed.innerHTML="";
 
@@ -4397,24 +5180,41 @@ async function loadPosts(){
 
 
     posts.forEach(post=>{
-      renderPost(post,feed,profiles);
+
+      renderPost(
+        post,
+        feed,
+        profiles
+      );
+
     });
 
   }catch(error){
 
-    console.error("loadPosts:",error);
+    console.error(
+      "loadPosts:",
+      error
+    );
 
     feed.innerHTML=
       `<div class="wall-empty">
         Ошибка загрузки ленты.
       </div>`;
 
+  }finally{
+
+    postsLoading=false;
+
   }
 
 }
 
 
-function renderPost(post,container,profiles){
+function renderPost(
+  post,
+  container,
+  profiles
+){
 
   const reaction=
     localStorage.getItem(
@@ -4441,53 +5241,74 @@ function renderPost(post,container,profiles){
     profile?.avatar_url;
 
 
-  const div=document.createElement("div");
+  const div=
+    document.createElement("div");
 
   div.className="post";
 
 
-  const user=document.createElement("div");
+  const user=
+    document.createElement("div");
 
   user.className="post-user";
 
 
   if(avatar){
 
-    const img=document.createElement("img");
+    const img=
+      document.createElement("img");
 
-    img.className="mini-avatar";
+    img.className=
+      "mini-avatar";
+
     img.src=avatar;
     img.alt="";
+    img.loading="lazy";
 
     user.appendChild(img);
 
   }else{
 
-    const placeholder=document.createElement("div");
+    const placeholder=
+      document.createElement("div");
 
-    placeholder.className="mini-avatar-placeholder";
+    placeholder.className=
+      "mini-avatar-placeholder";
 
     placeholder.textContent=
-      displayName.charAt(0).toUpperCase();
+      displayName
+        .charAt(0)
+        .toUpperCase();
 
-    user.appendChild(placeholder);
+    user.appendChild(
+      placeholder
+    );
 
   }
 
 
-  const userInfo=document.createElement("div");
+  const userInfo=
+    document.createElement("div");
 
 
-  const name=document.createElement("div");
+  const name=
+    document.createElement("div");
 
-  name.className="user-name";
-  name.textContent=displayName;
+  name.className=
+    "user-name";
+
+  name.textContent=
+    displayName;
 
 
-  const usernameEl=document.createElement("div");
+  const usernameEl=
+    document.createElement("div");
 
-  usernameEl.className="post-date";
-  usernameEl.textContent="@"+username;
+  usernameEl.className=
+    "post-date";
+
+  usernameEl.textContent=
+    "@"+username;
 
 
   userInfo.appendChild(name);
@@ -4496,25 +5317,80 @@ function renderPost(post,container,profiles){
   user.appendChild(userInfo);
 
 
-  const text=document.createElement("div");
-
-  text.className="post-text";
-  text.textContent=post.content;
+  div.appendChild(user);
 
 
-  const actions=document.createElement("div");
+  if(post.content){
 
-  actions.className="actions";
+    const text=
+      document.createElement("div");
+
+    text.className=
+      "post-text";
+
+    text.textContent=
+      post.content;
+
+    div.appendChild(text);
+
+  }
 
 
-  const likeButton=document.createElement("button");
+  if(
+    post.image_url &&
+    isAllowedImageUrl(
+      post.image_url
+    )
+  ){
+
+    const img=
+      document.createElement("img");
+
+    img.className=
+      "post-image";
+
+    img.src=
+      post.image_url;
+
+    img.alt=
+      "Фото публикации";
+
+    img.loading=
+      "lazy";
+
+    img.decoding=
+      "async";
+
+    img.onerror=()=>{
+      img.remove();
+    };
+
+    div.appendChild(img);
+
+  }
+
+
+  const actions=
+    document.createElement("div");
+
+  actions.className=
+    "actions";
+
+
+  const likeButton=
+    document.createElement("button");
 
   likeButton.className=
     "reaction-btn"+
-    (reaction==="like" ? " active" : "");
+    (
+      reaction==="like"
+        ? " active"
+        : ""
+    );
 
   likeButton.textContent=
-    "👍 "+Number(post.likes || 0);
+    "👍 "+
+    Number(post.likes || 0);
 
   likeButton.onclick=()=>{
     reactToPost(
@@ -4524,14 +5400,20 @@ function renderPost(post,container,profiles){
   };
 
 
-  const dislikeButton=document.createElement("button");
+  const dislikeButton=
+    document.createElement("button");
 
   dislikeButton.className=
     "reaction-btn"+
-    (reaction==="dislike" ? " active" : "");
+    (
+      reaction==="dislike"
+        ? " active"
+        : ""
+    );
 
   dislikeButton.textContent=
-    "👎 "+Number(post.dislikes || 0);
+    "👎 "+
+    Number(post.dislikes || 0);
 
   dislikeButton.onclick=()=>{
     reactToPost(
@@ -4541,11 +5423,14 @@ function renderPost(post,container,profiles){
   };
 
 
-  actions.appendChild(likeButton);
-  actions.appendChild(dislikeButton);
+  actions.appendChild(
+    likeButton
+  );
 
-  div.appendChild(user);
-  div.appendChild(text);
+  actions.appendChild(
+    dislikeButton
+  );
+
   div.appendChild(actions);
 
   container.appendChild(div);
@@ -4553,29 +5438,628 @@ function renderPost(post,container,profiles){
 }
 
 
-/* ================= CREATE POSTS ================= */
+/* =========================================================
+   PHOTO UPLOAD
+========================================================= */
+
+function choosePostImage(
+  target
+){
+
+  const input=
+    target==="wall"
+      ? document.getElementById(
+          "wallImageInput"
+        )
+      : document.getElementById(
+          "postImageInput"
+        );
+
+
+  if(input){
+    input.click();
+  }
+
+}
+
+
+function previewPostImage(
+  event,
+  target
+){
+
+  const input=
+    event.target;
+
+  const file=
+    input.files[0];
+
+
+  const preview=
+    target==="wall"
+      ? document.getElementById(
+          "wallImagePreview"
+        )
+      : document.getElementById(
+          "postImagePreview"
+        );
+
+
+  const name=
+    target==="wall"
+      ? document.getElementById(
+          "wallImageName"
+        )
+      : document.getElementById(
+          "postImageName"
+        );
+
+
+  if(!preview || !name){
+    return;
+  }
+
+
+  preview.innerHTML="";
+  preview.classList.remove(
+    "has-image"
+  );
+
+  name.textContent="";
+
+
+  if(!file){
+    return;
+  }
+
+
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "Можно выбрать только изображение."
+    );
+
+    input.value="";
+    return;
+
+  }
+
+
+  if(file.size>10*1024*1024){
+
+    alert(
+      "Максимальный размер фотографии: 10 МБ."
+    );
+
+    input.value="";
+    return;
+
+  }
+
+
+  name.textContent=
+    file.name;
+
+
+  const reader=
+    new FileReader();
+
+
+  reader.onload=()=>{
+    
+    const wrapper=
+      document.createElement("div");
+
+    const img=
+      document.createElement("img");
+
+    img.src=
+      reader.result;
+
+    img.alt=
+      "Предпросмотр";
+
+
+    const remove=
+      document.createElement("button");
+
+    remove.type="button";
+
+    remove.className=
+      "remove-photo";
+
+    remove.textContent="×";
+
+    remove.onclick=()=>{
+      
+      input.value="";
+      preview.innerHTML="";
+      preview.classList.remove(
+        "has-image"
+      );
+      name.textContent="";
+
+    };
+
+
+    wrapper.appendChild(img);
+    preview.appendChild(wrapper);
+
+    preview.classList.add(
+      "has-image"
+    );
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+function clearPostImage(
+  target
+){
+
+  const input=
+    target==="wall"
+      ? document.getElementById(
+          "wallImageInput"
+        )
+      : document.getElementById(
+          "postImageInput"
+        );
+
+  const preview=
+    target==="wall"
+      ? document.getElementById(
+          "wallImagePreview"
+        )
+      : document.getElementById(
+          "postImagePreview"
+        );
+
+  const name=
+    target==="wall"
+      ? document.getElementById(
+          "wallImageName"
+        )
+      : document.getElementById(
+          "postImageName"
+        );
+
+
+  if(input){
+    input.value="";
+  }
+
+  if(preview){
+
+    preview.innerHTML="";
+
+    preview.classList.remove(
+      "has-image"
+    );
+
+  }
+
+  if(name){
+    name.textContent="";
+  }
+
+}
+
+
+/* =========================================================
+   IMAGE PROCESSING
+========================================================= */
+
+function getImageExtension(
+  mime,
+  filename=""
+){
+
+  if(mime==="image/jpeg"){
+    return "jpg";
+  }
+
+  if(mime==="image/png"){
+    return "png";
+  }
+
+  if(mime==="image/webp"){
+    return "webp";
+  }
+
+  if(mime==="image/gif"){
+    return "gif";
+  }
+
+
+  const original=
+    filename
+      .split(".")
+      .pop()
+      ?.toLowerCase();
+
+
+  if(
+    original &&
+    /^[a-z0-9]+$/.test(original)
+  ){
+
+    return original;
+
+  }
+
+
+  return "jpg";
+
+}
+
+
+async function prepareImageForUpload(
+  file
+){
+
+  /*
+    Для JPEG/PNG/WebP пытаемся уменьшить
+    слишком большие фотографии.
+    Это сильно ускоряет загрузку с телефона.
+  */
+
+  if(
+    ![
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ].includes(file.type)
+  ){
+
+    return file;
+
+  }
+
+
+  if(file.size<1200000){
+
+    return file;
+
+  }
+
+
+  try{
+
+    const image=
+      await loadImage(file);
+
+
+    const maxSize=2000;
+
+    const scale=
+      Math.min(
+        1,
+        maxSize/
+        Math.max(
+          image.naturalWidth,
+          image.naturalHeight
+        )
+      );
+
+
+    const width=
+      Math.max(
+        1,
+        Math.round(
+          image.naturalWidth*
+          scale
+        )
+      );
+
+
+    const height=
+      Math.max(
+        1,
+        Math.round(
+          image.naturalHeight*
+          scale
+        )
+      );
+
+
+    const canvas=
+      document.createElement("canvas");
+
+    canvas.width=width;
+    canvas.height=height;
+
+
+    const context=
+      canvas.getContext("2d");
+
+
+    context.drawImage(
+      image,
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    const blob=
+      await new Promise(resolve=>{
+
+        canvas.toBlob(
+          resolve,
+          "image/jpeg",
+          .82
+        );
+
+      });
+
+
+    if(!blob){
+      return file;
+    }
+
+
+    return new File(
+      [blob],
+      "photo.jpg",
+      {
+        type:"image/jpeg",
+        lastModified:Date.now()
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Image compression skipped:",
+      error
+    );
+
+    return file;
+
+  }
+
+}
+
+
+function loadImage(file){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const url=
+        URL.createObjectURL(file);
+
+      const image=
+        new Image();
+
+
+      image.onload=()=>{
+
+        URL.revokeObjectURL(url);
+
+        resolve(image);
+
+      };
+
+
+      image.onerror=()=>{
+
+        URL.revokeObjectURL(url);
+
+        reject(
+          new Error(
+            "Не удалось прочитать изображение."
+          )
+        );
+
+      };
+
+
+      image.src=url;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+async function uploadToStorage(
+  filePath,
+  file
+){
+
+  const token=
+    localStorage.getItem(
+      "access_token"
+    );
+
+
+  if(!token){
+
+    return{
+      ok:false,
+      text:"Нет авторизации."
+    };
+
+  }
+
+
+  try{
+
+    const response=
+      await fetch(
+        SUPABASE_URL+
+        "/storage/v1/object/Stenka/"+
+        filePath,
+        {
+          method:"POST",
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer "+token,
+            "Content-Type":
+              file.type ||
+              "application/octet-stream",
+            "x-upsert":"false"
+          },
+          body:file
+        }
+      );
+
+
+    const text=
+      response.ok
+        ? ""
+        : await response.text();
+
+
+    return{
+      ok:response.ok,
+      text
+    };
+
+  }catch(error){
+
+    console.error(
+      "uploadToStorage:",
+      error
+    );
+
+    return{
+      ok:false,
+      text:"Ошибка соединения при загрузке файла."
+    };
+
+  }
+
+}
+
+
+async function deleteStorageFile(
+  filePath
+){
+
+  const token=
+    localStorage.getItem(
+      "access_token"
+    );
+
+
+  if(!token)return;
+
+
+  try{
+
+    await fetch(
+      SUPABASE_URL+
+      "/storage/v1/object/Stenka/"+
+      filePath,
+      {
+        method:"DELETE",
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Authorization":
+            "Bearer "+token
+        }
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "deleteStorageFile:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE POSTS
+========================================================= */
 
 async function createPost(){
 
   const input=
-    document.getElementById("postInput");
+    document.getElementById(
+      "postInput"
+    );
+
+  const imageInput=
+    document.getElementById(
+      "postImageInput"
+    );
+
+  const button=
+    document.getElementById(
+      "publishPostButton"
+    );
 
 
-  const text=input.value.trim();
+  const text=
+    input.value.trim();
 
-  if(!text)return;
-
-
-  const success=
-    await createPostInDatabase(text);
+  const file=
+    imageInput.files[0] || null;
 
 
-  if(!success)return;
+  if(!text && !file){
+
+    alert(
+      "Напиши что-нибудь или добавь фотографию."
+    );
+
+    return;
+
+  }
 
 
-  input.value="";
+  button.disabled=true;
+  button.textContent=
+    file
+      ? "Загружаем фото..."
+      : "Публикуем...";
 
-  await loadPosts();
+
+  try{
+
+    const success=
+      await createPostInDatabase(
+        text,
+        file
+      );
+
+
+    if(!success){
+      return;
+    }
+
+
+    input.value="";
+
+    clearPostImage("feed");
+
+    await loadPosts();
+
+  }finally{
+
+    button.disabled=false;
+    button.textContent=
+      "Опубликовать";
+
+  }
 
 }
 
@@ -4583,37 +6067,94 @@ async function createPost(){
 async function createWallPost(){
 
   const input=
-    document.getElementById("wallInput");
+    document.getElementById(
+      "wallInput"
+    );
+
+  const imageInput=
+    document.getElementById(
+      "wallImageInput"
+    );
+
+  const button=
+    document.getElementById(
+      "publishWallButton"
+    );
 
 
-  const text=input.value.trim();
+  const text=
+    input.value.trim();
 
-  if(!text)return;
-
-
-  const success=
-    await createPostInDatabase(text);
+  const file=
+    imageInput.files[0] || null;
 
 
-  if(!success)return;
+  if(!text && !file){
+
+    alert(
+      "Напиши что-нибудь или добавь фотографию."
+    );
+
+    return;
+
+  }
 
 
-  input.value="";
+  button.disabled=true;
+  button.textContent=
+    file
+      ? "Загружаем фото..."
+      : "Публикуем...";
 
-  await loadWall();
+
+  try{
+
+    const success=
+      await createPostInDatabase(
+        text,
+        file
+      );
+
+
+    if(!success){
+      return;
+    }
+
+
+    input.value="";
+
+    clearPostImage("wall");
+
+    await loadWall();
+
+  }finally{
+
+    button.disabled=false;
+    button.textContent=
+      "Опубликовать";
+
+  }
 
 }
 
 
-async function createPostInDatabase(text){
+async function createPostInDatabase(
+  text,
+  file=null
+){
 
   const userId=
-    localStorage.getItem("user_id");
+    localStorage.getItem(
+      "user_id"
+    );
 
 
   if(!userId){
 
-    alert("Нужно войти в аккаунт.");
+    alert(
+      "Нужно войти в аккаунт."
+    );
+
     return false;
 
   }
@@ -4624,9 +6165,76 @@ async function createPostInDatabase(text){
     "you";
 
 
+  let uploadedPath=null;
+  let imageUrl=null;
+
+
   try{
 
-    const response =
+    /*
+      Сначала загружаем фотографию.
+    */
+
+    if(file){
+
+      const prepared=
+        await prepareImageForUpload(
+          file
+        );
+
+
+      const extension=
+        getImageExtension(
+          prepared.type || file.type,
+          file.name
+        );
+
+
+      uploadedPath=
+        "posts/"+
+        userId+
+        "/"+
+        Date.now()+
+        "-"+
+        Math.random()
+          .toString(36)
+          .slice(2,8)+
+        "."+
+        extension;
+
+
+      const uploadResult=
+        await uploadToStorage(
+          uploadedPath,
+          prepared
+        );
+
+
+      if(!uploadResult.ok){
+
+        alert(
+          "Не удалось загрузить фотографию:\n"+
+          uploadResult.text
+        );
+
+        return false;
+
+      }
+
+
+      imageUrl=
+        SUPABASE_URL+
+        "/storage/v1/object/public/Stenka/"+
+        uploadedPath;
+
+    }
+
+
+    /*
+      Теперь создаём сам пост.
+    */
+
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/posts",
@@ -4639,7 +6247,8 @@ async function createPostInDatabase(text){
           body:JSON.stringify({
             user_id:userId,
             username,
-            content:text
+            content:text || "",
+            image_url:imageUrl
           })
         }
       );
@@ -4647,9 +6256,28 @@ async function createPostInDatabase(text){
 
     if(!response.ok){
 
+      const errorText=
+        await response.text();
+
+
+      /*
+        Если пост не создался,
+        удаляем уже загруженное фото,
+        чтобы не оставлять мусор в Storage.
+      */
+
+      if(uploadedPath){
+
+        await deleteStorageFile(
+          uploadedPath
+        );
+
+      }
+
+
       alert(
         "Не удалось опубликовать пост:\n"+
-        await response.text()
+        errorText
       );
 
       return false;
@@ -4661,9 +6289,24 @@ async function createPostInDatabase(text){
 
   }catch(error){
 
-    console.error("createPost:",error);
+    console.error(
+      "createPostInDatabase:",
+      error
+    );
 
-    alert("Ошибка соединения с сервером.");
+
+    if(uploadedPath){
+
+      await deleteStorageFile(
+        uploadedPath
+      );
+
+    }
+
+
+    alert(
+      "Ошибка соединения с сервером."
+    );
 
     return false;
 
@@ -4672,28 +6315,41 @@ async function createPostInDatabase(text){
 }
 
 
-/* ================= WALL ================= */
+/* =========================================================
+   WALL
+========================================================= */
 
 async function loadWall(){
 
   const userId=
-    localStorage.getItem("user_id");
+    localStorage.getItem(
+      "user_id"
+    );
 
   const wall=
-    document.getElementById("wall");
+    document.getElementById(
+      "wall"
+    );
 
 
-  if(!userId || !wall)return;
+  if(
+    !userId ||
+    !wall
+  ){
+    return;
+  }
 
 
   try{
 
-    const response =
+    const response=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/posts?user_id=eq."+
         encodeURIComponent(userId)+
-        "&select=*&order=created_at.desc",
+        "&select=*"+
+        "&order=created_at.desc"+
+        "&limit=50",
         {
           headers:authHeaders()
         }
@@ -4712,8 +6368,12 @@ async function loadWall(){
     }
 
 
-    const posts=await response.json();
-    const profiles=await loadProfilesMap();
+    const posts=
+      await response.json();
+
+    const profiles=
+      await loadProfilesMap();
+
 
     wall.innerHTML="";
 
@@ -4731,12 +6391,21 @@ async function loadWall(){
 
 
     posts.forEach(post=>{
-      renderPost(post,wall,profiles);
+
+      renderPost(
+        post,
+        wall,
+        profiles
+      );
+
     });
 
   }catch(error){
 
-    console.error("loadWall:",error);
+    console.error(
+      "loadWall:",
+      error
+    );
 
     wall.innerHTML=
       `<div class="wall-empty">
@@ -4748,9 +6417,14 @@ async function loadWall(){
 }
 
 
-/* ================= REACTIONS ================= */
+/* =========================================================
+   REACTIONS
+========================================================= */
 
-async function reactToPost(postId,type){
+async function reactToPost(
+  postId,
+  type
+){
 
   const oldReaction=
     localStorage.getItem(
@@ -4794,7 +6468,7 @@ async function reactToPost(postId,type){
 
   try{
 
-    const getResponse =
+    const getResponse=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/posts?id=eq."+
@@ -4808,35 +6482,45 @@ async function reactToPost(postId,type){
 
     if(!getResponse.ok){
 
-      alert("Не удалось получить реакцию.");
+      alert(
+        "Не удалось получить реакцию."
+      );
+
       return;
 
     }
 
 
-    const rows=await getResponse.json();
+    const rows=
+      await getResponse.json();
 
-    if(!rows.length)return;
+
+    if(!rows.length){
+      return;
+    }
 
 
-    const post=rows[0];
+    const post=
+      rows[0];
 
 
     const newLikes=
       Math.max(
         0,
-        Number(post.likes || 0)+likeChange
+        Number(post.likes || 0)+
+        likeChange
       );
 
 
     const newDislikes=
       Math.max(
         0,
-        Number(post.dislikes || 0)+dislikeChange
+        Number(post.dislikes || 0)+
+        dislikeChange
       );
 
 
-    const updateResponse =
+    const updateResponse=
       await fetch(
         SUPABASE_URL+
         "/rest/v1/posts?id=eq."+
@@ -4883,7 +6567,20 @@ async function reactToPost(postId,type){
     }
 
 
-    await loadPosts();
+    /*
+      Обновляем только нужную страницу.
+    */
+
+    if(
+      document
+        .getElementById("feedPage")
+        .classList
+        .contains("active")
+    ){
+
+      await loadPosts();
+
+    }
 
 
     if(
@@ -4901,7 +6598,9 @@ async function reactToPost(postId,type){
     if(
       publicProfile &&
       document
-        .getElementById("publicProfilePage")
+        .getElementById(
+          "publicProfilePage"
+        )
         .classList
         .contains("active")
     ){
@@ -4914,20 +6613,113 @@ async function reactToPost(postId,type){
 
   }catch(error){
 
-    console.error("reactToPost:",error);
+    console.error(
+      "reactToPost:",
+      error
+    );
 
-    alert("Ошибка соединения с сервером.");
+    alert(
+      "Ошибка соединения с сервером."
+    );
 
   }
 
 }
 
 
-/* ================= ESCAPE ================= */
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function isAllowedImageUrl(url){
+
+  if(
+    typeof url!=="string" ||
+    !url
+  ){
+    return false;
+  }
+
+
+  return(
+    url.startsWith(
+      SUPABASE_URL+
+      "/storage/v1/object/public/Stenka/"
+    )
+  );
+
+}
+
+
+function appendAvatar(
+  container,
+  profile,
+  type
+){
+
+  const avatar=
+    profile.avatar_url;
+
+
+  if(avatar){
+
+    const img=
+      document.createElement("img");
+
+    if(type==="search"){
+
+      img.className=
+        "search-avatar";
+
+    }else{
+
+      img.className=
+        "message-result-avatar";
+
+    }
+
+    img.src=avatar;
+    img.alt="";
+    img.loading="lazy";
+
+    container.appendChild(img);
+
+    return;
+
+  }
+
+
+  const placeholder=
+    document.createElement("div");
+
+
+  placeholder.className=
+    type==="search"
+      ? "search-avatar-placeholder"
+      : "message-result-placeholder";
+
+
+  placeholder.textContent=
+    (
+      profile.display_name ||
+      profile.username ||
+      "N"
+    )
+    .charAt(0)
+    .toUpperCase();
+
+
+  container.appendChild(
+    placeholder
+  );
+
+}
+
 
 function escapeHtml(text){
 
-  const div=document.createElement("div");
+  const div=
+    document.createElement("div");
 
   div.textContent=
     text==null
@@ -4939,7 +6731,9 @@ function escapeHtml(text){
 }
 
 
-/* ================= AUTH ENTER ================= */
+/* =========================================================
+   AUTH ENTER
+========================================================= */
 
 document.addEventListener(
   "keydown",
@@ -4949,33 +6743,34 @@ document.addEventListener(
       event.key!=="Enter" ||
       event.shiftKey
     ){
-
       return;
-
     }
 
 
-    const target=event.target;
+    const target=
+      event.target;
 
 
     if(
       target &&
       target.tagName==="TEXTAREA"
     ){
-
       return;
-
     }
 
 
     const loginVisible=
-      document.getElementById("loginForm")
-        .style.display==="block";
+      document
+        .getElementById("loginForm")
+        .style
+        .display==="block";
 
 
     const signupVisible=
-      document.getElementById("signupForm")
-        .style.display==="block";
+      document
+        .getElementById("signupForm")
+        .style
+        .display==="block";
 
 
     if(loginVisible){
@@ -4994,22 +6789,32 @@ document.addEventListener(
 );
 
 
-/* ================= MODAL OUTSIDE CLICK ================= */
+/* =========================================================
+   MODAL
+========================================================= */
 
-document.getElementById("profileModal")
+document
+  .getElementById("profileModal")
   .addEventListener(
     "click",
     event=>{
 
-      if(event.target.id==="profileModal"){
+      if(
+        event.target.id===
+        "profileModal"
+      ){
+
         closeProfileEditor();
+
       }
 
     }
   );
 
 
-/* ================= START ================= */
+/* =========================================================
+   START
+========================================================= */
 
 async function startApp(){
 
