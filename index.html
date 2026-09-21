@@ -856,15 +856,25 @@ textarea:focus,
 .profile-card,
 .public-profile-card{
   border-radius:0;
-  overflow:hidden;
+  overflow:visible;
   margin-bottom:20px;
   border:0;
   background:#fff;
 }
 
+.profile-hero,
+.public-hero{
+  position:relative;
+  height:230px;
+  background:#fff;
+  overflow:hidden;
+}
+
 .cover,
 .public-cover{
-  height:175px;
+  position:absolute;
+  inset:0;
+  height:230px;
   background:#fff;
   background-position:center;
   background-size:cover;
@@ -874,59 +884,201 @@ textarea:focus,
 
 .profile-info,
 .public-info{
-  padding:0 18px 20px;
+  position:relative;
+  padding:0 18px 0;
+}
+
+.profile-avatar-wrap,
+.public-avatar-wrap{
+  position:absolute;
+  left:18px;
+  top:22px;
+  z-index:3;
 }
 
 .big-avatar,
-.public-avatar{
-  width:148px;
-  height:148px;
-  margin-top:-74px;
-  border-radius:10px;
+.public-avatar,
+.avatar-placeholder,
+.public-avatar-placeholder{
+  width:172px;
+  height:172px;
+  border-radius:8px;
   object-fit:cover;
   border:0;
   background:#fff;
   display:block;
-  position:relative;
   box-shadow:0 1px 0 rgba(0,0,0,.04);
 }
 
 .avatar-placeholder,
 .public-avatar-placeholder{
-  width:148px;
-  height:148px;
-  margin-top:-74px;
-  border-radius:10px;
-  border:0;
   background:var(--navy);
   color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:44px;
+  font-size:48px;
   font-weight:900;
+}
+
+.profile-identity,
+.public-identity{
+  position:absolute;
+  left:210px;
+  right:18px;
+  top:38px;
+  z-index:2;
 }
 
 .profile-name,
 .public-name{
-  margin-top:14px;
-  font-size:27px;
+  margin:0;
+  font-size:30px;
+  line-height:1.05;
   font-weight:900;
-  color:var(--navy);
+  color:#fff;
+  text-shadow:0 2px 12px rgba(0,0,0,.30);
   overflow-wrap:anywhere;
 }
 
 .profile-username,
 .public-username{
-  color:var(--muted);
-  margin-top:3px;
+  color:rgba(255,255,255,.86);
+  margin-top:6px;
+  font-size:16px;
+  text-shadow:0 2px 8px rgba(0,0,0,.28);
 }
 
 .profile-bio,
-.public-bio{
-  margin-top:13px;
-  line-height:1.5;
-  white-space:pre-wrap;
+.public-bio,
+.profile-info>.status-label,
+.public-info>.status-label{
+  display:none;
+}
+
+.profile-main-stats,
+.public-main-stats{
+  background:#fff;
+  padding:18px 18px 12px;
+}
+
+.profile-stats,
+.public-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:0;
+  text-align:center;
+}
+
+.stat{
+  cursor:pointer;
+}
+
+.stat-number{
+  color:#111;
+  font-size:22px;
+  line-height:1.1;
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+.stat-label{
+  color:#777;
+  font-size:15px;
+  margin-top:7px;
+  font-weight:400;
+}
+
+.profile-buttons,
+.public-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:4px 18px 12px;
+}
+
+.profile-button,
+.public-action{
+  background:var(--sky);
+  color:var(--navy);
+  border-radius:10px;
+  padding:10px 13px;
+  font-weight:700;
+}
+
+.profile-button.dark,
+.public-action.dark{
+  background:var(--navy);
+  color:#fff;
+}
+
+.public-action{
+  flex:1;
+}
+
+.public-action.following{
+  background:var(--navy);
+  color:#fff;
+}
+
+.friend-badge{
+  display:none;
+}
+
+.profile-tabs{
+  display:flex;
+  margin:0;
+  border-bottom:1px solid #e8edf1;
+  background:#fff;
+}
+
+.profile-tab{
+  flex:1;
+  padding:17px 10px 14px;
+  background:#fff;
+  color:#777;
+  font-size:18px;
+  font-weight:400;
+  border-bottom:3px solid transparent;
+}
+
+.profile-tab.active{
+  color:#111;
+  font-weight:700;
+  border-bottom-color:#111;
+}
+
+.profile-tab-content{
+  display:none;
+}
+
+.profile-tab-content.active{
+  display:block;
+}
+
+.profile-wall{
+  border-radius:0;
+  padding:17px 0 0;
+  border:0;
+}
+
+.wall-title{
+  font-size:21px;
+  font-weight:900;
+  color:var(--navy);
+  margin-bottom:14px;
+}
+
+.public-wall{
+  margin-top:20px;
+}
+
+.public-back{
+  background:transparent;
+  color:var(--muted);
+  padding:4px 0 12px;
+  font-weight:700;
 }
 
 .status-label{
@@ -2113,7 +2265,7 @@ textarea:focus,
 
   <div class="header-logo">
     <img
-      src="logo1.png"
+      src="nocap-logo.png1.png"
       class="header-logo-image"
       alt="NoCap">
   </div>
@@ -2321,17 +2473,20 @@ textarea:focus,
 <section id="profilePage" class="page">
 
   <div class="profile-card">
-    <div id="profileCover" class="cover"></div>
+    <div class="profile-hero">
+      <div id="profileCover" class="cover"></div>
 
-    <div class="profile-info">
-      <div id="profileAvatarContainer"></div>
+      <div class="profile-avatar-wrap">
+        <div id="profileAvatarContainer"></div>
+      </div>
 
-      <div id="profileName" class="profile-name"></div>
-      <div id="profileUsername" class="profile-username"></div>
+      <div class="profile-identity">
+        <div id="profileName" class="profile-name"></div>
+        <div id="profileUsername" class="profile-username"></div>
+      </div>
+    </div>
 
-      <div class="status-label">Status</div>
-      <div id="profileBio" class="profile-bio"></div>
-
+    <div class="profile-main-stats">
       <div class="profile-stats">
         <div class="stat">
           <div id="myPostsCount" class="stat-number">0</div>
@@ -2346,10 +2501,10 @@ textarea:focus,
           <div class="stat-label">подписок</div>
         </div>
       </div>
+    </div>
 
-      <div class="profile-buttons">
-        <button class="profile-button dark" onclick="openProfileEditor()">Редактировать профиль</button>
-      </div>
+    <div class="profile-buttons">
+      <button class="profile-button dark" onclick="openProfileEditor()">Редактировать профиль</button>
     </div>
 
     <div class="profile-tabs">
@@ -2750,9 +2905,11 @@ function clearSession(){
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_id");
   localStorage.removeItem("remember_me");
+  localStorage.removeItem("refresh_token");
   sessionStorage.removeItem("access_token");
   sessionStorage.removeItem("user_id");
   sessionStorage.removeItem("remember_me");
+  sessionStorage.removeItem("refresh_token");
 }
 
 function storeSession(data,remember){
@@ -2761,6 +2918,9 @@ function storeSession(data,remember){
   storage.setItem("access_token",data.access_token);
   storage.setItem("user_id",data.user.id);
   storage.setItem("remember_me",remember ? "1" : "0");
+  if(data.refresh_token){
+    storage.setItem("refresh_token",data.refresh_token);
+  }
 }
 
 function showAuth(){
@@ -3032,48 +3192,63 @@ async function signIn(){
    SESSION
 ========================================================= */
 
-async function validateSession(){
+async function refreshSession(){
 
-  const token = getStoredValue("access_token");
-  const userId = getStoredValue("user_id");
+  const refreshToken=getStoredValue("refresh_token");
+  const userId=getStoredValue("user_id");
+  const remember=getStoredValue("remember_me")==="1";
 
-  if(!token || !userId){
-    return false;
-  }
+  if(!refreshToken || !userId)return false;
 
   try{
-
     const response=await fetch(
-      SUPABASE_URL+"/auth/v1/user",
+      SUPABASE_URL+"/auth/v1/token?grant_type=refresh_token",
       {
-        headers:{
-          apikey:SUPABASE_KEY,
-          Authorization:"Bearer "+token
-        }
+        method:"POST",
+        headers:baseHeaders,
+        body:JSON.stringify({refresh_token:refreshToken})
       }
     );
 
-    if(!response.ok){
+    if(!response.ok)return false;
 
-      clearSession();
+    const data=await response.json();
+    if(!data.access_token || !data.user)return false;
 
-      return false;
-    }
-
-    const user=await response.json();
-
-    if(user.id!==userId){
-
-      clearSession();
-
-      return false;
-    }
-
-    return true;
-
-  }catch{
-
+    storeSession(data,remember);
+    return data.user.id===userId;
+  }catch(e){
+    console.error(e);
     return false;
+  }
+}
+
+async function validateSession(){
+
+  const token=getStoredValue("access_token");
+  const userId=getStoredValue("user_id");
+
+  if(!token || !userId)return false;
+
+  try{
+    const response=await fetch(
+      SUPABASE_URL+"/auth/v1/user",
+      {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+token}}
+    );
+
+    if(response.ok){
+      const user=await response.json();
+      if(user.id===userId)return true;
+    }
+
+    const refreshed=await refreshSession();
+    if(refreshed)return true;
+
+    clearSession();
+    return false;
+  }catch(e){
+    console.error(e);
+    return await refreshSession();
   }
 }
 
@@ -3168,7 +3343,7 @@ async function loadProfile(){
 
     if(!response.ok)return null;
 
-    const rows=await response.json();
+    let rows=await response.json();
 
     if(!rows.length){
       const userResponse=await fetch(
@@ -3204,10 +3379,6 @@ async function loadProfile(){
     document.getElementById("profileUsername").textContent =
       "@"+profile.username;
 
-    document.getElementById("profileBio").textContent =
-      profile.bio ||
-      "Status пока не добавлен.";
-
     renderAvatar(
       "profileAvatarContainer",
       profile,
@@ -3215,18 +3386,16 @@ async function loadProfile(){
     );
     renderCover("profileCover",profile);
 
-    const postCountResponse=await fetch(
+    const postCountPromise=fetch(
       SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(id)+"&select=id",
       {headers:authHeaders()}
     );
+    const [postCountResponse]=await Promise.all([
+      postCountPromise,
+      loadFollowStats(id,"myFollowersCount","myFollowingCount")
+    ]);
     const postRows=postCountResponse.ok ? await postCountResponse.json() : [];
     document.getElementById("myPostsCount").textContent=postRows.length;
-
-    await loadFollowStats(
-      id,
-      "myFollowersCount",
-      "myFollowingCount"
-    );
 
     return profile;
 
@@ -9405,27 +9574,19 @@ async function showApp(){
 
 (async function(){
 
-  const rememberMe =
-    getStoredValue("remember_me") === "1";
+  const hasSession=
+    !!getStoredValue("access_token") &&
+    !!getStoredValue("user_id");
 
-  if(rememberMe){
-
-    const valid =
-      await validateSession();
-
+  if(hasSession){
+    const valid=await validateSession();
     if(valid){
-
       await showApp();
-
-    }else{
-
-      showAuth();
+      return;
     }
-
-  }else{
-
-    showAuth();
   }
+
+  showAuth();
 
 })();
 </script>
