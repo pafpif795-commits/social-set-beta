@@ -111,7 +111,7 @@ textarea{
 }
 
 .auth-welcome .nocap{
-  color:#72d68b;
+  color:#72d98b;
   font-style:italic;
   text-shadow:none;
 }
@@ -139,7 +139,7 @@ textarea{
   position:relative;
   width:100%;
   padding:28px 25px;
-  background:rgba(7,46,25,.50);
+  background:rgba(4,35,20,.50);
   border:1px solid rgba(255,255,255,.13);
   border-radius:26px;
   box-shadow:
@@ -222,14 +222,14 @@ textarea{
 }
 
 .primary{
-  background:linear-gradient(135deg,#2f9b4f,#23753a);
+  background:linear-gradient(135deg,#2f9b57,#1f713e);
   color:#fff;
   border:1px solid rgba(255,255,255,.18);
-  box-shadow:0 10px 28px rgba(22,100,44,.24);
+  box-shadow:0 10px 28px rgba(24,100,50,.24);
 }
 
 .primary:hover{
-  box-shadow:0 13px 34px rgba(22,100,44,.34);
+  box-shadow:0 13px 34px rgba(24,100,50,.32);
 }
 
 .secondary{
@@ -454,6 +454,21 @@ textarea:focus,
   width:100%;
 }
 
+@keyframes postIn{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.post{
+  animation:postIn .42s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.post:nth-child(2){animation-delay:.04s}
+.post:nth-child(3){animation-delay:.08s}
+.post:nth-child(4){animation-delay:.12s}
+.post:nth-child(5){animation-delay:.16s}
+.post:nth-child(6){animation-delay:.20s}
+
 .post + .post{
   border-top:0;
 }
@@ -641,7 +656,14 @@ textarea:focus,
 
 .reaction-btn.active .reaction-icon{
   transform:scale(1.08);
-  filter:brightness(1.2) saturate(1.35);
+}
+
+.reaction-btn[data-reaction="like"].active .reaction-icon{
+  filter:brightness(0) saturate(100%) invert(49%) sepia(92%) saturate(1550%) hue-rotate(184deg) brightness(96%) contrast(96%);
+}
+
+.reaction-btn[data-reaction="dislike"].active .reaction-icon{
+  filter:brightness(0) saturate(100%) invert(35%) sepia(94%) saturate(2300%) hue-rotate(333deg) brightness(96%) contrast(96%);
 }
 
 .comment-toggle{
@@ -652,30 +674,15 @@ textarea:focus,
 }
 
 .comment-toggle .reaction-icon{
-  width:27px;
-  height:27px;
+  width:25px;
+  height:25px;
 }
 
 .comment-count{
   font-size:13px;
+  line-height:1;
   font-weight:500;
-  line-height:1;
-  color:var(--muted);
-}
-
-.favorite-toggle{
-  width:44px;
-  height:40px;
-  padding:5px;
-  font-size:22px;
-  line-height:1;
-  color:#8a939d;
-}
-
-.favorite-toggle.active{
-  color:#23753a;
-  background:#f0f9f2;
-  border-color:#bfe1c5;
+  font-variant-numeric:tabular-nums;
 }
 
 /* =========================================================
@@ -850,45 +857,47 @@ textarea:focus,
 .public-profile-card{
   border-radius:0;
   overflow:hidden;
-  margin-bottom:0;
-  background:#fff;
+  margin-bottom:20px;
   border:0;
+  background:#fff;
 }
 
 .cover,
 .public-cover{
-  height:190px;
-  background:
-    linear-gradient(135deg,#0b1f3a,#23608f 55%,#62b7f5);
-  background-size:cover;
+  height:175px;
+  background:#fff;
   background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  border:0;
 }
 
 .profile-info,
 .public-info{
-  padding:0 18px 22px;
+  padding:0 18px 20px;
 }
 
 .big-avatar,
 .public-avatar{
-  width:150px;
-  height:150px;
-  margin-top:-75px;
+  width:148px;
+  height:148px;
+  margin-top:-74px;
   border-radius:10px;
   object-fit:cover;
-  border:4px solid #fff;
-  background:var(--sky);
+  border:0;
+  background:#fff;
   display:block;
-  box-shadow:0 5px 18px rgba(0,0,0,.12);
+  position:relative;
+  box-shadow:0 1px 0 rgba(0,0,0,.04);
 }
 
 .avatar-placeholder,
 .public-avatar-placeholder{
-  width:150px;
-  height:150px;
-  margin-top:-75px;
+  width:148px;
+  height:148px;
+  margin-top:-74px;
   border-radius:10px;
-  border:4px solid #fff;
+  border:0;
   background:var(--navy);
   color:#fff;
   display:flex;
@@ -901,7 +910,7 @@ textarea:focus,
 .profile-name,
 .public-name{
   margin-top:14px;
-  font-size:28px;
+  font-size:27px;
   font-weight:900;
   color:var(--navy);
   overflow-wrap:anywhere;
@@ -911,18 +920,22 @@ textarea:focus,
 .public-username{
   color:var(--muted);
   margin-top:3px;
-  font-size:15px;
 }
 
 .profile-bio,
 .public-bio{
-  margin-top:12px;
-  line-height:1.45;
+  margin-top:13px;
+  line-height:1.5;
   white-space:pre-wrap;
 }
 
 .status-label{
-  display:none;
+  margin-top:14px;
+  font-size:12px;
+  font-weight:900;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.5px;
 }
 
 .profile-stats,
@@ -936,20 +949,19 @@ textarea:focus,
 
 .stat{
   cursor:pointer;
-  padding:2px 4px;
 }
 
 .stat-number{
   color:var(--navy);
   font-size:21px;
-  line-height:1.15;
-  font-weight:600;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
 }
 
 .stat-label{
-  color:#5f6872;
-  font-size:13px;
-  margin-top:5px;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
 }
 
 .profile-buttons,
@@ -957,41 +969,7 @@ textarea:focus,
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:18px;
-}
-
-.profile-tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  background:#fff;
-  border-top:1px solid #eef1f4;
-  border-bottom:1px solid #e5e9ed;
-  margin-bottom:0;
-}
-
-.profile-tab{
-  min-height:54px;
-  background:#fff;
-  color:#6d747c;
-  font-size:18px;
-  font-weight:500;
-  position:relative;
-}
-
-.profile-tab.active{
-  color:#111820;
-  font-weight:800;
-}
-
-.profile-tab.active::after{
-  content:"";
-  position:absolute;
-  left:28%;
-  right:28%;
-  bottom:-1px;
-  height:3px;
-  border-radius:3px 3px 0 0;
-  background:var(--navy);
+  margin-top:16px;
 }
 
 .profile-button,
@@ -1031,15 +1009,46 @@ textarea:focus,
   font-weight:800;
 }
 
+.profile-tabs{
+  display:flex;
+  margin:4px 0 0;
+  border-bottom:1px solid #e8edf1;
+}
+
+.profile-tab{
+  flex:1;
+  padding:15px 10px 13px;
+  background:#fff;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:700;
+  border-bottom:2px solid transparent;
+}
+
+.profile-tab.active{
+  color:var(--navy);
+  border-bottom-color:var(--navy);
+}
+
+.profile-tab-content{
+  display:none;
+}
+
+.profile-tab-content.active{
+  display:block;
+}
+
 .profile-wall{
   border-radius:0;
-  padding:17px 2px 90px;
+  padding:17px 0 0;
   border:0;
-  background:#fff;
 }
 
 .wall-title{
-  display:none;
+  font-size:21px;
+  font-weight:900;
+  color:var(--navy);
+  margin-bottom:14px;
 }
 
 .public-wall{
@@ -1051,6 +1060,65 @@ textarea:focus,
   color:var(--muted);
   padding:4px 0 12px;
   font-weight:700;
+}
+
+.favorite-button{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--muted);
+  border-radius:10px;
+  padding:6px 10px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.favorite-button.active{
+  color:#b88700;
+  background:#fffaf0;
+  border-color:#ead7a3;
+}
+
+.edit-profile-page{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  border:1px solid var(--line);
+}
+
+.edit-profile-page h2{
+  margin:0 0 15px;
+  color:var(--navy);
+}
+
+.edit-profile-cover-preview{
+  width:100%;
+  height:150px;
+  border-radius:12px;
+  background:#fff;
+  background-size:cover;
+  background-position:center;
+  border:1px solid #edf1f4;
+}
+
+.edit-cover-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.edit-profile-page input,
+.edit-profile-page textarea{
+  width:100%;
+  margin-top:10px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  outline:none;
+}
+
+.edit-profile-page textarea{
+  min-height:110px;
 }
 
 /* =========================================================
@@ -1336,6 +1404,7 @@ textarea:focus,
   object-fit:cover;
   background:var(--sky);
   flex-shrink:0;
+  order:3;
 }
 
 .conversation-placeholder{
@@ -1349,11 +1418,13 @@ textarea:focus,
   justify-content:center;
   font-size:21px;
   font-weight:900;
+  order:3;
 }
 
 .conversation-main{
   flex:1;
   min-width:0;
+  order:1;
 }
 
 .conversation-top{
@@ -1393,6 +1464,7 @@ textarea:focus,
 }
 
 .unread-count{
+  order:2;
   min-width:21px;
   height:21px;
   padding:0 6px;
@@ -1843,28 +1915,7 @@ textarea:focus,
 
   .cover,
   .public-cover{
-    height:165px;
-  }
-
-  .big-avatar,
-  .public-avatar,
-  .avatar-placeholder,
-  .public-avatar-placeholder{
-    width:138px;
-    height:138px;
-    margin-top:-69px;
-    border-radius:9px;
-  }
-
-  .profile-name,
-  .public-name{
-    font-size:25px;
-  }
-
-  .profile-info,
-  .public-info{
-    padding-left:14px;
-    padding-right:14px;
+    height:150px;
   }
 
   .header-logo{
@@ -2270,142 +2321,91 @@ textarea:focus,
 <section id="profilePage" class="page">
 
   <div class="profile-card">
-
-    <div class="cover"></div>
+    <div id="profileCover" class="cover"></div>
 
     <div class="profile-info">
-
       <div id="profileAvatarContainer"></div>
 
-      <div
-        id="profileName"
-        class="profile-name">
-      </div>
+      <div id="profileName" class="profile-name"></div>
+      <div id="profileUsername" class="profile-username"></div>
 
-      <div
-        id="profileUsername"
-        class="profile-username">
-      </div>
-
-      <div class="status-label">
-        Status
-      </div>
-
-      <div
-        id="profileBio"
-        class="profile-bio">
-      </div>
+      <div class="status-label">Status</div>
+      <div id="profileBio" class="profile-bio"></div>
 
       <div class="profile-stats">
-
         <div class="stat">
           <div id="myPostsCount" class="stat-number">0</div>
           <div class="stat-label">постов</div>
         </div>
-
-        <div
-          class="stat"
-          onclick="openFollowList('followers',localStorage.getItem('user_id'))">
+        <div class="stat" onclick="openFollowList('followers',getStoredValue('user_id'))">
           <div id="myFollowersCount" class="stat-number">0</div>
           <div class="stat-label">подписчиков</div>
         </div>
-
-        <div
-          class="stat"
-          onclick="openFollowList('following',localStorage.getItem('user_id'))">
-
-          <div
-            id="myFollowingCount"
-            class="stat-number">
-            0
-          </div>
-
-          <div class="stat-label">
-            подписок
-          </div>
-
+        <div class="stat" onclick="openFollowList('following',getStoredValue('user_id'))">
+          <div id="myFollowingCount" class="stat-number">0</div>
+          <div class="stat-label">подписок</div>
         </div>
-
       </div>
 
       <div class="profile-buttons">
-
-        <button
-          class="profile-button dark"
-          onclick="openProfileEditor()">
-          Редактировать профиль
-        </button>
-
-        <button
-          class="profile-button"
-          onclick="chooseAvatar()">
-          📷 Аватар
-        </button>
-
+        <button class="profile-button dark" onclick="openProfileEditor()">Редактировать профиль</button>
       </div>
-
     </div>
 
-  </div>
-
-
-  <div class="profile-tabs">
-    <button id="profileWallTab" class="profile-tab active" onclick="switchProfileTab('wall')">Стена</button>
-    <button id="profileFavoritesTab" class="profile-tab" onclick="switchProfileTab('favorites')">Избранное</button>
-  </div>
-
-  <div class="profile-wall">
-
-    <div id="profileWallTitle" class="wall-title">
-      Моя стена
+    <div class="profile-tabs">
+      <button id="profileWallTab" class="profile-tab active" onclick="showProfileTab('wall')">Стена</button>
+      <button id="profileFavoritesTab" class="profile-tab" onclick="showProfileTab('favorites')">Избранное</button>
     </div>
-
-    <div class="create-post">
-
-      <textarea
-        id="wallInput"
-        maxlength="5000"
-        placeholder="Что написать на стене?"></textarea>
-
-      <div class="post-photo-tools">
-
-        <button
-          class="photo-button"
-          onclick="choosePostImage('wall')">
-          📷 Фото
-        </button>
-
-        <span
-          id="wallImageName"
-          class="photo-name"></span>
-
-      </div>
-
-      <div
-        id="wallImagePreview"
-        class="post-image-preview">
-      </div>
-
-      <input
-        id="wallImageInput"
-        type="file"
-        accept="image/*"
-        hidden
-        onchange="previewPostImage(event,'wall')">
-
-      <button
-        class="publish"
-        id="publishWallButton"
-        onclick="createWallPost()">
-        Опубликовать
-      </button>
-
-    </div>
-
-    <div id="wall"></div>
-
   </div>
 
+  <div id="profileWallSection" class="profile-tab-content active">
+    <div class="profile-wall">
+      <div class="wall-title">Моя стена</div>
+      <div class="create-post">
+        <textarea id="wallInput" maxlength="5000" placeholder="Что написать на стене?"></textarea>
+        <div class="post-photo-tools">
+          <button class="photo-button" onclick="choosePostImage('wall')">📷 Фото</button>
+          <span id="wallImageName" class="photo-name"></span>
+        </div>
+        <div id="wallImagePreview" class="post-image-preview"></div>
+        <input id="wallImageInput" type="file" accept="image/*" hidden onchange="previewPostImage(event,'wall')">
+        <button class="publish" id="publishWallButton" onclick="createWallPost()">Опубликовать</button>
+      </div>
+      <div id="wall"></div>
+    </div>
+  </div>
+
+  <div id="profileFavoritesSection" class="profile-tab-content">
+    <div class="profile-wall">
+      <div class="wall-title">Избранное</div>
+      <div id="favoritesWall"></div>
+    </div>
+  </div>
+
+</section>
+
+<section id="editProfilePage" class="page">
+  <div class="edit-profile-page">
+    <button class="public-back" onclick="showPage('profile')">← Назад в профиль</button>
+    <h2>Редактировать профиль</h2>
+
+    <div id="editCoverPreview" class="edit-profile-cover-preview"></div>
+    <div class="edit-cover-tools">
+      <button class="profile-button" onclick="chooseCover()">🖼️ Выбрать шапку</button>
+      <button class="profile-button" onclick="removeCover()">Убрать шапку</button>
+    </div>
+    <input id="coverInput" type="file" accept="image/*" hidden onchange="uploadCover()">
+
+    <input id="editDisplayName" placeholder="Имя" maxlength="50">
+    <input id="editUsername" placeholder="Username" maxlength="30">
+    <label class="status-modal-label">Status</label>
+    <textarea id="editBio" maxlength="300" placeholder="Напиши свой Status"></textarea>
+
+    <div class="modal-actions">
+      <button class="cancel" onclick="showPage('profile')">Отмена</button>
+      <button class="primary" onclick="saveProfile()">Сохранить</button>
+    </div>
+  </div>
 </section>
 
 
@@ -2421,7 +2421,7 @@ textarea:focus,
 
   <div class="public-profile-card">
 
-    <div class="public-cover"></div>
+    <div id="publicCover" class="public-cover"></div>
 
     <div class="public-info">
 
@@ -2449,39 +2449,9 @@ textarea:focus,
       <div id="publicFriendBadge"></div>
 
       <div class="public-stats">
-
-        <div
-          class="stat"
-          onclick="openFollowList('followers',publicProfile?.id)">
-
-          <div
-            id="publicFollowersCount"
-            class="stat-number">
-            0
-          </div>
-
-          <div class="stat-label">
-            подписчиков
-          </div>
-
-        </div>
-
-        <div
-          class="stat"
-          onclick="openFollowList('following',publicProfile?.id)">
-
-          <div
-            id="publicFollowingCount"
-            class="stat-number">
-            0
-          </div>
-
-          <div class="stat-label">
-            подписок
-          </div>
-
-        </div>
-
+        <div class="stat"><div id="publicPostsCount" class="stat-number">0</div><div class="stat-label">постов</div></div>
+        <div class="stat" onclick="openFollowList('followers',(publicProfile ? publicProfile.id : null))"><div id="publicFollowersCount" class="stat-number">0</div><div class="stat-label">подписчиков</div></div>
+        <div class="stat" onclick="openFollowList('following',(publicProfile ? publicProfile.id : null))"><div id="publicFollowingCount" class="stat-number">0</div><div class="stat-label">подписок</div></div>
       </div>
 
       <div
@@ -2594,56 +2564,6 @@ textarea:focus,
 
 
 <div
-  id="profileModal"
-  class="modal">
-
-  <div class="modal-card">
-
-    <h2>
-      Редактировать профиль
-    </h2>
-
-    <input
-      id="editDisplayName"
-      placeholder="Имя"
-      maxlength="50">
-
-    <input
-      id="editUsername"
-      placeholder="Username"
-      maxlength="30">
-
-    <label class="status-modal-label">
-      Status
-    </label>
-
-    <textarea
-      id="editBio"
-      maxlength="300"
-      placeholder="Напиши свой Status"></textarea>
-
-    <div class="modal-actions">
-
-      <button
-        class="cancel"
-        onclick="closeProfileEditor()">
-        Отмена
-      </button>
-
-      <button
-        class="primary"
-        onclick="saveProfile()">
-        Сохранить
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div
   id="groupModal"
   class="modal">
 
@@ -2691,6 +2611,12 @@ textarea:focus,
   hidden
   onchange="uploadAvatar()">
 
+<input
+  id="coverInputLegacy"
+  type="file"
+  accept="image/*"
+  hidden>
+
 
 <script>
 
@@ -2713,8 +2639,7 @@ const baseHeaders = {
 function authHeaders(){
 
   const token =
-    localStorage.getItem("access_token") ||
-    sessionStorage.getItem("access_token") ||
+    getStoredValue("access_token") ||
     SUPABASE_KEY;
 
   return {
@@ -2817,12 +2742,25 @@ function showAuthForm(type){
   document.getElementById("authMessage").textContent="";
 }
 
-function clearSession(){
+function getStoredValue(key){
+  return localStorage.getItem(key) || sessionStorage.getItem(key);
+}
 
+function clearSession(){
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_id");
+  localStorage.removeItem("remember_me");
   sessionStorage.removeItem("access_token");
   sessionStorage.removeItem("user_id");
+  sessionStorage.removeItem("remember_me");
+}
+
+function storeSession(data,remember){
+  clearSession();
+  const storage=remember ? localStorage : sessionStorage;
+  storage.setItem("access_token",data.access_token);
+  storage.setItem("user_id",data.user.id);
+  storage.setItem("remember_me",remember ? "1" : "0");
 }
 
 function showAuth(){
@@ -3072,27 +3010,7 @@ async function signIn(){
     const rememberMe =
       document.getElementById("rememberMe").checked;
 
-    localStorage.setItem(
-      "remember_me",
-      rememberMe ? "1" : "0"
-    );
-
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user_id");
-    sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("user_id");
-
-    const storage = rememberMe ? localStorage : sessionStorage;
-
-    storage.setItem(
-      "access_token",
-      data.access_token
-    );
-
-    storage.setItem(
-      "user_id",
-      data.user.id
-    );
+    storeSession(data,rememberMe);
 
     await showApp();
 
@@ -3116,13 +3034,8 @@ async function signIn(){
 
 async function validateSession(){
 
-  const token =
-    localStorage.getItem("access_token") ||
-    sessionStorage.getItem("access_token");
-
-  const userId =
-    localStorage.getItem("user_id") ||
-    sessionStorage.getItem("user_id");
+  const token = getStoredValue("access_token");
+  const userId = getStoredValue("user_id");
 
   if(!token || !userId){
     return false;
@@ -3181,6 +3094,8 @@ function signOut(){
 
   profilesCache=null;
   profilesCacheTime=0;
+  favoriteIdsCache=null;
+  favoriteIdsPromise=null;
 
   showAuth();
 }
@@ -3235,8 +3150,7 @@ async function createProfile(id,username){
 
 async function loadProfile(){
 
-  const id =
-    localStorage.getItem("user_id");
+  const id = getStoredValue("user_id");
 
   if(!id)return null;
 
@@ -3256,7 +3170,28 @@ async function loadProfile(){
 
     const rows=await response.json();
 
-    if(!rows.length)return null;
+    if(!rows.length){
+      const userResponse=await fetch(
+        SUPABASE_URL+"/auth/v1/user",
+        {headers:authHeaders()}
+      );
+      if(!userResponse.ok)return null;
+      const user=await userResponse.json();
+      const rawBase=(user.email||"user").split("@")[0].replace(/[^a-zA-Z0-9_.-]/g,"").slice(0,24) || "user";
+      const base=rawBase+"_"+Date.now().toString(36).slice(-4);
+      const create=await fetch(
+        SUPABASE_URL+"/rest/v1/profiles",
+        {
+          method:"POST",
+          headers:{...authHeaders(),Prefer:"return=representation"},
+          body:JSON.stringify({id,username:base,display_name:base,bio:"",avatar_url:"",cover_url:""})
+        }
+      );
+      if(!create.ok)return null;
+      const created=await create.json();
+      if(!created.length)return null;
+      rows=created;
+    }
 
     const profile=rows[0];
 
@@ -3278,6 +3213,14 @@ async function loadProfile(){
       profile,
       "big"
     );
+    renderCover("profileCover",profile);
+
+    const postCountResponse=await fetch(
+      SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(id)+"&select=id",
+      {headers:authHeaders()}
+    );
+    const postRows=postCountResponse.ok ? await postCountResponse.json() : [];
+    document.getElementById("myPostsCount").textContent=postRows.length;
 
     await loadFollowStats(
       id,
@@ -3347,6 +3290,13 @@ function renderAvatar(containerId,profile,type){
   container.appendChild(div);
 }
 
+function renderCover(containerId,profile){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.style.backgroundImage=profile && profile.cover_url ? 'url("'+profile.cover_url.replace(/"/g,'\\"')+'")' : "none";
+  el.style.backgroundColor="#fff";
+}
+
 function chooseAvatar(){
 
   document
@@ -3382,7 +3332,7 @@ async function uploadAvatar(){
   }
 
   const id =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -3464,50 +3414,55 @@ async function uploadAvatar(){
 }
 
 function openProfileEditor(){
-
   const p=window.currentProfile;
-
-  if(!p){
-
-    alert("Профиль ещё загружается.");
-
-    return;
-  }
-
-  document.getElementById(
-    "editDisplayName"
-  ).value =
-    p.display_name ||
-    p.username;
-
-  document.getElementById(
-    "editUsername"
-  ).value =
-    p.username ||
-    "";
-
-  document.getElementById(
-    "editBio"
-  ).value =
-    p.bio ||
-    "";
-
-  document
-    .getElementById("profileModal")
-    .classList.add("active");
+  if(!p){ alert("Профиль ещё загружается."); return; }
+  document.getElementById("editDisplayName").value=p.display_name || p.username || "";
+  document.getElementById("editUsername").value=p.username || "";
+  document.getElementById("editBio").value=p.bio || "";
+  renderCover("editCoverPreview",p);
+  showPage("editProfile");
 }
 
-function closeProfileEditor(){
+function chooseCover(){
+  document.getElementById("coverInput").click();
+}
 
-  document
-    .getElementById("profileModal")
-    .classList.remove("active");
+async function uploadCover(){
+  const input=document.getElementById("coverInput");
+  const file=input.files[0];
+  if(!file)return;
+  if(!file.type.startsWith("image/")){ alert("Можно загружать только изображения."); input.value=""; return; }
+  if(file.size>15*1024*1024){ alert("Максимальный размер: 15 МБ."); input.value=""; return; }
+  const id=getStoredValue("user_id");
+  try{
+    const prepared=await prepareImageForUpload(file);
+    const ext=getImageExtension(prepared.type,file.name);
+    const path=id+"/"+Date.now()+"-cover."+ext;
+    const upload=await uploadToStorage(path,prepared);
+    if(!upload.ok){ alert("Ошибка загрузки шапки:\n"+upload.text); return; }
+    const url=SUPABASE_URL+"/storage/v1/object/public/Stenka/"+path;
+    const response=await fetch(SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(id),{method:"PATCH",headers:{...authHeaders(),Prefer:"return=representation"},body:JSON.stringify({cover_url:url})});
+    if(!response.ok){ alert("Шапка загрузилась, но профиль не обновился."); return; }
+    profilesCache=null; profilesCacheTime=0; input.value="";
+    await loadProfile();
+    renderCover("editCoverPreview",window.currentProfile);
+  }catch(e){ console.error(e); alert("Ошибка загрузки шапки."); }
+}
+
+async function removeCover(){
+  const id=getStoredValue("user_id");
+  try{
+    const response=await fetch(SUPABASE_URL+"/rest/v1/profiles?id=eq."+encodeURIComponent(id),{method:"PATCH",headers:{...authHeaders(),Prefer:"return=minimal"},body:JSON.stringify({cover_url:""})});
+    if(!response.ok){ alert("Не удалось убрать шапку."); return; }
+    await loadProfile();
+    renderCover("editCoverPreview",window.currentProfile);
+  }catch(e){ console.error(e); alert("Ошибка."); }
 }
 
 async function saveProfile(){
 
   const id =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const display_name =
     document
@@ -3590,9 +3545,8 @@ async function saveProfile(){
     profilesCache=null;
     profilesCacheTime=0;
 
-    closeProfileEditor();
-
     await loadProfile();
+    showPage("profile");
 
   }catch(e){
 
@@ -3672,7 +3626,7 @@ async function loadFollowStats(
 async function isFollowing(target){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me || me===target)return false;
 
@@ -3703,7 +3657,7 @@ async function isFollowing(target){
 async function isFriend(target){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me || me===target)return false;
 
@@ -3753,7 +3707,7 @@ async function isFriend(target){
 async function toggleFollow(target){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me || me===target)return;
 
@@ -3852,7 +3806,7 @@ async function toggleFollow(target){
 
 async function openFoundProfile(profile){
 
-  if(!profile?.id)return;
+  if(!(profile ? profile.id : null))return;
 
   publicProfile=profile;
 
@@ -3932,6 +3886,10 @@ async function openFoundProfile(profile){
       publicProfile,
       "public"
     );
+    renderCover("publicCover",publicProfile);
+    const publicPostCount=await fetch(SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(publicProfile.id)+"&select=id",{headers:authHeaders()});
+    const publicPostRows=publicPostCount.ok ? await publicPostCount.json() : [];
+    document.getElementById("publicPostsCount").textContent=publicPostRows.length;
 
     await loadFollowStats(
       publicProfile.id,
@@ -3966,7 +3924,7 @@ async function renderPublicActions(target){
     document.getElementById("publicFriendBadge");
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   container.innerHTML="";
   badge.innerHTML="";
@@ -4063,9 +4021,6 @@ async function loadPublicWall(userId){
     }
 
     const posts=await response.json();
-
-    const countNode=document.getElementById("myPostsCount");
-    if(countNode)countNode.textContent=String(posts.length);
 
     const profiles =
       await loadProfilesMap();
@@ -4305,7 +4260,7 @@ async function getProfilesByIds(ids){
       .map(encodeURIComponent)
       .join(",")+
     ")"+
-    "&select=id,username,display_name,avatar_url,bio",
+    "&select=id,username,display_name,avatar_url,cover_url,bio",
     {
       headers:authHeaders()
     }
@@ -4505,7 +4460,7 @@ async function loadProfilesMap(force=false){
 
     const response=await fetch(
       SUPABASE_URL+
-      "/rest/v1/profiles?select=id,username,display_name,avatar_url",
+      "/rest/v1/profiles?select=id,username,display_name,avatar_url,cover_url",
       {
         headers:authHeaders()
       }
@@ -4590,8 +4545,6 @@ async function getCommentsForPosts(posts){
 
 async function loadPosts(){
 
-  await loadFavoritePostIds();
-
   const feed =
     document.getElementById("feed");
 
@@ -4660,16 +4613,16 @@ function renderPost(
     profiles[post.user_id];
 
   const username =
-    profile?.username ||
+    (profile ? profile.username : null) ||
     post.username ||
     "user";
 
   const display =
-    profile?.display_name ||
+    (profile ? profile.display_name : null) ||
     username;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const own =
     post.user_id===me;
@@ -4897,30 +4850,6 @@ function renderPost(
     );
   };
 
-  const favoriteButton =
-    document.createElement("button");
-
-  favoriteButton.className =
-    "reaction-btn favorite-toggle" +
-    (window.favoritePostIds && window.favoritePostIds.has(String(post.id)) ? " active" : "");
-
-  favoriteButton.type="button";
-  favoriteButton.title="Добавить в избранное";
-  favoriteButton.setAttribute("aria-label","Избранное");
-  favoriteButton.textContent="☆";
-
-  favoriteButton.onclick=async e=>{
-    e.stopPropagation();
-    const saved=await toggleFavorite(post.id);
-    if(saved){
-      favoriteButton.classList.add("active");
-      favoriteButton.textContent="★";
-    }else{
-      favoriteButton.classList.remove("active");
-      favoriteButton.textContent="☆";
-    }
-  };
-
   const commentButton =
     document.createElement("button");
 
@@ -4938,8 +4867,15 @@ function renderPost(
   );
 
   commentButton.innerHTML =
-    '<img src="comment.png" class="reaction-icon" alt="">'+
-    '<span class="comment-count">'+comments.length+'</span>';
+    '<img src="comment.png" class="reaction-icon" alt=""><span class="comment-count">'+comments.length+'</span>';
+
+  const favoriteButton=document.createElement("button");
+  favoriteButton.type="button";
+  favoriteButton.className="favorite-button";
+  favoriteButton.textContent="☆ Сохранить";
+  favoriteButton.dataset.favoritePost=String(post.id);
+  favoriteButton.onclick=function(e){e.stopPropagation();toggleFavorite(post.id,favoriteButton);};
+  updateFavoriteButton(favoriteButton,post.id);
 
   actions.appendChild(like);
   actions.appendChild(dislike);
@@ -5024,6 +4960,90 @@ function renderPost(
 
 
 /* =========================================================
+   FAVORITES
+========================================================= */
+
+let favoriteIdsCache=null;
+let favoriteIdsPromise=null;
+
+async function loadFavoriteIds(force){
+  if(!force && favoriteIdsCache)return favoriteIdsCache;
+  if(!force && favoriteIdsPromise)return favoriteIdsPromise;
+  const userId=getStoredValue("user_id");
+  if(!userId)return new Set();
+  favoriteIdsPromise=(async function(){
+    try{
+      const r=await fetch(SUPABASE_URL+"/rest/v1/Favorites?user_id=eq."+encodeURIComponent(userId)+"&select=post_id",{headers:authHeaders()});
+      if(!r.ok)return favoriteIdsCache || new Set();
+      const rows=await r.json();
+      favoriteIdsCache=new Set(rows.map(function(x){return String(x.post_id);}));
+      return favoriteIdsCache;
+    }catch(e){ return favoriteIdsCache || new Set(); }
+    finally{favoriteIdsPromise=null;}
+  })();
+  return favoriteIdsPromise;
+}
+
+async function updateFavoriteButton(button,postId){
+  const ids=await loadFavoriteIds(false);
+  const active=ids.has(String(postId));
+  button.classList.toggle("active",active);
+  button.textContent=active ? "★ Сохранено" : "☆ Сохранить";
+}
+
+async function toggleFavorite(postId,button){
+  const userId=getStoredValue("user_id");
+  if(!userId)return;
+  button.disabled=true;
+  try{
+    const ids=await loadFavoriteIds(false);
+    const active=ids.has(String(postId));
+    let r;
+    if(active){
+      r=await fetch(SUPABASE_URL+"/rest/v1/Favorites?user_id=eq."+encodeURIComponent(userId)+"&post_id=eq."+encodeURIComponent(postId),{method:"DELETE",headers:authHeaders()});
+    }else{
+      r=await fetch(SUPABASE_URL+"/rest/v1/Favorites",{method:"POST",headers:{...authHeaders(),Prefer:"return=minimal"},body:JSON.stringify({user_id:userId,post_id:postId})});
+    }
+    if(!r.ok){ alert("Не удалось изменить Избранное.\n"+await r.text()); return; }
+    favoriteIdsCache=null;
+    await updateFavoriteButton(button,postId);
+  }catch(e){ console.error(e); alert("Ошибка Избранного."); }
+  finally{ button.disabled=false; }
+}
+
+async function loadFavorites(){
+  const wall=document.getElementById("favoritesWall");
+  if(!wall)return;
+  const userId=getStoredValue("user_id");
+  wall.innerHTML='<div class="wall-empty">Загружаем...</div>';
+  try{
+    const f=await fetch(SUPABASE_URL+"/rest/v1/Favorites?user_id=eq."+encodeURIComponent(userId)+"&select=post_id,created_at&order=created_at.desc&limit=100",{headers:authHeaders()});
+    if(!f.ok)throw new Error(await f.text());
+    const favs=await f.json();
+    if(!favs.length){wall.innerHTML='<div class="wall-empty">Сохранённых постов пока нет.</div>';return;}
+    const ids=favs.map(function(x){return x.post_id;});
+    const p=await fetch(SUPABASE_URL+"/rest/v1/posts?id=in.("+ids.map(encodeURIComponent).join(",")+")&select=*&limit=100",{headers:authHeaders()});
+    if(!p.ok)throw new Error(await p.text());
+    const posts=await p.json();
+    const byId={}; posts.forEach(function(x){byId[String(x.id)]=x;});
+    const ordered=ids.map(function(id){return byId[String(id)];}).filter(Boolean);
+    const profiles=await loadProfilesMap();
+    const comments=await getCommentsForPosts(ordered);
+    wall.innerHTML="";
+    ordered.forEach(function(post){renderPost(post,wall,profiles,comments[post.id] || []);});
+  }catch(e){console.error(e);wall.innerHTML='<div class="wall-empty">Не удалось загрузить Избранное.</div>';}
+}
+
+function showProfileTab(tab){
+  const wall=tab==="wall";
+  document.getElementById("profileWallSection").classList.toggle("active",wall);
+  document.getElementById("profileFavoritesSection").classList.toggle("active",!wall);
+  document.getElementById("profileWallTab").classList.toggle("active",wall);
+  document.getElementById("profileFavoritesTab").classList.toggle("active",!wall);
+  if(!wall)loadFavorites();
+}
+
+/* =========================================================
    EDIT / DELETE POSTS
 ========================================================= */
 
@@ -5049,7 +5069,7 @@ async function editPost(post){
   }
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -5107,7 +5127,7 @@ async function deletePost(post){
   }
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -5247,7 +5267,7 @@ function renderComment(
 ){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const profile =
     profiles[comment.user_id];
@@ -5257,7 +5277,7 @@ function renderComment(
 
   wrapper.className="comment";
 
-  if(profile?.avatar_url){
+  if((profile ? profile.avatar_url : null)){
 
     const avatar =
       document.createElement("img");
@@ -5291,8 +5311,8 @@ function renderComment(
     avatar.style.cursor="pointer";
 
     avatar.textContent=(
-      profile?.display_name ||
-      profile?.username ||
+      (profile ? profile.display_name : null) ||
+      (profile ? profile.username : null) ||
       "?"
     ).charAt(0).toUpperCase();
 
@@ -5321,8 +5341,8 @@ function renderComment(
   author.className="comment-author";
 
   author.textContent =
-    profile?.display_name ||
-    profile?.username ||
+    (profile ? profile.display_name : null) ||
+    (profile ? profile.username : null) ||
     "Пользователь";
 
   if(profile){
@@ -5414,7 +5434,7 @@ async function addComment(
   if(!content)return;
 
   const userId =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -5506,7 +5526,7 @@ async function addComment(
     );
 
     button.innerHTML =
-      '<img src="comment.png" class="reaction-icon" alt="">';
+      '<img src="comment.png" class="reaction-icon" alt=""><span class="comment-count">'+comments.length+'</span>';
 
     commentsBox.classList.add("open");
 
@@ -5572,7 +5592,7 @@ async function editComment(
   if(!content)return;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -5648,7 +5668,7 @@ async function deleteComment(
   }
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -5876,7 +5896,7 @@ function getImageExtension(
     name
       .split(".")
       .pop()
-      ?.toLowerCase() ||
+       .toLowerCase() ||
     "jpg"
   );
 }
@@ -6267,7 +6287,7 @@ async function createPostInDatabase(
         body:JSON.stringify({
           user_id:userId,
           username:
-            window.currentProfile?.username ||
+            (window.currentProfile ? window.currentProfile.username : null) ||
             "you",
           content:text || "",
           image_url:imageUrl
@@ -6311,129 +6331,13 @@ async function createPostInDatabase(
 
 
 /* =========================================================
-   FAVORITES
-========================================================= */
-
-window.favoritePostIds=new Set();
-
-async function loadFavoritePostIds(){
-  const userId=localStorage.getItem("user_id");
-  window.favoritePostIds=new Set();
-  if(!userId)return window.favoritePostIds;
-
-  try{
-    const response=await fetch(
-      SUPABASE_URL+
-      "/rest/v1/Favorites?select=post_id&user_id=eq."+
-      encodeURIComponent(userId),
-      {headers:authHeaders()}
-    );
-    if(!response.ok)return window.favoritePostIds;
-    const rows=await response.json();
-    rows.forEach(row=>window.favoritePostIds.add(String(row.post_id)));
-  }catch(e){
-    console.error(e);
-  }
-  return window.favoritePostIds;
-}
-
-async function toggleFavorite(postId){
-  const userId=localStorage.getItem("user_id");
-  if(!userId)return false;
-
-  const key=String(postId);
-  const exists=window.favoritePostIds.has(key);
-
-  try{
-    const response=await fetch(
-      SUPABASE_URL+
-      "/rest/v1/Favorites?user_id=eq."+
-      encodeURIComponent(userId)+
-      "&post_id=eq."+
-      encodeURIComponent(postId),
-      {
-        method:exists?"DELETE":"POST",
-        headers:{
-          ...authHeaders(),
-          Prefer:"return=minimal"
-        },
-        body:exists?undefined:JSON.stringify({user_id:userId,post_id:postId})
-      }
-    );
-
-    if(!response.ok){
-      console.error(await response.text());
-      return exists;
-    }
-
-    if(exists)window.favoritePostIds.delete(key);
-    else window.favoritePostIds.add(key);
-
-    return !exists;
-  }catch(e){
-    console.error(e);
-    return exists;
-  }
-}
-
-async function loadFavorites(){
-  const wall=document.getElementById("wall");
-  if(!wall)return;
-  wall.innerHTML='<div class="wall-empty">Загружаем избранное...</div>';
-
-  await loadFavoritePostIds();
-  const ids=Array.from(window.favoritePostIds);
-
-  if(!ids.length){
-    wall.innerHTML='<div class="wall-empty">В избранном пока ничего нет.</div>';
-    return;
-  }
-
-  try{
-    const response=await fetch(
-      SUPABASE_URL+
-      "/rest/v1/posts?id=in.("+ids.map(encodeURIComponent).join(",")+")&select=*&order=created_at.desc",
-      {headers:authHeaders()}
-    );
-    if(!response.ok)throw new Error();
-    const posts=await response.json();
-    const profiles=await loadProfilesMap();
-    const comments=await getCommentsForPosts(posts);
-    wall.innerHTML="";
-    posts.forEach(post=>renderPost(post,wall,profiles,comments[post.id]||[]));
-  }catch(e){
-    console.error(e);
-    wall.innerHTML='<div class="wall-empty">Не удалось загрузить избранное.</div>';
-  }
-}
-
-function switchProfileTab(tab){
-  const wallTab=document.getElementById("profileWallTab");
-  const favTab=document.getElementById("profileFavoritesTab");
-  if(!wallTab||!favTab)return;
-
-  const favorites=tab==="favorites";
-  wallTab.classList.toggle("active",!favorites);
-  favTab.classList.toggle("active",favorites);
-
-  if(favorites){
-    loadFavorites();
-  }else{
-    loadWall();
-  }
-}
-
-
-/* =========================================================
    WALL
 ========================================================= */
 
 async function loadWall(){
 
-  await loadFavoritePostIds();
-
   const userId =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const wall =
     document.getElementById("wall");
@@ -6506,12 +6410,7 @@ function updateReactionButtons(
   activeReaction
 ){
 
-  const postElement =
-    document.querySelector(
-      '.post[data-post-id="'+
-      CSS.escape(String(postId))+
-      '"]'
-    );
+  const postElement=Array.from(document.querySelectorAll('.post[data-post-id]')).find(function(el){return String(el.dataset.postId)===String(postId);});
 
   if(!postElement)return;
 
@@ -6554,12 +6453,7 @@ function updateReactionButtons(
 
 function animateReaction(postId,type){
 
-  const postElement =
-    document.querySelector(
-      '.post[data-post-id="'+
-      CSS.escape(String(postId))+
-      '"]'
-    );
+  const postElement=Array.from(document.querySelectorAll('.post[data-post-id]')).find(function(el){return String(el.dataset.postId)===String(postId);});
 
   if(!postElement)return;
 
@@ -6632,12 +6526,7 @@ async function reactToPost(
     не моргает.
   */
 
-  const postElement =
-    document.querySelector(
-      '.post[data-post-id="'+
-      CSS.escape(String(id))+
-      '"]'
-    );
+  const postElement=Array.from(document.querySelectorAll('.post[data-post-id]')).find(function(el){return String(el.dataset.postId)===String(id);});
 
   let previousLike=0;
   let previousDislike=0;
@@ -6779,7 +6668,7 @@ async function reactToPost(
     );
 
     const me =
-      localStorage.getItem("user_id");
+      getStoredValue("user_id");
 
     if(
       type==="like" &&
@@ -6891,7 +6780,7 @@ async function createNotification(
 async function loadNotifications(){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const container =
     document.getElementById(
@@ -6992,7 +6881,7 @@ async function loadNotifications(){
           }
         };
 
-        if(actor?.avatar_url){
+        if((actor ? actor.avatar_url : null)){
 
           const img =
             document.createElement("img");
@@ -7016,8 +6905,8 @@ async function loadNotifications(){
             "notification-avatar-placeholder";
 
           avatar.textContent=(
-            actor?.display_name ||
-            actor?.username ||
+            (actor ? actor.display_name : null) ||
+            (actor ? actor.username : null) ||
             "N"
           ).charAt(0).toUpperCase();
 
@@ -7043,8 +6932,8 @@ async function loadNotifications(){
           "notification-name";
 
         name.textContent =
-          actor?.display_name ||
-          actor?.username ||
+          (actor ? actor.display_name : null) ||
+          (actor ? actor.username : null) ||
           "Пользователь";
 
         text.appendChild(name);
@@ -7102,7 +6991,7 @@ async function loadNotifications(){
 async function markNotificationRead(id){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -7135,7 +7024,7 @@ async function markNotificationRead(id){
 async function markAllNotificationsRead(){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -7178,7 +7067,7 @@ async function markAllNotificationsRead(){
 async function getUnreadNotificationCount(){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me)return 0;
 
@@ -7215,7 +7104,7 @@ async function getUnreadNotificationCount(){
 async function getUnreadMessageCount(){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me)return 0;
 
@@ -7249,7 +7138,7 @@ async function markDirectMessagesRead(
 ){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me || !otherId)return;
 
@@ -7339,7 +7228,7 @@ async function updateNotificationBadges(){
 async function loadConversations(){
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const container =
     document.getElementById(
@@ -7626,7 +7515,7 @@ async function performMessageSearch(){
     const rows=await response.json();
 
     const me =
-      localStorage.getItem("user_id");
+      getStoredValue("user_id");
 
     results.innerHTML="";
 
@@ -7701,7 +7590,7 @@ async function performMessageSearch(){
 
 async function openChatWithUser(profile){
 
-  if(!profile?.id)return;
+  if(!(profile ? profile.id : null))return;
 
   currentChatUser=profile;
   currentGroupChat=null;
@@ -7824,7 +7713,7 @@ async function loadDirectMessages(){
   if(!currentChatUser)return;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   const other =
     currentChatUser.id;
@@ -7992,7 +7881,7 @@ async function sendMessage(){
   if(!content)return;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   input.disabled=true;
 
@@ -8071,7 +7960,7 @@ async function sendMessage(){
         me,
         "message",
         null,
-        sentMessage?.id || null,
+        (sentMessage ? sentMessage.id : null) || null,
         "отправил вам сообщение"
       );
     }
@@ -8139,7 +8028,7 @@ async function editMessage(
   if(!content)return;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -8194,7 +8083,7 @@ async function deleteMessage(
   }
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -8238,12 +8127,7 @@ async function deleteMessage(
       return;
     }
 
-    const row =
-      document.querySelector(
-        '.message-row[data-message-id="'+
-        CSS.escape(String(message.id))+
-        '"]'
-      );
+    const row=Array.from(document.querySelectorAll('.message-row[data-message-id]')).find(function(el){return String(el.dataset.messageId)===String(message.id);});
 
     if(row){
 
@@ -8343,7 +8227,7 @@ async function openCreateGroupModal(){
   try{
 
     const me =
-      localStorage.getItem("user_id");
+      getStoredValue("user_id");
 
     const [
       followingResponse,
@@ -8525,7 +8409,7 @@ async function createGroupChat(){
   ].map(x=>x.value);
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!selected.length){
 
@@ -8640,7 +8524,7 @@ async function loadGroupChats(){
     );
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   if(!me)return;
 
@@ -8838,7 +8722,7 @@ async function loadGroupMessages(){
     );
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -8940,8 +8824,8 @@ function renderGroupMessage(
     sender.className="message-sender";
 
     sender.textContent =
-      profile?.display_name ||
-      profile?.username ||
+      (profile ? profile.display_name : null) ||
+      (profile ? profile.username : null) ||
       "Пользователь";
 
     wrap.appendChild(sender);
@@ -9036,7 +8920,7 @@ async function editGroupMessage(
   if(!content)return;
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -9091,7 +8975,7 @@ async function deleteGroupMessage(
   }
 
   const me =
-    localStorage.getItem("user_id");
+    getStoredValue("user_id");
 
   try{
 
@@ -9135,12 +9019,7 @@ async function deleteGroupMessage(
       return;
     }
 
-    const row =
-      document.querySelector(
-        '.message-row[data-message-id="'+
-        CSS.escape(String(message.id))+
-        '"]'
-      );
+    const row=Array.from(document.querySelectorAll('.message-row[data-message-id]')).find(function(el){return String(el.dataset.messageId)===String(message.id);});
 
     if(row){
 
@@ -9313,6 +9192,7 @@ function showPage(page){
   if(page==="profile"){
 
     publicProfile=null;
+    showProfileTab("wall");
 
     document
       .getElementById("profilePage")
@@ -9323,8 +9203,14 @@ function showPage(page){
       .classList.add("active");
 
     loadProfile();
-    switchProfileTab("wall");
+    loadWall();
 
+    return;
+  }
+
+  if(page==="editProfile"){
+    document.getElementById("editProfilePage").classList.add("active");
+    document.getElementById("profileNav").classList.add("active");
     return;
   }
 
@@ -9371,19 +9257,6 @@ function isAllowedImageUrl(url){
 /* =========================================================
    EVENTS
 ========================================================= */
-
-document
-  .getElementById("profileModal")
-  .addEventListener(
-    "click",
-    e=>{
-      if(
-        e.target.id==="profileModal"
-      ){
-        closeProfileEditor();
-      }
-    }
-  );
 
 document
   .getElementById("groupModal")
@@ -9495,17 +9368,18 @@ async function showApp(){
     "app"
   ).style.display="block";
 
-  const profile =
-    await loadProfile();
+  let profile=null;
+  for(let attempt=0; attempt<3 && !profile; attempt++){
+    profile=await loadProfile();
+    if(!profile){
+      await new Promise(r=>setTimeout(r,350));
+    }
+  }
 
   if(!profile){
-
-    alert(
-      "Не удалось загрузить профиль."
-    );
-
-    signOut();
-
+    document.getElementById("app").style.display="none";
+    document.getElementById("authScreen").style.display="flex";
+    document.getElementById("authMessage").textContent="Не удалось загрузить профиль. Попробуй войти ещё раз.";
     return;
   }
 
@@ -9532,19 +9406,24 @@ async function showApp(){
 (async function(){
 
   const rememberMe =
-    localStorage.getItem("remember_me") === "1";
+    getStoredValue("remember_me") === "1";
 
-  const hasSession =
-    !!(localStorage.getItem("access_token") || sessionStorage.getItem("access_token"));
+  if(rememberMe){
 
-  if(rememberMe || hasSession){
-    const valid=await validateSession();
+    const valid =
+      await validateSession();
+
     if(valid){
+
       await showApp();
+
     }else{
+
       showAuth();
     }
+
   }else{
+
     showAuth();
   }
 
