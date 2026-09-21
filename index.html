@@ -524,7 +524,7 @@ textarea:focus,
   width:100%;
   max-height:650px;
   object-fit:contain;
-  border-radius:14px;
+  border-radius:0;
   margin-top:12px;
   background:#f1f3f5;
 }
@@ -601,7 +601,7 @@ textarea:focus,
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:3px;
+  gap:2px;
   transition:
     transform .18s ease,
     background .18s ease,
@@ -666,14 +666,21 @@ textarea:focus,
   color:var(--navy);
 }
 
+.comment-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+}
+
 .comment-toggle .reaction-icon{
-  width:25px;
-  height:25px;
+  width:30px;
+  height:30px;
 }
 
 .comment-count{
-  margin-left:1px;
-  font-size:13px;
+  margin-left:-1px;
+  font-size:14px;
   line-height:1;
   font-weight:500;
   font-variant-numeric:tabular-nums;
@@ -849,6 +856,7 @@ textarea:focus,
 
 .profile-card,
 .public-profile-card{
+  width:100%;
   border:0;
   border-radius:0;
   overflow:visible;
@@ -856,22 +864,22 @@ textarea:focus,
   background:#fff;
 }
 
-/* Концепт: аватар слева, шапка только справа от него */
+/* Концепт: компактный квадратный аватар + шапка до края экрана */
 .profile-hero,
 .public-hero{
   position:relative;
-  height:144px;
+  height:108px;
   background:#fff;
-  overflow:hidden;
+  overflow:visible;
 }
 
 .cover,
 .public-cover{
   position:absolute;
-  left:144px;
-  right:-15px;
-  top:13px;
-  height:127px;
+  left:108px;
+  right:-24px;
+  top:7px;
+  height:94px;
   background:#fff;
   background-position:center;
   background-size:cover;
@@ -891,9 +899,9 @@ textarea:focus,
 .public-avatar,
 .avatar-placeholder,
 .public-avatar-placeholder{
-  width:144px;
-  height:144px;
-  border-radius:9px;
+  width:108px;
+  height:108px;
+  border-radius:7px;
   object-fit:cover;
   border:0;
   background:#fff;
@@ -915,9 +923,9 @@ textarea:focus,
 .profile-identity,
 .public-identity{
   position:absolute;
-  left:163px;
-  right:18px;
-  top:28px;
+  left:124px;
+  right:12px;
+  top:13px;
   z-index:4;
   pointer-events:none;
 }
@@ -925,27 +933,57 @@ textarea:focus,
 .profile-name,
 .public-name{
   margin:0;
-  font-size:29px;
+  font-size:24px;
   line-height:1.05;
   font-weight:900;
-  color:#fff;
-  text-shadow:0 2px 12px rgba(0,0,0,.32);
+  color:#111;
+  -webkit-text-stroke:1px rgba(255,255,255,.95);
+  text-shadow:0 1px 7px rgba(255,255,255,.75);
   overflow-wrap:anywhere;
 }
 
 .profile-username,
 .public-username{
-  color:rgba(255,255,255,.88);
+  color:#111;
+  -webkit-text-stroke:.7px rgba(255,255,255,.95);
   margin-top:5px;
-  font-size:16px;
-  text-shadow:0 2px 8px rgba(0,0,0,.30);
+  font-size:15px;
+  font-weight:700;
+  text-shadow:0 1px 6px rgba(255,255,255,.72);
 }
 
 .profile-bio,
-.public-bio,
-.profile-info>.status-label,
-.public-info>.status-label{
-  display:none;
+.public-bio{
+  display:block;
+  margin-top:7px;
+  color:#111;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:700;
+  max-width:330px;
+  overflow-wrap:anywhere;
+  -webkit-text-stroke:.5px rgba(255,255,255,.95);
+  text-shadow:0 1px 5px rgba(255,255,255,.7);
+}
+
+.profile-status,
+.public-status{
+  margin-top:6px;
+  color:#111;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:700;
+  overflow-wrap:anywhere;
+  -webkit-text-stroke:.45px rgba(255,255,255,.95);
+  text-shadow:0 1px 5px rgba(255,255,255,.72);
+}
+
+.profile-status-label,
+.public-status-label{
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.3px;
+  margin-right:4px;
 }
 
 .profile-main-stats,
@@ -1926,41 +1964,51 @@ textarea:focus,
 
   .profile-hero,
   .public-hero{
-    height:128px;
+    height:108px;
   }
 
   .cover,
   .public-cover{
-    left:128px;
+    left:108px;
     right:-12px;
-    top:11px;
-    height:113px;
+    top:7px;
+    height:94px;
   }
 
   .big-avatar,
   .public-avatar,
   .avatar-placeholder,
   .public-avatar-placeholder{
-    width:128px;
-    height:128px;
-    border-radius:8px;
+    width:108px;
+    height:108px;
+    border-radius:7px;
   }
 
   .profile-identity,
   .public-identity{
-    left:145px;
-    right:12px;
-    top:24px;
+    left:124px;
+    right:10px;
+    top:13px;
   }
 
   .profile-name,
   .public-name{
-    font-size:25px;
+    font-size:22px;
+  }
+
+  .profile-bio,
+  .public-bio{
+    font-size:11px;
   }
 
   .profile-username,
   .public-username{
-    font-size:14px;
+    font-size:13px;
+  }
+
+  .profile-status,
+  .public-status{
+    font-size:11px;
   }
 
   .header-logo{
@@ -2380,6 +2428,8 @@ textarea:focus,
       <div class="profile-identity">
         <div id="profileName" class="profile-name"></div>
         <div id="profileUsername" class="profile-username"></div>
+        <div id="profileStatus" class="profile-status"></div>
+        <div id="profileBio" class="profile-bio" style="display:none"></div>
       </div>
     </div>
 
@@ -2443,6 +2493,7 @@ textarea:focus,
 
     <div id="editCoverPreview" class="edit-profile-cover-preview"></div>
     <div class="edit-cover-tools">
+      <button class="profile-button" onclick="chooseAvatar()">🖼️ Изменить аватарку</button>
       <button class="profile-button" onclick="chooseCover()">🖼️ Выбрать шапку</button>
       <button class="profile-button" onclick="removeCover()">Убрать шапку</button>
     </div>
@@ -2483,6 +2534,8 @@ textarea:focus,
       <div class="public-identity">
         <div id="publicName" class="public-name"></div>
         <div id="publicUsername" class="public-username"></div>
+        <div id="publicStatus" class="public-status"></div>
+        <div id="publicBio" class="public-bio" style="display:none"></div>
       </div>
     </div>
 
@@ -2671,6 +2724,16 @@ const baseHeaders = {
   apikey:SUPABASE_KEY,
   "Content-Type":"application/json"
 };
+
+async function fetchWithTimeout(url,options,timeout=9000){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeout);
+  try{
+    return await fetch(url,{...(options||{}),signal:controller.signal});
+  }finally{
+    clearTimeout(timer);
+  }
+}
 
 function authHeaders(){
 
@@ -3082,13 +3145,14 @@ async function refreshSession(){
   if(!refreshToken || !userId)return false;
 
   try{
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+"/auth/v1/token?grant_type=refresh_token",
       {
         method:"POST",
         headers:baseHeaders,
         body:JSON.stringify({refresh_token:refreshToken})
-      }
+      },
+      9000
     );
 
     if(!response.ok)return false;
@@ -3112,9 +3176,10 @@ async function validateSession(){
   if(!token || !userId)return false;
 
   try{
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+"/auth/v1/user",
-      {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+token}}
+      {headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+token}},
+      9000
     );
 
     if(response.ok){
@@ -3212,14 +3277,15 @@ async function loadProfile(){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/profiles?id=eq."+
       encodeURIComponent(id)+
       "&select=*",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok)return null;
@@ -3227,9 +3293,10 @@ async function loadProfile(){
     let rows=await response.json();
 
     if(!rows.length){
-      const userResponse=await fetch(
+      const userResponse=await fetchWithTimeout(
         SUPABASE_URL+"/auth/v1/user",
-        {headers:authHeaders()}
+        {headers:authHeaders()},
+        9000
       );
       if(!userResponse.ok)return null;
       const user=await userResponse.json();
@@ -3259,6 +3326,14 @@ async function loadProfile(){
 
     document.getElementById("profileUsername").textContent =
       "@"+profile.username;
+
+    document.getElementById("profileStatus").innerHTML =
+      profile.bio
+        ? '<span class="profile-status-label">Status</span>'+escapeHtml(profile.bio)
+        : "";
+
+    document.getElementById("profileBio").textContent =
+      profile.bio || "";
 
     renderAvatar(
       "profileAvatarContainer",
@@ -3869,6 +3944,7 @@ async function openFoundProfile(profile){
   document.getElementById(
     "publicUsername"
   ).textContent="";
+  document.getElementById("publicStatus").textContent="";
 
   document.getElementById(
     "publicActions"
@@ -3880,14 +3956,15 @@ async function openFoundProfile(profile){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/profiles?id=eq."+
       encodeURIComponent(profile.id)+
       "&select=*",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok){
@@ -3921,29 +3998,37 @@ async function openFoundProfile(profile){
     ).textContent =
       "@"+publicProfile.username;
 
+    document.getElementById("publicStatus").innerHTML =
+      publicProfile.bio
+        ? '<span class="public-status-label">Status</span>'+escapeHtml(publicProfile.bio)
+        : "";
+
+    document.getElementById("publicBio").textContent =
+      publicProfile.bio || "";
+
     renderAvatar(
       "publicAvatarContainer",
       publicProfile,
       "public"
     );
     renderCover("publicCover",publicProfile);
-    const publicPostCount=await fetch(SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(publicProfile.id)+"&select=id",{headers:authHeaders()});
-    const publicPostRows=publicPostCount.ok ? await publicPostCount.json() : [];
+
+    const publicId=publicProfile.id;
+    const publicPostCountPromise=fetchWithTimeout(
+      SUPABASE_URL+"/rest/v1/posts?user_id=eq."+encodeURIComponent(publicId)+"&select=id",
+      {headers:authHeaders()},
+      9000
+    );
+
+    const results=await Promise.all([
+      publicPostCountPromise,
+      loadFollowStats(publicId,"publicFollowersCount","publicFollowingCount"),
+      renderPublicActions(publicId),
+      loadPublicWall(publicId)
+    ]);
+
+    const publicPostRows=results[0].ok ? await results[0].json() : [];
     document.getElementById("publicPostsCount").textContent=publicPostRows.length;
-
-    await loadFollowStats(
-      publicProfile.id,
-      "publicFollowersCount",
-      "publicFollowingCount"
-    );
-
-    await renderPublicActions(
-      publicProfile.id
-    );
-
-    await loadPublicWall(
-      publicProfile.id
-    );
 
   }catch(e){
 
@@ -3984,11 +4069,10 @@ async function renderPublicActions(target){
     return;
   }
 
-  const following =
-    await isFollowing(target);
-
-  const friend =
-    await isFriend(target);
+  const [following,friend] = await Promise.all([
+    isFollowing(target),
+    isFriend(target)
+  ]);
 
   if(friend){
 
@@ -4046,14 +4130,15 @@ async function loadPublicWall(userId){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/posts?user_id=eq."+
       encodeURIComponent(userId)+
       "&select=*&order=created_at.desc&limit=50",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok){
@@ -4062,11 +4147,10 @@ async function loadPublicWall(userId){
 
     const posts=await response.json();
 
-    const profiles =
-      await loadProfilesMap();
-
-    const comments =
-      await getCommentsForPosts(posts);
+    const [profiles,comments] = await Promise.all([
+      loadProfilesMap(),
+      getCommentsForPosts(posts)
+    ]);
 
     wall.innerHTML="";
 
@@ -4498,12 +4582,13 @@ async function loadProfilesMap(force=false){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/profiles?select=id,username,display_name,avatar_url,cover_url",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok){
@@ -4544,7 +4629,7 @@ async function getCommentsForPosts(posts){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/comments?post_id=in.("+
       ids.join(",")+
@@ -4552,7 +4637,8 @@ async function getCommentsForPosts(posts){
       "&select=*&order=created_at.asc",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok)return {};
@@ -4590,14 +4676,15 @@ async function loadPosts(){
 
   try{
 
-    const response=await fetch(
+    const response=await fetchWithTimeout(
       SUPABASE_URL+
       "/rest/v1/posts?select=*"+
       "&order=created_at.desc"+
       "&limit=50",
       {
         headers:authHeaders()
-      }
+      },
+      9000
     );
 
     if(!response.ok){
@@ -4606,11 +4693,10 @@ async function loadPosts(){
 
     const posts=await response.json();
 
-    const profiles =
-      await loadProfilesMap();
-
-    const comments =
-      await getCommentsForPosts(posts);
+    const [profiles,comments] = await Promise.all([
+      loadProfilesMap(),
+      getCommentsForPosts(posts)
+    ]);
 
     feed.innerHTML="";
 
@@ -6063,37 +6149,50 @@ async function uploadToStorage(
 ){
 
   const token =
-    localStorage.getItem(
-      "access_token"
-    );
+    getStoredValue("access_token");
+
+  if(!token){
+    return{
+      ok:false,
+      text:"Сессия пользователя не найдена. Войди в аккаунт ещё раз."
+    };
+  }
 
   try{
 
-    const response=await fetch(
-      SUPABASE_URL+
-      "/storage/v1/object/Stenka/"+
-      path,
-      {
-        method:"POST",
-        headers:{
-          apikey:SUPABASE_KEY,
-          Authorization:
-            "Bearer "+token,
-          "Content-Type":
-            file.type ||
-            "application/octet-stream",
-          "x-upsert":"false"
-        },
-        body:file
+    async function sendUpload(accessToken){
+      return fetch(
+        SUPABASE_URL+
+        "/storage/v1/object/Stenka/"+
+        path,
+        {
+          method:"POST",
+          headers:{
+            apikey:SUPABASE_KEY,
+            Authorization:"Bearer "+accessToken,
+            "Content-Type":file.type || "application/octet-stream",
+            "x-upsert":"false"
+          },
+          body:file
+        }
+      );
+    }
+
+    let response=await sendUpload(token);
+
+    if(response.status===401 || response.status===403){
+      const refreshed=await refreshSession();
+      if(refreshed){
+        const freshToken=getStoredValue("access_token");
+        if(freshToken){
+          response=await sendUpload(freshToken);
+        }
       }
-    );
+    }
 
     return{
       ok:response.ok,
-      text:
-        response.ok
-          ? ""
-          : await response.text()
+      text:response.ok ? "" : await response.text()
     };
 
   }catch{
@@ -6108,9 +6207,7 @@ async function uploadToStorage(
 async function deleteStorageFile(path){
 
   const token =
-    localStorage.getItem(
-      "access_token"
-    );
+    getStoredValue("access_token");
 
   try{
 
@@ -6258,9 +6355,7 @@ async function createPostInDatabase(
 ){
 
   const userId =
-    localStorage.getItem(
-      "user_id"
-    );
+    getStoredValue("user_id");
 
   if(!userId)return false;
 
@@ -6315,25 +6410,32 @@ async function createPostInDatabase(
         uploadedPath;
     }
 
-    const response=await fetch(
-      SUPABASE_URL+
-      "/rest/v1/posts",
-      {
-        method:"POST",
-        headers:{
-          ...authHeaders(),
-          Prefer:"return=minimal"
-        },
-        body:JSON.stringify({
-          user_id:userId,
-          username:
-            (window.currentProfile ? window.currentProfile.username : null) ||
-            "you",
-          content:text || "",
-          image_url:imageUrl
-        })
+    const postPayload=JSON.stringify({
+      user_id:userId,
+      username:(window.currentProfile ? window.currentProfile.username : null) || "you",
+      content:text || "",
+      image_url:imageUrl
+    });
+
+    async function sendPost(){
+      return fetch(
+        SUPABASE_URL+"/rest/v1/posts",
+        {
+          method:"POST",
+          headers:{...authHeaders(),Prefer:"return=minimal"},
+          body:postPayload
+        }
+      );
+    }
+
+    let response=await sendPost();
+
+    if(response.status===401 || response.status===403){
+      const refreshed=await refreshSession();
+      if(refreshed){
+        response=await sendPost();
       }
-    );
+    }
 
     if(!response.ok){
 
@@ -6525,7 +6627,7 @@ async function reactToPost(
     "reaction_"+id;
 
   const old =
-    localStorage.getItem(key);
+    getStoredValue(key);
 
   let likeDelta=0;
   let dislikeDelta=0;
@@ -9282,6 +9384,15 @@ function showPage(page){
    HELPERS
 ========================================================= */
 
+function escapeHtml(value){
+  return String(value == null ? "" : value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
 function isAllowedImageUrl(url){
 
   return(
@@ -9408,22 +9519,18 @@ async function showApp(){
     "app"
   ).style.display="block";
 
-  let profile=null;
-  for(let attempt=0; attempt<3 && !profile; attempt++){
-    profile=await loadProfile();
-    if(!profile){
-      await new Promise(r=>setTimeout(r,350));
-    }
-  }
-
-  if(!profile){
-    document.getElementById("app").style.display="none";
-    document.getElementById("authScreen").style.display="flex";
-    document.getElementById("authMessage").textContent="Не удалось загрузить профиль. Попробуй войти ещё раз.";
-    return;
-  }
-
+  /* Не блокируем вход ожиданием профиля или медленного запроса. */
   showPage("feed");
+
+  loadProfile().then(function(profile){
+    if(!profile){
+      refreshSession().then(function(refreshed){
+        if(refreshed) loadProfile();
+      }).catch(function(){});
+    }
+  }).catch(function(e){
+    console.error(e);
+  });
 
   await updateNotificationBadges();
 
