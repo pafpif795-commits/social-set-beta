@@ -5935,6 +5935,13 @@ document.addEventListener("keydown",e=>{
 ========================================================= */
 
 async function showApp(){
+    const video=document.querySelector(".auth-video");
+
+  if(video){
+    video.pause();
+    video.currentTime=0;
+    video.muted=true;
+  }
 
   document.getElementById("authScreen").style.display="none";
   document.getElementById("app").style.display="block";
