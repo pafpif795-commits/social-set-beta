@@ -82,7 +82,7 @@ textarea{
 .auth-overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.24);
+  background:rgba(0,0,0,.30);
   z-index:1;
   pointer-events:none;
 }
@@ -106,18 +106,21 @@ textarea{
   font-weight:900;
   font-style:italic;
   letter-spacing:-1.4px;
-  text-shadow:0 5px 25px rgba(0,0,0,.35);
+  text-shadow:0 5px 25px rgba(0,0,0,.45);
   animation:welcomeIn .8s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .auth-welcome .nocap{
-  color:#3d9cff;
+  color:#07182d;
   font-style:italic;
+  text-shadow:
+    0 2px 12px rgba(255,255,255,.16),
+    0 4px 18px rgba(0,0,0,.35);
 }
 
 .auth-tagline{
   margin-top:10px;
-  color:rgba(255,255,255,.75);
+  color:rgba(255,255,255,.76);
   font-size:14px;
   font-weight:600;
   letter-spacing:.2px;
@@ -138,14 +141,14 @@ textarea{
   position:relative;
   width:100%;
   padding:28px 25px;
-  background:rgba(11,31,58,.40);
-  border:1px solid rgba(255,255,255,.18);
+  background:rgba(4,17,34,.82);
+  border:1px solid rgba(255,255,255,.13);
   border-radius:26px;
   box-shadow:
-    0 25px 80px rgba(0,0,0,.38),
-    inset 0 1px 0 rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+    0 25px 80px rgba(0,0,0,.52),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   animation:cardIn .75s cubic-bezier(.2,.8,.2,1) .08s both;
 }
 
@@ -232,14 +235,14 @@ textarea{
 }
 
 .secondary{
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
   color:#fff;
-  border:1px solid rgba(255,255,255,.30);
+  border:1px solid rgba(255,255,255,.22);
   box-shadow:0 8px 24px rgba(0,0,0,.16);
 }
 
 .secondary:hover{
-  background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.13);
 }
 
 .remember-me{
@@ -444,7 +447,6 @@ textarea:focus,
    POSTS
 ========================================================= */
 
-/* Непрерывная лента без карточек и линий */
 .post{
   padding:18px 4px;
   border:0;
@@ -595,6 +597,31 @@ textarea:focus,
   align-items:center;
   justify-content:center;
   gap:5px;
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease;
+}
+
+.reaction-btn:active{
+  transform:scale(.92);
+}
+
+.reaction-btn.reaction-pop{
+  animation:reactionPop .32s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes reactionPop{
+  0%{
+    transform:scale(1);
+  }
+  45%{
+    transform:scale(1.16);
+  }
+  100%{
+    transform:scale(1);
+  }
 }
 
 .reaction-icon{
@@ -603,6 +630,9 @@ textarea:focus,
   object-fit:contain;
   display:block;
   pointer-events:none;
+  transition:
+    transform .18s ease,
+    filter .18s ease;
 }
 
 .reaction-btn.active{
@@ -623,7 +653,6 @@ textarea:focus,
     contrast(105%);
 }
 
-/* Только иконка комментария */
 .comment-toggle{
   width:44px;
   height:40px;
@@ -1525,6 +1554,14 @@ textarea:focus,
   position:relative;
 }
 
+.message-sender{
+  color:var(--navy);
+  font-size:11px;
+  font-weight:900;
+  margin:0 0 4px 7px;
+  opacity:.8;
+}
+
 .message-bubble{
   padding:10px 13px;
   border-radius:18px;
@@ -2084,7 +2121,7 @@ textarea:focus,
       id="messageSearchInput"
       class="messages-search-input"
       placeholder="Поиск"
-      oninput="searchMessageUsers">
+      oninput="searchMessageUsers()">
 
   </div>
 
@@ -2596,10 +2633,6 @@ textarea:focus,
 const SUPABASE_URL =
   "https://jrzoexmvgyyitojbcxvr.supabase.co";
 
-/*
-  ВСТАВЬ СЮДА СВОЙ ТЕКУЩИЙ PUBLISHABLE KEY.
-  Service-role key сюда НЕ нужен.
-*/
 const SUPABASE_KEY =
   "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
 
@@ -2640,7 +2673,54 @@ let messageSearchTimer=null;
 let profilesCache=null;
 let profilesCacheTime=0;
 
+let authSoundHandler=null;
+
 const PROFILE_CACHE_TIME=30000;
+
+
+/* =========================================================
+   AUTH VIDEO
+========================================================= */
+
+function armAuthVideoSound(){
+
+  const authScreen =
+    document.getElementById("authScreen");
+
+  if(!authScreen)return;
+
+  if(authSoundHandler){
+
+    authScreen.removeEventListener(
+      "click",
+      authSoundHandler
+    );
+  }
+
+  authSoundHandler=()=>{
+
+    if(
+      authScreen.style.display==="none"
+    ){
+      return;
+    }
+
+    const video =
+      document.querySelector(".auth-video");
+
+    if(!video)return;
+
+    video.muted=false;
+    video.volume=1;
+
+    video.play().catch(()=>{});
+  };
+
+  authScreen.addEventListener(
+    "click",
+    authSoundHandler
+  );
+}
 
 
 /* =========================================================
@@ -2688,16 +2768,27 @@ function showAuth(){
 
   showAuthChoice();
 
-  const video=document.querySelector(".auth-video");
+  const video =
+    document.querySelector(".auth-video");
 
   if(video){
 
     video.pause();
     video.currentTime=0;
+
+    /*
+      На iPhone Safari autoplay со звуком
+      блокируется браузером.
+      Поэтому стартуем без звука,
+      а первый тап включает звук.
+    */
     video.muted=true;
+    video.volume=1;
 
     video.play().catch(()=>{});
   }
+
+  armAuthVideoSound();
 }
 
 
@@ -4503,6 +4594,8 @@ function renderPost(
 
   div.className="post";
 
+  div.dataset.postId=post.id;
+
   const top =
     document.createElement("div");
 
@@ -4678,6 +4771,8 @@ function renderPost(
     "reaction-btn"+
     (reaction==="like" ? " active" : "");
 
+  like.dataset.reaction="like";
+
   like.innerHTML =
     '<img src="like.png" class="reaction-icon" alt=""> '+
     Number(post.likes || 0);
@@ -4699,6 +4794,8 @@ function renderPost(
   dislike.className =
     "reaction-btn"+
     (reaction==="dislike" ? " active" : "");
+
+  dislike.dataset.reaction="dislike";
 
   dislike.innerHTML =
     '<img src="dislike.png" class="reaction-icon" alt=""> '+
@@ -4911,15 +5008,35 @@ async function deletePost(post){
       encodeURIComponent(me),
       {
         method:"DELETE",
-        headers:authHeaders()
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        }
       }
     );
+
+    const deleted =
+      response.ok
+        ? await response.json().catch(()=>[])
+        : [];
 
     if(!response.ok){
 
       alert(
         "Не удалось удалить публикацию:\n"+
         await response.text()
+      );
+
+      return;
+    }
+
+    if(
+      Array.isArray(deleted) &&
+      deleted.length===0
+    ){
+
+      alert(
+        "Сервер не удалил публикацию. Проверь RLS-политику DELETE для posts."
       );
 
       return;
@@ -5432,15 +5549,35 @@ async function deleteComment(
       encodeURIComponent(me),
       {
         method:"DELETE",
-        headers:authHeaders()
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        }
       }
     );
+
+    const deleted =
+      response.ok
+        ? await response.json().catch(()=>[])
+        : [];
 
     if(!response.ok){
 
       alert(
         "Не удалось удалить комментарий:\n"+
         await response.text()
+      );
+
+      return;
+    }
+
+    if(
+      Array.isArray(deleted) &&
+      deleted.length===0
+    ){
+
+      alert(
+        "Комментарий не был удалён. Проверь RLS-политику DELETE для comments."
       );
 
       return;
@@ -6135,6 +6272,88 @@ async function loadWall(){
    REACTIONS
 ========================================================= */
 
+function updateReactionButtons(
+  postId,
+  likeCount,
+  dislikeCount,
+  activeReaction
+){
+
+  const postElement =
+    document.querySelector(
+      '.post[data-post-id="'+
+      CSS.escape(String(postId))+
+      '"]'
+    );
+
+  if(!postElement)return;
+
+  const like =
+    postElement.querySelector(
+      '[data-reaction="like"]'
+    );
+
+  const dislike =
+    postElement.querySelector(
+      '[data-reaction="dislike"]'
+    );
+
+  if(!like || !dislike)return;
+
+  const likeIcon =
+    '<img src="like.png" class="reaction-icon" alt=""> ';
+
+  const dislikeIcon =
+    '<img src="dislike.png" class="reaction-icon" alt=""> ';
+
+  like.innerHTML =
+    likeIcon+
+    Number(likeCount || 0);
+
+  dislike.innerHTML =
+    dislikeIcon+
+    Number(dislikeCount || 0);
+
+  like.classList.toggle(
+    "active",
+    activeReaction==="like"
+  );
+
+  dislike.classList.toggle(
+    "active",
+    activeReaction==="dislike"
+  );
+}
+
+function animateReaction(postId,type){
+
+  const postElement =
+    document.querySelector(
+      '.post[data-post-id="'+
+      CSS.escape(String(postId))+
+      '"]'
+    );
+
+  if(!postElement)return;
+
+  const button =
+    postElement.querySelector(
+      '[data-reaction="'+type+'"]'
+    );
+
+  if(!button)return;
+
+  button.classList.remove("reaction-pop");
+
+  void button.offsetWidth;
+
+  button.classList.add("reaction-pop");
+
+  setTimeout(()=>{
+    button.classList.remove("reaction-pop");
+  },350);
+}
+
 async function reactToPost(
   id,
   type,
@@ -6147,41 +6366,115 @@ async function reactToPost(
   const old =
     localStorage.getItem(key);
 
-  let like=0;
-  let dislike=0;
+  let likeDelta=0;
+  let dislikeDelta=0;
 
   let nextReaction=null;
 
   if(old===type){
 
     if(type==="like"){
-      like=-1;
+      likeDelta=-1;
     }else{
-      dislike=-1;
+      dislikeDelta=-1;
     }
 
   }else{
 
     if(old==="like"){
-      like=-1;
+      likeDelta=-1;
     }
 
     if(old==="dislike"){
-      dislike=-1;
+      dislikeDelta=-1;
     }
 
     if(type==="like"){
-      like=1;
+      likeDelta=1;
     }else{
-      dislike=1;
+      dislikeDelta=1;
     }
 
     nextReaction=type;
   }
 
+  /*
+    Сначала меняем интерфейс.
+    Никакого loadPosts() после клика.
+    Поэтому лента не пересоздаётся и экран
+    не моргает.
+  */
+
+  const postElement =
+    document.querySelector(
+      '.post[data-post-id="'+
+      CSS.escape(String(id))+
+      '"]'
+    );
+
+  let previousLike=0;
+  let previousDislike=0;
+
+  if(postElement){
+
+    const buttons =
+      postElement.querySelectorAll(
+        ".reaction-btn"
+      );
+
+    const likeButton =
+      postElement.querySelector(
+        '[data-reaction="like"]'
+      );
+
+    const dislikeButton =
+      postElement.querySelector(
+        '[data-reaction="dislike"]'
+      );
+
+    if(likeButton){
+
+      previousLike =
+        parseInt(
+          likeButton.textContent.trim(),
+          10
+        ) || 0;
+    }
+
+    if(dislikeButton){
+
+      previousDislike =
+        parseInt(
+          dislikeButton.textContent.trim(),
+          10
+        ) || 0;
+    }
+
+    updateReactionButtons(
+      id,
+      Math.max(
+        0,
+        previousLike+likeDelta
+      ),
+      Math.max(
+        0,
+        previousDislike+dislikeDelta
+      ),
+      nextReaction
+    );
+
+    animateReaction(id,type);
+  }
+
   if(nextReaction){
-    localStorage.setItem(key,nextReaction);
+
+    localStorage.setItem(
+      key,
+      nextReaction
+    );
+
   }else{
+
     localStorage.removeItem(key);
   }
 
@@ -6198,7 +6491,9 @@ async function reactToPost(
     );
 
     if(!get.ok){
-      throw new Error("Не удалось получить пост.");
+      throw new Error(
+        "Не удалось получить пост."
+      );
     }
 
     const rows=await get.json();
@@ -6208,6 +6503,18 @@ async function reactToPost(
     }
 
     const post=rows[0];
+
+    const newLikes =
+      Math.max(
+        0,
+        Number(post.likes || 0)+likeDelta
+      );
+
+    const newDislikes =
+      Math.max(
+        0,
+        Number(post.dislikes || 0)+dislikeDelta
+      );
 
     const response=await fetch(
       SUPABASE_URL+
@@ -6220,14 +6527,8 @@ async function reactToPost(
           Prefer:"return=minimal"
         },
         body:JSON.stringify({
-          likes:Math.max(
-            0,
-            Number(post.likes || 0)+like
-          ),
-          dislikes:Math.max(
-            0,
-            Number(post.dislikes || 0)+dislike
-          )
+          likes:newLikes,
+          dislikes:newDislikes
         })
       }
     );
@@ -6237,6 +6538,18 @@ async function reactToPost(
         await response.text()
       );
     }
+
+    /*
+      После ответа сервера аккуратно
+      синхронизируем цифры без перерисовки поста.
+    */
+
+    updateReactionButtons(
+      id,
+      newLikes,
+      newDislikes,
+      nextReaction
+    );
 
     const me =
       localStorage.getItem("user_id");
@@ -6258,8 +6571,6 @@ async function reactToPost(
       );
     }
 
-    await loadPosts();
-
     await updateNotificationBadges();
 
   }catch(e){
@@ -6267,16 +6578,31 @@ async function reactToPost(
     console.error(e);
 
     /*
-      Сервер не принял реакцию.
-      Возвращаем локальное состояние обратно.
+      Возвращаем интерфейс к состоянию
+      до клика, опять же без перезагрузки ленты.
     */
+
     if(old){
-      localStorage.setItem(key,old);
+
+      localStorage.setItem(
+        key,
+        old
+      );
+
     }else{
+
       localStorage.removeItem(key);
     }
 
-    await loadPosts();
+    if(postElement){
+
+      updateReactionButtons(
+        id,
+        previousLike,
+        previousDislike,
+        old
+      );
+    }
   }
 }
 
@@ -6819,11 +7145,6 @@ async function loadConversations(){
     const profiles =
       await loadProfilesMap();
 
-    /*
-      Одним проходом собираем последние сообщения
-      и непрочитанные сообщения по каждому собеседнику.
-      Раньше здесь был отдельный fetch на каждого пользователя.
-    */
     const map={};
     const unreadMap={};
 
@@ -7355,6 +7676,8 @@ function renderMessage(
         : "theirs"
     );
 
+  row.dataset.messageId=message.id;
+
   const wrap =
     document.createElement("div");
 
@@ -7656,7 +7979,10 @@ async function deleteMessage(
       encodeURIComponent(me),
       {
         method:"DELETE",
-        headers:authHeaders()
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        }
       }
     );
 
@@ -7670,7 +7996,44 @@ async function deleteMessage(
       return;
     }
 
-    await loadDirectMessages();
+    const deleted =
+      await response.json().catch(()=>[]);
+
+    if(
+      Array.isArray(deleted) &&
+      deleted.length===0
+    ){
+
+      alert(
+        "Сообщение не удалилось. Проверь RLS-политику DELETE для таблицы messages."
+      );
+
+      return;
+    }
+
+    const row =
+      document.querySelector(
+        '.message-row[data-message-id="'+
+        CSS.escape(String(message.id))+
+        '"]'
+      );
+
+    if(row){
+
+      row.style.transition=
+        "opacity .18s ease, transform .18s ease";
+
+      row.style.opacity="0";
+      row.style.transform="translateY(-4px)";
+
+      setTimeout(()=>{
+        row.remove();
+      },180);
+
+    }else{
+
+      await loadDirectMessages();
+    }
 
   }catch(e){
 
@@ -8271,6 +8634,9 @@ async function loadGroupMessages(){
     const messages =
       await response.json();
 
+    const profiles =
+      await loadProfilesMap();
+
     container.innerHTML="";
 
     if(!messages.length){
@@ -8284,93 +8650,12 @@ async function loadGroupMessages(){
     messages.forEach(
       message=>{
 
-        const row =
-          document.createElement("div");
+        renderGroupMessage(
+          message,
+          me,
+          profiles
+        );
 
-        row.className =
-          "message-row "+
-          (
-            message.sender_id===me
-              ? "mine"
-              : "theirs"
-          );
-
-        const wrap =
-          document.createElement("div");
-
-        wrap.className=
-          "message-wrap";
-
-        const bubble =
-          document.createElement("div");
-
-        bubble.className=
-          "message-bubble";
-
-        bubble.textContent=
-          message.content;
-
-        const time =
-          document.createElement("div");
-
-        time.className=
-          "message-time";
-
-        time.textContent =
-          formatChatTime(
-            message.created_at
-          );
-
-        bubble.appendChild(time);
-
-        wrap.appendChild(bubble);
-
-        if(
-          message.sender_id===me
-        ){
-
-          const actions =
-            document.createElement("div");
-
-          actions.className=
-            "message-actions";
-
-          const edit =
-            document.createElement("button");
-
-          edit.textContent=
-            "Изменить";
-
-          edit.onclick=()=>{
-            editGroupMessage(
-              message
-            );
-          };
-
-          const remove =
-            document.createElement("button");
-
-          remove.className=
-            "delete";
-
-          remove.textContent=
-            "Удалить";
-
-          remove.onclick=()=>{
-            deleteGroupMessage(
-              message
-            );
-          };
-
-          actions.appendChild(edit);
-          actions.appendChild(remove);
-
-          wrap.appendChild(actions);
-        }
-
-        row.appendChild(wrap);
-
-        container.appendChild(row);
       }
     );
 
@@ -8384,6 +8669,126 @@ async function loadGroupMessages(){
     container.innerHTML =
       '<div class="chat-empty">Не удалось загрузить сообщения.</div>';
   }
+}
+
+function renderGroupMessage(
+  message,
+  me,
+  profiles
+){
+
+  const row =
+    document.createElement("div");
+
+  row.className =
+    "message-row "+
+    (
+      message.sender_id===me
+        ? "mine"
+        : "theirs"
+    );
+
+  row.dataset.messageId=message.id;
+
+  const wrap =
+    document.createElement("div");
+
+  wrap.className=
+    "message-wrap";
+
+  /*
+    В групповых чатах показываем,
+    кто отправил сообщение.
+    Свой ник не нужен.
+  */
+
+  if(message.sender_id!==me){
+
+    const profile =
+      profiles[message.sender_id];
+
+    const sender =
+      document.createElement("div");
+
+    sender.className="message-sender";
+
+    sender.textContent =
+      profile?.display_name ||
+      profile?.username ||
+      "Пользователь";
+
+    wrap.appendChild(sender);
+  }
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className="message-bubble";
+
+  bubble.textContent=
+    message.content;
+
+  const time =
+    document.createElement("div");
+
+  time.className="message-time";
+
+  time.textContent =
+    formatChatTime(
+      message.created_at
+    );
+
+  bubble.appendChild(time);
+
+  wrap.appendChild(bubble);
+
+  if(
+    message.sender_id===me
+  ){
+
+    const actions =
+      document.createElement("div");
+
+    actions.className="message-actions";
+
+    const edit =
+      document.createElement("button");
+
+    edit.textContent=
+      "Изменить";
+
+    edit.onclick=()=>{
+      editGroupMessage(
+        message
+      );
+    };
+
+    const remove =
+      document.createElement("button");
+
+    remove.className=
+      "delete";
+
+    remove.textContent=
+      "Удалить";
+
+    remove.onclick=()=>{
+      deleteGroupMessage(
+        message
+      );
+    };
+
+    actions.appendChild(edit);
+    actions.appendChild(remove);
+
+    wrap.appendChild(actions);
+  }
+
+  row.appendChild(wrap);
+
+  document
+    .getElementById("chatMessages")
+    .appendChild(row);
 }
 
 async function editGroupMessage(
@@ -8471,7 +8876,10 @@ async function deleteGroupMessage(
       encodeURIComponent(me),
       {
         method:"DELETE",
-        headers:authHeaders()
+        headers:{
+          ...authHeaders(),
+          Prefer:"return=representation"
+        }
       }
     );
 
@@ -8485,7 +8893,44 @@ async function deleteGroupMessage(
       return;
     }
 
-    await loadGroupMessages();
+    const deleted =
+      await response.json().catch(()=>[]);
+
+    if(
+      Array.isArray(deleted) &&
+      deleted.length===0
+    ){
+
+      alert(
+        "Сообщение не удалилось. Проверь RLS-политику DELETE для group_messages."
+      );
+
+      return;
+    }
+
+    const row =
+      document.querySelector(
+        '.message-row[data-message-id="'+
+        CSS.escape(String(message.id))+
+        '"]'
+      );
+
+    if(row){
+
+      row.style.transition=
+        "opacity .18s ease, transform .18s ease";
+
+      row.style.opacity="0";
+      row.style.transform="translateY(-4px)";
+
+      setTimeout(()=>{
+        row.remove();
+      },180);
+
+    }else{
+
+      await loadGroupMessages();
+    }
 
   }catch(e){
 
@@ -8803,17 +9248,16 @@ async function showApp(){
     );
 
   /*
-    ВАЖНО:
-    Видео полностью останавливается.
-    Никаких глобальных click -> unmute/play больше нет.
-    Поэтому лайк, дизлайк, комментарии и любые другие
-    клики в приложении не смогут запустить музыку.
+    Как только приложение открыто,
+    музыка и видео полностью останавливаются.
   */
+
   if(video){
 
     video.pause();
     video.currentTime=0;
     video.muted=true;
+    video.volume=0;
   }
 
   document.getElementById(
@@ -8885,12 +9329,6 @@ async function showApp(){
   }
 
 })();
-
-/*
-  НИКАКОГО document click -> video.play() здесь больше нет.
-  Это и убирает баг с музыкой при первом клике по лайку.
-*/
-
 </script>
 
 </body>
