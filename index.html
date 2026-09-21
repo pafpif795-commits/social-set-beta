@@ -116,14 +116,6 @@ textarea{
   text-shadow:none;
 }
 
-.auth-tagline{
-  margin-top:10px;
-  color:rgba(255,255,255,.76);
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:.2px;
-}
-
 @keyframes welcomeIn{
   from{
     opacity:0;
@@ -855,17 +847,18 @@ textarea:focus,
 
 .profile-card,
 .public-profile-card{
+  border:0;
   border-radius:0;
   overflow:visible;
   margin-bottom:20px;
-  border:0;
   background:#fff;
 }
 
+/* Концепт: аватар слева, шапка только справа от него */
 .profile-hero,
 .public-hero{
   position:relative;
-  height:230px;
+  height:154px;
   background:#fff;
   overflow:hidden;
 }
@@ -873,8 +866,10 @@ textarea:focus,
 .cover,
 .public-cover{
   position:absolute;
-  inset:0;
-  height:230px;
+  left:154px;
+  right:0;
+  top:14px;
+  height:136px;
   background:#fff;
   background-position:center;
   background-size:cover;
@@ -882,17 +877,11 @@ textarea:focus,
   border:0;
 }
 
-.profile-info,
-.public-info{
-  position:relative;
-  padding:0 18px 0;
-}
-
 .profile-avatar-wrap,
 .public-avatar-wrap{
   position:absolute;
-  left:18px;
-  top:22px;
+  left:0;
+  top:0;
   z-index:3;
 }
 
@@ -900,9 +889,9 @@ textarea:focus,
 .public-avatar,
 .avatar-placeholder,
 .public-avatar-placeholder{
-  width:172px;
-  height:172px;
-  border-radius:8px;
+  width:154px;
+  height:154px;
+  border-radius:10px;
   object-fit:cover;
   border:0;
   background:#fff;
@@ -917,36 +906,37 @@ textarea:focus,
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:48px;
+  font-size:42px;
   font-weight:900;
 }
 
 .profile-identity,
 .public-identity{
   position:absolute;
-  left:210px;
+  left:174px;
   right:18px;
-  top:38px;
-  z-index:2;
+  top:31px;
+  z-index:4;
+  pointer-events:none;
 }
 
 .profile-name,
 .public-name{
   margin:0;
-  font-size:30px;
+  font-size:29px;
   line-height:1.05;
   font-weight:900;
   color:#fff;
-  text-shadow:0 2px 12px rgba(0,0,0,.30);
+  text-shadow:0 2px 12px rgba(0,0,0,.32);
   overflow-wrap:anywhere;
 }
 
 .profile-username,
 .public-username{
-  color:rgba(255,255,255,.86);
-  margin-top:6px;
+  color:rgba(255,255,255,.88);
+  margin-top:5px;
   font-size:16px;
-  text-shadow:0 2px 8px rgba(0,0,0,.28);
+  text-shadow:0 2px 8px rgba(0,0,0,.30);
 }
 
 .profile-bio,
@@ -959,7 +949,7 @@ textarea:focus,
 .profile-main-stats,
 .public-main-stats{
   background:#fff;
-  padding:18px 18px 12px;
+  padding:19px 0 13px;
 }
 
 .profile-stats,
@@ -967,7 +957,7 @@ textarea:focus,
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:8px;
-  margin-top:0;
+  margin:0;
   text-align:center;
 }
 
@@ -995,7 +985,7 @@ textarea:focus,
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin:4px 18px 12px;
+  margin:0 0 12px;
 }
 
 .profile-button,
@@ -1047,139 +1037,6 @@ textarea:focus,
   color:#111;
   font-weight:700;
   border-bottom-color:#111;
-}
-
-.profile-tab-content{
-  display:none;
-}
-
-.profile-tab-content.active{
-  display:block;
-}
-
-.profile-wall{
-  border-radius:0;
-  padding:17px 0 0;
-  border:0;
-}
-
-.wall-title{
-  font-size:21px;
-  font-weight:900;
-  color:var(--navy);
-  margin-bottom:14px;
-}
-
-.public-wall{
-  margin-top:20px;
-}
-
-.public-back{
-  background:transparent;
-  color:var(--muted);
-  padding:4px 0 12px;
-  font-weight:700;
-}
-
-.status-label{
-  margin-top:14px;
-  font-size:12px;
-  font-weight:900;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-
-.profile-stats,
-.public-stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:22px;
-  text-align:center;
-}
-
-.stat{
-  cursor:pointer;
-}
-
-.stat-number{
-  color:var(--navy);
-  font-size:21px;
-  font-weight:800;
-  font-variant-numeric:tabular-nums;
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:3px;
-}
-
-.profile-buttons,
-.public-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:16px;
-}
-
-.profile-button,
-.public-action{
-  background:var(--sky);
-  color:var(--navy);
-  border-radius:10px;
-  padding:10px 13px;
-  font-weight:700;
-}
-
-.profile-button.dark,
-.public-action.dark{
-  background:var(--navy);
-  color:#fff;
-}
-
-.public-action{
-  flex:1;
-}
-
-.public-action.following{
-  background:var(--navy);
-  color:#fff;
-}
-
-.friend-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  margin-top:12px;
-  padding:7px 10px;
-  border-radius:10px;
-  background:#edf8ef;
-  color:var(--green);
-  font-size:13px;
-  font-weight:800;
-}
-
-.profile-tabs{
-  display:flex;
-  margin:4px 0 0;
-  border-bottom:1px solid #e8edf1;
-}
-
-.profile-tab{
-  flex:1;
-  padding:15px 10px 13px;
-  background:#fff;
-  color:var(--muted);
-  font-size:16px;
-  font-weight:700;
-  border-bottom:2px solid transparent;
-}
-
-.profile-tab.active{
-  color:var(--navy);
-  border-bottom-color:var(--navy);
 }
 
 .profile-tab-content{
@@ -2065,9 +1922,42 @@ textarea:focus,
     font-size:34px;
   }
 
+  .profile-hero,
+  .public-hero{
+    height:136px;
+  }
+
   .cover,
   .public-cover{
-    height:150px;
+    left:136px;
+    top:12px;
+    height:120px;
+  }
+
+  .big-avatar,
+  .public-avatar,
+  .avatar-placeholder,
+  .public-avatar-placeholder{
+    width:136px;
+    height:136px;
+    border-radius:9px;
+  }
+
+  .profile-identity,
+  .public-identity{
+    left:151px;
+    right:12px;
+    top:27px;
+  }
+
+  .profile-name,
+  .public-name{
+    font-size:25px;
+  }
+
+  .profile-username,
+  .public-username{
+    font-size:14px;
   }
 
   .header-logo{
@@ -2154,9 +2044,6 @@ textarea:focus,
     <div class="auth-welcome">
       Добро пожаловать<br>
       в <span class="nocap">NoCap</span>
-      <div class="auth-tagline">
-        Своя соцсеть. Без лишнего.
-      </div>
     </div>
 
     <div class="auth-card">
@@ -2576,45 +2463,29 @@ textarea:focus,
 
   <div class="public-profile-card">
 
-    <div id="publicCover" class="public-cover"></div>
+    <div class="public-hero">
+      <div id="publicCover" class="public-cover"></div>
 
-    <div class="public-info">
-
-      <div id="publicAvatarContainer"></div>
-
-      <div
-        id="publicName"
-        class="public-name">
+      <div class="public-avatar-wrap">
+        <div id="publicAvatarContainer"></div>
       </div>
 
-      <div
-        id="publicUsername"
-        class="public-username">
+      <div class="public-identity">
+        <div id="publicName" class="public-name"></div>
+        <div id="publicUsername" class="public-username"></div>
       </div>
+    </div>
 
-      <div class="status-label">
-        Status
-      </div>
-
-      <div
-        id="publicBio"
-        class="public-bio">
-      </div>
-
-      <div id="publicFriendBadge"></div>
-
+    <div class="public-main-stats">
       <div class="public-stats">
         <div class="stat"><div id="publicPostsCount" class="stat-number">0</div><div class="stat-label">постов</div></div>
         <div class="stat" onclick="openFollowList('followers',(publicProfile ? publicProfile.id : null))"><div id="publicFollowersCount" class="stat-number">0</div><div class="stat-label">подписчиков</div></div>
         <div class="stat" onclick="openFollowList('following',(publicProfile ? publicProfile.id : null))"><div id="publicFollowingCount" class="stat-number">0</div><div class="stat-label">подписок</div></div>
       </div>
-
-      <div
-        id="publicActions"
-        class="public-actions">
-      </div>
-
     </div>
+
+    <div id="publicFriendBadge"></div>
+    <div id="publicActions" class="public-actions"></div>
 
   </div>
 
