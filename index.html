@@ -76,6 +76,7 @@ textarea{
   height:100%;
   object-fit:cover;
   z-index:0;
+  pointer-events:none;
 }
 
 .auth-overlay{
@@ -83,9 +84,9 @@ textarea{
   inset:0;
   background:rgba(0,0,0,.24);
   z-index:1;
+  pointer-events:none;
 }
 
-/* Общий блок авторизации */
 .auth-content{
   position:relative;
   z-index:2;
@@ -96,7 +97,6 @@ textarea{
   align-items:center;
 }
 
-/* Приветствие */
 .auth-welcome{
   text-align:center;
   margin-bottom:24px;
@@ -134,7 +134,6 @@ textarea{
   }
 }
 
-/* Синяя прозрачная плашка */
 .auth-card{
   position:relative;
   width:100%;
@@ -302,23 +301,27 @@ header{
   position:sticky;
   top:0;
   z-index:50;
+  overflow:hidden;
 }
 
 .header-logo{
   height:50px;
+  width:129px;
   display:flex;
   align-items:center;
   justify-content:flex-start;
   overflow:hidden;
+  flex-shrink:0;
 }
 
 .header-logo-image{
-  width:120px;
+  width:124px;
   height:46px;
   object-fit:contain;
   object-position:left center;
   display:block;
-  margin:0;
+  margin-left:5px;
+  flex-shrink:0;
 }
 
 .header-actions{
@@ -383,7 +386,6 @@ header{
 ========================================================= */
 
 .create-post,
-.post,
 .profile-card,
 .profile-wall,
 .public-profile-card,
@@ -442,16 +444,24 @@ textarea:focus,
    POSTS
 ========================================================= */
 
+/* Непрерывная лента без карточек и линий */
 .post{
-  padding:16px;
-  border-radius:17px;
-  margin-bottom:15px;
+  padding:18px 4px;
+  border:0;
+  border-radius:0;
+  margin:0;
+  background:transparent;
+  width:100%;
+}
+
+.post + .post{
+  border-top:0;
 }
 
 .post-user{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
   margin-bottom:12px;
   cursor:pointer;
   min-width:0;
@@ -460,9 +470,9 @@ textarea:focus,
 .mini-avatar,
 .search-avatar,
 .message-result-avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
+  width:58px;
+  height:58px;
+  border-radius:14px;
   object-fit:cover;
   background:var(--sky);
   border:1px solid var(--line);
@@ -472,9 +482,9 @@ textarea:focus,
 .mini-avatar-placeholder,
 .search-avatar-placeholder,
 .message-result-placeholder{
-  width:42px;
-  height:42px;
-  border-radius:50%;
+  width:58px;
+  height:58px;
+  border-radius:14px;
   background:var(--navy);
   color:#fff;
   display:flex;
@@ -569,6 +579,7 @@ textarea:focus,
   display:flex;
   gap:8px;
   margin-top:14px;
+  align-items:center;
   flex-wrap:wrap;
 }
 
@@ -582,6 +593,7 @@ textarea:focus,
   font-weight:700;
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:5px;
 }
 
@@ -590,6 +602,7 @@ textarea:focus,
   height:26px;
   object-fit:contain;
   display:block;
+  pointer-events:none;
 }
 
 .reaction-btn.active{
@@ -610,8 +623,17 @@ textarea:focus,
     contrast(105%);
 }
 
+/* Только иконка комментария */
 .comment-toggle{
+  width:44px;
+  height:40px;
+  padding:5px;
   color:var(--navy);
+}
+
+.comment-toggle .reaction-icon{
+  width:27px;
+  height:27px;
 }
 
 /* =========================================================
@@ -669,7 +691,7 @@ textarea:focus,
 .comment-avatar{
   width:35px;
   height:35px;
-  border-radius:50%;
+  border-radius:10px;
   object-fit:cover;
   background:var(--sky);
   flex-shrink:0;
@@ -994,11 +1016,13 @@ textarea:focus,
 .search-avatar{
   width:50px;
   height:50px;
+  border-radius:14px;
 }
 
 .search-avatar-placeholder{
   width:50px;
   height:50px;
+  border-radius:14px;
 }
 
 .search-user-name{
@@ -1128,7 +1152,7 @@ textarea:focus,
 .notification-avatar{
   width:45px;
   height:45px;
-  border-radius:50%;
+  border-radius:14px;
   object-fit:cover;
   background:var(--sky);
   flex-shrink:0;
@@ -1137,7 +1161,7 @@ textarea:focus,
 .notification-avatar-placeholder{
   width:45px;
   height:45px;
-  border-radius:50%;
+  border-radius:14px;
   background:var(--navy);
   color:#fff;
   display:flex;
@@ -1233,7 +1257,7 @@ textarea:focus,
 .conversation-avatar{
   width:58px;
   height:58px;
-  border-radius:50%;
+  border-radius:14px;
   object-fit:cover;
   background:var(--sky);
   flex-shrink:0;
@@ -1242,7 +1266,7 @@ textarea:focus,
 .conversation-placeholder{
   width:58px;
   height:58px;
-  border-radius:50%;
+  border-radius:14px;
   background:var(--navy);
   color:#fff;
   display:flex;
@@ -1348,7 +1372,7 @@ textarea:focus,
 .group-icon{
   width:58px;
   height:58px;
-  border-radius:50%;
+  border-radius:14px;
   background:var(--sky);
   display:flex;
   align-items:center;
@@ -1437,14 +1461,14 @@ textarea:focus,
 .chat-avatar{
   width:43px;
   height:43px;
-  border-radius:50%;
+  border-radius:14px;
   object-fit:cover;
 }
 
 .chat-avatar-placeholder{
   width:43px;
   height:43px;
-  border-radius:50%;
+  border-radius:14px;
   background:var(--navy);
   color:#fff;
   display:flex;
@@ -1739,9 +1763,14 @@ textarea:focus,
     height:125px;
   }
 
+  .header-logo{
+    width:119px;
+  }
+
   .header-logo-image{
-    width:110px;
+    width:114px;
     height:44px;
+    margin-left:5px;
   }
 
   header{
@@ -1750,6 +1779,17 @@ textarea:focus,
 
   .logout{
     padding:8px 11px;
+  }
+
+  .post{
+    padding-left:2px;
+    padding-right:2px;
+  }
+
+  .mini-avatar,
+  .mini-avatar-placeholder{
+    width:58px;
+    height:58px;
   }
 }
 
@@ -1768,15 +1808,23 @@ textarea:focus,
     min-height:54px;
     font-size:17px;
   }
+
+  .header-logo{
+    width:114px;
+  }
+
+  .header-logo-image{
+    width:110px;
+  }
+
+  .logout{
+    padding:8px 9px;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<!-- =========================================================
-     AUTH
-========================================================= -->
 
 <section id="authScreen">
 
@@ -1822,8 +1870,6 @@ textarea:focus,
 
       </div>
 
-      <!-- LOGIN -->
-
       <div id="loginForm" class="auth-form">
 
         <h2>Войти</h2>
@@ -1859,8 +1905,6 @@ textarea:focus,
         </button>
 
       </div>
-
-      <!-- SIGNUP -->
 
       <div id="signupForm" class="auth-form">
 
@@ -1908,10 +1952,6 @@ textarea:focus,
 </section>
 
 
-<!-- =========================================================
-     APP
-========================================================= -->
-
 <div id="app">
 
 <header>
@@ -1948,8 +1988,6 @@ textarea:focus,
 
 <main class="container">
 
-<!-- FEED -->
-
 <section id="feedPage" class="page">
 
   <div class="create-post">
@@ -1957,8 +1995,7 @@ textarea:focus,
     <textarea
       id="postInput"
       maxlength="5000"
-      placeholder="Что у тебя нового?">
-    </textarea>
+      placeholder="Что у тебя нового?"></textarea>
 
     <div class="post-photo-tools">
 
@@ -1970,8 +2007,7 @@ textarea:focus,
 
       <span
         id="postImageName"
-        class="photo-name">
-      </span>
+        class="photo-name"></span>
 
     </div>
 
@@ -2001,8 +2037,6 @@ textarea:focus,
 </section>
 
 
-<!-- SEARCH -->
-
 <section id="searchPage" class="page">
 
   <div class="search-box">
@@ -2028,8 +2062,6 @@ textarea:focus,
 </section>
 
 
-<!-- MESSAGES -->
-
 <section id="messagesPage" class="page">
 
   <div class="messages-title">
@@ -2052,7 +2084,7 @@ textarea:focus,
       id="messageSearchInput"
       class="messages-search-input"
       placeholder="Поиск"
-      oninput="searchMessageUsers()">
+      oninput="searchMessageUsers">
 
   </div>
 
@@ -2070,8 +2102,6 @@ textarea:focus,
 
 </section>
 
-
-<!-- CHAT -->
 
 <section
   id="chatPage"
@@ -2094,8 +2124,7 @@ textarea:focus,
       class="chat-input"
       rows="1"
       placeholder="Сообщение..."
-      onkeydown="handleChatKey(event)">
-    </textarea>
+      onkeydown="handleChatKey(event)"></textarea>
 
     <button
       class="chat-send"
@@ -2107,8 +2136,6 @@ textarea:focus,
 
 </section>
 
-
-<!-- NOTIFICATIONS -->
 
 <section
   id="notificationsPage"
@@ -2135,8 +2162,6 @@ textarea:focus,
 
 </section>
 
-
-<!-- PROFILE -->
 
 <section id="profilePage" class="page">
 
@@ -2235,8 +2260,7 @@ textarea:focus,
       <textarea
         id="wallInput"
         maxlength="5000"
-        placeholder="Что написать на стене?">
-      </textarea>
+        placeholder="Что написать на стене?"></textarea>
 
       <div class="post-photo-tools">
 
@@ -2248,8 +2272,7 @@ textarea:focus,
 
         <span
           id="wallImageName"
-          class="photo-name">
-        </span>
+          class="photo-name"></span>
 
       </div>
 
@@ -2280,8 +2303,6 @@ textarea:focus,
 
 </section>
 
-
-<!-- PUBLIC PROFILE -->
 
 <section
   id="publicProfilePage"
@@ -2380,8 +2401,6 @@ textarea:focus,
 </section>
 
 
-<!-- FOLLOW LIST -->
-
 <section
   id="followListPage"
   class="page">
@@ -2412,8 +2431,6 @@ textarea:focus,
 
 </main>
 
-
-<!-- NAV -->
 
 <nav class="bottom-nav">
 
@@ -2471,10 +2488,6 @@ textarea:focus,
 </div>
 
 
-<!-- =========================================================
-     PROFILE MODAL
-========================================================= -->
-
 <div
   id="profileModal"
   class="modal">
@@ -2502,8 +2515,7 @@ textarea:focus,
     <textarea
       id="editBio"
       maxlength="300"
-      placeholder="Напиши свой Status">
-    </textarea>
+      placeholder="Напиши свой Status"></textarea>
 
     <div class="modal-actions">
 
@@ -2525,10 +2537,6 @@ textarea:focus,
 
 </div>
 
-
-<!-- =========================================================
-     GROUP MODAL
-========================================================= -->
 
 <div
   id="groupModal"
@@ -2588,15 +2596,21 @@ textarea:focus,
 const SUPABASE_URL =
   "https://jrzoexmvgyyitojbcxvr.supabase.co";
 
+/*
+  ВСТАВЬ СЮДА СВОЙ ТЕКУЩИЙ PUBLISHABLE KEY.
+  Service-role key сюда НЕ нужен.
+*/
 const SUPABASE_KEY =
   "sb_publishable_NGzwO7npRZMNPeTSXHNLbQ_TO5apgSJ";
 
+
 const baseHeaders = {
-  apikey: SUPABASE_KEY,
+  apikey:SUPABASE_KEY,
   "Content-Type":"application/json"
 };
 
 function authHeaders(){
+
   const token =
     localStorage.getItem("access_token") ||
     SUPABASE_KEY;
@@ -2612,21 +2626,21 @@ function authHeaders(){
    STATE
 ========================================================= */
 
-let currentChatUser = null;
-let currentGroupChat = null;
-let publicProfile = null;
-let followListReturn = null;
+let currentChatUser=null;
+let currentGroupChat=null;
+let publicProfile=null;
+let followListReturn=null;
 
-let chatPolling = null;
-let searchTimer = null;
-let messageSearchTimer = null;
+let chatPolling=null;
+let badgeTimer=null;
 
-let profilesCache = null;
-let profilesCacheTime = 0;
+let searchTimer=null;
+let messageSearchTimer=null;
 
-let badgeTimer = null;
+let profilesCache=null;
+let profilesCacheTime=0;
 
-const PROFILE_CACHE_TIME = 30000;
+const PROFILE_CACHE_TIME=30000;
 
 
 /* =========================================================
@@ -2664,6 +2678,11 @@ function showAuth(){
 
   stopChatPolling();
 
+  if(badgeTimer){
+    clearInterval(badgeTimer);
+    badgeTimer=null;
+  }
+
   document.getElementById("authScreen").style.display="flex";
   document.getElementById("app").style.display="none";
 
@@ -2672,8 +2691,11 @@ function showAuth(){
   const video=document.querySelector(".auth-video");
 
   if(video){
+
+    video.pause();
     video.currentTime=0;
     video.muted=true;
+
     video.play().catch(()=>{});
   }
 }
@@ -2701,25 +2723,33 @@ async function signUp(){
     document.getElementById("signupButton");
 
   if(!username || !email || !password){
+
     message.textContent="Заполни все поля.";
+
     return;
   }
 
   if(!/^[a-zA-Z0-9_.-]+$/.test(username)){
+
     message.textContent=
       "Username: только латиница, цифры, _ . -";
+
     return;
   }
 
   if(username.length<3){
+
     message.textContent=
       "Username должен быть минимум 3 символа.";
+
     return;
   }
 
   if(password.length<6){
+
     message.textContent=
       "Пароль должен быть минимум 6 символов.";
+
     return;
   }
 
@@ -2743,17 +2773,21 @@ async function signUp(){
     const data=await response.json();
 
     if(!response.ok){
+
       message.textContent =
         data.msg ||
         data.message ||
         data.error_description ||
         "Ошибка регистрации.";
+
       return;
     }
 
     if(!data.user){
+
       message.textContent=
         "Не удалось создать пользователя.";
+
       return;
     }
 
@@ -2963,6 +2997,11 @@ function signOut(){
 
   stopChatPolling();
 
+  if(badgeTimer){
+    clearInterval(badgeTimer);
+    badgeTimer=null;
+  }
+
   currentChatUser=null;
   currentGroupChat=null;
   publicProfile=null;
@@ -2970,11 +3009,7 @@ function signOut(){
   clearSession();
 
   profilesCache=null;
-
-  if(badgeTimer){
-    clearInterval(badgeTimer);
-    badgeTimer=null;
-  }
+  profilesCacheTime=0;
 
   showAuth();
 }
@@ -3010,6 +3045,7 @@ async function createProfile(id,username){
     if(response.ok){
 
       profilesCache=null;
+      profilesCacheTime=0;
 
       return true;
     }
@@ -3104,6 +3140,7 @@ function renderAvatar(containerId,profile,type){
     img.src=profile.avatar_url;
     img.alt="";
     img.loading="lazy";
+    img.decoding="async";
 
     img.className =
       type==="big"
@@ -3241,6 +3278,7 @@ async function uploadAvatar(){
     }
 
     profilesCache=null;
+    profilesCacheTime=0;
 
     input.value="";
 
@@ -3379,6 +3417,7 @@ async function saveProfile(){
     }
 
     profilesCache=null;
+    profilesCacheTime=0;
 
     closeProfileEditor();
 
@@ -3431,18 +3470,26 @@ async function loadFollowStats(
 
     if(a.ok){
 
-      document.getElementById(
-        followersId
-      ).textContent =
-        (await a.json()).length;
+      const element=
+        document.getElementById(followersId);
+
+      if(element){
+
+        element.textContent =
+          (await a.json()).length;
+      }
     }
 
     if(b.ok){
 
-      document.getElementById(
-        followingId
-      ).textContent =
-        (await b.json()).length;
+      const element=
+        document.getElementById(followingId);
+
+      if(element){
+
+        element.textContent =
+          (await b.json()).length;
+      }
     }
 
   }catch(e){
@@ -4047,6 +4094,7 @@ function appendFollowAvatar(
     img.src=profile.avatar_url;
     img.alt="";
     img.loading="lazy";
+    img.decoding="async";
 
     container.appendChild(img);
 
@@ -4480,6 +4528,7 @@ function renderPost(
       img.src=profile.avatar_url;
       img.alt="";
       img.loading="lazy";
+      img.decoding="async";
 
       user.appendChild(img);
 
@@ -4606,6 +4655,7 @@ function renderPost(
     img.className="post-image";
     img.src=post.image_url;
     img.loading="lazy";
+    img.decoding="async";
     img.alt="Фото";
 
     div.appendChild(img);
@@ -4632,7 +4682,10 @@ function renderPost(
     '<img src="like.png" class="reaction-icon" alt=""> '+
     Number(post.likes || 0);
 
-  like.onclick=()=>{
+  like.onclick=e=>{
+
+    e.stopPropagation();
+
     reactToPost(
       post.id,
       "like",
@@ -4651,7 +4704,10 @@ function renderPost(
     '<img src="dislike.png" class="reaction-icon" alt=""> '+
     Number(post.dislikes || 0);
 
-  dislike.onclick=()=>{
+  dislike.onclick=e=>{
+
+    e.stopPropagation();
+
     reactToPost(
       post.id,
       "dislike",
@@ -4665,11 +4721,18 @@ function renderPost(
   commentButton.className=
     "comment-toggle";
 
+  commentButton.type="button";
+
+  commentButton.title=
+    "Комментарии: "+comments.length;
+
+  commentButton.setAttribute(
+    "aria-label",
+    "Комментарии: "+comments.length
+  );
+
   commentButton.innerHTML =
-    '<img src="comment.png" class="reaction-icon" alt=""> '+
-    "Комментарии ("+
-    comments.length+
-    ")";
+    '<img src="comment.png" class="reaction-icon" alt="">';
 
   actions.appendChild(like);
   actions.appendChild(dislike);
@@ -4975,6 +5038,7 @@ function renderComment(
     avatar.src=profile.avatar_url;
     avatar.alt="";
     avatar.loading="lazy";
+    avatar.decoding="async";
     avatar.style.cursor="pointer";
 
     avatar.onclick=()=>{
@@ -5205,11 +5269,16 @@ async function addComment(
       profiles
     );
 
+    button.title=
+      "Комментарии: "+comments.length;
+
+    button.setAttribute(
+      "aria-label",
+      "Комментарии: "+comments.length
+    );
+
     button.innerHTML =
-      '<img src="comment.png" class="reaction-icon" alt=""> '+
-      "Комментарии ("+
-      comments.length+
-      ")";
+      '<img src="comment.png" class="reaction-icon" alt="">';
 
     commentsBox.classList.add("open");
 
@@ -6072,13 +6141,16 @@ async function reactToPost(
   postOwnerId
 ){
 
+  const key =
+    "reaction_"+id;
+
   const old =
-    localStorage.getItem(
-      "reaction_"+id
-    );
+    localStorage.getItem(key);
 
   let like=0;
   let dislike=0;
+
+  let nextReaction=null;
 
   if(old===type){
 
@@ -6087,10 +6159,6 @@ async function reactToPost(
     }else{
       dislike=-1;
     }
-
-    localStorage.removeItem(
-      "reaction_"+id
-    );
 
   }else{
 
@@ -6103,15 +6171,18 @@ async function reactToPost(
     }
 
     if(type==="like"){
-      like++;
+      like=1;
     }else{
-      dislike++;
+      dislike=1;
     }
 
-    localStorage.setItem(
-      "reaction_"+id,
-      type
-    );
+    nextReaction=type;
+  }
+
+  if(nextReaction){
+    localStorage.setItem(key,nextReaction);
+  }else{
+    localStorage.removeItem(key);
   }
 
   try{
@@ -6126,11 +6197,15 @@ async function reactToPost(
       }
     );
 
-    if(!get.ok)return;
+    if(!get.ok){
+      throw new Error("Не удалось получить пост.");
+    }
 
     const rows=await get.json();
 
-    if(!rows.length)return;
+    if(!rows.length){
+      throw new Error("Пост не найден.");
+    }
 
     const post=rows[0];
 
@@ -6157,7 +6232,11 @@ async function reactToPost(
       }
     );
 
-    if(!response.ok)return;
+    if(!response.ok){
+      throw new Error(
+        await response.text()
+      );
+    }
 
     const me =
       localStorage.getItem("user_id");
@@ -6186,6 +6265,18 @@ async function reactToPost(
   }catch(e){
 
     console.error(e);
+
+    /*
+      Сервер не принял реакцию.
+      Возвращаем локальное состояние обратно.
+    */
+    if(old){
+      localStorage.setItem(key,old);
+    }else{
+      localStorage.removeItem(key);
+    }
+
+    await loadPosts();
   }
 }
 
@@ -6359,6 +6450,7 @@ async function loadNotifications(){
           img.src=actor.avatar_url;
           img.alt="";
           img.loading="lazy";
+          img.decoding="async";
 
           item.appendChild(img);
 
@@ -6599,42 +6691,6 @@ async function getUnreadMessageCount(){
   }
 }
 
-async function getUnreadMessagesForUser(
-  otherId
-){
-
-  const me =
-    localStorage.getItem("user_id");
-
-  if(!me || !otherId)return 0;
-
-  try{
-
-    const response=await fetch(
-      SUPABASE_URL+
-      "/rest/v1/messages?receiver_id=eq."+
-      encodeURIComponent(me)+
-      "&sender_id=eq."+
-      encodeURIComponent(otherId)+
-      "&is_read=eq.false"+
-      "&select=id",
-      {
-        headers:authHeaders()
-      }
-    );
-
-    if(!response.ok)return 0;
-
-    return(
-      await response.json()
-    ).length;
-
-  }catch{
-
-    return 0;
-  }
-}
-
 async function markDirectMessagesRead(
   otherId
 ){
@@ -6763,7 +6819,13 @@ async function loadConversations(){
     const profiles =
       await loadProfilesMap();
 
+    /*
+      Одним проходом собираем последние сообщения
+      и непрочитанные сообщения по каждому собеседнику.
+      Раньше здесь был отдельный fetch на каждого пользователя.
+    */
     const map={};
+    const unreadMap={};
 
     messages.forEach(m=>{
 
@@ -6775,6 +6837,15 @@ async function loadConversations(){
       if(!map[other]){
         map[other]=m;
       }
+
+      if(
+        m.receiver_id===me &&
+        !m.is_read
+      ){
+
+        unreadMap[other] =
+          (unreadMap[other] || 0)+1;
+      }
     });
 
     container.innerHTML="";
@@ -6784,139 +6855,133 @@ async function loadConversations(){
       container.innerHTML =
         '<div class="search-empty">Пока нет сообщений.</div>';
 
-      await updateNotificationBadges();
-
       return;
     }
 
-    for(
-      const [id,message]
-      of Object.entries(map)
-    ){
+    Object.entries(map).forEach(
+      ([id,message])=>{
 
-      const profile =
-        profiles[id];
+        const profile =
+          profiles[id];
 
-      if(!profile)continue;
+        if(!profile)return;
 
-      const unread =
-        await getUnreadMessagesForUser(
-          id
-        );
+        const unread =
+          unreadMap[id] || 0;
 
-      const item =
-        document.createElement("div");
-
-      item.className="conversation";
-
-      item.onclick=()=>{
-        openChatWithUser(profile);
-      };
-
-      if(profile.avatar_url){
-
-        const img =
-          document.createElement("img");
-
-        img.className=
-          "conversation-avatar";
-
-        img.src=profile.avatar_url;
-        img.alt="";
-        img.loading="lazy";
-
-        item.appendChild(img);
-
-      }else{
-
-        const a =
+        const item =
           document.createElement("div");
 
-        a.className=
-          "conversation-placeholder";
+        item.className="conversation";
 
-        a.textContent=(
+        item.onclick=()=>{
+          openChatWithUser(profile);
+        };
+
+        if(profile.avatar_url){
+
+          const img =
+            document.createElement("img");
+
+          img.className=
+            "conversation-avatar";
+
+          img.src=profile.avatar_url;
+          img.alt="";
+          img.loading="lazy";
+          img.decoding="async";
+
+          item.appendChild(img);
+
+        }else{
+
+          const a =
+            document.createElement("div");
+
+          a.className=
+            "conversation-placeholder";
+
+          a.textContent=(
+            profile.display_name ||
+            profile.username
+          ).charAt(0).toUpperCase();
+
+          item.appendChild(a);
+        }
+
+        const main =
+          document.createElement("div");
+
+        main.className=
+          "conversation-main";
+
+        const top =
+          document.createElement("div");
+
+        top.className=
+          "conversation-top";
+
+        const name =
+          document.createElement("div");
+
+        name.className =
+          "conversation-name"+
+          (unread ? " unread" : "");
+
+        name.textContent =
           profile.display_name ||
-          profile.username
-        ).charAt(0).toUpperCase();
+          profile.username;
 
-        item.appendChild(a);
-      }
-
-      const main =
-        document.createElement("div");
-
-      main.className=
-        "conversation-main";
-
-      const top =
-        document.createElement("div");
-
-      top.className=
-        "conversation-top";
-
-      const name =
-        document.createElement("div");
-
-      name.className =
-        "conversation-name"+
-        (unread ? " unread" : "");
-
-      name.textContent =
-        profile.display_name ||
-        profile.username;
-
-      const time =
-        document.createElement("div");
-
-      time.className=
-        "conversation-time";
-
-      time.textContent =
-        formatMessageTime(
-          message.created_at
-        );
-
-      top.appendChild(name);
-      top.appendChild(time);
-
-      const preview =
-        document.createElement("div");
-
-      preview.className =
-        "conversation-preview"+
-        (unread ? " unread" : "");
-
-      preview.textContent =
-        unread>0
-          ? "Новое сообщение"
-          : (message.content || "");
-
-      main.appendChild(top);
-      main.appendChild(preview);
-
-      item.appendChild(main);
-
-      if(unread>0){
-
-        const badge =
+        const time =
           document.createElement("div");
 
-        badge.className=
-          "unread-count";
+        time.className=
+          "conversation-time";
 
-        badge.textContent =
-          unread>99
-            ? "99+"
-            : unread;
+        time.textContent =
+          formatMessageTime(
+            message.created_at
+          );
 
-        item.appendChild(badge);
+        top.appendChild(name);
+        top.appendChild(time);
+
+        const preview =
+          document.createElement("div");
+
+        preview.className =
+          "conversation-preview"+
+          (unread ? " unread" : "");
+
+        preview.textContent =
+          unread>0
+            ? "Новое сообщение"
+            : (message.content || "");
+
+        main.appendChild(top);
+        main.appendChild(preview);
+
+        item.appendChild(main);
+
+        if(unread>0){
+
+          const badge =
+            document.createElement("div");
+
+          badge.className=
+            "unread-count";
+
+          badge.textContent =
+            unread>99
+              ? "99+"
+              : unread;
+
+          item.appendChild(badge);
+        }
+
+        container.appendChild(item);
       }
-
-      container.appendChild(item);
-    }
-
-    await updateNotificationBadges();
+    );
 
   }catch(e){
 
@@ -6980,6 +7045,14 @@ async function performMessageSearch(){
 
     const safe =
       q.replace(/[,*()]/g,"");
+
+    if(!safe){
+
+      results.innerHTML =
+        '<div class="search-empty">Введи имя пользователя.</div>';
+
+      return;
+    }
 
     const pattern =
       "*"+safe+"*";
@@ -7132,6 +7205,7 @@ function renderDirectChatHeader(
     img.className="chat-avatar";
     img.src=profile.avatar_url;
     img.alt="";
+    img.loading="lazy";
 
     img.onclick=()=>{
       openFoundProfile(profile);
@@ -7681,8 +7755,12 @@ async function openCreateGroupModal(){
     const me =
       localStorage.getItem("user_id");
 
-    const followingResponse =
-      await fetch(
+    const [
+      followingResponse,
+      followersResponse
+    ]=await Promise.all([
+
+      fetch(
         SUPABASE_URL+
         "/rest/v1/follows?follower_id=eq."+
         encodeURIComponent(me)+
@@ -7690,10 +7768,9 @@ async function openCreateGroupModal(){
         {
           headers:authHeaders()
         }
-      );
+      ),
 
-    const followersResponse =
-      await fetch(
+      fetch(
         SUPABASE_URL+
         "/rest/v1/follows?following_id=eq."+
         encodeURIComponent(me)+
@@ -7701,7 +7778,9 @@ async function openCreateGroupModal(){
         {
           headers:authHeaders()
         }
-      );
+      )
+
+    ]);
 
     if(
       !followingResponse.ok ||
@@ -7763,6 +7842,7 @@ async function openCreateGroupModal(){
 
         img.src=profile.avatar_url;
         img.alt="";
+        img.loading="lazy";
 
         row.appendChild(img);
 
@@ -8560,6 +8640,8 @@ function showPage(page){
 
   if(page==="profile"){
 
+    publicProfile=null;
+
     document
       .getElementById("profilePage")
       .classList.add("active");
@@ -8691,6 +8773,8 @@ document.addEventListener(
       e.preventDefault();
 
       signIn();
+
+      return;
     }
 
     if(
@@ -8718,6 +8802,13 @@ async function showApp(){
       ".auth-video"
     );
 
+  /*
+    ВАЖНО:
+    Видео полностью останавливается.
+    Никаких глобальных click -> unmute/play больше нет.
+    Поэтому лайк, дизлайк, комментарии и любые другие
+    клики в приложении не смогут запустить музыку.
+  */
   if(video){
 
     video.pause();
@@ -8758,7 +8849,7 @@ async function showApp(){
   badgeTimer =
     setInterval(
       updateNotificationBadges,
-      10000
+      15000
     );
 }
 
@@ -8795,32 +8886,10 @@ async function showApp(){
 
 })();
 
-
-/* =========================================================
-   VIDEO AUTOPLAY
-========================================================= */
-
-document.addEventListener(
-  "click",
-  function(){
-
-    const video =
-      document.querySelector(
-        ".auth-video"
-      );
-
-    if(video){
-
-      video.muted=false;
-
-      video.play().catch(()=>{});
-    }
-
-  },
-  {
-    once:true
-  }
-);
+/*
+  НИКАКОГО document click -> video.play() здесь больше нет.
+  Это и убирает баг с музыкой при первом клике по лайку.
+*/
 
 </script>
 
